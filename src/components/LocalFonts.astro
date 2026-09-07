@@ -1,0 +1,43 @@
+---
+import heebohebrew from '@fontsource-variable/heebo/files/heebo-hebrew-wght-normal.woff2?url';
+import heebolatin from '@fontsource-variable/heebo/files/heebo-latin-wght-normal.woff2?url';
+import interlatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import jetbrainsmonolatin from '@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url';
+interface Props { hebrew?: boolean; primary?: 'heebo' | 'inter'; }
+const { hebrew = false, primary = 'heebo' } = Astro.props;
+const css = `@font-face {
+  font-family: 'Heebo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(${heebohebrew}) format('woff2-variations');
+  unicode-range: U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Heebo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(${heebolatin}) format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(${interlatin}) format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url(${jetbrainsmonolatin}) format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}`;
+---
+<link rel="preload" href={primary === 'inter' ? interlatin : heebolatin} as="font" type="font/woff2" crossorigin />
+{hebrew && <link rel="preload" href={heebohebrew} as="font" type="font/woff2" crossorigin />}
+<style is:inline set:html={css} />

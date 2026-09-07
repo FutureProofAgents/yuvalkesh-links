@@ -1,4 +1,5 @@
 ---
+import LocalFonts from './LocalFonts.astro';
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
 
@@ -150,9 +151,7 @@ const copy = he
   <meta property="og:description" content={copy.description} />
   <meta property="og:url" content={`${site}${pagePath}`} />
   <meta property="og:image" content={`${site}/avatar.jpg`} />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <LocalFonts hebrew={lang === 'he'} primary={lang === 'he' ? 'heebo' : 'inter'} />
   <style is:inline>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --blue:#1d9bf0; --ink:#e7e9ea; --muted:#8b949e; --panel:#101214; --line:#2f3336; }

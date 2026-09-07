@@ -1,6 +1,9 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import SiteHeader from './SiteHeader.astro';
 import type { CollectionEntry } from 'astro:content';
+const imageAssets = import.meta.glob<ImageMetadata>('/public/images/**/*.{png,jpg,jpeg,webp}', { eager: true, import: 'default' });
 interface Props { posts: CollectionEntry<'blog'>[]; lang: 'he' | 'en' }
 const { posts, lang } = Astro.props;
 const he = lang === 'he';
@@ -23,6 +26,7 @@ const cover = (post: CollectionEntry<'blog'>) => post.data.coverImage?.src ?? (
   /content-machine/.test(post.id) ? '/images/blog/ai-development-agent-team-chat-he/conversation-to-pr.png' : undefined
 );
 
+const optimizedCover = (post: CollectionEntry<'blog'>) => imageAssets[`/public${cover(post)}`];
 ---
 <div class="archive" data-blog-archive data-lang={lang}>
   <a class="skip" href="#library">{he ? 'דילוג למאמרים' : 'Skip to articles'}</a>
@@ -33,7 +37,7 @@ const cover = (post: CollectionEntry<'blog'>) => post.data.coverImage?.src ?? (
   </header>
   {featured && <section class="featured" aria-label={he ? 'המאמר האחרון' : 'Latest article'}>
     <a class="feature-art" href={`${root}${featured.id}/`} aria-label={featured.data.title} tabindex="-1" aria-hidden="true">
-      {cover(featured) ? <img src={cover(featured)} alt="" width="1200" height="700" fetchpriority="high" /> : <div class="diagram" aria-hidden="true"><span class="diagram-node">{he ? 'ידע' : 'Knowledge'}</span><span class="diagram-line"></span><span class="diagram-core"><img src="/favicon.svg" width="90" height="90" alt="" /></span><span class="diagram-line"></span><span class="diagram-node">{he ? 'פעולה' : 'Action'}</span><span class="diagram-caption">FutureProof Agents</span></div>}
+      {cover(featured) ? <Image src={optimizedCover(featured) ?? cover(featured)!} alt="" width={1200} widths={[360, 720, 1200]} sizes="(max-width: 560px) calc(100vw - 42px), (max-width: 900px) calc(100vw - 66px), 560px" format="webp" quality={80} loading="eager" fetchpriority="high" /> : <div class="diagram" aria-hidden="true"><span class="diagram-node">{he ? 'ידע' : 'Knowledge'}</span><span class="diagram-line"></span><span class="diagram-core"><img src="/favicon.svg" width="90" height="90" alt="" /></span><span class="diagram-line"></span><span class="diagram-node">{he ? 'פעולה' : 'Action'}</span><span class="diagram-caption">FutureProof Agents</span></div>}
     </a>
     <div class="feature-copy"><span class="feature-label">{he ? 'חדש בבלוג' : 'Latest story'}</span><p class="story-meta">{topics[topic(featured)]} <span aria-hidden="true">/</span> {minutes(featured)} {he ? 'דקות קריאה' : 'min read'}</p><h2><a href={`${root}${featured.id}/`}>{featured.data.title}</a></h2><p class="feature-description">{featured.data.description}</p><a class="read-link" href={`${root}${featured.id}/`}>{he ? 'לקריאת המאמר' : 'Read the story'} <span aria-hidden="true">{he ? '←' : '→'}</span></a></div>
   </section>}
@@ -43,7 +47,7 @@ const cover = (post: CollectionEntry<'blog'>) => post.data.coverImage?.src ?? (
     <div class="results-line"><p data-count aria-live="polite">{posts.length} {he ? 'מאמרים' : 'articles'}</p><a href="/rss.xml">RSS</a></div>
     <div class="article-grid">
       {posts.map((post) => <article class="story" data-story data-category={topic(post)} data-search-text={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`}>
-        <a class="story-image" href={`${root}${post.id}/`} tabindex="-1" aria-hidden="true">{cover(post) ? <img src={cover(post)} alt="" width="800" height="450" loading="lazy" /> : <div class={`story-placeholder topic-${topic(post)}`}><img src="/favicon.svg" width="72" height="72" alt="" /><span>{topics[topic(post)]}</span></div>}</a>
+        <a class="story-image" href={`${root}${post.id}/`} tabindex="-1" aria-hidden="true">{cover(post) ? <Image src={optimizedCover(post) ?? cover(post)!} alt="" width={800} widths={[360, 720, 1080]} sizes="(max-width: 560px) calc(100vw - 42px), (max-width: 900px) calc((100vw - 90px) / 2), 355px" format="webp" quality={80} loading="lazy" /> : <div class={`story-placeholder topic-${topic(post)}`}><img src="/favicon.svg" width="72" height="72" alt="" /><span>{topics[topic(post)]}</span></div>}</a>
         <div class="story-body"><p class="story-meta">{topics[topic(post)]}<span aria-hidden="true">/</span>{minutes(post)} {he ? 'דק׳' : 'min'}</p><h3><a href={`${root}${post.id}/`}>{post.data.title}</a></h3><p class="story-description">{post.data.description}</p><div class="story-bottom"><time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time><a class="card-read" href={`${root}${post.id}/`} aria-label={`${he ? 'לקריאה: ' : 'Read: '}${post.data.title}`}>{he ? 'לקריאה ←' : 'Read →'}</a></div></div>
       </article>)}
     </div>

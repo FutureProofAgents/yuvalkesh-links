@@ -1,4 +1,5 @@
 ---
+import LocalFonts from '../components/LocalFonts.astro';
 const videos = [
   {
     id: 'Q6LybYS9FbY',
@@ -61,10 +62,7 @@ const sources = [
   <meta property="og:title" content="סינגפור: המודל שעובד" />
   <meta property="og:description" content="עמוד המתנה לספר של אלי ורד חזן על סינגפור, מתוך השפה והרעיונות של סדרת הסרטונים שלו." />
   <meta property="og:image" content="https://i.ytimg.com/vi/Q6LybYS9FbY/maxresdefault.jpg" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <LocalFonts hebrew={true} />
 
   <style is:inline>
     * { box-sizing: border-box; margin: 0; padding: 0; }

@@ -1,4 +1,5 @@
 ---
+import LocalFonts from '../../components/LocalFonts.astro';
 import BlogArchive from '../../components/BlogArchive.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import { getCollection } from 'astro:content';
@@ -51,10 +52,7 @@ const jsonLd = {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#000000" />
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <LocalFonts hebrew={false} />
 
 </head>
 <body>

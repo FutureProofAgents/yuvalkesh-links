@@ -1,4 +1,5 @@
 ---
+import LocalFonts from '../components/LocalFonts.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
 
 const waMsg = encodeURIComponent('היי יובל, בהמשך לשיחה על יום האפיון לזאפ');
@@ -58,10 +59,7 @@ const proof = [
   <meta name="description" content="סיכום השיחה עם אבירם והצעת מחיר ליום אפיון: 8,000 ₪ + מע״מ." />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#000000" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <LocalFonts hebrew={true} />
 
   <style is:inline>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }

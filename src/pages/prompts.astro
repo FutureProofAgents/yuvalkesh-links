@@ -1,4 +1,5 @@
 ---
+import LocalFonts from '../components/LocalFonts.astro';
 import PageHeader from '../components/PageHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
@@ -30,10 +31,7 @@ const pageUrl = `${site}/prompts/`;
   <meta name="twitter:image" content={`${site}/avatar.jpg`} />
   <meta name="twitter:creator" content="@Parzival_1991" />
   <meta name="theme-color" content="#000000" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <LocalFonts hebrew={false} />
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }

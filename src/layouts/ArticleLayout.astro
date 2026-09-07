@@ -1,4 +1,5 @@
 ---
+import LocalFonts from '../components/LocalFonts.astro';
 import PageHeader from '../components/PageHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 interface Heading {
@@ -161,10 +162,7 @@ const socials = [
   <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
   {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <LocalFonts hebrew={lang === 'he'} />
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }

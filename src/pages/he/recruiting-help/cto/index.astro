@@ -1,4 +1,5 @@
 ---
+import LocalFonts from '../../../../components/LocalFonts.astro';
 import PageHeader from '../../../../components/PageHeader.astro';
 import SiteFooter from '../../../../components/SiteFooter.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
@@ -49,10 +50,7 @@ const musts = [
   <meta property="og:type" content="website" />
   <meta property="og:url" content={`${site}${PATH}`} />
   <meta name="theme-color" content="#000000" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <LocalFonts hebrew={true} />
 
   <style is:inline>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }

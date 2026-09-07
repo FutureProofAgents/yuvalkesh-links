@@ -1,4 +1,5 @@
 ---
+import LocalFonts from '../components/LocalFonts.astro';
 import PageHeader from '../components/PageHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
@@ -126,10 +127,7 @@ const jsonLd = {
   <meta property="og:url" content={`${site}/`} />
   <meta name="theme-color" content="#000000" />
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <LocalFonts hebrew={false} primary="inter" />
 
   <style is:inline>
     * {
