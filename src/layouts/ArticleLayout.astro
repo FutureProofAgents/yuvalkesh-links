@@ -463,7 +463,7 @@ const socials = [
 <body>
   <article class="wrap">
     <nav class="top-nav">
-      <a href="/blog/">{backLabel}</a>
+      <a href={lang === 'he' ? '/he/blog/' : '/blog/'}>{backLabel}</a>
       {translationOf && (
         <div class="lang-switch" dir="ltr" role="navigation" aria-label={lang === 'he' ? 'שפה' : 'Language'}>
           {lang === 'en' ? (
@@ -474,7 +474,7 @@ const socials = [
           {lang === 'he' ? (
             <span class="lang-opt active" aria-current="true">עב</span>
           ) : (
-            <a class="lang-opt" href={`/blog/${translationOf}/`} lang="he" title="קראו בעברית">עב</a>
+            <a class="lang-opt" href={`/he/blog/${translationOf}/`} lang="he" title="קראו בעברית">עב</a>
           )}
         </div>
       )}
@@ -534,7 +534,7 @@ const socials = [
         <div class="more-title">{moreLabel}</div>
         <div class="more-list">
           {morePosts.map((p) => (
-            <a class="more-card" href={`/blog/${p.slug}/`} dir={p.lang === 'he' ? 'rtl' : 'ltr'} lang={p.lang}>
+            <a class="more-card" href={`${p.lang === 'he' ? '/he' : ''}/blog/${p.slug}/`} dir={p.lang === 'he' ? 'rtl' : 'ltr'} lang={p.lang}>
               <h3>{p.title}</h3>
               <p>{p.description}</p>
               <div class="row">

@@ -26,3 +26,64 @@ services:
       - type: redirect
         source: /factory/*
         destination: /
+      - type: redirect
+        source: /blog/ai-agents-vs-skills-he
+        destination: /he/blog/ai-agents-vs-skills-he/
+      - type: redirect
+        source: /blog/ai-agents-vs-skills-he/
+        destination: /he/blog/ai-agents-vs-skills-he/
+      - type: redirect
+        source: /blog/kids-song-video-ai-he
+        destination: /he/blog/kids-song-video-ai-he/
+      - type: redirect
+        source: /blog/kids-song-video-ai-he/
+        destination: /he/blog/kids-song-video-ai-he/
+      - type: redirect
+        source: /blog/run-ai-agents-in-the-cloud-24-7-he
+        destination: /he/blog/run-ai-agents-in-the-cloud-24-7-he/
+      - type: redirect
+        source: /blog/run-ai-agents-in-the-cloud-24-7-he/
+        destination: /he/blog/run-ai-agents-in-the-cloud-24-7-he/
+      - type: redirect
+        source: /blog/timlul-pgishot-maagar-yeda
+        destination: /he/blog/timlul-pgishot-maagar-yeda/
+      - type: redirect
+        source: /blog/timlul-pgishot-maagar-yeda/
+        destination: /he/blog/timlul-pgishot-maagar-yeda/
+      - type: redirect
+        source: /blog/ai-agent-tools-stack-he
+        destination: /he/blog/ai-agent-tools-stack-he/
+      - type: redirect
+        source: /blog/ai-agent-tools-stack-he/
+        destination: /he/blog/ai-agent-tools-stack-he/
+      - type: redirect
+        source: /blog/ai-development-agent-team-chat-he
+        destination: /he/blog/ai-development-agent-team-chat-he/
+      - type: redirect
+        source: /blog/ai-development-agent-team-chat-he/
+        destination: /he/blog/ai-development-agent-team-chat-he/
+      - type: redirect
+        source: /blog/ai-inference-market-guide-he
+        destination: /he/blog/ai-inference-market-guide-he/
+      - type: redirect
+        source: /blog/ai-inference-market-guide-he/
+        destination: /he/blog/ai-inference-market-guide-he/
+      - type: redirect
+        source: /blog/ai-agents-clinic-three-systems-he
+        destination: /he/blog/ai-agents-clinic-three-systems-he/
+      - type: redirect
+        source: /blog/ai-agents-clinic-three-systems-he/
+        destination: /he/blog/ai-agents-clinic-three-systems-he/
+      - type: redirect
+        source: /blog/build-ai-agent-team-orchestration-he
+        destination: /he/blog/build-ai-agent-team-orchestration-he/
+      - type: redirect
+        source: /blog/build-ai-agent-team-orchestration-he/
+        destination: /he/blog/build-ai-agent-team-orchestration-he/
+    headers:
+      - path: /*
+        name: Link
+        value: '<https://futureproofagents.com/sitemap-index.xml>; rel="sitemap", <https://futureproofagents.com/llms.txt>; rel="alternate"; type="text/plain"'
+      - path: /*.md
+        name: X-Robots-Tag
+        value: noindex
