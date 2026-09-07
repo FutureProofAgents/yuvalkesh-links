@@ -103,6 +103,7 @@ const copy = he
 <!DOCTYPE html>
 <html lang={lang} dir={he ? 'rtl' : 'ltr'}>
 <head>
+  <script is:inline defer src="/scripts/analytics.js"></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -528,6 +529,7 @@ const copy = he
             emailInput.value = '';
             status.textContent = status.dataset.success;
             status.dataset.state = 'success';
+            window.fpAnalytics?.('newsletter_signup');
             button.textContent = button.dataset.idle;
           } catch (error) {
             status.textContent = status.dataset.error;
