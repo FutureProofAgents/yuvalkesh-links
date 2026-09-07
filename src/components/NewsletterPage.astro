@@ -24,10 +24,10 @@ const copy = he
       headlineB: 'ההחלטות שלכם צריכות להדביק את הקצב.',
       intro: 'פעם בשבוע: חמש התפתחויות שחשוב להכיר, מה הן אומרות על העסק שלכם, וחמש החלטות שאפשר לקחת לישיבת ההנהלה. בלי הייפ, בלי סיכומי השקות ועם מקור לכל נתון.',
       email: 'כתובת המייל שלך',
-      cta: 'הרשמה',
+      cta: 'בקשת הצטרפות',
       loading: 'נרשמים…',
-      note: 'חינם. מייל אחד בשבוע. ההרשמה תושלם רק לאחר אישור במייל. אפשר להסיר את עצמך בכל רגע.',
-      success: 'בדקו את תיבת המייל ולחצו על קישור האישור. רק לאחר האישור נצרף אתכם לדיוור.',
+      note: 'לאקזקיוטיבז בלבד. כל בקשה נבדקת ומאושרת אישית על ידי יובל. לאחר האישור נשלח מייל לאימות הכתובת.',
+      success: 'בקשת ההצטרפות התקבלה וממתינה לאישור אישי של יובל. אם תאושר, נשלח קישור לאימות המייל לפני הצירוף לדיוור.',
       error: 'משהו השתבש. נסו שוב בעוד רגע.',
       proof: ['3 דקות קריאה', '5 התפתחויות חשובות', '5 החלטות למנכ״ל', 'מקור לכל נתון'],
       insideEyebrow: 'מה נכנס לכל גיליון',
@@ -67,10 +67,10 @@ const copy = he
       headlineB: 'Know where it is going.',
       intro: 'What CEOs need to implement AI inside the company: what works in leading organizations, where implementation gets stuck, and five practical decisions for the leadership meeting. No launch recaps, no hype, and a source behind every claim.',
       email: 'Your work email',
-      cta: 'Send me the brief',
+      cta: 'Apply to join',
       loading: 'Joining…',
-      note: 'Free. Weekly. Confirm your email to complete signup. Unsubscribe at any time.',
-      success: 'Check your inbox and click the confirmation link. Your subscription starts only after you confirm.',
+      note: 'For executives only. Yuval personally reviews each application. If approved, you will receive an email verification link.',
+      success: 'Your application is awaiting Yuval’s personal approval. If approved, you will receive an email verification link before joining the newsletter.',
       error: 'That did not go through. Try again in a moment.',
       proof: ['3 minute read', '5 developments', '5 decisions', 'Every source linked'],
       insideEyebrow: 'Inside every issue',
@@ -388,6 +388,8 @@ const copy = he
       .reveal { opacity: 1; transform: none; animation: none; }
       * { transition-duration: .01ms !important; }
     }
+    .signup-form .application-field{grid-column:1/-1;display:grid;gap:7px;width:100%;text-align:start;color:#c8d2db;font-size:14px;font-weight:600}
+    .signup-form .application-field input{width:100%;min-width:0;font:inherit;padding:14px;border:1px solid #35444c;border-radius:10px;background:#0c1116;color:#fff;min-height:48px}
   </style>
 </head>
 <body>
@@ -395,7 +397,7 @@ const copy = he
     <div class="header-shell"><SiteHeader lang={lang} active="newsletter" /></div>
 
     <main>
-      <div class="confirmation-banner" hidden data-confirmation role="status">{he ? 'תודה על האישור! ההרשמה לניוזלטר הושלמה. אפשר להסיר את עצמך בכל עת דרך כל מייל.' : 'Thank you for confirming! Your newsletter subscription is complete. You can unsubscribe from any email.'}</div>
+      <div class="confirmation-banner" hidden data-confirmation role="status">{he ? 'כתובת המייל אומתה. הצירוף לרשימת האקזקיוטיבז מחייב גם אישור אישי של יובל ומתעדכן בתוך מספר דקות.' : 'Your email address is verified. Joining the executive list also requires Yuval’s personal approval and is processed within a few minutes.'}</div>
       <section class="hero">
         <div class="eyebrow reveal">{copy.eyebrow}</div>
         <h1 class="reveal">{copy.headlineA}<span>{copy.headlineB}</span></h1>
@@ -403,6 +405,9 @@ const copy = he
         <div class="signup-wrap reveal" id="subscribe">
           <form class="signup-form" data-newsletter-form novalidate>
             <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
+            <label class="application-field">{he ? 'שם מלא' : 'Full name'}<input name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="120" /></label>
+            <label class="application-field">{he ? 'תפקיד בהנהלה' : 'Executive role'}<input name="jobTitle" type="text" autocomplete="organization-title" required minlength="2" maxlength="120" placeholder={he ? 'למשל: מנכ״ל, סמנכ״לית' : 'e.g. CEO, VP, Managing Director'} /></label>
+            <label class="application-field">{he ? 'חברה / ארגון' : 'Company / organization'}<input name="organization" type="text" autocomplete="organization" required minlength="2" maxlength="160" /></label>
             <input name="email" type="email" dir="ltr" inputmode="email" autocomplete="email" required placeholder={copy.email} aria-label={copy.email} />
             <button type="submit" data-idle={copy.cta} data-loading={copy.loading}>{copy.cta}</button>
             <label class="consent"><input name="consent" type="checkbox" required /> <span>{he ? 'אני רוצה לקבל את הניוזלטר של FutureProof במייל.' : 'I would like to receive the FutureProof newsletter by email.'}</span></label>
@@ -466,6 +471,9 @@ const copy = he
         <div class="signup-wrap">
           <form class="signup-form" data-newsletter-form novalidate>
             <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
+            <label class="application-field">{he ? 'שם מלא' : 'Full name'}<input name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="120" /></label>
+            <label class="application-field">{he ? 'תפקיד בהנהלה' : 'Executive role'}<input name="jobTitle" type="text" autocomplete="organization-title" required minlength="2" maxlength="120" placeholder={he ? 'למשל: מנכ״ל, סמנכ״לית' : 'e.g. CEO, VP, Managing Director'} /></label>
+            <label class="application-field">{he ? 'חברה / ארגון' : 'Company / organization'}<input name="organization" type="text" autocomplete="organization" required minlength="2" maxlength="160" /></label>
             <input name="email" type="email" dir="ltr" inputmode="email" autocomplete="email" required placeholder={copy.email} aria-label={copy.email} />
             <button type="submit" data-idle={copy.cta} data-loading={copy.loading}>{copy.cta}</button>
             <label class="consent"><input name="consent" type="checkbox" required /> <span>{he ? 'אני רוצה לקבל את הניוזלטר של FutureProof במייל.' : 'I would like to receive the FutureProof newsletter by email.'}</span></label>
@@ -513,6 +521,9 @@ const copy = he
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 email: email,
+                fullName: form.querySelector('[name=fullName]').value.trim(),
+                jobTitle: form.querySelector('[name=jobTitle]').value.trim(),
+                organization: form.querySelector('[name=organization]').value.trim(),
                 consent: form.querySelector('[name="consent"]').checked,
                 company: companyInput.value,
                 lang: lang,
@@ -521,7 +532,7 @@ const copy = he
             });
 
             var result = await response.json();
-            if (!response.ok || result.status !== 'pending_confirmation') throw new Error('signup failed');
+            if (!response.ok || result.status !== 'pending_review') throw new Error('signup failed');
             emailInput.value = '';
             status.textContent = status.dataset.success;
             status.dataset.state = 'success';

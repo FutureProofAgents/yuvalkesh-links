@@ -6,11 +6,8 @@ const COMPOSIO_USER_ID = process.env.COMPOSIO_USER_ID;
 
 const AIRTABLE_BASE_ID = 'appSZz4NuPjcVEvQ1';
 const AIRTABLE_TABLE_ID = 'tblW8r4jXEMTm5LBD';
-// Native ActiveCampaign form 20 targets dedicated newsletter list 44 with double opt-in.
-// Never subscribe contacts directly: the provider activates them only after email confirmation.
-const OPTIN_FORM_URL = 'https://uxwritinghub.activehosted.com/proc.php?jsonp=true';
-const OPTIN_FORM_ID = '20';
-
+// Applications are recorded for Yuval's manual review. No subscription or email
+// confirmation is requested here. The approval worker handles verified approvals.
 const TOOL_VERSIONS = {
   AIRTABLE_LIST_RECORDS: '20260828_00',
   AIRTABLE_CREATE_RECORDS: '20260828_00',
@@ -102,55 +99,27 @@ function getFirstRecord(data) {
   return Array.isArray(records) ? records[0] : null;
 }
 
-async function saveAirtableSubscriber({ email, language, source, signedUpAt, page, userAgent }) {
-  const escapedEmail = email.replace(/'/g, "''");
+async function saveApplication(payload) {
+  const escapedEmail = payload.email.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
   const existing = await executeTool('AIRTABLE_LIST_RECORDS', {
-    baseId: AIRTABLE_BASE_ID,
-    tableIdOrName: AIRTABLE_TABLE_ID,
-    fields: ['Email'],
-    filterByFormula: `LOWER({Email})='${escapedEmail}'`,
-    maxRecords: 1,
-    pageSize: 1,
+    baseId: AIRTABLE_BASE_ID, tableIdOrName: AIRTABLE_TABLE_ID,
+    filterByFormula: `LOWER({Email})='${escapedEmail}'`, maxRecords: 1, pageSize: 1,
   });
-
-  const fields = {
-    Email: email,
-    Language: language,
-    Source: source,
-    'Signed Up At': signedUpAt,
-    Page: page,
-    'User Agent': userAgent,
-  };
   const record = getFirstRecord(existing);
-
+  // Repeated public requests must not reset a decision, consent or review progress.
+  if (record?.fields?.['Review Status']) return;
+  const fields = {
+    Email: payload.email, Language: payload.language,
+    Source: 'futureproof-executive-application', 'Signed Up At': payload.signedUpAt,
+    Page: payload.page, 'User Agent': payload.userAgent,
+    'Full Name': payload.fullName, 'Job Title': payload.jobTitle,
+    Organization: payload.organization, 'Executive Approved': false,
+    'Review Status': 'pending_review', 'Notification Status': 'pending',
+  };
   if (record?.id) {
-    return executeTool('AIRTABLE_UPDATE_RECORD', {
-      baseId: AIRTABLE_BASE_ID,
-      tableIdOrName: AIRTABLE_TABLE_ID,
-      recordId: record.id,
-      fields,
-    });
+    return executeTool('AIRTABLE_UPDATE_RECORD', {baseId:AIRTABLE_BASE_ID,tableIdOrName:AIRTABLE_TABLE_ID,recordId:record.id,fields});
   }
-
-  return executeTool('AIRTABLE_CREATE_RECORDS', {
-    baseId: AIRTABLE_BASE_ID,
-    tableIdOrName: AIRTABLE_TABLE_ID,
-    records: [{ fields }],
-  });
-}
-
-async function requestConfirmation(email) {
-  const form = new FormData();
-  for (const [key, value] of Object.entries({u: OPTIN_FORM_ID, f: OPTIN_FORM_ID, s: '', c: '0', m: '0', act: 'sub', v: '2', email})) form.set(key, value);
-  const response = await fetch(OPTIN_FORM_URL, {
-    method: 'POST', headers: { Accept: 'application/json' }, body: form,
-    signal: AbortSignal.timeout(15_000),
-  });
-  const result = await response.json().catch(() => null);
-  // Parse the native form's success marker; never evaluate provider JavaScript.
-  if (!response.ok || typeof result?.js !== 'string' || !/_show_thank_you\(\s*['"]20['"]/.test(result.js) || result.js.includes('_show_error(')) {
-    throw new Error('Confirmation request was not accepted');
-  }
+  return executeTool('AIRTABLE_CREATE_RECORDS', {baseId:AIRTABLE_BASE_ID,tableIdOrName:AIRTABLE_TABLE_ID,records:[{fields}]});
 }
 
 export default async function handler(request, response) {
@@ -184,7 +153,14 @@ export default async function handler(request, response) {
     return send(response, 400, { ok: false, error: 'Valid email is required' });
   }
 
+  const fullName = clean(body.fullName, 120);
+  const jobTitle = clean(body.jobTitle, 120);
+  const organization = clean(body.organization, 160);
+  if (fullName.length < 2 || jobTitle.length < 2 || organization.length < 2) {
+    return send(response, 400, {ok:false,error:'Name, executive role and organization are required'});
+  }
   const payload = {
+    fullName, jobTitle, organization,
     email,
     language: lang === 'he' ? 'Hebrew' : 'English',
     source: 'futureproof-newsletter-pending',
@@ -194,13 +170,11 @@ export default async function handler(request, response) {
   };
 
   try {
-    await requestConfirmation(payload.email);
-    // ActiveCampaign is the subscription source of truth. Airtable is only an inquiry log.
-    if (COMPOSIO_USER_API_KEY && COMPOSIO_ORG_ID && COMPOSIO_PROJECT_ID && COMPOSIO_USER_ID) {
-      try { await saveAirtableSubscriber(payload); }
-      catch { console.error('[newsletter] pending lead mirror failed; provider accepted confirmation request'); }
+    if (!COMPOSIO_USER_API_KEY || !COMPOSIO_ORG_ID || !COMPOSIO_PROJECT_ID || !COMPOSIO_USER_ID) {
+      throw new Error('Application review service unavailable');
     }
-    return send(response, 202, { ok: true, status: 'pending_confirmation' });
+    await saveApplication(payload);
+    return send(response, 202, { ok: true, status: 'pending_review' });
   } catch (error) {
     console.error('[newsletter] signup failed:', error?.message || 'unknown error');
     return send(response, 502, { ok: false, error: 'Could not complete signup' });
