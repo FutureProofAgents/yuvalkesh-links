@@ -22,7 +22,6 @@ faq:
 ---
 
 
-# How to Run AI Agents in the Cloud 24/7 (Without a DevOps Headache)
 
 You built an agent that actually works.
 

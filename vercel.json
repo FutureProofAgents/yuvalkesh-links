@@ -133,6 +133,133 @@
       "source": "/blog/timlul-pgishot-maagar-yeda/",
       "destination": "/he/blog/timlul-pgishot-maagar-yeda/",
       "permanent": true
+    },
+    {
+      "source": "/blog/ai-agent-tools-stack-he",
+      "destination": "/he/blog/ai-agent-tools-stack-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agent-tools-stack-he/",
+      "destination": "/he/blog/ai-agent-tools-stack-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-development-agent-team-chat-he",
+      "destination": "/he/blog/ai-development-agent-team-chat-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-development-agent-team-chat-he/",
+      "destination": "/he/blog/ai-development-agent-team-chat-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-inference-market-guide-he",
+      "destination": "/he/blog/ai-inference-market-guide-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-inference-market-guide-he/",
+      "destination": "/he/blog/ai-inference-market-guide-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agents-clinic-three-systems-he",
+      "destination": "/he/blog/ai-agents-clinic-three-systems-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agents-clinic-three-systems-he/",
+      "destination": "/he/blog/ai-agents-clinic-three-systems-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/build-ai-agent-team-orchestration-he",
+      "destination": "/he/blog/build-ai-agent-team-orchestration-he/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/build-ai-agent-team-orchestration-he/",
+      "destination": "/he/blog/build-ai-agent-team-orchestration-he/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/index.md"
+    },
+    {
+      "source": "/he",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/he.md"
+    },
+    {
+      "source": "/he/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/he.md"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://futureproofagents.com/sitemap-index.xml>; rel=\"sitemap\", <https://futureproofagents.com/llms.txt>; rel=\"alternate\"; type=\"text/plain\""
+        }
+      ]
+    },
+    {
+      "source": "/:path*.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept"
+        }
+      ]
+    },
+    {
+      "source": "/he/:path*",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept"
+        }
+      ]
     }
   ]
 }

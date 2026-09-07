@@ -20,7 +20,6 @@ faq:
     a: "Yes, both run the same underlying Claude models. Which is smarter is the wrong question, because the real difference is where each one runs and what you are producing."
 ---
 
-# Claude Cowork vs Claude Code: Which One Should You Actually Use?
 
 You opened the Claude desktop app and there are suddenly three tabs.
 

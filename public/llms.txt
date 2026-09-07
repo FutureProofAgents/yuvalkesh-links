@@ -1,0 +1,19 @@
+# FutureProof Agents
+
+> AI agent systems and business-process automation. Founded by Yuval Keshtcher. We map business processes, implement purpose-built systems, and retain human oversight where judgment matters.
+
+## Company and services
+- [English homepage](https://futureproofagents.com/): Services, process, team and published case studies.
+- [Hebrew homepage](https://futureproofagents.com/he/): הטמעת סוכני AI ואוטומציה לתהליכים עסקיים.
+
+## Resources
+- [English articles](https://futureproofagents.com/blog/): Practical AI systems and implementation guides.
+- [Hebrew articles](https://futureproofagents.com/he/blog/): מדריכים בעברית על סוכני AI, אוטומציה ותהליכים עסקיים.
+- [Newsletter](https://futureproofagents.com/newsletter/): Subscribe to updates.
+- [Sitemap](https://futureproofagents.com/sitemap-index.xml): Canonical public pages.
+- [RSS](https://futureproofagents.com/rss.xml): Published articles.
+
+## Contact
+- [Contact Yuval](https://wa.me/972526414555): Discuss a business process or implementation project. Pricing and scope are determined for each engagement; no fixed public price list is offered here.
+
+Use linked pages as the source of truth. This file is a discovery aid, not an API or authorization to act on behalf of visitors.
