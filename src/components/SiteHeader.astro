@@ -9,7 +9,7 @@ const prefix = he ? '/he' : '';
   <nav class="fp-nav" aria-label={he ? 'ניווט ראשי' : 'Main navigation'}>
     <a href={`${prefix}/`} aria-current={active === 'home' ? 'page' : undefined}>{he ? 'ראשי' : 'Home'}</a>
     <a href={`${prefix}/blog/`} aria-current={active === 'blog' ? 'page' : undefined}>{he ? 'בלוג' : 'Blog'}</a>
-    <a href={`${prefix}/newsletter/`} aria-current={active === 'newsletter' ? 'page' : undefined}>{he ? 'ניוזלטר' : 'Newsletter'}</a>
+    <a class="fp-signup" href={`${prefix}/newsletter/#subscribe`} aria-label={he ? 'הרשמה לניוזלטר' : 'Subscribe to the newsletter'} aria-current={active === 'newsletter' ? 'page' : undefined}>{he ? 'ניוזלטר' : 'Newsletter'}</a>
     <a class="fp-language" href={alternatePath ?? `${he ? '' : '/he'}${active && active !== 'home' ? `/${active}` : ''}/`} lang={he ? 'en' : 'he'} hreflang={he ? 'en' : 'he'}>{he ? 'English' : 'עברית'}</a>
   </nav>
 </header>
@@ -24,4 +24,5 @@ const prefix = he ? '/he' : '';
 .fp-header a:focus-visible{outline:3px solid #61baff;outline-offset:3px}
 @media(max-width:700px){.fp-header{flex-direction:column;align-items:flex-start;gap:16px;padding-block:20px}.fp-nav{width:100%;justify-content:space-between;gap:4px}.fp-nav a{padding:10px 11px;font-size:13px}.fp-nav .fp-language{margin-inline-start:0}.fp-brand{font-size:18px}}
 @media(max-width:360px){.fp-nav a{padding-inline:8px;font-size:12px}}
+.fp-nav a.fp-signup{border-color:#27563b;color:#9aefb7;background:#10251a}.fp-nav a.fp-signup:hover{background:#173b25;color:#c0fcd4}
 </style>

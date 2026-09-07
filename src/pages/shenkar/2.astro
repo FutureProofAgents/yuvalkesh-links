@@ -1,4 +1,5 @@
 ---
+import NewsletterInvite from '../../components/NewsletterInvite.astro';
 import LocalFonts from '../../components/LocalFonts.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
 const pageUrl = `${site}/shenkar/2/`;
@@ -486,6 +487,7 @@ const pageUrl = `${site}/shenkar/2/`;
     </div>
   </div>
 
+<NewsletterInvite lang="he" />
 </main>
 
 <script is:inline>

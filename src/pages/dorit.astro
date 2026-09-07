@@ -1,4 +1,5 @@
 ---
+import NewsletterInvite from '../components/NewsletterInvite.astro';
 import LocalFonts from '../components/LocalFonts.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
 
@@ -666,6 +667,7 @@ const doritRole = [
       <div><a href="/">yuvkesh</a> · מסמך עבודה פנימי · noindex</div>
       <div>מבוסס על יומן השבוע, תמלולי Spinach מסונכרנים לוויקי, וזיכרון העבודה של יובל.</div>
     </footer>
-  </main>
+  <NewsletterInvite lang="he" />
+</main>
 </body>
 </html>

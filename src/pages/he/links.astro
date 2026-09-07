@@ -1,4 +1,5 @@
 ---
+import NewsletterInvite from '../../components/NewsletterInvite.astro';
 import LocalFonts from '../../components/LocalFonts.astro';
 import PageHeader from '../../components/PageHeader.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
@@ -324,7 +325,8 @@ const jsonLd = {
       <div class="brand">yuvkesh</div>
       <div class="sub">בינה מלאכותית עסקית עם יובל קשטכר</div>
     </footer>
-  </main>
+  <NewsletterInvite lang="he" />
+</main>
 
   <script is:inline>
     // micro-animation: spotlight follows cursor on each button

@@ -1,0 +1,22 @@
+---
+interface Props { lang?: 'he' | 'en' }
+const { lang = 'he' } = Astro.props;
+const he = lang === 'he';
+const href = `${he ? '/he' : ''}/newsletter/#subscribe`;
+---
+<aside class="fp-newsletter-invite" dir={he ? 'rtl' : 'ltr'} lang={lang} aria-label={he ? 'הרשמה לניוזלטר FutureProof Agents' : 'Subscribe to the FutureProof Agents newsletter'}>
+  <div class="fp-invite-copy">
+    <strong>{he ? 'סוכני AI, רעיונות וכלים — ישר למייל.' : 'AI agents, ideas and tools — straight to your inbox.'}</strong>
+    <p>{he ? 'הצטרפו לניוזלטר של FutureProof Agents. ההרשמה תושלם רק אחרי אישור במייל.' : 'Join the FutureProof Agents newsletter. Confirm your email to complete your subscription.'}</p>
+  </div>
+  <a class="fp-invite-link" href={href}>{he ? 'להרשמה לניוזלטר' : 'Subscribe to the newsletter'} <span aria-hidden="true">{he ? '←' : '→'}</span></a>
+</aside>
+<style>
+.fp-newsletter-invite,.fp-newsletter-invite *{box-sizing:border-box}
+.fp-newsletter-invite{width:100%;min-width:0;max-width:1116px;margin:32px auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px;border:1px solid #274a42;border-radius:18px;background:linear-gradient(120deg,#101c22,#101a18);color:#edf5f7;text-align:start;font-family:Heebo,Inter,system-ui,sans-serif}
+.fp-invite-copy{min-width:0;flex:1}.fp-invite-copy strong{display:block;color:#edf5f7;font-size:21px;line-height:1.4;font-weight:800;letter-spacing:normal;text-transform:none}.fp-invite-copy p{margin:9px 0 0;color:#b4c3cb;font-size:14px;line-height:1.7}
+.fp-newsletter-invite a.fp-invite-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:none;min-height:48px;margin:0;padding:12px 20px;background:#25d366;color:#062b17;border:1px solid #25d366;border-radius:12px;text-decoration:none;font-size:15px;font-weight:800;line-height:1.5;white-space:normal;text-align:center;box-shadow:none}
+.fp-newsletter-invite a.fp-invite-link:hover{background:#50e086;color:#062b17}.fp-invite-link:focus-visible{outline:3px solid #8fd6ff;outline-offset:4px}
+@media(max-width:760px){.fp-newsletter-invite{flex-direction:column;align-items:stretch;padding:22px;gap:18px}.fp-invite-copy strong{font-size:20px}}
+@media print{.fp-newsletter-invite{display:none}}
+</style>

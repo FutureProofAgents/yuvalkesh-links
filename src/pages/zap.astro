@@ -1,4 +1,5 @@
 ---
+import NewsletterInvite from '../components/NewsletterInvite.astro';
 import LocalFonts from '../components/LocalFonts.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
 
@@ -421,6 +422,7 @@ const proof = [
       <div class="brand"><a href="/">yuvkesh</a></div>
       <div class="sub2">בינה מלאכותית עסקית עם יובל קשטכר</div>
     </footer>
-  </main>
+  <NewsletterInvite lang="he" />
+</main>
 </body>
 </html>
