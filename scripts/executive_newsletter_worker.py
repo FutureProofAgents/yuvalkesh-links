@@ -2,7 +2,7 @@
 No secrets, recipient bodies or confirmation URLs are printed by this worker.
 Run on the agent host, never in the public browser.
 """
-import fcntl,json,subprocess,tempfile,sys
+import fcntl,json,subprocess,tempfile,sys,time,uuid
 from pathlib import Path
 from urllib.request import Request,urlopen
 from urllib.parse import urlencode
@@ -51,7 +51,9 @@ def notify(record):
 
 def request_confirmation(email):
     fields={'u':str(FORM),'f':str(FORM),'s':'','c':'0','m':'0','act':'sub','v':'2','email':email}
-    req=Request('https://uxwritinghub.activehosted.com/proc.php?jsonp=true',data=urlencode(fields).encode(),headers={'Accept':'application/json','Content-Type':'application/x-www-form-urlencoded'},method='POST')
+    boundary='----FutureProof'+uuid.uuid4().hex
+    body=''.join(f'--{boundary}\r\nContent-Disposition: form-data; name="{key}"\r\n\r\n{value}\r\n' for key,value in fields.items())+f'--{boundary}--\r\n'
+    req=Request('https://uxwritinghub.activehosted.com/proc.php?jsonp=true',data=body.encode(),headers={'Accept':'application/json','Content-Type':'multipart/form-data; boundary='+boundary},method='POST')
     with urlopen(req,timeout=25) as r:d=json.load(r)
     js=d.get('js','')
     import re
@@ -108,6 +110,12 @@ def main():
     try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError:print(json.dumps({'busy':True}));return
     records=list_records();todo=[r for r in records if r['fields'].get('Notification Status')=='pending' or (r['fields'].get('Review Status') in ['pending_review','pending_confirmation'] and r['fields'].get('Executive Approved') is True) or (r['fields'].get('Review Status')=='executive_active' and r['fields'].get('Executive Approved') is not True)]
+    # New alerts/decisions take priority; rotate waiting confirmations to avoid starvation.
+    urgent=[r for r in todo if r['fields'].get('Notification Status')=='pending' or r['fields'].get('Review Status')!='pending_confirmation']
+    waiting=[r for r in todo if r not in urgent]
+    if waiting:
+        pivot=int(time.time()//300)%len(waiting);waiting=waiting[pivot:]+waiting[:pivot]
+    todo=urgent+waiting
     summary={'candidates':len(todo),'processed':0,'errors':0}
     for record in todo[:8]:
         try:
