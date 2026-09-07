@@ -1,0 +1,129 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { posts: CollectionEntry<'blog'>[]; lang: 'he' | 'en' }
+const { posts, lang } = Astro.props;
+const he = lang === 'he';
+const root = he ? '/he/blog/' : '/blog/';
+const topics = he ? ['הכול', 'סוכנים וכלים', 'תהליכים עסקיים', 'תוכן ויצירה', 'תשתיות ושוק'] : ['All topics', 'Agents & tools', 'Business workflows', 'Content & creativity', 'Infrastructure & market'];
+const topic = (post: CollectionEntry<'blog'>) => {
+  const id = post.id;
+  if (/inference|cloud/.test(id)) return 4;
+  if (/content-machine|kids-song/.test(id)) return 3;
+  if (/brain|transcript|timlul|clinic/.test(id)) return 2;
+  return 1;
+};
+const minutes = (p: CollectionEntry<'blog'>) => Math.max(1, Math.ceil((p.body ?? '').split(/\s+/).length / 220));
+const fmt = (d: Date) => d.toLocaleDateString(he ? 'he-IL' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+const featured = posts[0];
+const cover = (post: CollectionEntry<'blog'>) => post.data.coverImage?.src ?? (
+  /build-your-own|orchestration/.test(post.id) ? '/images/blog/ai-agent-tools-stack-he/agent-stack.png' :
+  /inference/.test(post.id) ? '/images/blog/run-ai-agents-in-the-cloud-24-7/02-cost-stack.png' :
+  /clinic/.test(post.id) ? '/images/blog/meeting-transcripts-knowledge-base/transcription-flywheel.png' :
+  /content-machine/.test(post.id) ? '/images/blog/ai-development-agent-team-chat-he/conversation-to-pr.png' : undefined
+);
+
+---
+<div class="archive" data-blog-archive data-lang={lang}>
+  <a class="skip" href="#library">{he ? 'דילוג למאמרים' : 'Skip to articles'}</a>
+  <nav class="masthead" aria-label={he ? 'ניווט ראשי' : 'Main navigation'}>
+    <a class="brand" href={he ? '/he/' : '/'} dir="ltr"><img src="/favicon.svg" width="34" height="34" alt="" /><span translate="no">FutureProof<span class="brand-light"> Agents</span></span></a>
+    <div class="nav-links"><a href={he ? '/he/' : '/'}>{he ? 'ראשי' : 'Home'}</a><a href={root} aria-current="page">{he ? 'בלוג' : 'Blog'}</a><a href={he ? '/he/newsletter/' : '/newsletter/'}>{he ? 'ניוזלטר' : 'Newsletter'}</a><a class="language-link" href={he ? '/blog/' : '/he/blog/'} lang={he ? 'en' : 'he'}>{he ? 'English' : 'עברית'}</a></div>
+  </nav>
+  <header class="archive-intro">
+    <h1>{he ? 'בינה מלאכותית. ידע שעובד.' : 'AI insights. Built for real life.'}</h1>
+    <p>{he ? 'מדריכים, תובנות ותהליכים מהעבודה עם בינה מלאכותית. מהרעיון הראשון ועד למערכת שעובדת בעסק.' : 'Field notes, practical guides and a closer look at AI. From the first idea to a system that works in your business.'}</p>
+  </header>
+  {featured && <section class="featured" aria-label={he ? 'המאמר האחרון' : 'Latest article'}>
+    <a class="feature-art" href={`${root}${featured.id}/`} aria-label={featured.data.title} tabindex="-1" aria-hidden="true">
+      {cover(featured) ? <img src={cover(featured)} alt="" width="1200" height="700" fetchpriority="high" /> : <div class="diagram" aria-hidden="true"><span class="diagram-node">{he ? 'ידע' : 'Knowledge'}</span><span class="diagram-line"></span><span class="diagram-core"><img src="/favicon.svg" width="90" height="90" alt="" /></span><span class="diagram-line"></span><span class="diagram-node">{he ? 'פעולה' : 'Action'}</span><span class="diagram-caption">FutureProof Agents</span></div>}
+    </a>
+    <div class="feature-copy"><span class="feature-label">{he ? 'חדש בבלוג' : 'Latest story'}</span><p class="story-meta">{topics[topic(featured)]} <span aria-hidden="true">/</span> {minutes(featured)} {he ? 'דקות קריאה' : 'min read'}</p><h2><a href={`${root}${featured.id}/`}>{featured.data.title}</a></h2><p class="feature-description">{featured.data.description}</p><a class="read-link" href={`${root}${featured.id}/`}>{he ? 'לקריאת המאמר' : 'Read the story'} <span aria-hidden="true">{he ? '←' : '→'}</span></a></div>
+  </section>}
+  <section id="library" class="library" aria-labelledby="library-title">
+    <div class="library-heading"><h2 id="library-title">{he ? 'כל המאמרים' : 'The library'}</h2><label class="search" hidden data-enhanced><span>{he ? 'חיפוש בבלוג' : 'Search the blog'}</span><input type="search" name="q" autocomplete="off" placeholder={he ? 'נושא, כלי או רעיון…' : 'A topic, tool or idea…'} data-search /></label></div>
+    <div class="filter-bar" hidden data-enhanced role="group" aria-label={he ? 'סינון לפי נושא' : 'Filter by topic'}>{topics.map((label, i) => <button type="button" data-topic={i} aria-pressed={i === 0}>{label}</button>)}</div>
+    <div class="results-line"><p data-count aria-live="polite">{posts.length} {he ? 'מאמרים' : 'articles'}</p><a href="/rss.xml">RSS</a></div>
+    <div class="article-grid">
+      {posts.map((post) => <article class="story" data-story data-category={topic(post)} data-search-text={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`}>
+        <a class="story-image" href={`${root}${post.id}/`} tabindex="-1" aria-hidden="true">{cover(post) ? <img src={cover(post)} alt="" width="800" height="450" loading="lazy" /> : <div class={`story-placeholder topic-${topic(post)}`}><img src="/favicon.svg" width="72" height="72" alt="" /><span>{topics[topic(post)]}</span></div>}</a>
+        <div class="story-body"><p class="story-meta">{topics[topic(post)]}<span aria-hidden="true">/</span>{minutes(post)} {he ? 'דק׳' : 'min'}</p><h3><a href={`${root}${post.id}/`}>{post.data.title}</a></h3><p class="story-description">{post.data.description}</p><div class="story-bottom"><time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time><a class="card-read" href={`${root}${post.id}/`} aria-label={`${he ? 'לקריאה: ' : 'Read: '}${post.data.title}`}>{he ? 'לקריאה ←' : 'Read →'}</a></div></div>
+      </article>)}
+    </div>
+    <div class="empty-state" data-empty hidden><h3>{he ? 'לא נמצאו מאמרים שמתאימים לחיפוש' : 'No matching articles'}</h3><p>{he ? 'נסו מילה אחרת או חזרו לכל הנושאים.' : 'Try another keyword, or explore all topics.'}</p><button type="button" data-reset>{he ? 'הצגת כל המאמרים' : 'Show all articles'}</button></div>
+  </section>
+  <aside class="newsletter-banner" aria-labelledby="newsletter-title"><div><h2 id="newsletter-title">{he ? 'ממשיכים ללמוד גם בין המאמרים.' : 'Keep learning between articles.'}</h2><p>{he ? 'מדריכים ותובנות על סוכני AI ועבודה עם כלים חדשים — בניוזלטר של FutureProof Agents.' : 'Practical guides and field notes on AI agents and new tools, in the FutureProof Agents newsletter.'}</p></div><a href={he ? '/he/newsletter/' : '/newsletter/'}>{he ? 'לניוזלטר ←' : 'Explore the newsletter →'}</a></aside>
+</div>
+<script>
+const archive = document.querySelector<HTMLElement>('[data-blog-archive]');
+if (archive) {
+  archive.querySelectorAll<HTMLElement>('[data-enhanced]').forEach(el => el.hidden = false);
+  const input = archive.querySelector<HTMLInputElement>('[data-search]')!;
+  const buttons = [...archive.querySelectorAll<HTMLButtonElement>('[data-topic]')];
+  const stories = [...archive.querySelectorAll<HTMLElement>('[data-story]')];
+  let selected = '0';
+  const normalize = (text: string) => text.normalize('NFKD').replace(/[\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C5\u05C7]/g, '').toLocaleLowerCase();
+  const apply = (updateUrl = true) => {
+    const q = normalize(input.value.trim()); let count = 0;
+    stories.forEach(story => { const show = (selected === '0' || story.dataset.category === selected) && normalize(story.dataset.searchText ?? '').includes(q); story.hidden = !show; if (show) count++; });
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.topic === selected)));
+    archive.querySelector<HTMLElement>('[data-empty]')!.hidden = count !== 0;
+    archive.querySelector('[data-count]')!.textContent = `${count} ${archive.dataset.lang === 'he' ? 'מאמרים' : 'articles'}`;
+    if (updateUrl) { const url = new URL(location.href); input.value.trim() ? url.searchParams.set('q', input.value.trim()) : url.searchParams.delete('q'); selected === '0' ? url.searchParams.delete('topic') : url.searchParams.set('topic', selected); history.replaceState(null, '', url); }
+  };
+  const restore = () => { const params = new URLSearchParams(location.search); input.value = params.get('q') ?? ''; selected = buttons.some(b => b.dataset.topic === params.get('topic')) ? params.get('topic')! : '0'; apply(false); };
+  input.addEventListener('input', () => apply());
+  buttons.forEach(button => button.addEventListener('click', () => { selected = button.dataset.topic!; apply(); }));
+  archive.querySelector('[data-reset]')!.addEventListener('click', () => { input.value = ''; selected = '0'; apply(); input.focus(); });
+  window.addEventListener('popstate', restore); restore();
+}
+</script>
+<style>
+  :global(html) { color-scheme: dark; scroll-behavior: smooth; }
+  :global(body) { margin: 0; background: #000; color: #f1f3f5; font-family: 'Heebo', system-ui, sans-serif; }
+  :global(*) { box-sizing: border-box; }
+  :global(a:focus-visible), :global(button:focus-visible), :global(input:focus-visible), :global(summary:focus-visible) { outline: 3px solid #69bfff; outline-offset: 5px; }
+  :global(.site-footer a) { color: #aeb8c0; }
+  .archive { max-width: 1180px; margin: auto; padding: 0 32px 40px; }
+  a { color: inherit; text-decoration: none; } button, input { font: inherit; } button, a { touch-action: manipulation; }
+  .skip { position: absolute; top: -100px; padding: 12px; background: #fff; color: #000; z-index: 100; }.skip:focus { top: 12px; }
+  .masthead { min-height: 96px; border-bottom: 1px solid #292d32; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; }.brand-light { font-weight: 400; }.masthead>div { display: flex; gap: 28px; font-size: 14px; color: #b5bcc3; }.masthead a:hover { color: #69bfff; }
+  .archive-intro { padding: 68px 0 44px; max-width: 790px; }.archive-intro h1 { font-size: clamp(36px, 5vw, 62px); line-height: 1.14; letter-spacing: -.035em; margin: 0 0 22px; text-wrap: balance; }.archive-intro p { max-width: 660px; font-size: 19px; line-height: 1.75; color: #aeb8c0; margin: 0; }
+  .featured { display: grid; grid-template-columns: 1.05fr 1fr; background: #101519; border: 1px solid #29343c; border-radius: 14px; overflow: hidden; }.feature-art { min-height: 350px; display: grid; background: #082436; }.feature-art>img { width: 100%; height: 100%; object-fit: cover; }.feature-copy { padding: 36px; }.feature-label { display: inline-block; color: #08121a; background: #69bfff; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 700; margin-bottom: 18px; }.feature-copy h2 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.35; margin: 12px 0; text-wrap: balance; }.feature-copy h2 a:hover { color: #69bfff; }.feature-description { color: #b8c1c9; line-height: 1.7; font-size: 16px; }.read-link { display: inline-flex; gap: 22px; align-items: center; color: #75c5ff; padding: 12px 0; font-weight: 700; }.read-link:hover { text-decoration: underline; }
+  .diagram { position: relative; display: flex; align-items: center; justify-content: center; padding: 28px; direction: ltr; background-image: radial-gradient(#276181 1px, transparent 1px); background-size: 24px 24px; }.diagram-node { background: #0b2636; padding: 13px 18px; border: 1px solid #2b6c91; border-radius: 8px; font-size: 14px; }.diagram-core { padding: 18px; background: #000; border: 1px solid #369cd6; border-radius: 22px; }.diagram-line { height: 1px; width: 32px; background: #69bfff; }.diagram-caption { position: absolute; bottom: 25px; color: #95c4df; font-size: 13px; }
+  .library { padding-top: 68px; scroll-margin-top: 20px; }.library-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; }.library-heading h2 { font-size: 32px; margin: 0 0 8px; }.search { display: grid; gap: 7px; width: min(100%, 340px); font-size: 13px; color: #aeb8c0; }.search input { border: 1px solid #3c4850; color: #fff; border-radius: 8px; background: #101519; padding: 12px 16px; width: 100%; font-size: 16px; }.search input::placeholder { color: #969fa8; }
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; padding: 28px 0 22px; border-bottom: 1px solid #29343c; }.filter-bar button { border: 1px solid #343e46; background: transparent; color: #bbc5cd; border-radius: 30px; padding: 10px 18px; cursor: pointer; }.filter-bar button:hover { border-color: #69bfff; color: #fff; }.filter-bar button[aria-pressed=true] { background: #e9f5ff; border-color: #e9f5ff; color: #071724; }
+  .results-line { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #9da9b3; padding: 6px 0 20px; }.results-line a:hover { color: #69bfff; }
+  .article-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 26px; }.story { min-width: 0; display: flex; flex-direction: column; border-bottom: 1px solid #29343c; }.story[hidden], [hidden] { display: none !important; }.story-image { aspect-ratio: 16/9; overflow: hidden; border-radius: 8px; background: #0d2332; }.story-image>img { width: 100%; height: 100%; object-fit: cover; }.story-placeholder { height: 100%; display: flex; align-items: center; justify-content: center; gap: 20px; padding: 22px; background: #0d273a; }.story-placeholder span { max-width: 120px; font-size: 20px; font-weight: 700; }.topic-2 { background: #152e33; }.topic-3 { background: #232b3e; }.topic-4 { background: #102f46; }
+  .story-body { padding: 20px 0; display: flex; flex: 1; flex-direction: column; }.story-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; font-size: 12px; color: #91b6cf; margin: 0; }.story h3 { font-size: 21px; line-height: 1.4; margin: 12px 0 10px; text-wrap: pretty; }.story h3 a:hover { color: #69bfff; }.story-description { font-size: 15px; line-height: 1.7; margin: 0 0 24px; color: #aeb8c0; }.story-bottom { margin-top: auto; display: flex; justify-content: space-between; align-items: center; color: #a8b4be; font-size: 12px; }.story-bottom>span { color: #69bfff; font-size: 22px; }
+  .empty-state { padding: 60px 10px; text-align: center; }.empty-state p { color: #aeb8c0; }.empty-state button { border: 0; border-radius: 8px; padding: 12px 20px; background: #69bfff; color: #071724; cursor: pointer; }
+  @media(max-width: 900px) { .article-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }.featured { grid-template-columns: 1fr; }.feature-art { min-height: 0; height: 290px; }.feature-copy { padding: 28px; }.diagram { min-height: 290px; } }
+  @media(max-width: 560px) { .archive { padding-inline: 20px; }.masthead { min-height: 80px; gap: 12px; }.brand { font-size: 15px; gap: 6px; }.brand img { width: 28px; height: 28px; }.brand-light { display: none; }.masthead>div { gap: 18px; font-size: 13px; }.archive-intro { padding: 42px 0 30px; }.archive-intro p { font-size: 17px; }.article-grid { grid-template-columns: 1fr; gap: 28px; }.library { padding-top: 44px; }.library-heading { display: grid; gap: 16px; }.search { width: 100%; }.filter-bar { gap: 7px; }.filter-bar button { padding: 9px 13px; font-size: 13px; }.feature-copy { padding: 24px; }.feature-art { height: 225px; }.diagram { min-height: 225px; padding: 16px; }.diagram-core { padding: 10px; }.diagram-core img { width: 58px; height: 58px; }.diagram-node { padding: 10px; font-size: 12px; }.diagram-line { width: 20px; }.story h3 { font-size: 23px; } }
+  @media(prefers-reduced-motion: reduce) { :global(html) { scroll-behavior: auto; } }
+
+  .nav-links [aria-current=page] { color:#fff; border-bottom:2px solid #1d9bf0; padding-block:10px; }
+  .language-link { border:1px solid #343e46; border-radius:999px; padding:8px 13px; }
+  .archive-intro { max-width:none; padding:52px 0 34px; }
+  .archive-intro h1 { font-size:clamp(34px,4vw,52px); }
+  .featured { grid-template-columns:1fr 1fr; background:#16181c; border-radius:18px; }
+  .feature-art { background:#0b1320; min-height:320px; }
+  .feature-art>img { object-fit:contain; max-height:420px; align-self:center; }
+  .feature-copy { padding:30px; }.feature-copy h2 { font-size:clamp(23px,2.2vw,30px); }
+  .feature-description { font-size:15px; }
+  .library { padding-top:48px; }
+  .story { border:1px solid #2f3336; border-radius:16px; overflow:hidden; background:#16181c; transition:border-color .2s,transform .2s; }
+  .story:hover { border-color:#516779; transform:translateY(-3px); }
+  .story-image { border-radius:0; background:#0b1320; }
+  .story-image>img { object-fit:contain; }
+  .story-body { padding:22px; }
+  .story h3 { font-size:20px; }
+  .story-description { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .story-bottom { border-top:1px solid #2f3336; padding-top:16px; gap:10px; }
+  .card-read { color:#69bfff; font-size:13px; font-weight:700; white-space:nowrap; }.card-read:hover { text-decoration:underline; }
+  .newsletter-banner { border:1px solid #293e50; border-radius:18px; background:#0b1b28; padding:30px; margin-top:56px; display:flex; align-items:center; justify-content:space-between; gap:30px; }
+  .newsletter-banner h2 { font-size:24px; margin:0 0 10px; }.newsletter-banner p { color:#aeb8c0; line-height:1.7; font-size:15px; max-width:680px; margin:0; }
+  .newsletter-banner>a { background:#1d9bf0; color:#03131f; border-radius:999px; font-weight:700; padding:13px 24px; white-space:nowrap; }
+  @media(max-width:900px) { .featured { grid-template-columns:1fr; }.feature-art { min-height:0; }.feature-art>img { max-height:290px; }.newsletter-banner { flex-direction:column; align-items:start; } }
+  @media(max-width:560px) { .masthead { flex-wrap:wrap; padding:18px 0 14px; gap:16px; }.masthead>.nav-links { width:100%; justify-content:space-between; gap:10px; font-size:13px; }.archive-intro { padding:34px 0 26px; }.archive-intro h1 { font-size:35px; }.feature-art>img { max-height:225px; }.feature-copy { padding:24px; }.story-body { padding:20px; }.newsletter-banner { padding:24px; }.newsletter-banner h2 { font-size:22px; } }
+  @media(prefers-reduced-motion:reduce) { .story { transition:none; }.story:hover { transform:none; } }
+</style>
