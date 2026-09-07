@@ -80,6 +80,12 @@ services:
       - type: redirect
         source: /blog/build-ai-agent-team-orchestration-he/
         destination: /he/blog/build-ai-agent-team-orchestration-he/
+      - type: redirect
+        source: /blog/build-your-own-ai-agent-from-scratch-he
+        destination: /he/blog/build-your-own-ai-agent-from-scratch-he/
+      - type: redirect
+        source: /blog/build-your-own-ai-agent-from-scratch-he/
+        destination: /he/blog/build-your-own-ai-agent-from-scratch-he/
     headers:
       - path: /*
         name: Link
