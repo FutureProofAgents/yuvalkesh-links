@@ -16,20 +16,20 @@ const issuePath = he ? '/he/newsletter/issue-001/' : '/newsletter/issue-001/';
 
 const copy = he
   ? {
-      title: 'FutureProof Newsletter — הניוזלטר למנכ״לים שמטמיעים AI',
-      description: 'ניוזלטר שבועי למנכ״לים שרוצים להבין איך להטמיע AI בחברה, מה באמת עובד, ואילו החלטות צריך לקבל עכשיו.',
+      title: 'FutureProof — ניוזלטר AI למנהלים בכירים בלבד',
+      description: 'ניוזלטר AI למנכ״לים, מייסדים פעילים והנהלה בכירה. תובנות להחלטות עסקיות, לקהל שנבחר אישית. ההצטרפות כפופה לאישור של יובל.',
       switcher: 'English',
-      eyebrow: 'הניוזלטר למנכ״לים שמטמיעים AI',
-      headlineA: 'AI מתקדם מהר.',
-      headlineB: 'ההחלטות שלכם צריכות להדביק את הקצב.',
-      intro: 'פעם בשבוע: חמש התפתחויות שחשוב להכיר, מה הן אומרות על העסק שלכם, וחמש החלטות שאפשר לקחת לישיבת ההנהלה. בלי הייפ, בלי סיכומי השקות ועם מקור לכל נתון.',
+      eyebrow: 'למנהלים בכירים בלבד · הצטרפות באישור אישי',
+      headlineA: 'AI למי שמקבלים',
+      headlineB: 'את ההחלטות.',
+      intro: 'כשאתם אחראים על הכיוון, התקציב והביצוע, עוד עדכון על AI לא מספיק. אתם צריכים להבין במה להשקיע, מה לדחות ואילו שאלות לשאול בהנהלה. זה הניוזלטר שנכתב עבורכם — למנכ״לים, מייסדים פעילים וסמנכ״לים. כל בקשת הצטרפות נבדקת אישית על ידי יובל.',
       email: 'כתובת המייל שלך',
       cta: 'בקשת הצטרפות',
-      loading: 'נרשמים…',
-      note: 'לאקזקיוטיבז בלבד. כל בקשה נבדקת ומאושרת אישית על ידי יובל. לאחר האישור נשלח מייל לאימות הכתובת.',
+      loading: 'שולחים בקשה…',
+      note: 'זו בקשת קבלה, לא הרשמה אוטומטית. יובל בוחן את התפקיד והחברה ומחליט על התאמה לקהל המנהלים הבכירים. רק לאחר אישורו ואימות המייל מצטרפים לרשימה.',
       success: 'בקשת ההצטרפות התקבלה וממתינה לאישור אישי של יובל. אם תאושר, נשלח קישור לאימות המייל לפני הצירוף לדיוור.',
       error: 'משהו השתבש. נסו שוב בעוד רגע.',
-      proof: ['3 דקות קריאה', '5 התפתחויות חשובות', '5 החלטות למנכ״ל', 'מקור לכל נתון'],
+      proof: ['מנהלים בכירים בלבד', 'בדיקה אישית של יובל', 'תובנות להנהלה', 'הצטרפות באישור'],
       insideEyebrow: 'מה נכנס לכל גיליון',
       insideTitle: 'פחות רעש. יותר החלטות טובות.',
       insideIntro: 'המבנה נשאר קבוע כדי שתוכלו לקרוא מהר, להבין מה באמת השתנה, ולצאת עם החלטה ברורה.',
@@ -54,25 +54,25 @@ const copy = he
       move: 'בחרו סוכן אחד שכבר עובד בארגון וחברו אותו לשורה בדוח רווח והפסד — עם מדד ברור ועם מנהל שאחראי עליו. אם אף אחד לא מחזיק במספר, זו עדיין לא הטמעה. זה פיילוט.',
       source: 'מקור עיקרי: סקר State of AI 2026 של מקינזי, בהשתתפות 1,719 מנהלים',
       closingEyebrow: 'FutureProof Newsletter',
-      closingTitle: 'להישאר בחזית, בלי לחיות בתוך הפיד.',
-      closingText: 'שלוש דקות פעם בשבוע. מספיק כדי להגיע לישיבת ההנהלה עם השאלה הנכונה ועם החלטה שאפשר לקדם.',
+      closingTitle: 'מובילים את העסק? הגישו בקשת הצטרפות.',
+      closingText: 'ספרו לי מי אתם, מה התפקיד שלכם ובאיזו חברה אתם מובילים. אני בודק כל בקשה בעצמי. אם יש התאמה, תקבלו קישור לאימות המייל ולהשלמת ההצטרפות.',
       home: 'FutureProof Agents',
     }
   : {
-      title: 'FutureProof Newsletter — The AI implementation newsletter for CEOs',
-      description: 'A weekly newsletter for CEOs implementing AI inside their companies: what works, how leading teams deploy it, and what to do next.',
+      title: 'FutureProof — An AI newsletter exclusively for senior executives',
+      description: 'An AI newsletter for CEOs, operating founders and senior executives. Practical business decisions for a personally selected readership. Admission requires Yuval’s approval.',
       switcher: 'עברית',
-      eyebrow: 'The AI implementation newsletter for CEOs',
-      headlineA: 'AI moves fast.',
-      headlineB: 'Know where it is going.',
-      intro: 'What CEOs need to implement AI inside the company: what works in leading organizations, where implementation gets stuck, and five practical decisions for the leadership meeting. No launch recaps, no hype, and a source behind every claim.',
+      eyebrow: 'Senior executives only · Personally approved',
+      headlineA: 'AI for the people',
+      headlineB: 'making the decisions.',
+      intro: 'When you own the strategy, budget and execution, another AI update is not enough. You need to know where to invest, what to hold back and which questions to bring to leadership. This newsletter is written for CEOs, operating founders and senior executives. Yuval personally reviews every application.',
       email: 'Your work email',
       cta: 'Apply to join',
-      loading: 'Joining…',
-      note: 'For executives only. Yuval personally reviews each application. If approved, you will receive an email verification link.',
+      loading: 'Submitting application…',
+      note: 'This is an application, not an automatic subscription. Yuval reviews your role and company for fit with a senior executive readership. Admission requires both his approval and your email verification.',
       success: 'Your application is awaiting Yuval’s personal approval. If approved, you will receive an email verification link before joining the newsletter.',
       error: 'That did not go through. Try again in a moment.',
-      proof: ['3 minute read', '5 developments', '5 decisions', 'Every source linked'],
+      proof: ['Senior executives only', 'Personally reviewed by Yuval', 'Built for leadership', 'Admission by approval'],
       insideEyebrow: 'Inside every issue',
       insideTitle: 'Less news. Better judgment.',
       insideIntro: 'The format stays fixed so you can read fast, understand what changed, and leave with a decision.',
@@ -97,8 +97,8 @@ const copy = he
       move: 'Take one agent already in production and put it on a P&L line — with a named owner and a number. If nobody owns the number, you do not have a deployment. You have a pilot.',
       source: 'Primary source: McKinsey State of AI 2026 survey, 1,719 respondents',
       closingEyebrow: 'FutureProof Newsletter',
-      closingTitle: 'Stay ahead without living in the feed.',
-      closingText: 'Three minutes, once a week. Enough to walk into the leadership meeting with the right question.',
+      closingTitle: 'Leading the business? Apply to join.',
+      closingText: 'Tell me who you are, your role and the company you lead. I review every application myself. If there is a fit, you will receive an email verification link to complete your admission.',
       home: 'FutureProof Agents',
     };
 ---
@@ -388,6 +388,8 @@ const copy = he
       .reveal { opacity: 1; transform: none; animation: none; }
       * { transition-duration: .01ms !important; }
     }
+    .editor-note{margin-top:28px;padding:28px;border-inline-start:3px solid var(--blue);background:var(--panel);border-radius:12px;line-height:1.8;color:var(--ink)}
+    .editor-note strong{display:block;margin-top:14px;color:var(--muted);font-size:14px}
     .signup-form .application-field{grid-column:1/-1;display:grid;gap:7px;width:100%;text-align:start;color:#c8d2db;font-size:14px;font-weight:600}
     .signup-form .application-field[hidden]{display:none}
     .signup-form .application-field input,.signup-form .application-field select{width:100%;min-width:0;font:inherit;padding:14px;border:1px solid #35444c;border-radius:10px;background:#0c1116;color:#fff;min-height:48px}
@@ -423,6 +425,30 @@ const copy = he
         </div>
       </section>
 
+      <hr class="rule" />
+
+      <section class="section" aria-labelledby="readership-title">
+        <div class="section-head">
+          <div class="eyebrow">{he ? 'קהל מדויק. רף כניסה ברור.' : 'A focused readership. A clear admission standard.'}</div>
+          <h2 id="readership-title">{he ? 'לא לכל מי שמתעניין ב־AI. למי שאחראי למה שעושים איתו.' : 'Not just interested in AI. Accountable for what it delivers.'}</h2>
+          <p>{he ? 'הניוזלטר מיועד למנכ״לים, מייסדים שמובילים חברה בפועל וסמנכ״לים עם אחריות על אסטרטגיה, תקציב, צוותים או הטמעה. סקרנות טכנולוגית לבדה אינה תנאי קבלה; האחריות הניהולית והרלוונטיות לתוכן הן מה שקובע.' : 'For CEOs, founders actively running a company, and senior executives responsible for strategy, budgets, teams or implementation. Interest in technology alone is not the admission criterion. Leadership responsibility and relevance to the content are.'}</p>
+        </div>
+        <div class="issue-grid">
+          {(he ? [
+            ['01', 'מגישים בקשה', 'שם, תפקיד, חברה ושפה מועדפת — כדי להבין מי נמצא בצד השני.'],
+            ['02', 'יובל בודק אישית', 'כל בקשה נבחנת לפי התאמתה לקהל. הגשת הטופס אינה מבטיחה קבלה.'],
+            ['03', 'מקבלים אישור ומאמתים', 'אם הבקשה מאושרת, מקבלים קישור לאימות המייל. רק לאחר שני השלבים מצטרפים לרשימה.']
+          ] : [
+            ['01', 'Apply', 'Share your name, role, company and preferred language so I know who is on the other side.'],
+            ['02', 'Yuval reviews personally', 'Every application is considered for fit. Submitting the form does not guarantee admission.'],
+            ['03', 'Approval, then verification', 'If approved, you receive an email verification link. You join the list only after both steps.']
+          ]).map(([no,name,desc]) => <article class="issue-row"><div class="issue-no">{no}</div><div class="issue-name">{name}</div><p class="issue-desc">{desc}</p></article>)}
+        </div>
+        <div class="editor-note">
+          <p>{he ? 'אני רוצה לכתוב לאנשים שצריכים לקבל החלטות אמיתיות על AI — לא לצבור עוד כתובות ברשימה. לכן אני בודק כל בקשה אישית.' : 'I want to write for people who need to make real decisions about AI — not simply collect more email addresses. That is why I review every application personally.'}</p>
+          <strong>{he ? 'יובל קשטכר · FutureProof Agents' : 'Yuval Keshtcher · FutureProof Agents'}</strong>
+        </div>
+      </section>
       <hr class="rule" />
 
       <section class="section">
