@@ -1,4 +1,5 @@
 ---
+import SiteHeader from './SiteHeader.astro';
 import type { CollectionEntry } from 'astro:content';
 interface Props { posts: CollectionEntry<'blog'>[]; lang: 'he' | 'en' }
 const { posts, lang } = Astro.props;
@@ -25,10 +26,7 @@ const cover = (post: CollectionEntry<'blog'>) => post.data.coverImage?.src ?? (
 ---
 <div class="archive" data-blog-archive data-lang={lang}>
   <a class="skip" href="#library">{he ? 'דילוג למאמרים' : 'Skip to articles'}</a>
-  <nav class="masthead" aria-label={he ? 'ניווט ראשי' : 'Main navigation'}>
-    <a class="brand" href={he ? '/he/' : '/'} dir="ltr"><img src="/favicon.svg" width="34" height="34" alt="" /><span translate="no">FutureProof<span class="brand-light"> Agents</span></span></a>
-    <div class="nav-links"><a href={he ? '/he/' : '/'}>{he ? 'ראשי' : 'Home'}</a><a href={root} aria-current="page">{he ? 'בלוג' : 'Blog'}</a><a href={he ? '/he/newsletter/' : '/newsletter/'}>{he ? 'ניוזלטר' : 'Newsletter'}</a><a class="language-link" href={he ? '/blog/' : '/he/blog/'} lang={he ? 'en' : 'he'}>{he ? 'English' : 'עברית'}</a></div>
-  </nav>
+  <SiteHeader lang={lang} active="blog" />
   <header class="archive-intro">
     <h1>{he ? 'בינה מלאכותית. ידע שעובד.' : 'AI insights. Built for real life.'}</h1>
     <p>{he ? 'מדריכים, תובנות ותהליכים מהעבודה עם בינה מלאכותית. מהרעיון הראשון ועד למערכת שעובדת בעסק.' : 'Field notes, practical guides and a closer look at AI. From the first idea to a system that works in your business.'}</p>

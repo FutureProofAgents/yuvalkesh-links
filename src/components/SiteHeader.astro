@@ -1,0 +1,25 @@
+---
+interface Props { lang: 'he' | 'en'; active: 'blog' | 'newsletter'; alternatePath?: string; }
+const {lang, active, alternatePath} = Astro.props;
+const he = lang === 'he';
+const prefix = he ? '/he' : '';
+---
+<header class="fp-header">
+  <a class="fp-brand" href={`${prefix}/`} dir="ltr" aria-label="FutureProof Agents — Home"><img src="/favicon.svg" width="32" height="32" alt="" /><span>FutureProof <b>Agents</b></span></a>
+  <nav class="fp-nav" aria-label={he ? 'ניווט ראשי' : 'Main navigation'}>
+    <a href={`${prefix}/`}>{he ? 'ראשי' : 'Home'}</a>
+    <a href={`${prefix}/blog/`} aria-current={active === 'blog' ? 'page' : undefined}>{he ? 'בלוג' : 'Blog'}</a>
+    <a href={`${prefix}/newsletter/`} aria-current={active === 'newsletter' ? 'page' : undefined}>{he ? 'ניוזלטר' : 'Newsletter'}</a>
+    <a class="fp-language" href={alternatePath ?? `${he ? '' : '/he'}/${active}/`} lang={he ? 'en' : 'he'} hreflang={he ? 'en' : 'he'}>{he ? 'English' : 'עברית'}</a>
+  </nav>
+</header>
+<style>
+.fp-header{width:100%;min-height:88px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:18px;border-bottom:1px solid #292e34;position:relative;z-index:2}
+.fp-brand{display:inline-flex;flex-shrink:0;align-items:center;gap:10px;color:#f5f7fa;text-decoration:none;font-size:18px;font-weight:800;letter-spacing:-.4px;white-space:nowrap;line-height:1.4}
+.fp-brand img{display:block;flex-shrink:0}.fp-brand b{font-weight:500;color:#61baff}
+.fp-nav{display:flex;align-items:center;gap:6px;min-width:0}.fp-nav a{display:inline-flex;justify-content:center;align-items:center;min-height:44px;padding:10px 14px;border:1px solid transparent;border-radius:10px;text-decoration:none;color:#b8c2cd;font-size:14px;font-weight:600;line-height:1.4;white-space:nowrap}
+.fp-nav a:hover{background:#161d25;color:white}.fp-nav a[aria-current=page]{background:#12283a;border-color:#23465e;color:#83ceff}.fp-nav .fp-language{border-color:#303943;margin-inline-start:10px;color:#e7edf4}
+.fp-header a:focus-visible{outline:3px solid #61baff;outline-offset:3px}
+@media(max-width:700px){.fp-header{flex-direction:column;align-items:flex-start;gap:16px;padding-block:20px}.fp-nav{width:100%;justify-content:space-between;gap:4px}.fp-nav a{padding:10px 11px;font-size:13px}.fp-nav .fp-language{margin-inline-start:0}.fp-brand{font-size:18px}}
+@media(max-width:360px){.fp-nav a{padding-inline:8px;font-size:12px}}
+</style>
