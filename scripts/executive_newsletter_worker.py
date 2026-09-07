@@ -40,7 +40,7 @@ def list_records():
 def notify(record):
     f=record['fields'];rid=record['id']
     body=('בקשת הצטרפות לניוזלטר האקזקיוטיבז של FutureProof Agents\n\n'
-          f"שם: {f.get('Full Name','')}\nמייל: {f['Email']}\nתפקיד: {f.get('Job Title','')}\nחברה: {f.get('Organization','')}\n\n"
+          f"שם: {f.get('Full Name','')}\nמייל: {f['Email']}\nתפקיד: {f.get('Job Title','')}\nחברה: {f.get('Organization','')}\nשפה מועדפת: {f.get('Preferred Language','לא צוינה')}\n\n"
           'הבקשה ממתינה לבדיקה שלך. אין צירוף אוטומטי לדיוור.\n'
           f'לפתיחת הבקשה בחשבון Airtable שלך:\nhttps://airtable.com/{BASE}/{TABLE}/{rid}\n\n'
           'לאישור: סמן את Executive Approved.\nלדחייה: שנה את Review Status ל-rejected והשאר את האישור לא מסומן.\n'

@@ -389,7 +389,8 @@ const copy = he
       * { transition-duration: .01ms !important; }
     }
     .signup-form .application-field{grid-column:1/-1;display:grid;gap:7px;width:100%;text-align:start;color:#c8d2db;font-size:14px;font-weight:600}
-    .signup-form .application-field input{width:100%;min-width:0;font:inherit;padding:14px;border:1px solid #35444c;border-radius:10px;background:#0c1116;color:#fff;min-height:48px}
+    .signup-form .application-field[hidden]{display:none}
+    .signup-form .application-field input,.signup-form .application-field select{width:100%;min-width:0;font:inherit;padding:14px;border:1px solid #35444c;border-radius:10px;background:#0c1116;color:#fff;min-height:48px}
   </style>
 </head>
 <body>
@@ -408,6 +409,8 @@ const copy = he
             <label class="application-field">{he ? 'שם מלא' : 'Full name'}<input name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="120" /></label>
             <label class="application-field">{he ? 'תפקיד בהנהלה' : 'Executive role'}<input name="jobTitle" type="text" autocomplete="organization-title" required minlength="2" maxlength="120" placeholder={he ? 'למשל: מנכ״ל, סמנכ״לית' : 'e.g. CEO, VP, Managing Director'} /></label>
             <label class="application-field">{he ? 'חברה / ארגון' : 'Company / organization'}<input name="organization" type="text" autocomplete="organization" required minlength="2" maxlength="160" /></label>
+            <label class="application-field">{he ? 'שפה מועדפת' : 'Preferred language'}<select name="preferredLanguage" required><option value="">{he ? 'בחירת שפה' : 'Choose a language'}</option><option value="he">{he ? 'עברית' : 'Hebrew'}</option><option value="en">{he ? 'אנגלית' : 'English'}</option><option value="other">{he ? 'אחרת' : 'Other'}</option></select></label>
+            <label class="application-field" data-other-language hidden>{he ? 'איזו שפה תעדיפו?' : 'Which language would you prefer?'}<input name="otherLanguage" type="text" maxlength="80" disabled /></label>
             <input name="email" type="email" dir="ltr" inputmode="email" autocomplete="email" required placeholder={copy.email} aria-label={copy.email} />
             <button type="submit" data-idle={copy.cta} data-loading={copy.loading}>{copy.cta}</button>
             <label class="consent"><input name="consent" type="checkbox" required /> <span>{he ? 'אני רוצה לקבל את הניוזלטר של FutureProof במייל.' : 'I would like to receive the FutureProof newsletter by email.'}</span></label>
@@ -474,6 +477,8 @@ const copy = he
             <label class="application-field">{he ? 'שם מלא' : 'Full name'}<input name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="120" /></label>
             <label class="application-field">{he ? 'תפקיד בהנהלה' : 'Executive role'}<input name="jobTitle" type="text" autocomplete="organization-title" required minlength="2" maxlength="120" placeholder={he ? 'למשל: מנכ״ל, סמנכ״לית' : 'e.g. CEO, VP, Managing Director'} /></label>
             <label class="application-field">{he ? 'חברה / ארגון' : 'Company / organization'}<input name="organization" type="text" autocomplete="organization" required minlength="2" maxlength="160" /></label>
+            <label class="application-field">{he ? 'שפה מועדפת' : 'Preferred language'}<select name="preferredLanguage" required><option value="">{he ? 'בחירת שפה' : 'Choose a language'}</option><option value="he">{he ? 'עברית' : 'Hebrew'}</option><option value="en">{he ? 'אנגלית' : 'English'}</option><option value="other">{he ? 'אחרת' : 'Other'}</option></select></label>
+            <label class="application-field" data-other-language hidden>{he ? 'איזו שפה תעדיפו?' : 'Which language would you prefer?'}<input name="otherLanguage" type="text" maxlength="80" disabled /></label>
             <input name="email" type="email" dir="ltr" inputmode="email" autocomplete="email" required placeholder={copy.email} aria-label={copy.email} />
             <button type="submit" data-idle={copy.cta} data-loading={copy.loading}>{copy.cta}</button>
             <label class="consent"><input name="consent" type="checkbox" required /> <span>{he ? 'אני רוצה לקבל את הניוזלטר של FutureProof במייל.' : 'I would like to receive the FutureProof newsletter by email.'}</span></label>
@@ -497,6 +502,15 @@ const copy = he
         : 'https://yuvalkesh-links.vercel.app/api/newsletter';
 
       document.querySelectorAll('[data-newsletter-form]').forEach(function (form) {
+        var languageSelect = form.querySelector('[name=preferredLanguage]');
+        var otherField = form.querySelector('[data-other-language]');
+        var otherInput = form.querySelector('[name=otherLanguage]');
+        languageSelect.addEventListener('change', function () {
+          var other = languageSelect.value === 'other';
+          otherField.hidden = !other;
+          otherInput.disabled = !other;
+          otherInput.required = other;
+        });
         form.addEventListener('submit', async function (event) {
           event.preventDefault();
           var emailInput = form.querySelector('input[name="email"]');
@@ -524,6 +538,8 @@ const copy = he
                 fullName: form.querySelector('[name=fullName]').value.trim(),
                 jobTitle: form.querySelector('[name=jobTitle]').value.trim(),
                 organization: form.querySelector('[name=organization]').value.trim(),
+                preferredLanguage: languageSelect.value,
+                otherLanguage: languageSelect.value === 'other' ? otherInput.value.trim() : '',
                 consent: form.querySelector('[name="consent"]').checked,
                 company: companyInput.value,
                 lang: lang,

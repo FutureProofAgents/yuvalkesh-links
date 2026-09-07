@@ -110,6 +110,7 @@ async function saveApplication(payload) {
   if (record?.fields?.['Review Status']) return;
   const fields = {
     Email: payload.email, Language: payload.language,
+    'Preferred Language': payload.preferredLanguage,
     Source: 'futureproof-executive-application', 'Signed Up At': payload.signedUpAt,
     Page: payload.page, 'User Agent': payload.userAgent,
     'Full Name': payload.fullName, 'Job Title': payload.jobTitle,
@@ -159,7 +160,13 @@ export default async function handler(request, response) {
   if (fullName.length < 2 || jobTitle.length < 2 || organization.length < 2) {
     return send(response, 400, {ok:false,error:'Name, executive role and organization are required'});
   }
+  const preference = body.preferredLanguage;
+  const otherLanguage = clean(body.otherLanguage, 80);
+  if (!['he', 'en', 'other'].includes(preference) || (preference === 'other' && !otherLanguage)) {
+    return send(response, 400, {ok:false,error:'Preferred language is required; specify the language when choosing Other'});
+  }
   const payload = {
+    preferredLanguage: preference === 'other' ? otherLanguage : preference === 'he' ? 'Hebrew' : 'English',
     fullName, jobTitle, organization,
     email,
     language: lang === 'he' ? 'Hebrew' : 'English',
