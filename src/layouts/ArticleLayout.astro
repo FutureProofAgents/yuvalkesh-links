@@ -1,4 +1,6 @@
 ---
+import PageHeader from '../components/PageHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 interface Heading {
   depth: number;
   slug: string;
@@ -177,7 +179,7 @@ const socials = [
       display: flex;
       justify-content: center;
     }
-    .wrap { width: 100%; max-width: 680px; }
+    .wrap { width: 100%; max-width: 760px; }
     .top-nav {
       margin-bottom: 36px;
       display: flex;
@@ -444,7 +446,7 @@ const socials = [
       body { padding: 32px 16px 72px; overflow-x: hidden; }
       .wrap { width: 100%; max-width: calc(100vw - 32px); min-width: 0; overflow-wrap: anywhere; }
       .top-nav { margin-bottom: 28px; }
-      h1 { font-size: 27px; }
+      h1 { font-size: clamp(28px, 7vw, 36px); }
       .content { font-size: 16.5px; }
       .content :global(h2) { font-size: 23px; margin-top: 44px; }
       .content :global(h3) { font-size: 19px; margin-top: 34px; }
@@ -459,27 +461,19 @@ const socials = [
       .sticky-cta-title { font-size: 12.5px; }
       .sticky-cta-button { padding: 8px 13px; font-size: 12.5px; }
     }
+    .wrap{min-width:0;overflow-wrap:anywhere}.meta{color:#aeb8c0}.top-nav{margin-bottom:24px}
+    h1{text-wrap:balance;line-height:1.2;font-size:clamp(30px,4vw,46px);letter-spacing:-.025em}
+    .content :global(h2),.content :global(h3){scroll-margin-top:100px}
+    .content :global(img){height:auto}.content :global(iframe),.content :global(video){max-width:100%}
+    .content :global(a){text-decoration:underline;text-underline-offset:3px}
+    @media(min-width:760px){.more-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.more-card{height:100%}}
+    @media(max-width:480px){.wrap{max-width:100%}.sticky-cta{flex-wrap:wrap}.sticky-cta-button{white-space:normal}}
   </style>
 </head>
-<body>
+<body class="fp-site-page">
+  <PageHeader lang={lang} active="blog" alternatePath={translationOf ? `${lang === 'he' ? '' : '/he'}/blog/${translationOf}/` : undefined} />
   <article class="wrap">
-    <nav class="top-nav">
-      <a href={lang === 'he' ? '/he/blog/' : '/blog/'}>{backLabel}</a>
-      {translationOf && (
-        <div class="lang-switch" dir="ltr" role="navigation" aria-label={lang === 'he' ? 'שפה' : 'Language'}>
-          {lang === 'en' ? (
-            <span class="lang-opt active" aria-current="true">EN</span>
-          ) : (
-            <a class="lang-opt" href={`/blog/${translationOf}/`} lang="en" title="Read in English">EN</a>
-          )}
-          {lang === 'he' ? (
-            <span class="lang-opt active" aria-current="true">עב</span>
-          ) : (
-            <a class="lang-opt" href={`/he/blog/${translationOf}/`} lang="he" title="קראו בעברית">עב</a>
-          )}
-        </div>
-      )}
-    </nav>
+    <nav class="top-nav" aria-label={lang === 'he' ? 'ניווט מאמר' : 'Article navigation'}><a href={lang === 'he' ? '/he/blog/' : '/blog/'}>{backLabel}</a></nav>
     <h1>{title}</h1>
     <p class="meta">
       {fmt(pubDate)}{updatedDate && ` · ${lang === 'he' ? 'עודכן' : 'Updated'} ${fmt(updatedDate)}`}
@@ -548,5 +542,6 @@ const socials = [
       </section>
     )}
   </article>
+  <SiteFooter lang={lang} />
 </body>
 </html>

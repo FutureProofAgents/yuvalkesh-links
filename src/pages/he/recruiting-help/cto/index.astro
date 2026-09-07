@@ -1,4 +1,5 @@
 ---
+import PageHeader from '../../../../components/PageHeader.astro';
 import SiteFooter from '../../../../components/SiteFooter.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
 const API = 'https://fpa-cto-form.vercel.app/api/submit';
@@ -175,7 +176,8 @@ const musts = [
     @media (prefers-reduced-motion: reduce) { .fade, body::before { animation: none; opacity: 1; transform: none; } }
   </style>
 </head>
-<body>
+<body class="fp-site-page">
+  <PageHeader lang="he" />
   <main class="container">
     <a class="lang fade" style="animation-delay:0.02s" href="/he/">לעמוד הראשי</a>
 

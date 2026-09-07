@@ -1,4 +1,5 @@
 ---
+import PageHeader from '../components/PageHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 const site = Astro.site!.href.replace(/\/$/, '');
 const pageUrl = `${site}/prompts/`;
@@ -213,13 +214,9 @@ const pageUrl = `${site}/prompts/`;
     }
   </style>
 </head>
-<body>
+<body class="fp-site-page">
+  <PageHeader lang="en" />
 <main class="wrap">
-
-  <nav class="top-nav">
-    <a href="/">← Home</a>
-    <span class="brand">PROMPT PLAYBOOK</span>
-  </nav>
 
   <span class="kicker">A Practical Guide for Your Team</span>
   <h1>How to Write Prompts<br>That Actually <span class="accent">Work</span></h1>

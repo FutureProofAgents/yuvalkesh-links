@@ -1,4 +1,5 @@
 ---
+import PageHeader from '../components/PageHeader.astro';
 ---
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -43,7 +44,8 @@
     a:hover { background: #1d1f23; }
   </style>
 </head>
-<body>
+<body class="fp-site-page">
+  <PageHeader lang="he" />
   <h1>404</h1>
   <p>העמוד הזה לא קיים.</p>
   <a href="/">לעמוד הראשי</a>
