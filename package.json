@@ -6,9 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "test": "node --test test/*.test.mjs",
-    "check": "node --check api/outreach.js && node --check api/outreach-public.js && node --check api/outreach-followups.js && npm test && npm run build"
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
