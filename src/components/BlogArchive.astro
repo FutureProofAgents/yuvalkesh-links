@@ -13,7 +13,7 @@ const topic = (post: CollectionEntry<'blog'>) => {
   const id = post.id;
   if (/inference|cloud/.test(id)) return 4;
   if (/content-machine|kids-song/.test(id)) return 3;
-  if (/brain|transcript|timlul|clinic/.test(id)) return 2;
+  if (/brain|transcript|timlul|clinic|^ai-crm-follow-up-automation/.test(id)) return 2;
   return 1;
 };
 const minutes = (p: CollectionEntry<'blog'>) => Math.max(1, Math.ceil((p.body ?? '').split(/\s+/).length / 220));
