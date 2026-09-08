@@ -9,6 +9,7 @@ process.env.COMPOSIO_ORG_ID='test';
 process.env.COMPOSIO_PROJECT_ID='test';
 process.env.COMPOSIO_USER_ID='test';
 process.env.OUTREACH_POSTAL_ADDRESS='Test address';
+process.env.OUTREACH_SEND_DISABLED='false';
 
 let calls=[];
 global.fetch=async (url,options)=>{

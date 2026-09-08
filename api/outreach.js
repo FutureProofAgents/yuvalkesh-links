@@ -110,6 +110,10 @@ function render(template, fields) {
   const values={first_name:fields['First Name']||fields['Full Name']?.split(/\s+/)[0]||'',full_name:fields['Full Name']||'',company:fields.Company||'',job_title:fields['Job Title']||'',personal_note:fields['Personal Note']||''};
   return String(template||'').replace(/{{\s*(first_name|full_name|company|job_title|personal_note)\s*}}/gi,(_,key)=>values[key.toLowerCase()]||'');
 }
+function approvalFingerprint(campaign, recipient) {
+  const approved={recipientId:recipient.id,email:email(recipient.fields.Email),subject:render(campaign.fields.Subject,recipient.fields),body:render(campaign.fields['Body Template'],recipient.fields),followupSubject:render(campaign.fields['Follow-up Subject'],recipient.fields),followupBody:render(campaign.fields['Follow-up Body'],recipient.fields),followupDays:Number(campaign.fields['Follow-up Delay Days'])||4,senderName:campaign.fields['Sender Name']||'',senderEmail:campaign.fields['Sender Email']||'',replyTo:campaign.fields['Reply To']||''};
+  return crypto.createHash('sha256').update(JSON.stringify(approved)).digest('hex');
+}
 function publicRecord(row) { return {id:row.id,createdTime:row.createdTime,fields:row.fields||{}}; }
 
 async function requestLogin(request,response,body) {
@@ -147,25 +151,31 @@ async function createCampaign(response,body) {
   const made=await create(TABLES.campaigns,[fields]); return json(response,201,{ok:true,campaign:publicRecord(made[0])});
 }
 async function importRecipients(response,body) {
-  const campaign=clean(body.campaignId,30); const input=Array.isArray(body.contacts)?body.contacts.slice(0,500):[];
-  if(!/^rec[a-zA-Z0-9]{14}$/.test(campaign)||!input.length)return json(response,400,{ok:false,error:'Campaign and contacts are required'});
+  const campaign=clean(body.campaignId,30); const input=Array.isArray(body.contacts)?body.contacts.slice(0,500):[]; const source=clean(body.source,180);
+  if(!/^rec[a-zA-Z0-9]{14}$/.test(campaign)||!input.length||!source)return json(response,400,{ok:false,error:'Campaign, source and contacts are required'});
   const existing=await list(TABLES.recipients); const seen=new Set(existing.map((r)=>`${r.fields?.Email?.toLowerCase()}|${(r.fields?.Campaign||[])[0]}`));
   const suppressed=new Set((await list(TABLES.suppressions)).map((r)=>String(r.fields?.Email||'').toLowerCase())); const now=new Date().toISOString(); const rows=[];
-  for(const item of input){const e=email(item.email);if(!e||suppressed.has(e)||seen.has(`${e}|${campaign}`))continue;rows.push({'Recipient Key':`${campaign}:${e}`,'Campaign':[campaign],'Email':e,'First Name':clean(item.firstName,80),'Full Name':clean(item.fullName,120),'Job Title':clean(item.jobTitle,120),'Company':clean(item.company,160),'Language':item.language==='Hebrew'?'Hebrew':item.language==='Other'?'Other':'English','Status':'imported','Send Approved':false,'Sequence Approved':false,'Personal Note':clean(item.personalNote,1500),'Imported At':now});seen.add(`${e}|${campaign}`);}
+  for(const item of input){const e=email(item.email);if(!e||suppressed.has(e)||seen.has(`${e}|${campaign}`))continue;rows.push({'Recipient Key':`${campaign}:${e}`,'Campaign':[campaign],'Email':e,'First Name':clean(item.firstName,80),'Full Name':clean(item.fullName,120),'Job Title':clean(item.jobTitle,120),'Company':clean(item.company,160),'Language':item.language==='Hebrew'?'Hebrew':item.language==='Other'?'Other':'English','Status':'imported','Send Approved':false,'Sequence Approved':false,'Personal Note':clean(item.personalNote,1500),'Import Source':source,'Imported At':now});seen.add(`${e}|${campaign}`);}
   const made=await create(TABLES.recipients,rows); for(const row of made.slice(0,20))await event('imported',row.id,campaign,'Imported from owner-reviewed CSV');
   return json(response,201,{ok:true,imported:made.length,skipped:input.length-made.length});
 }
 async function approveRecipient(response,body) {
   const id=clean(body.id,30); const approved=body.approved===true; if(!/^rec[a-zA-Z0-9]{14}$/.test(id))return json(response,400,{ok:false,error:'Invalid recipient'});
-  await update(TABLES.recipients,id,{'Send Approved':approved,'Sequence Approved':approved,'Status':approved?'approved':'imported'}); await event('approved',id,null,approved?'Initial email and one configured follow-up approved by owner':'Sequence approval removed by owner'); return json(response,200,{ok:true});
+  const recipient=(await list(TABLES.recipients,{filterByFormula:`RECORD_ID()='${id}'`,maxRecords:1}))[0]; if(!recipient)return json(response,404,{ok:false,error:'Recipient not found'});
+  const campaignId=(recipient.fields.Campaign||[])[0]; const campaign=(await list(TABLES.campaigns,{filterByFormula:`RECORD_ID()='${campaignId}'`,maxRecords:1}))[0]; if(!campaign)return json(response,404,{ok:false,error:'Campaign not found'});
+  const hash=approved?approvalFingerprint(campaign,recipient):'';
+  await update(TABLES.recipients,id,{'Send Approved':approved,'Sequence Approved':approved,'Approval Hash':hash,'Approved At':approved?new Date().toISOString():'','Status':approved?'approved':'imported'}); await event('approved',id,campaignId,approved?`Exact sequence version approved: ${hash}`:'Sequence approval removed by owner'); return json(response,200,{ok:true});
 }
 async function sendRecipient(response,body) {
+  if(process.env.OUTREACH_SEND_DISABLED!=='false')return json(response,503,{ok:false,error:'Sending is disabled until the owner canary is verified'});
   if(!process.env.OUTREACH_POSTAL_ADDRESS)return json(response,409,{ok:false,error:'A postal address must be configured before sending'});
   const id=clean(body.id,30); const recipients=await list(TABLES.recipients,{filterByFormula:`RECORD_ID()='${id}'`,maxRecords:1}); const recipient=recipients[0];
   if(!recipient?.fields?.['Sequence Approved']||recipient.fields.Status!=='approved')return json(response,409,{ok:false,error:'Recipient sequence requires explicit approval'});
   const e=email(recipient.fields.Email); if(!e)return json(response,400,{ok:false,error:'Recipient email is invalid'});
   if((await list(TABLES.suppressions,{filterByFormula:`LOWER({Email})='${e.replace(/'/g,"''")}'`,maxRecords:1})).length)return json(response,409,{ok:false,error:'Recipient is suppressed'});
   const campaignId=(recipient.fields.Campaign||[])[0]; const campaigns=await list(TABLES.campaigns,{filterByFormula:`RECORD_ID()='${campaignId}'`,maxRecords:1}); const campaign=campaigns[0]; if(!campaign)return json(response,404,{ok:false,error:'Campaign not found'});
+  const currentHash=approvalFingerprint(campaign,recipient); if(recipient.fields['Approval Hash']!==currentHash){await update(TABLES.recipients,id,{'Send Approved':false,'Sequence Approved':false,'Status':'imported','Approval Hash':''});return json(response,409,{ok:false,error:'Message changed after approval; review and approve it again'});}
+  const today=new Date().toISOString().slice(0,10); const sentToday=(await list(TABLES.recipients)).filter((r)=>String(r.fields?.['Sent At']||'').startsWith(today)).length; if(sentToday>=20)return json(response,429,{ok:false,error:'Daily safety limit reached'});
   const token=sign({email:e,exp:Date.now()+365*24*60*60*1000}); const unsubscribe=`${APP_URL}/api/outreach-public?action=unsubscribe&token=${encodeURIComponent(token)}`;
   const subject=render(campaign.fields.Subject,recipient.fields); const core=render(campaign.fields['Body Template'],recipient.fields); const text=`${core}\n\nFutureProof Agents · ${process.env.OUTREACH_POSTAL_ADDRESS}\nUnsubscribe: ${unsubscribe}`;
   await update(TABLES.recipients,id,{'Status':'sending','Rendered Subject':subject,'Rendered Body':text,'Last Error':''});
@@ -188,7 +198,7 @@ async function syncInbox(response) {
 export default async function handler(request,response){
   try{
     if(!validOrigin(request))return json(response,403,{ok:false,error:'Origin not allowed'});
-    const action=clean(request.query?.action,50); const body=typeof request.body==='string'?JSON.parse(request.body||'{}'):(request.body||{});
+    const action=clean(request.query?.action,50); if(typeof request.body==='string'&&request.body.length>250000)return json(response,413,{ok:false,error:'Request too large'}); const body=typeof request.body==='string'?JSON.parse(request.body||'{}'):(request.body||{});
     if(request.method==='POST'&&action==='request-login')return requestLogin(request,response,body);
     if(request.method==='POST'&&action==='verify-login')return verifyLogin(request,response,body);
     const session=requireSession(request,response); if(!session)return;
