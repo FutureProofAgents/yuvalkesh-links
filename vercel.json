@@ -261,5 +261,11 @@
         }
       ]
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/outreach-followups",
+      "schedule": "0 8 * * *"
+    }
   ]
 }
