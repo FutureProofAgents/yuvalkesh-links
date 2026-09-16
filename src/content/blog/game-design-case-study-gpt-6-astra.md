@@ -50,7 +50,7 @@ Metal Slug came out on the Neo Geo in 1996 and I still think it is the best-draw
 
 Soldiers breathe. They fidget. They panic when you point a flamethrower at them. Every explosion was drawn separately instead of reused. The POWs you rescue hand you a weapon and wave goodbye.
 
-Then in February 2025, two brothers released Guns of Fury for $8.99. John on code, Lefteris on art, Dominic Ninmark on music. Reviews called it "Metal Slug meets Super Metroid." Infinite pistol, limited big weapons, four mechs, drivable tanks, a dedicated button for main, secondary and bombs.
+Then in February 2025, two brothers released Guns of Fury for $14.99. John on code, Lefteris on art, Dominic Ninmark on music. Reviews called it "Metal Slug meets Super Metroid." Infinite pistol, limited big weapons, four mechs, drivable tanks, a dedicated button for main, secondary and bombs.
 
 Two people. One composer. A game that stands next to Nazca's.
 
