@@ -1,5 +1,5 @@
 ---
-interface Props { lang: 'he' | 'en'; active?: 'home' | 'blog' | 'newsletter'; alternatePath?: string; }
+interface Props { lang: 'he' | 'en'; active?: 'home' | 'blog' | 'workshops' | 'newsletter'; alternatePath?: string; }
 const {lang, active, alternatePath} = Astro.props;
 const he = lang === 'he';
 const prefix = he ? '/he' : '';
@@ -9,6 +9,7 @@ const prefix = he ? '/he' : '';
   <nav class="fp-nav" aria-label={he ? 'ניווט ראשי' : 'Main navigation'}>
     <a href={`${prefix}/`} aria-current={active === 'home' ? 'page' : undefined}>{he ? 'ראשי' : 'Home'}</a>
     <a href={`${prefix}/blog/`} aria-current={active === 'blog' ? 'page' : undefined}>{he ? 'בלוג' : 'Blog'}</a>
+    <a href={`${prefix}/workshops/`} aria-current={active === 'workshops' ? 'page' : undefined}>{he ? 'סדנאות' : 'Workshops'}</a>
     <a class="fp-signup" href={`${prefix}/newsletter/#subscribe`} aria-label={he ? 'הרשמה לניוזלטר' : 'Subscribe to the newsletter'} aria-current={active === 'newsletter' ? 'page' : undefined}>{he ? 'ניוזלטר' : 'Newsletter'}</a>
     <a class="fp-language" href={alternatePath ?? `${he ? '' : '/he'}${active && active !== 'home' ? `/${active}` : ''}/`} lang={he ? 'en' : 'he'} hreflang={he ? 'en' : 'he'}>{he ? 'English' : 'עברית'}</a>
   </nav>

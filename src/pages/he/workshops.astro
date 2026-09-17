@@ -1,0 +1,306 @@
+---
+import LocalFonts from '../../components/LocalFonts.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+const site = Astro.site!.href.replace(/\/$/, '');
+const PATH = '/he/workshops/';
+
+const waMsg = encodeURIComponent('היי יובל, ראיתי את עמוד הסדנאות של FutureProof Agents ואשמח לדבר על סדנה לצוות שלי');
+const waLink = `https://wa.me/972526414555?text=${waMsg}`;
+
+const fits = [
+  { icon: '🧪', title: 'מחקר, פיתוח ודאטה', desc: 'אגרונומים, אנליסטים, חוקרים. אנשים שיושבים על דאטה בייס מלא ניסויים ועדיין מייצאים לאקסל כדי לשאול אותו שאלה.' },
+  { icon: '⚙️', title: 'תפעול', desc: 'מלאי, משלוחים, ספקים, בורדים במאנדיי ואקסלים. המחלקה שבה מתחבאות הכי הרבה שעות ידניות.' },
+  { icon: '📣', title: 'שיווק ומכירות', desc: 'תוכן, CRM, סיכומי שיחות, פולואפים. צוותים שכבר משתמשים ב AI כדי לכתוב, ומוכנים שהוא יתחיל לעבוד.' },
+  { icon: '💼', title: 'כספים ואדמיניסטרציה', desc: 'חשבוניות, התאמות, דוחות שנבנים מחדש כל חודש ביד. חוזר על עצמו, מבוסס כללים, מושלם לסוכן ראשון.' },
+];
+
+const steps = [
+  { n: '01', when: 'לפני היום · 45 עד 60 דקות', title: 'שיחת אפיון עם ראש המחלקה', desc: 'איך נראה היום יום, אילו כלים כבר בשימוש, איפה יושבים הנתונים, ומה שלוש עד חמש המשימות שחוזרות על עצמן וגוזלות הכי הרבה זמן. אתם מקבלים חזרה לו״ז מדויק, רשימת יוז קייסים, ורשימת הכנות טכניות (גישה לנתונים, חשבונות, מחשבים ניידים).' },
+  { n: '02', when: 'הסדנה · חצי יום, ארבע עד חמש שעות, אצלכם או בזום', title: 'בונים עם המחלקה', desc: 'ארבעה בלוקים: מה אפשר (45 דקות, דוגמאות אמיתיות מחברות אחרות, לא מצגת) · בוחרים שניים עד שלושה יוז קייסים מהשבוע האמיתי שלכם (30 דקות) · ידיים על המקלדת, כל אחד על המחשב שלו, מחברים את Claude לנתונים ובונים את הכלים (שעתיים עד שעתיים וחצי) · סיכום: מה עובד, מה עוד צריך פיתוח, מי מחזיק כל כלי, ומה הצעד הבא (30 דקות).' },
+  { n: '03', when: 'אחרי היום · שבוע', title: 'מעקב עד שהכלים מתייצבים', desc: 'מסמך סיכום עם כל סקיל וסוכן שנבנה, ההגדרות שלו וההמלצה שלנו לצעד הבא. שאלות במייל או בוואטסאפ במשך שבוע אחרי, עד שהכלים יציבים בשימוש יומיומי.' },
+];
+
+const leave = [
+  ['שניים עד שלושה כלים עובדים', 'שהמחלקה בנתה בעצמה, על הנתונים שלכם, ויודעת להפעיל ולשנות.'],
+  ['מפת יוז קייסים כתובה', 'מה מהיר והצוות יכול לבד, מה דורש פיתוח, ומה לא שווה את המאמץ.'],
+  ['מסמך סיכום', 'כל סקיל וסוכן, ההגדרות שלו, והצעד הבא המומלץ.'],
+  ['אנשים שבונים', 'מחלקה שמפסיקה לחכות ל IT ומתחילה לכתוב סקילים בעצמה.'],
+];
+
+const principles = [
+  { icon: '⌨️', title: 'ידיים על המקלדת', desc: 'אף אחד לא צופה בדמו. כל משתתף בונה על הלפטופ שלו, על המשימה האמיתית שלו.' },
+  { icon: '🗄️', title: 'הנתונים שלכם, לא נתוני דוגמה', desc: 'מתחברים לדאטה בייס האמיתי, לגיליונות האמיתיים, לתיבת המייל האמיתית. הכלים עובדים ביום ראשון בבוקר כי הם נבנו על הנתונים של יום ראשון.' },
+  { icon: '🎯', title: 'מחלקה אחת בכל פעם', desc: 'הרצאות AI לכל החברה זה נחמד. תוצאות מגיעות מלשבת עם צוות אחד על הכאבים הספציפיים שלו.' },
+  { icon: '🤝', title: 'אף אחד לא נדחף לטרמינל', desc: 'יש כאלה שרוצים לבנות. יש כאלה שרוצים כלי שפשוט עובד. שניהם מקבלים מה שהם צריכים: הבונים בונים, ולשאר אנחנו בונים.' },
+  { icon: '🧰', title: 'Claude Code, Claude Desktop, MCP', desc: 'הכלים שאנחנו עובדים איתם כל יום בפרודקשן. מלמדים מה ההבדל בין צ׳אט, סקיל, סוכן ומחבר, ומתי כל אחד מהם הבחירה הנכונה.' },
+  { icon: '👤', title: 'בני אדם איפה שצריך שיקול דעת', desc: 'לכל סוכן שאנחנו בונים יש בן אדם שמאשר את מה שחשוב. מהירות מהסוכנים, החלטות מהצוות שלכם.' },
+];
+
+const formats = [
+  { title: 'יום מחלקה', desc: 'הפורמט הבסיסי. שיחת אפיון אחת, חצי יום בנייה עם מחלקה אחת, שבוע מעקב.' },
+  { title: 'סדרה לכמה מחלקות', desc: 'אותו תהליך, מחלקה אחרי מחלקה, על פני כמה שבועות. כל צוות מקבל את היום שלו ואת הכלים שלו, והחברה מקבלת מפה של איפה AI באמת מזיז את שורת הרווח.' },
+  { title: 'ליווי אחרי', desc: 'אחרי היום: מפגשים פרטניים על יוז קייס ספציפי, כלים שנבנים עבור מי שמעדיף לא לבנות, תחזוקה כשמשהו נשבר, והרחבה לצוות הבא.' },
+];
+
+const faqs = [
+  ['המשתתפים צריכים לדעת לכתוב קוד?', 'לא. עובדים ב Claude Code וב Claude Desktop בשפה רגילה. מי שיודע לתאר את העבודה שלו בבירור יכול לבנות סקיל עד סוף היום. ההתקנות הטכניות נסגרות ברשימת ההכנות לפני היום.'],
+  ['כמה אנשים בסדנה?', 'מחלקה אחת. מספיק קטן כדי שכולם יבנו ויקבלו פידבק על הכלי שלהם במהלך היום.'],
+  ['באילו כלים עובדים?', 'Claude (Claude Code, Claude Desktop, מחברי MCP) מעל המערכות הקיימות שלכם: דאטה בייס, Google Workspace, מאנדיי, CRM, גיליונות. אם לכלי יש API, אפשר להתחבר אליו.'],
+  ['מה עם הנתונים שלנו?', 'הכל רץ בתוך החשבונות והתשתית שלכם. שום דבר לא מועתק אלינו. שיחת ההכנה מכסה גישה, הרשאות, ומה חייב להישאר מחוץ לסקופ.'],
+  ['ואם אחרי הסדנה נרצה מערכת שלמה?', 'הסדנה היא בדיוק המקום שבו הצרכים האלה צפים. כל מה שמתברר כדורש פיתוח אמיתי הופך לפרויקט נפרד ומאופיין, שמתומחר בנפרד אחרי שיודעים בדיוק מה הוא.'],
+  ['עברית או אנגלית?', 'שתיהן. סדנאות בעברית לצוותים ישראליים ובאנגלית לצוותים בינלאומיים.'],
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'סדנאות סוכני AI לצוותים',
+  provider: { '@type': 'Organization', name: 'FutureProof Agents', url: site },
+  serviceType: 'סדנת הטמעת AI',
+  areaServed: ['IL'],
+  availableLanguage: ['he', 'en'],
+  description: 'סדנאות AI מעשיות של חצי יום, שבהן מחלקה אחת בונה בעצמה סוכני AI על הנתונים שלה עם FutureProof Agents. שיחת אפיון, יום בנייה, שבוע מעקב.',
+  url: `${site}${PATH}`,
+};
+---
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <script is:inline defer src="/scripts/analytics.js"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta charset="UTF-8" />
+  <script is:inline>(function(){var h=location.hostname;if(h==='futureproofagents.com'||h==='localhost'||h==='127.0.0.1')return;location.replace('https://futureproofagents.com'+location.pathname+location.search+location.hash);})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>סדנאות AI לצוותים: מחלקה אחת, חצי יום, סוכנים שעובדים | FutureProof Agents</title>
+  <meta name="description" content="סדנאות AI מעשיות לצוותים. שיחת אפיון אחת, חצי יום בנייה עם מחלקה אחת על הנתונים שלה, שבוע מעקב. הצוות יוצא עם סוכנים עובדים שהוא בנה בעצמו." />
+  <link rel="canonical" href={`${site}${PATH}`} />
+  <link rel="alternate" hreflang="he" href={`${site}${PATH}`} />
+  <link rel="alternate" hreflang="en" href={`${site}/workshops/`} />
+  <link rel="alternate" hreflang="x-default" href={`${site}/workshops/`} />
+
+  <meta property="og:title" content="סדנאות AI לצוותים | FutureProof Agents" />
+  <meta property="og:description" content="מחלקה אחת. חצי יום. סוכנים שממשיכים לעבוד ביום ראשון. איך אנחנו מעבירים סדנאות AI מעשיות לצוותים." />
+  <meta property="og:image" content={`${site}/avatar.jpg`} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`${site}${PATH}`} />
+  <meta name="theme-color" content="#000000" />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <LocalFonts hebrew={true} />
+
+  <style is:inline>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :root { --x-blue: #1d9bf0; --line: #2f3336; --muted: #71767b; --card: #16181c; --deep: #0b0d10; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh; background: #000; color: #e7e9ea;
+      display: flex; justify-content: center; padding: 56px 18px 64px;
+      overflow-x: hidden; position: relative;
+    }
+    body::before {
+      content: ""; position: fixed; top: -260px; inset-inline: 0; margin: auto;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,155,240,0.22) 0%, rgba(29,155,240,0) 70%);
+      filter: blur(20px); z-index: 0; pointer-events: none; opacity: 0;
+      animation: glowIn 1.4s ease-out 0.2s forwards;
+    }
+    @keyframes glowIn { to { opacity: 1; } }
+    .container { position: relative; z-index: 1; width: 100%; max-width: 680px; display: flex; flex-direction: column; align-items: center; }
+    .fade { opacity: 0; transform: translateY(14px); animation: fadeUp 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    .brandmark { flex-shrink: 0; width: 84px; height: 84px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 0 0 4px rgba(29,155,240,0.10), 0 10px 40px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .brandmark svg { width: 46px; height: 46px; }
+    .eyebrow { font-size: 12.5px; font-weight: 800; letter-spacing: 1px; color: var(--x-blue); background: rgba(29,155,240,0.12); border: 1px solid rgba(29,155,240,0.22); padding: 6px 14px; border-radius: 999px; margin-bottom: 16px; }
+    h1 { font-size: 38px; font-weight: 900; letter-spacing: -0.8px; color: #fff; text-align: center; line-height: 1.12; }
+    h1 span { color: var(--x-blue); }
+    .lead { font-size: 16.5px; color: #cfd2d4; text-align: center; max-width: 540px; line-height: 1.7; margin: 18px 0 24px; }
+    .lead b { color: #fff; font-weight: 700; }
+    .pill-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 26px; }
+    .pill { font-size: 13px; font-weight: 700; color: #cfd2d4; border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; }
+    .pill b { color: #fff; }
+
+    .cta { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 14px 30px; background: #25d366; color: #04210f; border: none; border-radius: 999px; text-decoration: none; font-size: 16.5px; font-weight: 800; transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease; box-shadow: 0 8px 26px rgba(37,211,102,0.28); }
+    .cta svg { width: 20px; height: 20px; fill: #04210f; }
+    .cta:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 12px 32px rgba(37,211,102,0.36); }
+    .cta-sub { font-size: 12.5px; color: var(--muted); margin-top: 10px; text-align: center; }
+
+    .divider { width: 100%; height: 1px; background: var(--line); margin: 40px 0; border: none; }
+    .section-head { text-align: center; margin-bottom: 26px; }
+    .section-head .kicker { font-size: 12.5px; font-weight: 800; letter-spacing: 1px; color: var(--x-blue); margin-bottom: 8px; }
+    .section-head h2 { font-size: 25px; font-weight: 800; color: #fff; line-height: 1.25; letter-spacing: -0.3px; }
+    .section-head .tag { font-size: 14.5px; color: #cfd2d4; line-height: 1.7; max-width: 480px; margin: 12px auto 0; }
+
+    .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; transition: border-color 0.2s ease, transform 0.2s ease; }
+    .card:hover { border-color: #3d4044; transform: translateY(-2px); }
+    .card .icon { width: 46px; height: 46px; border-radius: 12px; background: rgba(29,155,240,0.10); border: 1px solid rgba(29,155,240,0.22); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 14px; }
+    .card h3 { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 7px; line-height: 1.3; }
+    .card p { font-size: 14px; line-height: 1.6; color: #b8bcbf; }
+
+    .steps { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+    .step { display: grid; grid-template-columns: 56px 1fr; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+    .step .n { font-size: 22px; font-weight: 900; color: var(--x-blue); line-height: 1; padding-top: 4px; }
+    .step .when { font-size: 12.5px; font-weight: 800; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 6px; }
+    .step h3 { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.3; }
+    .step p { font-size: 14.5px; line-height: 1.7; color: #cfd2d4; }
+
+    .leave { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; }
+    .leave div { background: var(--deep); border: 1px solid var(--line); border-radius: 16px; padding: 18px; position: relative; padding-inline-start: 40px; }
+    .leave div::before { content: "✓"; position: absolute; inset-inline-start: 16px; top: 18px; width: 18px; height: 18px; border-radius: 50%; background: #22c55e; color: #04210f; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+    .leave b { display: block; color: #fff; font-size: 15px; margin-bottom: 4px; }
+    .leave span { font-size: 13.5px; color: #b8bcbf; line-height: 1.6; }
+
+    .formats { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; }
+    .format { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; display: grid; grid-template-columns: 1fr; gap: 6px; }
+    .format h3 { font-size: 16px; font-weight: 800; color: #fff; }
+    .format h3 small { color: var(--x-blue); font-weight: 800; font-size: 12px; letter-spacing: 0.6px; margin-inline-start: 8px; }
+    .format p { font-size: 14.5px; line-height: 1.7; color: #cfd2d4; }
+
+    .faq { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 0; }
+    .faq summary { list-style: none; cursor: pointer; padding: 16px 20px; font-size: 15.5px; font-weight: 800; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; color: var(--x-blue); font-size: 20px; font-weight: 800; flex-shrink: 0; }
+    .faq details[open] summary::after { content: "–"; }
+    .faq details p { padding: 0 20px 18px; font-size: 14.5px; line-height: 1.7; color: #cfd2d4; }
+
+    .close { width: 100%; background: linear-gradient(135deg, #0f1a26, #16181c); border: 1px solid rgba(29,155,240,0.45); border-radius: 22px; padding: 32px 28px; text-align: center; box-shadow: 0 0 0 4px rgba(29,155,240,0.08); display: flex; flex-direction: column; align-items: center; }
+    .close h2 { font-size: 24px; font-weight: 900; color: #fff; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .close p { font-size: 15px; color: #cfd2d4; line-height: 1.7; max-width: 460px; margin-bottom: 22px; }
+
+    @media (max-width: 600px) {
+      body { padding: 36px 14px 48px; }
+      h1 { font-size: 31px; }
+      .grid2, .leave { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 1fr; gap: 6px; }
+      .step .n { padding-top: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .fade, body::before { animation: none; opacity: 1; transform: none; } }
+  </style>
+</head>
+<body class="fp-site-page">
+  <PageHeader lang="he" active="workshops" alternatePath="/workshops/" />
+  <main class="container">
+
+    <div class="brandmark fade" style="animation-delay:0.05s" aria-hidden="true">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <circle cx="24" cy="10" r="5" fill="#1d9bf0"/>
+        <circle cx="10" cy="34" r="5" fill="#1d9bf0" opacity="0.75"/>
+        <circle cx="38" cy="34" r="5" fill="#1d9bf0" opacity="0.75"/>
+        <path d="M24 15v8m0 0-11 8m11-8 11 8" stroke="#1d9bf0" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="24" cy="23" r="3" fill="#fff"/>
+      </svg>
+    </div>
+    <div class="eyebrow fade" style="animation-delay:0.09s">סדנאות לצוותים</div>
+    <h1 class="fade" style="animation-delay:0.12s">מחלקה אחת.<br />חצי יום.<br /><span>סוכנים שממשיכים לעבוד.</span></h1>
+    <p class="lead fade" style="animation-delay:0.2s">רוב הצוותים כבר משתמשים ב AI כדי לכתוב. מעטים משתמשים בו כדי <b>לעבוד</b>. אנחנו יושבים עם מחלקה אחת, על הנתונים האמיתיים שלה ועל המשימות האמיתיות של השבוע, ובסוף היום הצוות בנה שניים עד שלושה סוכנים שהוא מפעיל בעצמו. <b>בלי מצגות. בלי נתוני דוגמה. ידיים על המקלדת.</b></p>
+    <div class="pill-row fade" style="animation-delay:0.26s">
+      <span class="pill"><b>חצי יום</b> · אצלכם או בזום</span>
+      <span class="pill"><b>מחלקה אחת</b> · היוז קייסים שלה</span>
+      <span class="pill"><b>עברית</b> או <b>אנגלית</b></span>
+    </div>
+    <a class="cta fade" style="animation-delay:0.3s" href={waLink} target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+      דברו איתנו בוואטסאפ
+    </a>
+    <div class="cta-sub fade" style="animation-delay:0.34s">ספרו לנו איזה צוות ומה הוא עושה כל היום. עונים תוך יום עסקים.</div>
+
+    <hr class="divider fade" style="animation-delay:0.4s" />
+
+    <section class="fade" style="animation-delay:0.42s">
+      <div class="section-head">
+        <div class="kicker">למי זה מתאים</div>
+        <h2>מחלקות שכבר משתמשות ב AI, ומוכנות להתחיל לבנות איתו</h2>
+        <p class="tag">המועמדים הכי טובים הם צוותים עם משימה ברורה שחוזרת על עצמה ונתונים שיושבים במקום נגיש. כמה שאנחנו עושים את זה איתם:</p>
+      </div>
+      <div class="grid2">
+        {fits.map((f) => (
+          <div class="card"><div class="icon">{f.icon}</div><h3>{f.title}</h3><p>{f.desc}</p></div>
+        ))}
+      </div>
+    </section>
+
+    <hr class="divider fade" style="animation-delay:0.46s" />
+
+    <section class="fade" style="animation-delay:0.48s">
+      <div class="section-head">
+        <div class="kicker">איך זה עובד</div>
+        <h2>שלושה שלבים. שיחת אפיון, יום בנייה, שבוע מעקב.</h2>
+      </div>
+      <div class="steps">
+        {steps.map((s) => (
+          <div class="step"><div class="n">{s.n}</div><div><div class="when">{s.when}</div><h3>{s.title}</h3><p>{s.desc}</p></div></div>
+        ))}
+      </div>
+    </section>
+
+    <hr class="divider fade" style="animation-delay:0.5s" />
+
+    <section class="fade" style="animation-delay:0.52s">
+      <div class="section-head">
+        <div class="kicker">עם מה הצוות יוצא</div>
+        <h2>כלים, מפה, ואנשים שיודעים לבנות את הבא</h2>
+      </div>
+      <div class="leave">
+        {leave.map(([t, d]) => (<div><b>{t}</b><span>{d}</span></div>))}
+      </div>
+    </section>
+
+    <hr class="divider fade" style="animation-delay:0.54s" />
+
+    <section class="fade" style="animation-delay:0.56s">
+      <div class="section-head">
+        <div class="kicker">איך אנחנו עובדים</div>
+        <h2>שישה כללים שכל סדנה עומדת בהם</h2>
+      </div>
+      <div class="grid2">
+        {principles.map((p) => (
+          <div class="card"><div class="icon">{p.icon}</div><h3>{p.title}</h3><p>{p.desc}</p></div>
+        ))}
+      </div>
+    </section>
+
+    <hr class="divider fade" style="animation-delay:0.58s" />
+
+    <section class="fade" style="animation-delay:0.6s">
+      <div class="section-head">
+        <div class="kicker">פורמטים</div>
+        <h2>מתחילים ממחלקה אחת. משם מרחיבים.</h2>
+      </div>
+      <div class="formats">
+        {formats.map((f) => (<div class="format"><h3>{f.title}</h3><p>{f.desc}</p></div>))}
+      </div>
+    </section>
+
+    <hr class="divider fade" style="animation-delay:0.62s" />
+
+    <section class="fade" style="animation-delay:0.64s">
+      <div class="section-head">
+        <div class="kicker">שאלות</div>
+        <h2>לפני שאתם כותבים לנו</h2>
+      </div>
+      <div class="faq">
+        {faqs.map(([q, a]) => (<details><summary>{q}</summary><p>{a}</p></details>))}
+      </div>
+    </section>
+
+    <hr class="divider fade" style="animation-delay:0.66s" />
+
+    <section class="close fade" style="animation-delay:0.68s">
+      <h2>איזה צוות הולך ראשון?</h2>
+      <p>שלחו לנו וואטסאפ עם המחלקה ומה היא עושה כל היום. נחזור עם קריאה ראשונה של איפה סוכן משתלם, ומשם ממשיכים.</p>
+      <a class="cta" href={waLink} target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+        דברו איתנו בוואטסאפ
+      </a>
+      <div class="cta-sub">מעדיפים שיחה? <a href="https://calendar.app.google/Y98DRH6TpULmfevM9" target="_blank" rel="noopener noreferrer" style="color:#83ceff">קבעו 30 דקות</a>.</div>
+    </section>
+
+    <SiteFooter lang="he" />
+  </main>
+</body>
+</html>
