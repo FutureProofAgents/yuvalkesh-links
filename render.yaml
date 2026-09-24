@@ -6,6 +6,18 @@ services:
     staticPublishPath: ./dist
     routes:
       - type: redirect
+        source: /blog/sikum-pgishot-im-ai
+        destination: /he/blog/ai-transcription-agents-he/
+      - type: redirect
+        source: /blog/sikum-pgishot-im-ai/
+        destination: /he/blog/ai-transcription-agents-he/
+      - type: redirect
+        source: /he/blog/sikum-pgishot-im-ai
+        destination: /he/blog/ai-transcription-agents-he/
+      - type: redirect
+        source: /he/blog/sikum-pgishot-im-ai/
+        destination: /he/blog/ai-transcription-agents-he/
+      - type: redirect
         source: /blog/organizational-brain-git-repo-architecture/*
         destination: /blog/how-to-build-an-organizational-brain/
       - type: redirect

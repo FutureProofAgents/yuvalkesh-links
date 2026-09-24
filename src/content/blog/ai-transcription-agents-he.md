@@ -5,7 +5,7 @@ pubDate: 2026-09-24
 lang: he
 tags: ["סיכום פגישות", "תמלול פגישות", "סקילים", "Claude Code", "CRM"]
 coverImage:
-  src: /images/blog/sikum-pgishot-im-ai/transcript-pipeline.png
+  src: /images/blog/ai-transcription-agents/transcript-pipeline.png
   alt: "תרשים זרימה: תמלול אחד של שיחה עובר סיווג לפי סוג השיחה ומתפצל לארבעה תוצרים, הצעת מחיר, מסמך אפיון, רשומה ב CRM ולקחים לתוכן"
 ---
 
@@ -93,7 +93,7 @@ coverImage:
 - כל שיחה עם לקוח: סיכום קצר ומסודר שאפשר לשלוח לו.
 - כל שיחה בכלל: לקחים, החלטות ורעיונות לתוכן.
 
-![טבלה שממפה חמישה סוגי שיחות לסקיל שרץ על כל אחד ולתוצר שיוצא ממנו: שיחת מכירה, שיחת אפיון, פגישה עם לקוח, כל שיחה עם לקוח וכל שיחה](/images/blog/sikum-pgishot-im-ai/call-type-playbook.png)
+![טבלה שממפה חמישה סוגי שיחות לסקיל שרץ על כל אחד ולתוצר שיוצא ממנו: שיחת מכירה, שיחת אפיון, פגישה עם לקוח, כל שיחה עם לקוח וכל שיחה](/images/blog/ai-transcription-agents/call-type-playbook.png)
 
 הסיווג עצמו לוקח לClaude שניות.
 
@@ -107,7 +107,7 @@ coverImage:
 
 יש לי היום 65 סקילים.
 
-![תרשים זרימה מימין לשמאל: הקלטה, תמלול מלא, סיווג לפי סוג השיחה וסקיל, שמתפצל לארבעה תוצרים: הצעת מחיר, מסמך אפיון, CRM, לקחים ותוכן](/images/blog/sikum-pgishot-im-ai/transcript-pipeline.png)
+![תרשים זרימה מימין לשמאל: הקלטה, תמלול מלא, סיווג לפי סוג השיחה וסקיל, שמתפצל לארבעה תוצרים: הצעת מחיר, מסמך אפיון, CRM, לקחים ותוכן](/images/blog/ai-transcription-agents/transcript-pipeline.png)
 
 אלה החמישה שרצים על תמלולים.
 
