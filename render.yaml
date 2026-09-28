@@ -6,6 +6,18 @@ services:
     staticPublishPath: ./dist
     routes:
       - type: redirect
+        source: /blog/ai-security-checklist-he
+        destination: /he/blog/ai-agent-security-basics-he/
+      - type: redirect
+        source: /blog/ai-security-checklist-he/
+        destination: /he/blog/ai-agent-security-basics-he/
+      - type: redirect
+        source: /he/blog/ai-security-checklist-he
+        destination: /he/blog/ai-agent-security-basics-he/
+      - type: redirect
+        source: /he/blog/ai-security-checklist-he/
+        destination: /he/blog/ai-agent-security-basics-he/
+      - type: redirect
         source: /blog/sikum-pgishot-im-ai
         destination: /he/blog/ai-transcription-agents-he/
       - type: redirect
