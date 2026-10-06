@@ -8,7 +8,7 @@ The existing Render static site deploys from `main`. Form requests go to the exi
 
 ## Data flow
 
-The three-step form captures business, industry, customer market, self-reported annual revenue range and currency, required solutions, name, title and email. Challenge, phone and LinkedIn are optional. The form records inquiry consent separately from optional analytics consent; it does not subscribe a visitor to marketing email.
+The two-step form captures business, self-reported annual revenue range and currency, required solutions, name, title and email. Phone and LinkedIn are optional. The form does not ask for country/market, industry or an extra challenge description; older records retain those details. The form records inquiry consent separately from optional analytics consent; it does not subscribe a visitor to marketing email.
 
 A server-validated inquiry is committed to `fp_campaign_leads` before the secondary spreadsheet sync is attempted. Submission UUIDs make retries idempotent. Owner-only RLS protects leads and follow-up history. The private Studio inbox edits status, follow-up date and notes with optimistic version checks. It includes filters, campaign summaries, CSV export and a campaign-link builder.
 
