@@ -1,4 +1,5 @@
 import {allowedOrigin,validate,rpc,requestHash,syncLeads} from '../lib/campaign-leads.js';
+import {syncAdConversions} from '../lib/ad-conversions.js';
 export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type','application/json');
  if(!allowedOrigin(req.headers.origin))return res.status(403).json({ok:false});
@@ -11,7 +12,7 @@ export default async function handler(req,res){
  try{
   const result=await rpc('fp_campaign_ingest',{payload,request_hash:requestHash(req)});
   // The durable inquiry is accepted even if the secondary mirror is offline.
-  try{await syncLeads(result.id);}catch{console.error('[campaign-lead] Sheet sync queued');}
+  await Promise.allSettled([syncLeads(result.id),syncAdConversions(result.id)]);
   return res.status(201).json({ok:true,id:result.id});
  }catch(e){const limited=e.message==='rate_limit';console.error('[campaign-lead]',limited?'rate_limit':'save_failed');if(limited)res.setHeader('Retry-After','3600');return res.status(limited?429:503).json({ok:false,error:limited?'rate_limit':'try_again'});}
 }
