@@ -42,7 +42,7 @@
       }
     }
   }
-  const allowed = new Set(['whatsapp_click', 'booking_click', 'newsletter_signup']);
+  const allowed = new Set(['whatsapp_click', 'booking_click', 'newsletter_signup', 'lead_form_start', 'lead_form_step', 'lead_form_error', 'generate_lead']);
   window.fpAnalytics = (event) => {
     if (enabled && allowed.has(event)) gtag('event', event, { page_path: location.pathname, language: he ? 'he' : 'en', transport_type: 'beacon' });
   };

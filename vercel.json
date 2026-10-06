@@ -261,5 +261,13 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/lead.js": {
+      "maxDuration": 60
+    },
+    "api/lead-sync.js": {
+      "maxDuration": 60
+    }
+  }
 }
