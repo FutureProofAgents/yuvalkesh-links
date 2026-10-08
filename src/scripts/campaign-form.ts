@@ -37,7 +37,11 @@ form.addEventListener('submit',async e=>{
  try{
   const response=await fetch('https://yuvalkesh-links.vercel.app/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(65000)});
   const result=await response.json();if(!response.ok||!result.ok)throw Error(response.status===429?'rate_limit':'save_failed');
-  form.hidden=true;const success=document.querySelector<HTMLElement>('#form-success')!;success.hidden=false;success.focus();analytics('generate_lead');submissionId=crypto.randomUUID();
+  form.hidden=true;const success=document.querySelector<HTMLElement>('#form-success')!;success.hidden=false;success.focus();
+  // The API's durable lead ID also deduplicates Google Ads conversions. Spam
+  // responses have no ID; analytics failures must never undo a saved inquiry.
+  if(result.id){try{analytics('generate_lead');(window as any).fpGoogleAdsLead?.(result.id);}catch{/* Measurement is optional. */}}
+  submissionId=crypto.randomUUID();
  }catch(e){error.textContent=(e as Error).message==='rate_limit'?t('We have received several requests. Please try again later or book a call.','התקבלו מספר פניות. נסו שוב מאוחר יותר או קבעו שיחה.'):t('We could not confirm your submission. Your details are still here. Please try again.','לא הצלחנו לאשר שהפנייה נקלטה. הפרטים נשמרו בטופס. נסו שוב.');analytics('lead_form_error');error.focus();}
  finally{busy=false;submit.disabled=false;back.disabled=false;submit.textContent=label;}
 });
