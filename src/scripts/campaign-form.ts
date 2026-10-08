@@ -4,7 +4,7 @@ const steps=[...form.querySelectorAll<HTMLFieldSetElement>('[data-step]')];
 const lastStep=steps.length-1,needsStep=steps.findIndex(s=>s.querySelector('[name=solutions]'));
 const error=form.querySelector<HTMLElement>('#form-error')!,next=form.querySelector<HTMLButtonElement>('[data-next]')!,back=form.querySelector<HTMLButtonElement>('[data-back]')!,submit=form.querySelector<HTMLButtonElement>('[data-submit]')!;
 let step=0,busy=false,started=false,submissionId=crypto.randomUUID();
-const params=new URLSearchParams(location.search),keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','campaign_id','ad_group_id','ad_id','ad_account_id','oppref','click_id','gclid','fbclid'];
+const params=new URLSearchParams(location.search),keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','campaign_id','ad_group_id','ad_id','ad_account_id','oppref','click_id','gclid','gbraid','wbraid','fbclid'];
 const safePage=(url:string)=>{try{const u=new URL(url);return u.origin+u.pathname;}catch{return '';}};
 const current:Record<string,string>={page:safePage(location.href),referrer:safePage(document.referrer)};
 keys.forEach(k=>{current[k]=(params.get(k)||'').slice(0,300);});
