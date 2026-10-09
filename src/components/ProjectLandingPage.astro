@@ -1,0 +1,127 @@
+---
+import LocalFonts from './LocalFonts.astro';
+import '../styles/project-pages.css';
+
+type TextList = string | string[];
+interface ProjectPage {
+  slug: string; topic: string; kicker: string; title: string; description: string; lead: string; audience: TextList;
+  problems: { title: string; body: string }[];
+  deliverables: { title: string; body: string }[];
+  workflow: { title: string; body: string }[];
+  example: { title: string; body: string; input: TextList; output: TextList; reviewer: string; label: string };
+  systems: { body: string; items: string[]; footnote: string };
+  pilot: { title: string; body: string; includes: string[]; measures: string[] };
+  faqs: { q: string; a: string }[];
+  cta: { title: string; body: string; label: string };
+  seo: { title: string; description: string };
+}
+interface Props { page: ProjectPage; related: ProjectPage[] }
+const { page, related } = Astro.props;
+const site = 'https://futureproofagents.com';
+const canonical = `${site}/pages/${page.slug}/`;
+const booking = 'https://calendar.app.google/uWpM7vrcaS4JAZTQ6';
+const asList = (value: TextList) => Array.isArray(value) ? value : [value];
+const number = (index: number) => String(index + 1).padStart(2, '0');
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Service', '@id': `${canonical}#service`, name: page.seo.title.split(' | ')[0], description: page.seo.description,
+      serviceType: page.topic, provider: { '@type': 'Organization', name: 'FutureProof Agents', url: site },
+      areaServed: { '@type': 'Country', name: 'United States' }, url: canonical, inLanguage: 'en-US' },
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site}/` },
+      { '@type': 'ListItem', position: 2, name: 'AI projects', item: `${site}/pages/` },
+      { '@type': 'ListItem', position: 3, name: page.topic, item: canonical },
+    ] },
+  ],
+};
+---
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.seo.title}</title>
+    <meta name="description" content={page.seo.description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FutureProof Agents" />
+    <meta property="og:title" content={page.seo.title} />
+    <meta property="og:description" content={page.seo.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={`${site}/yuval-keshtcher.jpg`} />
+    <meta property="og:image:alt" content="Yuval Keshtcher, founder of FutureProof Agents" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={page.seo.title} />
+    <meta name="twitter:description" content={page.seo.description} />
+    <meta name="twitter:image" content={`${site}/yuval-keshtcher.jpg`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <LocalFonts primary="inter" />
+    <script is:inline src="/scripts/analytics.js" defer></script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
+  </head>
+  <body class="project-site" data-project={page.slug}>
+    <a class="project-skip" href="#main">Skip to content</a>
+    <header class="project-header project-wrap">
+      <a class="project-brand" href="/" aria-label="FutureProof Agents home"><img src="/favicon.svg" alt="" width="34" height="34" /><span>FutureProof <b>Agents</b></span></a>
+      <nav aria-label="Main navigation"><a href="/pages/">All projects</a><a class="project-nav-process" href="#process">The process</a><a class="project-button project-button-small" href={booking}>Let’s talk <span aria-hidden="true">↗</span></a></nav>
+    </header>
+    <main id="main">
+      <div class="project-wrap">
+        <nav class="project-breadcrumb" aria-label="Breadcrumb"><a href="/pages/">AI projects</a><span aria-hidden="true">/</span><span aria-current="page">{page.topic}</span></nav>
+        <section class="project-hero" aria-labelledby="project-title">
+          <div class="project-hero-copy">
+            <p class="project-kicker"><span class="project-dot" aria-hidden="true"></span>{page.kicker}</p>
+            <h1 id="project-title">{page.title}</h1>
+            <p class="project-lead">{page.lead}</p>
+            <div class="project-hero-actions"><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a><a class="project-text-link" href="#deliverables">Explore the project <span aria-hidden="true">↓</span></a></div>
+            <p class="project-caption">A focused conversation about your workflow, tools and first project.</p>
+          </div>
+          <aside class="project-example" aria-labelledby="example-title">
+            <div class="project-example-header"><span class="project-mono">WORKFLOW / {number(0)}</span><span class="project-example-label">{page.example.label}</span></div>
+            <h2 id="example-title">{page.example.title}</h2>
+            <p class="project-example-intro">{page.example.body}</p>
+            <div class="project-evidence-row"><span class="project-evidence-mark" aria-hidden="true">01</span><div><h3>Source inputs</h3><ul>{asList(page.example.input).map((item) => <li>{item}</li>)}</ul></div></div>
+            <div class="project-evidence-connector" aria-hidden="true">↓</div>
+            <div class="project-evidence-row project-evidence-output"><span class="project-evidence-mark" aria-hidden="true">02</span><div><h3>Prepared for review</h3><ul>{asList(page.example.output).map((item) => <li>{item}</li>)}</ul></div></div>
+            <div class="project-reviewer"><span class="project-review-symbol" aria-hidden="true">↳</span><div><span>Human review</span><strong>{page.example.reviewer}</strong></div><span class="project-review-tag">REQUIRED</span></div>
+            <p class="project-example-note">Illustrative process. Scope and connections are agreed with your team.</p>
+          </aside>
+        </section>
+        <div class="project-audience"><span class="project-mono">BUILT FOR</span><p>{asList(page.audience).join(' · ')}</p></div>
+      </div>
+
+      <section class="project-section project-wrap project-problems" aria-labelledby="problems-title">
+        <div class="project-section-intro"><p class="project-kicker">THE WORK BETWEEN THE WORK</p><h2 id="problems-title">Where does the<br />process slow down?</h2><p>{page.description}</p></div>
+        <div class="project-problem-list">{page.problems.map((item, i) => <article><span class="project-mono">{number(i)}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></article>)}</div>
+      </section>
+
+      <section class="project-deliverables-band" id="deliverables" aria-labelledby="deliverables-title"><div class="project-section project-wrap">
+        <div class="project-section-heading"><div><p class="project-kicker">THE PROJECT</p><h2 id="deliverables-title">What we build<br /><em>with your team.</em></h2></div><p>A defined workflow, connected to the work your people already do.</p></div>
+        <div class="project-deliverable-list">{page.deliverables.map((item, i) => <article><span class="project-deliverable-number">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+      </div></section>
+
+      <section class="project-section project-wrap" id="process" aria-labelledby="process-title">
+        <div class="project-section-heading"><div><p class="project-kicker">FROM WORKFLOW TO WORKING SYSTEM</p><h2 id="process-title">A clear route<br />from idea to use.</h2></div><p>Agree on the inputs, the people and the acceptance criteria before expanding.</p></div>
+        <ol class="project-process">{page.workflow.map((item, i) => <li><span class="project-process-number">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></li>)}</ol>
+        <div class="project-systems"><div><p class="project-kicker">YOUR EXISTING TOOLS</p><h3>Build around your systems.</h3><p>{page.systems.body}</p></div><div><ul class="project-system-list" aria-label="Systems and sources considered during scoping">{page.systems.items.map((item) => <li>{item}</li>)}</ul><p class="project-caption">{page.systems.footnote}</p></div></div>
+      </section>
+
+      <section class="project-pilot project-wrap" aria-labelledby="pilot-title">
+        <div class="project-pilot-intro"><p class="project-kicker">A FOCUSED FIRST STEP</p><h2 id="pilot-title">{page.pilot.title}</h2><p>{page.pilot.body}</p><a class="project-button project-button-light" href={booking}>Discuss a first project <span aria-hidden="true">↗</span></a></div>
+        <div class="project-pilot-details"><div><h3>Define the work</h3><ul>{page.pilot.includes.map((item) => <li>{item}</li>)}</ul></div><div><h3>Agree on what to measure</h3><ul>{page.pilot.measures.map((item) => <li>{item}</li>)}</ul></div></div>
+      </section>
+
+      <section class="project-founder project-wrap" aria-labelledby="founder-title"><img src="/yuval-keshtcher.jpg" width="144" height="144" loading="lazy" decoding="async" alt="Yuval Keshtcher, founder of FutureProof Agents" /><div><p class="project-kicker">YOUR IMPLEMENTATION PARTNER</p><h2 id="founder-title">Work with FutureProof.</h2><p>I’m Yuval Keshtcher, founder of FutureProof Agents. We connect process mapping, AI development and your existing tools in one scoped project, from the first workflow conversation through testing and handover.</p><a class="project-text-link" href="/">Meet FutureProof Agents <span aria-hidden="true">↗</span></a></div></section>
+
+      <section class="project-section project-wrap project-faq" aria-labelledby="faq-title"><div><p class="project-kicker">BEFORE WE START</p><h2 id="faq-title">Good questions.<br />Clear answers.</h2></div><div>{page.faqs.map((item) => <details><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div></section>
+
+      <section class="project-final-cta project-wrap" aria-labelledby="cta-title"><p class="project-kicker">LET’S MAP THE FIRST PROJECT</p><h2 id="cta-title">{page.cta.title}</h2><p>{page.cta.body}</p><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a></section>
+
+      <aside class="project-related project-wrap" aria-labelledby="related-title"><div class="project-related-heading"><h2 id="related-title">Other workflows we build</h2><a class="project-text-link" href="/pages/">View all projects <span aria-hidden="true">↗</span></a></div><div class="project-related-list">{related.map((item) => <a href={`/pages/${item.slug}/`}><span>{item.topic}</span><span aria-hidden="true">↗</span></a>)}</div></aside>
+    </main>
+    <footer class="project-footer project-wrap"><a class="project-brand" href="/"><img src="/favicon.svg" alt="" width="25" height="25" /><span>FutureProof <b>Agents</b></span></a><nav aria-label="Footer navigation"><a href="/pages/">AI projects</a><a href="/blog/">Articles</a><a href="/">About FutureProof</a></nav><p>© {new Date().getFullYear()} FutureProof Agents</p></footer>
+  </body>
+</html>

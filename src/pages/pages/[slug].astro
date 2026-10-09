@@ -1,0 +1,13 @@
+---
+import ProjectLandingPage from '../../components/ProjectLandingPage.astro';
+import pages from '../../data/project-pages.json';
+
+export function getStaticPaths() {
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page, related: pages.filter((item) => item.slug !== page.slug) },
+  }));
+}
+const { page, related } = Astro.props;
+---
+<ProjectLandingPage page={page} related={related} />
