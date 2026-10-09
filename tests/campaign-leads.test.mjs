@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {validate,sheetValues,SHEET_HEADERS,syncLeads,allowedOrigin,authorizedWorker} from '../lib/campaign-leads.js';
+import {validate,sheetValues,SHEET_HEADERS,syncLeads,allowedOrigin,authorizedWorker,PROJECT_FORMS} from '../lib/campaign-leads.js';
 const input=()=>({submission_id:'9ce3cbb2-aec2-4d25-a0d7-b4cd4cd5ac76',full_name:'QA Example',email:'QA@example.com',job_title:'Founder',company:'QA Company',business_description:'We sell software to companies.',industry:'technology',market:'global',revenue_band:'1m_5m',revenue_currency:'USD',solutions:['sales','operations'],consent:true,language:'en',attribution:{first:{utm_source:'newsletter',utm_campaign:'initial'},last:{utm_source:'openai',utm_medium:'paid',utm_campaign:'ai-growth',campaign_id:'campaign123',ad_group_id:'group123',ad_id:'ad123',click_id:'click123',page:'https://futureproofagents.com/ai-transformation/?email=private@example.com',referrer:'https://chatgpt.com/?private=1'}}});
 test('inquiry keeps attribution while stripping unrelated query data',()=>{const p=validate(input());assert.equal(p.source,'openai');assert.equal(p.email,'qa@example.com');assert.equal(p.attribution.first.utm_source,'newsletter');assert.equal(p.attribution.last.referrer,'https://chatgpt.com/');assert.equal(p.attribution.last.ad_id,'ad123');assert.equal(p.attribution.last.page,'https://futureproofagents.com/ai-transformation/');assert.equal(p.consent_version,'inquiry-2026-10-06');});
 test('both languages preserve currency and broad revenue ranges',()=>{const p=validate({...input(),language:'he',revenue_currency:'ILS',revenue_band:'undisclosed'});assert.equal(p.revenue_currency,'ILS');assert.equal(p.revenue_band,'undisclosed');assert.match(p.landing_page,/\/he\//);});
@@ -21,3 +21,29 @@ test('shorter form accepts omitted market, industry and challenge without invent
 const accounting=()=>({...input(),form_type:'accounting_us',team_size:'5_10',project_budget:'10k_25k',current_software:'TaxDome and Microsoft 365',firm_website:'https://example.com/?private=value',challenge:'Connect incoming client documents to our workflow.',attribution:{first:{utm_source:'google',gclid:'test-click'},last:{utm_source:'google',utm_medium:'cpc',utm_campaign:'us-accounting',gclid:'test-click',gbraid:'test-braid'}}});
 test('accounting qualification survives existing database and sheet fields with Google attribution',()=>{const p=validate(accounting());assert.equal(p.landing_page,'https://futureproofagents.com/ai-for-accounting-firms/');assert.equal(p.source,'google');assert.equal(p.attribution.last.gclid,'test-click');assert.equal(p.attribution.last.gbraid,'test-braid');assert.equal(p.market,'north_america');assert.match(p.challenge,/\$10,000–\$25,000/);assert.match(p.challenge,/TaxDome and Microsoft 365/);assert.ok(!p.challenge.includes('private=value'));assert.equal(sheetValues({...row(),...p})[13],p.challenge);assert.equal(sheetValues({...row(),...p})[25],p.landing_page);});
 test('accounting cannot submit incomplete budget or software details, unsafe URLs or oversized text',()=>{for(const patch of [{team_size:''},{project_budget:'free'},{current_software:''},{challenge:'short'},{firm_website:'javascript:alert(1)'},{language:'he'},{current_software:'x'.repeat(201)},{challenge:'x'.repeat(1001)}])assert.throws(()=>validate({...accounting(),...patch}));});
+
+test('each project saves its canonical page and ICP while preserving campaign attribution',()=>{
+ for(const [slug,project] of Object.entries(PROJECT_FORMS)){
+  const p=validate({...accounting(),form_type:'project_us',project_slug:slug,landing_page:'https://attacker.example/',attribution:{first:{utm_source:'outreach',utm_campaign:'first-wave'},last:{utm_source:'email',utm_medium:'outbound',utm_campaign:'us-icp-pilot',utm_content:'US-A01',page:'https://futureproofagents.com/pages/'+slug+'/?email=private@example.com'}}});
+  assert.equal(p.landing_page,'https://futureproofagents.com/pages/'+slug+'/');
+  assert.deepEqual(p.attribution.form,{type:'project_us',project_slug:slug,icp:project.icp});
+  assert.equal(p.attribution.first.utm_source,'outreach');assert.equal(p.attribution.last.utm_content,'US-A01');
+  assert.equal(p.source,'email');assert.equal(p.medium,'outbound');assert.equal(p.campaign,'us-icp-pilot');
+  assert.ok(p.challenge.includes(project.label));assert.equal(p.industry,project.industry);
+  const values=sheetValues({...row(),...p});assert.equal(values[25],p.landing_page);assert.equal(values[13],p.challenge);
+  assert.ok(!JSON.stringify(p.attribution).includes('private@example.com'));
+ }
+});
+test('project routing rejects unknown slugs and inherits inquiry qualification safeguards',()=>{
+ const valid={...accounting(),form_type:'project_us',project_slug:'construction-document-workflows'};
+ for(const project_slug of ['',undefined,'https://attacker.example/','constructor','__proto__','../ai-transformation'])assert.throws(()=>validate({...valid,project_slug}),/project_slug/);
+ for(const patch of [{consent:false},{team_size:''},{project_budget:'free'},{current_software:''},{challenge:'short'},{firm_website:'javascript:alert(1)'},{language:'he'}])assert.throws(()=>validate({...valid,...patch}));
+ assert.equal(validate(accounting()).attribution.form,undefined);
+ assert.equal(validate(input()).attribution.form,undefined);
+});
+test('project inquiries can leave budget undecided without changing the accounting ads qualification',()=>{
+ const p=validate({...accounting(),form_type:'project_us',project_slug:'construction-document-workflows',project_budget:'not_sure'});
+ assert.match(p.challenge,/Project budget \(USD\): Not decided yet/);
+ assert.ok(!p.challenge.includes('$5,000+ understood'));
+ assert.throws(()=>validate({...accounting(),project_budget:'not_sure'}),/project_budget/);
+});

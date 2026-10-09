@@ -249,3 +249,45 @@
 .project-scope-details ul{padding-left:18px;font-size:13px;line-height:1.9;color:#bdd3e4}
 @media(max-width:760px){.project-fit{padding:26px 0 29px}.project-fit h2{font-size:28px}.project-fit-grid{grid-template-columns:1fr;gap:21px;margin-top:23px}.project-fit-grid h3{margin-bottom:5px}.project-fit-grid p{font-size:14px}.project-service-line{font-size:14px}.project-business{padding-top:0}.project-implementation-steps{grid-template-columns:1fr;gap:24px}.project-integrations{padding:24px;margin-top:30px}.project-integrations h3{font-size:24px}.project-integration-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.project-integration-logos li{font-size:11px}.project-pilot-proof>h3{font-size:23px}}
 @media(max-width:420px){.project-integrations{padding:22px 17px}.project-integration-logos li{min-height:92px;padding:12px 5px}.project-integration-logos img{width:30px;height:30px}}
+
+/* Shared, accessible two-step inquiry form for sector solution pages. */
+.project-inquiry{display:grid;grid-template-columns:1fr 1.1fr;gap:70px;padding-block:70px;scroll-margin-top:25px;border-top:1px solid var(--project-line)}
+.project-inquiry-intro h2{margin:17px 0 24px;font-size:clamp(32px,3.1vw,43px)}
+.project-inquiry-intro>p:not(.project-kicker):not(.project-caption){font-size:15px;line-height:1.9;color:#b7c6d1}
+.project-inquiry-intro ol{padding-left:20px;margin:27px 0;color:#c9d7e1;font-size:14px;line-height:1.9}
+.project-inquiry-intro li+li{margin-top:12px}
+.project-inquiry-card{position:relative;padding:30px;border:1px solid #3a4b59;border-radius:9px;background:#0c151e;min-width:0}
+.project-inquiry [hidden]{display:none!important}
+.project-form-progress{display:flex;gap:25px;padding-bottom:22px;border-bottom:1px solid #2c3f4d;margin-bottom:14px}
+.project-form-progress>span{display:flex;gap:9px;align-items:center;font-size:12px;color:#7c93a5}
+.project-form-progress b{display:inline-grid;place-items:center;width:25px;height:25px;border:1px solid #425b6f;border-radius:50%;font-size:11px}
+.project-form-progress [aria-current]{color:#dff3ff}
+.project-form-progress [aria-current] b{background:#1d9bf0;border-color:#1d9bf0;color:#061522}
+.project-form-note{font-size:11px!important;line-height:1.75!important;color:#98abba!important;margin:14px 0!important}
+.project-inquiry fieldset{border:0;padding:0;margin:24px 0 0;min-width:0}
+.project-inquiry legend{padding:0;font-size:20px;font-weight:650;letter-spacing:-.02em;margin-bottom:17px;color:#f0f6fa}
+.project-inquiry label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:550;color:#d6e1e9;margin-bottom:16px}
+.project-inquiry input,.project-inquiry select,.project-inquiry textarea{font:400 14px/1.5 Inter,system-ui,sans-serif;width:100%;min-width:0;padding:11px 12px;color:#eff6fb;border:1px solid #405362;border-radius:5px;background:#071018}
+.project-inquiry input::placeholder,.project-inquiry textarea::placeholder{color:#8fa2b2;opacity:1}
+.project-inquiry textarea{resize:vertical;min-height:76px}
+.project-inquiry input:focus,.project-inquiry select:focus,.project-inquiry textarea:focus{outline:2px solid #78c9ff;outline-offset:2px;border-color:#78c9ff}
+.project-inquiry small{font-size:11px;line-height:1.7;font-weight:400;color:#91a8ba}
+.project-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.project-form-trap{position:absolute;left:-10000px;top:0;width:1px;height:1px;overflow:hidden}
+.project-inquiry .project-form-consent{flex-direction:row;align-items:flex-start;font-size:11px;line-height:1.8;font-weight:400;color:#bdccd7;gap:10px;margin-top:20px}
+.project-form-consent input{flex:0 0 17px;width:17px;height:17px;margin:2px 0;accent-color:#1d9bf0}
+.project-form-consent a,.project-inquiry-privacy a{text-decoration:underline;color:#87cfff}
+.project-form-actions{display:flex;gap:14px;align-items:center;justify-content:flex-end;margin-top:22px;flex-wrap:wrap}
+.project-form-actions>span{font-size:11px;color:#92a9ba;margin-right:auto}
+.project-form-actions button{cursor:pointer;font-family:inherit}
+.project-form-actions button[data-back]{border:0;background:transparent;color:#c8d8e5;font-size:13px;min-height:44px;padding:8px 4px}
+.project-inquiry button:disabled{opacity:.65;cursor:wait}
+.project-inquiry #form-error:not(:empty){margin:16px 0;padding:12px;border:1px solid #ae6262;background:#3e191d;color:#ffd5d5;font-size:13px;line-height:1.8;border-radius:5px}
+.project-inquiry #form-success h3{font-size:30px;line-height:1.25;margin:16px 0}
+.project-inquiry #form-success>p:not(.project-kicker){color:#bdcedc;font-size:15px;line-height:1.9;margin-bottom:23px}
+.project-inquiry-privacy{padding-bottom:40px}
+.project-inquiry-privacy summary{font-size:12px;color:#9fb2c1;cursor:pointer;min-height:44px}
+.project-inquiry-privacy p{font-size:12px;line-height:1.9;color:#9fb2c1;max-width:960px}
+@media(max-width:900px){.project-inquiry{gap:35px;grid-template-columns:.9fr 1.1fr}.project-inquiry-card{padding:25px}.project-form-row{grid-template-columns:1fr;gap:0}}
+@media(max-width:760px){.project-inquiry{grid-template-columns:1fr;padding-block:48px;gap:28px}.project-inquiry-intro h2{font-size:34px}.project-inquiry-intro ol{margin:20px 0}.project-inquiry-card{padding:23px}.project-inquiry input,.project-inquiry select,.project-inquiry textarea{font-size:16px}.project-form-actions .project-button{font-size:12px;padding:12px 14px;gap:15px}.project-form-progress{gap:23px}.project-inquiry-privacy{padding-bottom:25px}}
+@media print{.project-inquiry,.project-inquiry-privacy{display:none}}

@@ -1,5 +1,6 @@
 ---
 import LocalFonts from './LocalFonts.astro';
+import ProjectInquiryForm from './ProjectInquiryForm.astro';
 import '../styles/project-pages.css';
 import integrationCatalog from '../data/project-integrations.json';
 
@@ -23,7 +24,6 @@ interface Props { page: ProjectPage; related: ProjectPage[] }
 const { page, related } = Astro.props;
 const site = 'https://futureproofagents.com';
 const canonical = `${site}/pages/${page.slug}/`;
-const booking = 'https://calendar.app.google/uWpM7vrcaS4JAZTQ6';
 const asList = (value: TextList) => Array.isArray(value) ? value : [value];
 const number = (index: number) => String(index + 1).padStart(2, '0');
 const logos = page.integrations.map((key) => integrationCatalog[key as keyof typeof integrationCatalog]);
@@ -71,7 +71,7 @@ const structuredData = {
     <a class="project-skip" href="#main">Skip to content</a>
     <header class="project-header project-wrap">
       <a class="project-brand" href="/" aria-label="FutureProof Agents home"><img src="/favicon.svg" alt="" width="34" height="34" /><span>FutureProof <b>Agents</b></span></a>
-      <nav aria-label="Main navigation"><a href="/pages/">All solutions</a><a class="project-nav-process" href="#process">The process</a><a class="project-button project-button-small" href={booking}>Let’s talk <span aria-hidden="true">↗</span></a></nav>
+      <nav aria-label="Main navigation"><a href="/pages/">All solutions</a><a class="project-nav-process" href="#process">The process</a><a class="project-button project-button-small" href="#start" data-lead-cta="nav">Let’s talk <span aria-hidden="true">↗</span></a></nav>
     </header>
     <main id="main">
       <div class="project-wrap">
@@ -82,7 +82,7 @@ const structuredData = {
             <h1 id="project-title">{page.title}</h1>
             <p class="project-lead">{page.lead}</p>
             <p class="project-service-line">{page.serviceLine}</p>
-            <div class="project-hero-actions"><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a><a class="project-text-link" href="#who">Is this for your firm? <span aria-hidden="true">↓</span></a></div>
+            <div class="project-hero-actions"><a class="project-button" href="#start" data-lead-cta="hero">{page.cta.label}<span aria-hidden="true">↗</span></a><a class="project-text-link" href="#who">Is this for your firm? <span aria-hidden="true">↓</span></a></div>
             <p class="project-caption">A conversation with Yuval about where work gets stuck and what to fix first.</p>
           </div>
           <figure class="project-photo">
@@ -139,7 +139,7 @@ const structuredData = {
       </section>
 
       <section class="project-pilot project-wrap" aria-labelledby="pilot-title">
-        <div class="project-pilot-intro"><p class="project-kicker">A FOCUSED FIRST STEP</p><h2 id="pilot-title">{page.pilot.title}</h2><p>{page.pilot.body}</p><a class="project-button project-button-light" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a></div>
+        <div class="project-pilot-intro"><p class="project-kicker">A FOCUSED FIRST STEP</p><h2 id="pilot-title">{page.pilot.title}</h2><p>{page.pilot.body}</p><a class="project-button project-button-light" href="#start" data-lead-cta="pilot">{page.cta.label}<span aria-hidden="true">↗</span></a></div>
         <div class="project-pilot-proof"><h3>{page.businessValue.timing.title}</h3><p>{page.businessValue.timing.body}</p><details class="project-scope-details"><summary>What we test before expanding <span aria-hidden="true">+</span></summary><ul>{page.pilot.measures.map((item) => <li>{item}</li>)}</ul></details></div>
       </section>
 
@@ -147,7 +147,7 @@ const structuredData = {
 
       <section class="project-section project-wrap project-faq" aria-labelledby="faq-title"><div><p class="project-kicker">BEFORE WE START</p><h2 id="faq-title">Good questions.<br />Clear answers.</h2></div><div>{page.faqs.map((item) => <details><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div></section>
 
-      <section class="project-final-cta project-wrap" aria-labelledby="cta-title"><p class="project-kicker">LET’S LOOK AT YOUR BOTTLENECK</p><h2 id="cta-title">{page.cta.title}</h2><p>{page.cta.body}</p><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a></section>
+      <ProjectInquiryForm slug={page.slug} topic={page.topic} title={page.cta.title} body={page.cta.body} />
 
       <aside class="project-related project-wrap" aria-labelledby="related-title"><div class="project-related-heading"><h2 id="related-title">Other businesses we help</h2><a class="project-text-link" href="/pages/">View all projects <span aria-hidden="true">↗</span></a></div><div class="project-related-list">{related.map((item) => <a href={`/pages/${item.slug}/`}><span>{item.topic}</span><span aria-hidden="true">↗</span></a>)}</div></aside>
     </main>

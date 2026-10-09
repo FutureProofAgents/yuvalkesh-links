@@ -1,0 +1,50 @@
+---
+interface Props { slug: string; topic: string; title: string; body: string }
+const { slug, topic, title, body } = Astro.props;
+const hints: Record<string, { business: string; tools: string; challenge: string; solution: string }> = {
+  'construction-document-workflows': { business: 'For example, high-end apartment renovations in NYC.', tools: 'Your CRM, estimating files, design tools…', challenge: 'What holds up a quote or a revision after the site visit?', solution: 'sales' },
+  'accounting-client-operations': { business: 'For example, monthly bookkeeping and payroll for business clients.', tools: 'Your practice software, client portal, accounting tools…', challenge: 'Which documents or approvals does your team keep chasing?', solution: 'operations' },
+  'real-estate-document-review': { business: 'For example, buyer-side condo transactions in New York.', tools: 'Your matter system, document folders, email…', challenge: 'Which document comparison or preparation step keeps repeating?', solution: 'knowledge' },
+  'executive-search-intelligence': { business: 'For example, retained executive search for mid-market companies.', tools: 'Your CRM or ATS, meeting notes, email…', challenge: 'Where do client context, promised follow-ups or meeting preparation get stuck?', solution: 'sales' },
+};
+const hint = hints[slug];
+---
+<section class="project-inquiry project-wrap" id="start" aria-labelledby="inquiry-title">
+  <div class="project-inquiry-intro"><p class="project-kicker">LET’S LOOK AT YOUR BOTTLENECK</p><h2 id="inquiry-title">{title}</h2><p>{body}</p>
+    <ol><li>Tell us what gets stuck and which tools you use.</li><li>We review the details before speaking with you.</li><li>You can choose a call time after submitting.</li></ol>
+    <p class="project-caption">A brief description is enough. Please keep confidential client records and passwords out of the form.</p>
+  </div>
+  <div class="project-inquiry-card">
+    <form id="lead-form" data-language="en" novalidate>
+      <input type="hidden" name="form_type" value="project_us" /><input type="hidden" name="project_slug" value={slug} />
+      <input type="hidden" name="revenue_band" value="undisclosed" /><input type="hidden" name="revenue_currency" value="USD" />
+      <input type="hidden" name="solutions" value={hint.solution} /><input type="hidden" name="linkedin_url" value="" />
+      <div class="project-form-progress" aria-label="Form progress"><span data-progress="0" aria-current="step"><b>1</b>Your project</span><span data-progress="1"><b>2</b>Your details</span></div>
+      <p class="project-form-note">Required unless marked optional. Interest: {topic}.</p>
+      <div class="project-form-trap" aria-hidden="true"><label>Website<input name="website_check" tabindex="-1" autocomplete="off" /></label></div>
+      <fieldset data-step="0"><legend>Where does the work get stuck?</legend>
+        <label>Company name<input name="company" required minlength="2" maxlength="160" autocomplete="organization" /></label>
+        <label>What does your business do?<textarea name="business_description" required minlength="5" maxlength="800" rows="2" placeholder={hint.business}></textarea></label>
+        <div class="project-form-row"><label>Team size<select name="team_size" required><option value="">Choose a range</option><option value="1_4">1–4 people</option><option value="5_10">5–10 people</option><option value="11_30">11–30 people</option><option value="31_100">31–100 people</option><option value="100_plus">More than 100 people</option></select></label>
+          <label>Project budget (USD)<select name="project_budget" required><option value="">Choose a range</option><option value="not_sure">Not decided yet</option><option value="5k_10k">$5,000–$10,000</option><option value="10k_25k">$10,000–$25,000</option><option value="25k_plus">$25,000+</option></select></label></div>
+        <label>Current CRM and tools<input name="current_software" required minlength="2" maxlength="200" placeholder={hint.tools} /><small>“Spreadsheets” or “not sure” is fine.</small></label>
+        <label>The task you want to improve<textarea name="challenge" required minlength="10" maxlength="1000" rows="3" placeholder={hint.challenge}></textarea></label>
+      </fieldset>
+      <fieldset data-step="1" hidden><legend>Who should we speak with?</legend>
+        <label>Full name<input name="full_name" required minlength="2" maxlength="120" autocomplete="name" /></label>
+        <label>Your role<input name="job_title" required minlength="2" maxlength="120" autocomplete="organization-title" placeholder="Owner, partner, operations lead…" /></label>
+        <label>Work email<input name="email" type="email" required maxlength="180" autocomplete="email" /></label>
+        <label>Phone number (optional)<input name="phone" type="tel" maxlength="60" autocomplete="tel" /></label>
+        <label>Company website (optional)<input name="firm_website" type="url" maxlength="250" autocomplete="url" placeholder="https://yourcompany.com" /></label>
+        <label class="project-form-consent"><input type="checkbox" name="consent" required /><span>I agree that FutureProof Agents may use these details to respond to my inquiry, as explained in the <a href="#inquiry-privacy">privacy notice</a>.</span></label>
+      </fieldset>
+      <p id="form-error" role="alert" tabindex="-1"></p>
+      <div class="project-form-actions"><button type="button" data-back hidden>Back</button><span data-step-count>Step 1 of 2</span><button class="project-button" type="button" data-next>Continue <span aria-hidden="true">→</span></button><button class="project-button" type="submit" data-submit hidden>Let’s talk about the work <span aria-hidden="true">↗</span></button></div>
+      <noscript><p>Enable JavaScript to send this form, or <a href="https://calendar.app.google/uWpM7vrcaS4JAZTQ6">book a conversation here</a>.</p></noscript>
+    </form>
+    <div id="form-success" tabindex="-1" hidden><p class="project-kicker">YOUR INQUIRY IS IN</p><h3>Let’s talk about your first implementation.</h3><p>Your details have been received. We’ll use them to prepare for the conversation and reply at the email you provided.</p><a class="project-button" href="https://calendar.app.google/uWpM7vrcaS4JAZTQ6" target="_blank" rel="noopener noreferrer">Choose a call time <span aria-hidden="true">↗</span></a></div>
+    <p class="project-form-note">This inquiry does not subscribe you to marketing emails.</p>
+  </div>
+</section>
+<section class="project-inquiry-privacy project-wrap" id="inquiry-privacy"><details><summary>Inquiry privacy notice</summary><p>FutureProof Agents uses your business and contact details to assess and respond to this inquiry. We store your submission in our private lead database, CRM lead inbox and a private Google spreadsheet, and send an internal email alert to our team. We keep the page, project interest, referral and campaign information supplied in the link so we can understand which outreach or campaign led to the inquiry. First and latest referral details are kept in browser session storage. A hashed network identifier helps prevent spam. Optional Google Analytics measures page and button activity and successful inquiries; your contact details, prospect reference and form answers are not sent to Google. Declining analytics does not prevent submitting this form. This inquiry does not add you to a mailing list. For access, correction or deletion requests, contact <a href="mailto:y@uxwritinghub.com">y@uxwritinghub.com</a>.</p></details></section>
+<script src="../scripts/campaign-form.ts"></script>

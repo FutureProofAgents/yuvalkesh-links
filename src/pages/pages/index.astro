@@ -1,15 +1,23 @@
 ---
 import LocalFonts from '../../components/LocalFonts.astro';
 import pages from '../../data/project-pages.json';
+import integrations from '../../data/project-integrations.json';
 import '../../styles/project-pages.css';
+import '../../styles/solution-hub.css';
 const site = 'https://futureproofagents.com';
 const canonical = `${site}/pages/`;
-const title = 'Agentic Solutions Implemented for Your Business | FutureProof Agents';
-const description = 'Quotes stuck, paperwork missing, evidence scattered or client follow-ups slipping? We implement AI agents around your business, CRM and everyday tools.';
+const title = 'Agentic Solutions by Industry | FutureProof Agents';
+const description = 'Explore agentic solutions for construction, accounting, property law and executive search. FutureProof builds and implements agents around your existing CRM, tools and team.';
 const booking = 'https://calendar.app.google/uWpM7vrcaS4JAZTQ6';
+const sectors = [
+  { id: 'construction', name: 'Construction & renovation', audience: 'NYC renovation and design-build firms serving high-end homeowners.' },
+  { id: 'accounting', name: 'Accounting & payroll', audience: 'U.S. CPA, bookkeeping and payroll firms with recurring client work.' },
+  { id: 'property-law', name: 'Property law', audience: 'U.S. real estate attorneys and transaction teams reviewing property files.' },
+  { id: 'executive-search', name: 'Executive search', audience: 'U.S. retained-search firms developing relationships with hiring executives.' },
+].map(sector => ({ ...sector, solutions: pages.filter(page => page.sector === sector.name) }));
 const schema = { '@context': 'https://schema.org', '@graph': [
   { '@type': 'CollectionPage', name: title, description, url: canonical, inLanguage: 'en-US', mainEntity: { '@type': 'ItemList', itemListElement: pages.map((page, i) => ({ '@type': 'ListItem', position: i + 1, name: page.topic, url: `${canonical}${page.slug}/` })) } },
-  { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${site}/` }, { '@type': 'ListItem', position: 2, name: 'AI projects', item: canonical }] },
+  { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${site}/` }, { '@type': 'ListItem', position: 2, name: 'Agentic solutions', item: canonical }] },
 ] };
 ---
 <!doctype html>
@@ -26,8 +34,35 @@ const schema = { '@context': 'https://schema.org', '@graph': [
   <a class="project-skip" href="#main">Skip to content</a>
   <header class="project-header project-wrap"><a class="project-brand" href="/" aria-label="FutureProof Agents home"><img src="/favicon.svg" alt="" width="34" height="34" /><span>FutureProof <b>Agents</b></span></a><nav aria-label="Main navigation"><a href="/">About FutureProof</a><a class="project-button project-button-small" href={booking}>Let’s talk <span aria-hidden="true">↗</span></a></nav></header>
   <main id="main">
-    <section class="project-hub-hero project-wrap" aria-labelledby="hub-title"><p class="project-kicker"><span class="project-dot" aria-hidden="true"></span>AGENTIC SOLUTIONS. IMPLEMENTED FOR YOUR BUSINESS.</p><h1 id="hub-title">Your team is busy.<br /><em>The work is still waiting.</em></h1><div><p class="project-lead">The quote that still hasn’t gone out. The client documents you chased again. The evidence hidden in another PDF. The follow-up that slipped behind delivery work.</p><p>We build and implement AI agents around your existing CRM, tools and team. Find the problem your business recognizes—and see how we can help you move the work forward.</p></div></section>
-    <section class="project-hub-projects project-wrap" aria-label="Agentic solutions by business need">{pages.map((page, i) => <a class="project-hub-row" href={`/pages/${page.slug}/`}><div class="project-hub-image"><img src={page.image.small} width="480" height="600" alt={page.image.alt} loading="lazy" decoding="async" /><span class="project-hub-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span></div><div><p class="project-kicker">{page.kicker}</p><h2>{page.title}</h2></div><div class="project-hub-row-detail"><p>{page.description}</p><span>See how we can help <span aria-hidden="true">↗</span></span></div></a>)}</section>
+    <section class="solution-hub-hero project-wrap" aria-labelledby="hub-title">
+      <p class="project-kicker"><span class="project-dot" aria-hidden="true"></span>BUILT AROUND THE WAY YOUR BUSINESS WORKS</p>
+      <h1 id="hub-title">Agentic solutions<br /><em>for your industry.</em></h1>
+      <p class="project-lead">From renovation proposals to client follow-ups, find the solution that fits your team’s work. We build and implement AI agents around your existing CRM, tools and processes.</p>
+      <p class="solution-hub-service">A scoped implementation, tested with your team. Connections confirmed for your systems.</p>
+    </section>
+    <div class="project-wrap solution-catalog">
+      <nav class="solution-sector-nav" aria-label="Browse solutions by sector">
+        <span class="project-mono">BROWSE BY SECTOR</span>
+        <div>{sectors.map(sector => <a href={`#${sector.id}`}>{sector.name}<span aria-hidden="true">↓</span></a>)}</div>
+      </nav>
+      <div class="solution-sector-grid">
+        {sectors.map(sector => <section class="solution-sector" id={sector.id} aria-labelledby={`${sector.id}-title`}>
+          <header class="solution-sector-heading"><h2 id={`${sector.id}-title`}>{sector.name}</h2><span>{sector.solutions.length} {sector.solutions.length === 1 ? 'solution' : 'solutions'}</span></header>
+          <div class="solution-sector-offers">{sector.solutions.map(page => <article class="solution-card">
+            <div class="solution-card-image"><img src={page.image.small} srcset={`${page.image.small} 480w, ${page.image.src} 960w`} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1200px) 46vw, 559px" width="480" height="600" alt={page.image.alt} loading="lazy" decoding="async" /><span>AI-generated illustration</span></div>
+            <div class="solution-card-body">
+              <p class="project-kicker">IMPLEMENTED FOR YOUR TEAM</p>
+              <h3><a href={`/pages/${page.slug}/`}>{page.title}</a></h3>
+              <p class="solution-card-description">{page.description}</p>
+              <p class="solution-card-audience"><strong>For</strong> {sector.audience}</p>
+              <div class="solution-card-integrations"><span>Example tools</span><ul aria-label="Example integration tools">{page.integrations.slice(0,3).map(key => { const logo = integrations[key as keyof typeof integrations]; return <li><img src={logo.src} alt="" width="19" height="19" loading="lazy" /><span>{logo.name}</span></li>; })}</ul></div>
+              <a class="solution-card-link" href={`/pages/${page.slug}/`} aria-label={`Explore ${page.topic}`}>Explore the solution <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>)}</div>
+        </section>)}
+      </div>
+      <p class="solution-catalog-note">Tools shown are examples. We confirm available access and integration scope for your setup.</p>
+    </div>
     <section class="project-hub-principles project-wrap" aria-label="How we implement"><div><span class="project-mono">01 / YOUR BOTTLENECK</span><h2>Start with the work that gets stuck.</h2><p>We map one recurring problem and agree on a first implementation that matters to your business.</p></div><div><span class="project-mono">02 / YOUR EXISTING TOOLS</span><h2>We handle the connections.</h2><p>Your CRM, files and communication tools stay at the center. We confirm access and build the connections the work needs.</p></div><div><span class="project-mono">03 / IMPLEMENTED FOR YOU</span><h2>We build, test and train.</h2><p>We test the agents with real examples and prepare your team to use them in everyday work.</p></div></section>
     <section class="project-final-cta project-wrap" aria-labelledby="hub-cta-title"><p class="project-kicker">LET’S LOOK AT YOUR BOTTLENECK</p><h2 id="hub-cta-title">Which task keeps<br />holding your team back?</h2><p>Talk it through with Yuval. We’ll map the problem, the tools involved and a practical first step toward getting the work moving.</p><a class="project-button" href={booking}>Map your first implementation <span aria-hidden="true">↗</span></a></section>
   </main>

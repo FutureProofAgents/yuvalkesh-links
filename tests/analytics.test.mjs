@@ -6,19 +6,21 @@ import {readFileSync} from 'node:fs';
 const source = readFileSync(new URL('../public/scripts/analytics.js', import.meta.url), 'utf8');
 const destination = 'AW-17412494065/6TS5CJul05UdEPGl9u5A';
 const lead = '853c557b-0967-418c-9d0e-29b7954b8201';
-function page({ads = true, stored = {}, blockedStorage = false, hostname = 'futureproofagents.com', noindex = false} = {}) {
+function page({ads = true, stored = {}, blockedStorage = false, hostname = 'futureproofagents.com', noindex = false, project = ''} = {}) {
   const makeElement = (tag) => ({tag, children: [], dataset: {}, setAttribute() {}, append(...children) {this.children.push(...children);}});
+  const listeners = {};
   const document = {head: makeElement('head'), body: makeElement('body'), documentElement: {lang: 'en'},
     currentScript: {dataset: ads ? {googleAdsConversion: destination} : {}}, cookie: '',
     referrer: 'https://example.com/private?email=secret@example.com',
-    querySelector: () => noindex ? {} : null, createElement: makeElement, addEventListener() {}};
+    querySelector: () => noindex ? {} : null, createElement: makeElement, addEventListener(name, callback) {listeners[name] = callback;}};
+  document.body.dataset.project = project;
   const localStorage = {getItem(k) {if (blockedStorage) throw Error('blocked'); return stored[k] ?? null;}, setItem(k, v) {if (blockedStorage) throw Error('blocked'); stored[k] = v;}};
   const window = {};
   vm.runInNewContext(source, {window, document, localStorage, location: {hostname, origin: `https://${hostname}`, pathname: '/ai-for-accounting-firms/', search: '?gclid=click-123&email=secret@example.com'}, URL, URLSearchParams});
   const commands = () => (window.dataLayer || []).map(x => Array.from(x));
   const conversions = () => commands().filter(x => x[0] === 'event' && x[1] === 'conversion');
   const choose = (label) => document.body.children[0].children.find(x => x.tag === 'button' && x.textContent === label).onclick();
-  return {window, document, stored, commands, conversions, choose};
+  return {window, document, stored, commands, conversions, choose, listeners};
 }
 
 test('Ads requires fresh measurement consent; legacy analytics consent is not ad consent', () => {
@@ -84,4 +86,26 @@ test('measurement choice still works when browser storage is blocked', () => {
   assert.equal(p.window.fpGoogleAdsLead(lead), true);
   p.choose('No thanks');
   assert.equal(p.window.fpGoogleAdsLead('953c557b-0967-418c-9d0e-29b7954b8201'), false);
+});
+
+test('project CTA clicks respect consent and include only approved page context', () => {
+  const p = page({ads: false, project: 'construction-document-workflows'});
+  const anchor = {href: 'https://futureproofagents.com/ai-for-accounting-firms/#start', dataset: {leadCta: 'hero'}, hasAttribute: name => name === 'data-lead-cta'};
+  const click = () => p.listeners.click({target: {closest: () => anchor}});
+  click();
+  assert.equal(p.commands().some(x => x[1] === 'lead_cta_click'), false);
+  p.choose('Allow');
+  click();
+  const event = p.commands().find(x => x[1] === 'lead_cta_click')[2];
+  assert.equal(event.project_slug, 'construction-document-workflows');
+  assert.equal(event.icp, 'construction');
+  assert.equal(event.cta_location, 'hero');
+  p.window.fpAnalytics('generate_lead', {email: 'private@example.com', utm_content: 'private-prospect-reference', cta_location: 'unapproved-value'});
+  assert.equal(JSON.stringify(p.commands()).includes('private@example.com'), false);
+  assert.equal(JSON.stringify(p.commands()).includes('private-prospect-reference'), false);
+  assert.equal(JSON.stringify(p.commands()).includes('unapproved-value'), false);
+  p.choose('No thanks');
+  const before = p.commands().filter(x => x[1] === 'lead_cta_click').length;
+  click();
+  assert.equal(p.commands().filter(x => x[1] === 'lead_cta_click').length, before);
 });

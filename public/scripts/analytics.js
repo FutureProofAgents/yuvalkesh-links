@@ -79,9 +79,14 @@
       }
     }
   }
-  const allowed = new Set(['whatsapp_click', 'booking_click', 'newsletter_signup', 'lead_form_start', 'lead_form_step', 'lead_form_error', 'generate_lead']);
-  window.fpAnalytics = (event) => {
-    if (enabled && allowed.has(event)) gtag('event', event, { send_to: id, page_path: location.pathname, language: he ? 'he' : 'en', transport_type: 'beacon' });
+  const allowed = new Set(['whatsapp_click', 'booking_click', 'newsletter_signup', 'lead_cta_click', 'lead_form_start', 'lead_form_step', 'lead_form_error', 'generate_lead']);
+  const projectIcps = { 'construction-document-workflows': 'construction', 'accounting-client-operations': 'accounting', 'real-estate-document-review': 'property_law', 'executive-search-intelligence': 'executive_search' };
+  window.fpAnalytics = (event, metadata = {}) => {
+    if (!enabled || !allowed.has(event)) return;
+    const project = document.body.dataset.project;
+    const context = Object.hasOwn(projectIcps, project) ? { project_slug: project, icp: projectIcps[project] } : {};
+    if (['nav', 'hero', 'pilot'].includes(metadata.cta_location)) context.cta_location = metadata.cta_location;
+    gtag('event', event, { send_to: id, page_path: location.pathname, language: he ? 'he' : 'en', ...context, transport_type: 'beacon' });
   };
   window.fpGoogleAdsLead = (leadId) => {
     if (!adsEnabled || typeof leadId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(leadId) || sentLeads.has(leadId)) return false;
@@ -98,6 +103,7 @@
     let u; try { u = new URL(a.href); } catch { return; }
     if (u.hostname === 'wa.me') window.fpAnalytics('whatsapp_click');
     if (['calendar.app.google', 'calendly.com', 'cal.com'].includes(u.hostname)) window.fpAnalytics('booking_click');
+    if (a.hasAttribute('data-lead-cta') && u.origin === location.origin && u.pathname === location.pathname && u.hash === '#start') window.fpAnalytics('lead_cta_click', { cta_location: a.dataset.leadCta });
   });
   const panel = document.createElement('section');
   const preferenceLabel = he ? 'העדפות מדידה' : hasAds ? 'Measurement preferences' : 'Analytics preferences';
