@@ -4,6 +4,7 @@ import '../styles/project-pages.css';
 
 type TextList = string | string[];
 interface ProjectPage {
+  businessValue: { title: string; body: string; items: { title: string; body: string }[]; timing: { title: string; body: string } };
   image: { src: string; small: string; alt: string; caption: string };
   slug: string; topic: string; kicker: string; title: string; description: string; lead: string; audience: TextList;
   problems: { title: string; body: string }[];
@@ -87,6 +88,12 @@ const structuredData = {
         </section>
         <div class="project-audience"><span class="project-mono">BUILT FOR</span><p>{asList(page.audience).join(' · ')}</p></div>
       </div>
+
+      <section class="project-section project-wrap project-business" aria-labelledby="business-title">
+        <div class="project-section-heading"><div><p class="project-kicker">THE BUSINESS CASE</p><h2 id="business-title">{page.businessValue.title}</h2></div><p>{page.businessValue.body}</p></div>
+        <div class="project-value-list">{page.businessValue.items.map((item, i) => <article><span class="project-mono">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+        <div class="project-timing"><h3>{page.businessValue.timing.title}</h3><p>{page.businessValue.timing.body}</p></div>
+      </section>
 
       <section class="project-section project-wrap project-problems" aria-labelledby="problems-title">
         <div class="project-section-intro"><p class="project-kicker">THE WORK BETWEEN THE WORK</p><h2 id="problems-title">Where does the<br />process slow down?</h2><p>{page.description}</p></div>

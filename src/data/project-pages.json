@@ -1,230 +1,598 @@
 [
   {
     "slug": "construction-document-workflows",
-    "image": {"src": "/images/projects/construction-document-workflows-v1-960.webp", "small": "/images/projects/construction-document-workflows-v1-480.webp", "alt": "Illustrative scene of a designer and project lead reviewing plans and material samples.", "caption": "Good work starts with the details."},
-    "topic": "Construction & design-build",
-    "kicker": "FOR U.S. REMODELING AND DESIGN-BUILD TEAMS",
-    "title": "Turn project inputs into a Construction Set your designer can review.",
-    "description": "Custom AI workflows that organize project inputs, prepare branded documents and keep designers in control of the final Construction Set.",
-    "lead": "A client changes a finish. A selection lives in an email. The designer has to rebuild the story before producing the next document. FutureProof Agents helps connect that preparation work: gather the approved inputs, flag the gaps and produce a draft your design team can check, revise and approve.",
+    "image": {
+      "src": "/images/projects/construction-document-workflows-v2-960.webp",
+      "small": "/images/projects/construction-document-workflows-v2-480.webp",
+      "alt": "Illustrative scene of a NYC renovation team reviewing a proposal with an interior concept and itemized quote.",
+      "caption": "The design and the quote, in one conversation."
+    },
+    "topic": "NYC renovation quotes & interior design",
+    "kicker": "FOR NYC FIRMS RENOVATING HIGH-END HOMES",
+    "title": "Turn the site visit into a renovation quote that sells the design.",
+    "description": "A custom quote generator for premium NYC renovation firms: room-by-room scope, your approved pricing and interior design concepts in one client-ready proposal.",
+    "lead": "Your client wants to see the home they could have—and understand what it will cost. We build a quote generator that brings the site notes, room-by-room scope, material selections and interior design concept into one branded proposal. Your estimator checks the numbers. Your designer checks the vision. Your sales team gets a clearer next conversation.",
     "audience": [
-      "Remodeling and design-build firms with an in-house design team and several projects moving at once.",
-      "Owners, design directors and operations leads who want a repeatable document process across designers.",
-      "Teams with existing project folders, templates and completed jobs that can become a useful evaluation set."
+      "Owner-led NYC renovation and design-build firms serving high-end apartment, brownstone and townhouse clients.",
+      "Owners and heads of preconstruction whose estimators and interior designers build each proposal together.",
+      "Teams with qualified enquiries, several projects in progress and repeatable pricing or past estimates to work from."
     ],
     "problems": [
-      {"title": "The brief is scattered", "body": "Call notes, drawings, photographs and product selections arrive at different times. Your designer has to reconcile them before starting the set. We map which sources are approved, what each field means and where a missing decision should be flagged."},
-      {"title": "Preparation competes with design", "body": "Formatting documents, copying selections and matching images take attention away from design decisions. A scoped workflow can prepare these repeatable elements in your format, with the source material available to the reviewer."},
-      {"title": "One change creates another checking job", "body": "A revised fixture or room selection can affect several parts of a document. We define controlled revisions and version history so the designer can see what changed and check related sections before release."}
+      {
+        "title": "The designer and estimator rebuild the same brief",
+        "body": "Site photographs, measurements, client preferences and meeting notes arrive in different places. We turn the approved inputs into a shared room-by-room brief with missing decisions clearly marked."
+      },
+      {
+        "title": "The price and the interior concept tell different stories",
+        "body": "A beautiful mood board can omit the cost implications; an estimate can fail to explain the design. We connect the selected finishes, scope lines and concept pages in one proposal."
+      },
+      {
+        "title": "Every client change creates another round of document work",
+        "body": "A different vanity, stone or cabinetry option can affect the allowance and several pages. The workflow prepares a revised version and highlights the changes for the designer and estimator."
+      }
     ],
     "deliverables": [
-      {"title": "An agreed project brief", "body": "A structured view of the required inputs, selected materials and unresolved questions. Your design lead approves the fields and the point at which a brief is ready for document preparation."},
-      {"title": "A branded draft Construction Set", "body": "The document sections, selection schedule and reference images agreed during scoping, assembled for designer review. Exact contents follow your existing standard and the quality of the available inputs."},
-      {"title": "A revision and approval workflow", "body": "A way to request defined changes, retain versions and record review. Client delivery stays behind an explicit approval step. Any requested project-system updates are scoped separately by action and permission."},
-      {"title": "A handover your team can use", "body": "Documented inputs, operating instructions, permissions and exception handling, plus a team walkthrough. Hosting, third-party usage and ongoing support are identified in the proposal."}
+      {
+        "title": "A quote generator using your commercial rules",
+        "body": "Draft line items from your approved scope library, rate card and allowances. Apply the calculation rules you approve and surface missing rates, uncertain quantities and items requiring a supplier quote."
+      },
+      {
+        "title": "Interior design embedded in the proposal",
+        "body": "Room concept pages, material palettes, reference imagery and selected options alongside the relevant work. Any generated visual is labeled as a concept and checked by your designer before the client sees it."
+      },
+      {
+        "title": "A proposal built for a decision",
+        "body": "A branded PDF with room-by-room scope, the reviewed price, options, allowances, exclusions and next steps. The homeowner can see the proposed result and the decisions needed to move forward."
+      },
+      {
+        "title": "A controlled handoff into the project",
+        "body": "Retain the approved selections, quote version and unresolved items for the design and delivery team. Construction Set preparation and material schedules can follow as a separately agreed next stage."
+      }
     ],
     "workflow": [
-      {"title": "Collect the approved inputs", "body": "Read the agreed project folder and selected notes, plans, photographs and product information. Keep the source of each material selection available."},
-      {"title": "Resolve the brief", "body": "Prepare the structured brief and a list of missing or conflicting information. The designer confirms what can move forward."},
-      {"title": "Prepare and revise the draft", "body": "Assemble the agreed document sections and schedule. Apply reviewed changes while retaining the earlier version."},
-      {"title": "Approve the set", "body": "The responsible designer checks the content and any required professional review. An authorized person approves release to the client or project team."}
+      {
+        "title": "Capture the renovation brief",
+        "body": "Bring together the approved site notes, photographs, plans, client preferences and room list. Ask for missing measurements or choices instead of inventing them."
+      },
+      {
+        "title": "Build scope, design and price together",
+        "body": "Prepare the room scope and concept pages, then match priced items to your approved rates and allowances. Keep optional upgrades separate from the base proposal."
+      },
+      {
+        "title": "Review the commercial and design details",
+        "body": "The estimator checks quantities, supplier inputs and pricing. The designer reviews selections and visual concepts. Both can request a controlled revision."
+      },
+      {
+        "title": "Present the approved proposal",
+        "body": "An authorized person approves release. Keep the final scope and design decisions available for the next sales conversation and project handoff."
+      }
     ],
     "example": {
-      "label": "ILLUSTRATIVE WORKFLOW — NOT A CUSTOMER RESULT",
-      "title": "A bathroom renovation, ready for document review",
-      "body": "A design coordinator gathers the latest approved selections and meeting notes. The workflow prepares a consistent draft and flags a missing vanity specification. The designer resolves the gap and reviews the set before it moves forward.",
-      "input": "Approved project notes, existing drawings, a selection sheet, product images and the firm's document template.",
-      "output": "A draft brief, agreed Construction Set sections, a material schedule and a list of unresolved items.",
-      "reviewer": "The designated designer approves technical content; the firm's authorized approver controls release."
+      "label": "ILLUSTRATIVE NYC USE CASE — NOT A CUSTOMER RESULT",
+      "title": "One Manhattan kitchen. Two design options. One clear quote.",
+      "body": "After a site visit, the client is choosing between painted cabinetry and a natural oak upgrade. Today the designer builds a concept deck while the estimator works in a separate file. The proposed workflow assembles both options in one package, carries the approved price difference into the quote and flags an appliance specification still needed. Your team reviews it before the client receives it.",
+      "input": "Site notes and photographs, approved dimensions, room scope, finish preferences, your rate card and the current supplier allowances.",
+      "output": "A branded proposal with base scope, priced upgrade, interior concept pages, material selections and a short list of open decisions.",
+      "reviewer": "Your estimator approves the commercial details, your designer approves the concept, and your owner or sales lead authorizes release."
     },
     "systems": {
-      "body": "We start with the place your team already keeps project information and the documents it already produces. The first scope defines the specific folders, file types and permitted actions.",
-      "items": ["Project folders and shared drives", "Approved meeting notes", "Document and selection templates", "Existing design and project software"],
-      "footnote": "Connections depend on available APIs, export formats and permissions. CAD write-back, measured drawings and dimensional accuracy in generated images require separate assessment and acceptance criteria."
+      "body": "Keep the project folders, estimating files and design tools your team already uses. We connect the specific inputs needed for the first quote type and return the proposal in your format.",
+      "items": [
+        "Project folders and site-visit notes",
+        "Approved price books and estimate templates",
+        "Interior design references and selection libraries",
+        "Your CRM and project-management records"
+      ],
+      "footnote": "Connection and pricing rules are confirmed during scoping. Generated concepts do not establish dimensions, constructability or permit compliance. Professional drawings and approvals follow your normal project process."
     },
     "pilot": {
-      "title": "Prove the workflow on completed jobs.",
-      "body": "Start with one document family and a small set of completed projects. Your design lead helps define the expected output before implementation. We compare drafts against those examples and agree how missing information, incorrect fields and revisions will be handled.",
-      "includes": ["Map the current preparation and review process", "Agree templates, source inputs and approval ownership", "Build the bounded document workflow", "Review historical examples and an agreed live pilot", "Train the team and document the handover"],
-      "measures": ["Designer time spent preparing and checking each set", "Missing or incorrect fields against the agreed checklist", "Time from approved brief to approved document", "Whether a team member can complete the process independently"]
+      "title": "Start with three completed renovation proposals.",
+      "body": "Pick one repeatable project type, such as a kitchen or bathroom renovation. We compare the original brief, estimate and presentation, define the rules that made them correct, then build a quote-and-design pilot around those examples.",
+      "includes": [
+        "Map the journey from site visit to approved quote",
+        "Agree scope items, pricing rules, allowances and concept format",
+        "Build proposal generation and controlled revisions",
+        "Test completed projects before a reviewed live proposal",
+        "Train the estimator, designer and sales owner"
+      ],
+      "measures": [
+        "Hours spent assembling and reviewing each proposal",
+        "Elapsed time from complete brief to approved quote",
+        "Pricing, scope and selection corrections before release",
+        "Client revision rounds and proposal-to-contract conversion over time"
+      ]
     },
     "faqs": [
-      {"q": "Will this produce permit-ready drawings?", "a": "That is a separate scope. This service focuses on the document preparation your designer defines. Drawings, measurements, code requirements and professional sign-off remain subject to the standards and review required for your project."},
-      {"q": "Can we keep our current design software?", "a": "Yes, the starting point is your current process. We assess the required inputs and outputs before proposing any integration or migration. Your design software can remain the place where the team makes and approves drawing changes."},
-      {"q": "What should we bring to the first conversation?", "a": "Describe one document that takes repeated effort, who prepares it and where its inputs live. A redacted example can help after we agree an appropriate way to share it. We use the conversation to assess fit and define a sensible next step."}
+      {
+        "q": "Will the generator decide our prices?",
+        "a": "Your firm owns the pricing. The workflow uses the rates, quantities, allowances and calculation rules you approve. Missing supplier costs and uncertain quantities remain visible for the estimator to resolve."
+      },
+      {
+        "q": "Can the interior design be part of the quote itself?",
+        "a": "Yes. The offer includes agreed concept pages, selected finishes and design options within the branded proposal. The designer controls the aesthetic direction and approves any generated imagery. Detailed drawings and technical documentation are separate deliverables."
+      },
+      {
+        "q": "How quickly could we issue a quote?",
+        "a": "We measure that on your project type. The related 29-minute demonstration was one design-document run, not a complete priced renovation quote. In the pilot we record generation time, estimator time, designer time and the final approval delay so you can assess the actual sales turnaround."
+      }
     ],
-    "cta": {"title": "Find the document work worth automating.", "body": "Book an introductory call with Yuval. Bring one recurring document, the tools involved and the part that keeps your designer busy. We will help identify a practical first project.", "label": "Discuss your construction workflow"},
-    "seo": {"title": "Construction Document Automation | FutureProof Agents", "description": "Custom AI workflows for U.S. remodeling and design-build teams. Prepare Construction Sets and material schedules with designer review."}
+    "cta": {
+      "title": "Bring your last renovation quote. Let’s improve the next one.",
+      "body": "Book a call with Yuval. Describe the project type, how the estimate and design come together, and how long a proposal waits before it reaches the homeowner. We will identify a practical quote-and-design pilot.",
+      "label": "Discuss your renovation quote generator"
+    },
+    "seo": {
+      "title": "NYC Renovation Quote Generator & Interior Design | FutureProof Agents",
+      "description": "Turn site notes into a branded renovation proposal with your pricing, room-by-room scope and interior design concepts. Built for premium NYC design-build firms."
+    },
+    "businessValue": {
+      "title": "Make the proposal do more of the selling.",
+      "body": "The business problem is the gap between a promising site visit and a proposal the homeowner can act on. The offer connects the price and the design so your team can explain the project, present options and move toward an approved scope.",
+      "items": [
+        {
+          "title": "Put a clear offer in front of the client sooner",
+          "body": "Prepare the scope, pricing structure and presentation together. Measure site-visit-to-approved-quote time, including the estimator and designer checks that still need to happen."
+        },
+        {
+          "title": "Show what the price buys",
+          "body": "Place room concepts, finishes and selected materials beside the relevant scope and allowances. A client can compare a base design with an upgrade instead of trying to decode a spreadsheet."
+        },
+        {
+          "title": "Protect the margin through revisions",
+          "body": "Keep quantities, rates, allowances, exclusions and approved options explicit. When a client changes a finish, show the corresponding scope and price change for review before issuing a new version."
+        }
+      ],
+      "timing": {
+        "title": "A faster draft, with a benchmark you can inspect.",
+        "body": "A related design-document demonstration produced a draft in 29 minutes on one sample. For a pilot, we can test a document-generation target under 60 minutes once the brief is approved. That is a target for draft generation, not a proven turnaround for a fully priced, approved renovation quote; pricing and design review are measured separately."
+      }
+    }
   },
   {
     "slug": "accounting-client-operations",
-    "image": {"src": "/images/projects/accounting-client-operations-v1-960.webp", "small": "/images/projects/accounting-client-operations-v1-480.webp", "alt": "Illustrative scene of accounting colleagues reviewing a client document package.", "caption": "More context. A clearer next step."},
-    "topic": "Accounting & client operations",
-    "kicker": "FOR U.S. CPA, BOOKKEEPING AND CLIENT ACCOUNTING FIRMS",
-    "title": "Give every missing client document a clear next step.",
-    "description": "Connect document collection, client records and team follow-ups in a scoped AI workflow built around your accounting practice.",
-    "lead": "A document arrives in one place. The request for it lives somewhere else. Someone still has to check the client record, update the task and decide what to ask for next. FutureProof Agents builds the connections around that work, giving your team a reviewable picture of what is present, what is missing and who owns the next action.",
+    "image": {
+      "src": "/images/projects/accounting-client-operations-v2-960.webp",
+      "small": "/images/projects/accounting-client-operations-v2-480.webp",
+      "alt": "Illustrative scene of an accounting manager checking a client document package.",
+      "caption": "Get the client package ready for the work."
+    },
+    "topic": "Accounting close & payroll readiness",
+    "kicker": "FOR U.S. CPA, CAS, BOOKKEEPING AND PAYROLL FIRMS",
+    "title": "Get client work ready for the accountant sooner.",
+    "description": "Connect missing-document checks, payroll inputs and client follow-ups so your accounting team can move recurring work toward professional review.",
+    "lead": "A monthly package is almost complete. One recurring invoice is missing, a statement belongs to the wrong period and payroll is waiting on an approved input. We build a shared work queue that spots those gaps, prepares the next request and gives each exception an owner. Your team spends its attention on the work that needs judgment.",
     "audience": [
-      "CPA, bookkeeping, payroll and client accounting services firms with recurring client work.",
-      "Managing partners and operations leads coordinating documents, deadlines and handoffs across a team.",
-      "Practices with a defined monthly process and a reviewer who can help establish what complete means."
+      "Established U.S. CPA and client accounting services firms handling recurring bookkeeping and payroll for business clients.",
+      "Managing partners and operations managers whose coordinators check the same client packages every month.",
+      "Practices where email, client portals, accounting software and payroll systems each hold part of the status."
     ],
     "problems": [
-      {"title": "The client picture is split across tools", "body": "Email, document storage, practice software and the accounting system each hold part of the story. A scoped operating view can bring agreed status fields together, showing where information came from and when it was last updated."},
-      {"title": "Document chasing repeats every cycle", "body": "Your team checks the same list, searches for attachments and prepares another request. We define which items are expected, how arrivals are matched and when an exception needs a person rather than another reminder."},
-      {"title": "An exception needs an owner", "body": "An unresolved question can sit between the client coordinator and the delivery team. The workflow can prepare a task with context, source links and a named owner, then make its review status visible."}
+      {
+        "title": "A missing item can look like a finished package",
+        "body": "A document may be present but belong to another month, or a recurring invoice may have stopped arriving. We check the agreed client checklist and permitted history, then flag the difference with its source."
+      },
+      {
+        "title": "The same client gets checked by several people",
+        "body": "A coordinator searches email, a bookkeeper checks a folder and an operations manager asks for status. A shared view shows the latest check, the open question and who owns it."
+      },
+      {
+        "title": "The deadline arrives before the missing information",
+        "body": "When the team discovers a gap late, professional work pauses. Preparing earlier, specific follow-ups can give the client a clearer request and the team a visible escalation path."
+      }
     ],
     "deliverables": [
-      {"title": "A client completeness view", "body": "An agreed checklist for one recurring service, connected to the information your firm permits the workflow to read. Missing, received and review-needed items remain distinguishable."},
-      {"title": "Follow-ups ready for review", "body": "Draft requests that refer to the relevant client, period and missing item. Your team approves wording and recipient details before a message is sent under the agreed communication policy."},
-      {"title": "An exception and approval queue", "body": "A place to review conflicting information, unmatched documents and proposed changes. Every write action has a defined destination, permission and approval owner."},
-      {"title": "An operating guide and handover", "body": "Documented rules, source mappings, access arrangements and failure handling. Your team learns how to review the queue, correct an item and recognize when a connection needs attention."}
+      {
+        "title": "A client-and-period readiness view",
+        "body": "An agreed checklist showing received, missing and review-needed items for one monthly service. Link the status back to the relevant source and show when it was last checked."
+      },
+      {
+        "title": "Recurring invoice and document gap detection",
+        "body": "Flag expected items absent from the current package, using your approved rules and historical patterns. A missing recurring item is a question for review, not a conclusion that a transaction occurred."
+      },
+      {
+        "title": "Payroll preparation and an exception queue",
+        "body": "Assemble the required payroll inputs and show completeness issues with an owner. Keep uncertain matches, conflicting information and missing approvals separate from ready work."
+      },
+      {
+        "title": "Specific follow-ups ready to approve",
+        "body": "Draft a request naming the client, period and outstanding item. Your team checks the recipient and wording, then records the action in the agreed practice workflow."
+      }
     ],
     "workflow": [
-      {"title": "Define the expected package", "body": "Choose one service and reporting period. Your practice lead defines required documents, responsible staff and the checks that establish completeness."},
-      {"title": "Match incoming information", "body": "Read agreed sources and propose a client, period and document type. Ambiguous matches stay in the review queue."},
-      {"title": "Prepare the next action", "body": "Show what is missing and draft the appropriate request or internal task. Include the source context needed to check it."},
-      {"title": "Review and record", "body": "Your team approves the action. The workflow records the decision and, where explicitly scoped, updates the approved system."}
+      {
+        "title": "Choose a recurring service cycle",
+        "body": "Define one bookkeeping or payroll package, its expected inputs and the team member who decides when it is ready."
+      },
+      {
+        "title": "Match and check the incoming material",
+        "body": "Propose the client, period and document type. Compare against the checklist and agreed recurring patterns; uncertain matches go to review."
+      },
+      {
+        "title": "Prepare the next useful action",
+        "body": "Draft the missing-item request or internal task, with its source, owner and due date. Keep a late client response distinct from an internal processing issue."
+      },
+      {
+        "title": "Approve and hand off ready work",
+        "body": "The coordinator approves follow-ups and resolves matches. The accountant or payroll specialist receives the checked package and remains responsible for professional decisions."
+      }
     ],
     "example": {
-      "label": "ILLUSTRATIVE WORKFLOW — NOT A CUSTOMER RESULT",
-      "title": "A monthly bookkeeping package with one open item",
-      "body": "A coordinator reviews a client's monthly checklist. An expected statement is still missing and an attachment has an unclear period. The workflow separates the two issues, prepares a request and leaves the uncertain document for a person to check.",
-      "input": "An approved client checklist, available documents, the relevant reporting period and agreed practice-management status fields.",
-      "output": "A completeness view, an unmatched-document exception and a draft follow-up with an assigned owner.",
-      "reviewer": "The designated coordinator approves the request; qualified staff retain responsibility for accounting, payroll and tax decisions."
+      "label": "ILLUSTRATIVE SERVICE CYCLE — NOT A CUSTOMER RESULT",
+      "title": "A recurring vendor invoice is missing. Payroll has one open input.",
+      "body": "A business client normally supplies a monthly equipment-maintenance invoice. This month it is absent, and the payroll package is also awaiting an approved timesheet. Instead of two staff members searching the same inbox, the workflow prepares two specific exceptions and a consolidated request. The coordinator verifies whether the invoice is actually expected and approves the follow-up.",
+      "input": "The client checklist, current-period documents, permitted invoice history, payroll requirements and the responsible staff member.",
+      "output": "A readiness view, two clearly owned exceptions and a draft client request identifying exactly what is needed.",
+      "reviewer": "The coordinator approves the request; qualified accounting and payroll staff review the resulting work package."
     },
     "systems": {
-      "body": "Your accounting and practice systems can remain the authoritative records. We define which fields the workflow reads, where updates are allowed and how users see freshness or connection failures.",
-      "items": ["Practice-management software and CRM", "Accounting and payroll systems", "Business email and client portals", "Shared documents and internal procedures"],
-      "footnote": "Integration feasibility depends on your subscription, APIs, exports and permissions. We assess native features first and confirm the remaining connection work before committing to it."
+      "body": "Your practice, accounting and payroll systems keep their existing roles. We connect the status and documents required for the selected service cycle, including freshness and connection failures.",
+      "items": [
+        "Practice-management software and CRM",
+        "Accounting and payroll records",
+        "Business email and client portals",
+        "Client checklists and internal procedures"
+      ],
+      "footnote": "Specific integrations depend on APIs, subscriptions and permissions. Financial changes, payroll submission and tax decisions remain subject to your professional controls and explicit approval."
     },
     "pilot": {
-      "title": "Start with one recurring client process.",
-      "body": "Choose a manageable client group and a checklist the team already understands. We map the current effort, agree the expected behavior and test missing, duplicate, late and ambiguous inputs. Expansion follows review of the pilot against the agreed measures.",
-      "includes": ["Map one service cycle and its handoffs", "Agree source access and client-matching rules", "Build the completeness and approval workflow", "Test historical examples and controlled live work", "Train reviewers and document ongoing operating costs"],
-      "measures": ["Staff time spent checking and requesting documents", "Correct client and period matches", "Age and ownership of unresolved exceptions", "Time until the agreed client package is ready for professional review"]
+      "title": "Prove it on one monthly client group.",
+      "body": "Choose a recurring process and a manageable group of clients. Compare the current checking and chasing effort with the reviewed pilot, including missing, duplicate, late and ambiguous documents.",
+      "includes": [
+        "Map one monthly service and its handoffs",
+        "Agree client matching and expected-document rules",
+        "Build readiness, exception and follow-up views",
+        "Test historical packages and controlled live work",
+        "Train the coordinator and professional reviewers"
+      ],
+      "measures": [
+        "Staff minutes spent checking and chasing per client",
+        "Time until the package is ready for professional review",
+        "Correct client, period and document matches",
+        "Age of unresolved exceptions and repeat client requests"
+      ]
     },
     "faqs": [
-      {"q": "Our practice software already sends reminders. Where would this help?", "a": "We look for gaps between your existing tools: an attachment that has not been matched, a request whose status is unclear, or a task without enough context. The first discussion establishes whether native features already cover the problem."},
-      {"q": "Can the workflow make accounting or tax decisions?", "a": "The scope here is operational preparation, document handling and coordination. Qualified people review accounting and tax work. Sensitive actions, including financial changes or submissions, require separately defined permissions and human approval."},
-      {"q": "How do we begin with sensitive client information?", "a": "Start by describing the process. We can use redacted or sample materials during scoping, then agree necessary data, access and processing arrangements. Please keep client financial records and credentials out of the introductory inquiry."}
+      {
+        "q": "Our software already sends reminders. What does this add?",
+        "a": "The useful gap is often deciding what to request. We assess whether your existing tools can match an attachment to the right client and month, detect an expected item that is absent and show an owner for the exception. Native features may already solve part of the problem."
+      },
+      {
+        "q": "Does it calculate or submit payroll?",
+        "a": "This offer prepares a complete, reviewable package and surfaces missing information. Payroll calculations, changes and submission stay with authorized people and your existing controls. Any additional action requires its own defined scope."
+      },
+      {
+        "q": "How do we know it creates capacity?",
+        "a": "Measure checking time, chasing time and review time separately before and during the pilot. Also track incorrect matches and repeated requests. Faster preparation is useful only if the professional receives a package they can trust."
+      }
     ],
-    "cta": {"title": "Show us where client work gets stuck.", "body": "Book an introductory call with Yuval to discuss one recurring service, the systems involved and the follow-up work your team repeats. We will help define a focused implementation opportunity.", "label": "Discuss your accounting workflow"},
-    "seo": {"title": "Accounting Client Workflow Automation | FutureProof Agents", "description": "AI workflow implementation for U.S. accounting firms. Connect missing-document checks, client follow-ups and team approvals across agreed systems."}
+    "cta": {
+      "title": "Choose the client process that slows down every month.",
+      "body": "Book a call with Yuval. Bring the recurring service, the missing items your team chases and the systems they check. We will define a pilot around one package getting ready for professional review.",
+      "label": "Discuss your client-readiness workflow"
+    },
+    "seo": {
+      "title": "Accounting & Payroll Readiness Automation | FutureProof Agents",
+      "description": "Help U.S. CPA and CAS teams prepare client work sooner with missing-document checks, payroll readiness, owned exceptions and approved follow-ups."
+    },
+    "businessValue": {
+      "title": "Create capacity inside the service you already sell.",
+      "body": "The useful outcome is a client package that reaches the right professional sooner, with fewer repeated checks. This offer is built around missing-document detection and payroll preparation patterns from our accounting work.",
+      "items": [
+        {
+          "title": "Reduce repeated document chasing",
+          "body": "Show what has arrived, what is still missing and what needs checking. A coordinator can approve a specific request instead of reopening every folder and rebuilding the list."
+        },
+        {
+          "title": "Make payroll readiness visible",
+          "body": "Collect the agreed inputs, flag missing approvals or inconsistent periods and prepare a work package for the payroll specialist. The specialist retains calculation, approval and submission responsibility."
+        },
+        {
+          "title": "See where recurring work is stuck",
+          "body": "Give every open item a client, period, owner and due date. The operations lead can direct attention to the oldest blockers and explain the next step to the client."
+        }
+      ],
+      "timing": {
+        "title": "Review the exceptions at the start of the day.",
+        "body": "The workflow can run on an agreed schedule or when a document arrives, then prepare the queue for your coordinator. The pilot measures time to detect a gap, staff minutes per client package and time until professional review. Client response time remains a separate part of the cycle; no time-saving result is assumed."
+      }
+    }
   },
   {
     "slug": "real-estate-document-review",
-    "image": {"src": "/images/projects/real-estate-document-review-v1-960.webp", "small": "/images/projects/real-estate-document-review-v1-480.webp", "alt": "Illustrative scene of legal colleagues comparing property documents.", "caption": "Evidence your team can work with."},
-    "topic": "Real estate & legal document review",
-    "kicker": "FOR U.S. REAL ESTATE LEGAL AND TRANSACTION TEAMS",
-    "title": "Put the evidence beside every property-document finding.",
-    "description": "Custom document comparison workflows that prepare reviewable findings, source references and open questions for your real estate team.",
-    "lead": "Property review often means finding the same fact in several documents, checking whether the sources agree and explaining what still needs attention. FutureProof Agents builds a bounded workflow for that preparation: organize the approved documents, compare defined fields and produce a draft with evidence your reviewer can inspect.",
+    "image": {
+      "src": "/images/projects/real-estate-document-review-v2-960.webp",
+      "small": "/images/projects/real-estate-document-review-v2-480.webp",
+      "alt": "Illustrative scene of a property attorney comparing a survey and transaction documents.",
+      "caption": "Put the evidence beside the issue."
+    },
+    "topic": "Property due diligence & document review",
+    "kicker": "FOR U.S. REAL ESTATE TRANSACTION COUNSEL",
+    "title": "Spend review time on the property issue. Have the evidence ready.",
+    "description": "Prepare a source-linked property due-diligence report that helps real estate counsel review document conflicts and client questions more efficiently.",
+    "lead": "The purchase is moving, but the document package still needs a careful comparison: unit details, plans, recorded attachments and the provisions that affect the buyer. We build a workflow that assembles those facts, flags discrepancies and puts the relevant page beside each finding. Your attorney can move from searching files to reviewing the issue.",
     "audience": [
-      "Real estate law firms and transaction teams reviewing recurring property document packages.",
-      "Practice leads, senior paralegals and operations managers responsible for review quality and turnaround.",
-      "Teams able to define one jurisdiction, a clear document family and the qualified person who approves findings."
+      "U.S. boutique and midsize real estate law firms advising buyers or investors on repeated property acquisitions.",
+      "Real estate practice partners and senior paralegals who repeatedly compare similar condo or property document packages.",
+      "Teams with one defined jurisdiction, a repeatable transaction type and a qualified reviewer who owns the checklist."
     ],
     "problems": [
-      {"title": "Finding the relevant passage takes work", "body": "Long files, scans and inconsistent document structures slow down a comparison before professional judgment begins. We define the facts and passages to locate, then keep page references and relevant excerpts attached to the draft findings."},
-      {"title": "Conflicting sources need to stay visible", "body": "A property identifier, attachment or stated provision may differ across records. The workflow can organize those differences into a review queue. A missing or unclear source remains an open question for the reviewer."},
-      {"title": "A summary needs a traceable foundation", "body": "A polished paragraph is difficult to check without its evidence. We structure the output so your team can move from a finding to the document and page behind it, then record a correction or approval."}
+      {
+        "title": "The same fact appears in several places",
+        "body": "A unit description, parking reference or attachment may be recorded in different documents and formats. The workflow locates the agreed fields and presents the sources together."
+      },
+      {
+        "title": "The evidence is harder to find than the summary",
+        "body": "A reviewer needs more than a confident paragraph. Every material draft finding is paired with the document, page and relevant excerpt or image crop needed to check it."
+      },
+      {
+        "title": "Missing evidence becomes a last-minute question",
+        "body": "An absent page or unclear scan can block a conclusion. The workflow identifies what cannot be established and keeps it visible in the matter’s open-item list."
+      }
     ],
     "deliverables": [
-      {"title": "A scoped document and review checklist", "body": "An agreed jurisdiction, transaction type, document set and list of comparison fields. Your qualified reviewer defines eligibility, exceptions and the questions the workflow is allowed to prepare."},
-      {"title": "An evidence-linked draft report", "body": "A structured draft with document references, pages and excerpts or image crops where appropriate. Proposed matches, discrepancies and unresolved items remain distinct and available for review."},
-      {"title": "A controlled review process", "body": "A completeness check before analysis and a qualified review before release. The reviewer can approve, edit or reject findings and retain a record of the decision."},
-      {"title": "An evaluation set and operating guide", "body": "Representative historical matters, expected findings and agreed error definitions, followed by documented handling for incomplete files and difficult scans. Acceptance is based on those examples and the scope agreed with your team."}
+      {
+        "title": "A matter-specific comparison checklist",
+        "body": "Your qualified reviewer defines the jurisdiction, eligible document package, fields to compare and questions that belong in the first version."
+      },
+      {
+        "title": "A draft diligence report with evidence",
+        "body": "A comparison table and findings with source references, pages and relevant excerpts or crops. Clearly distinguish supported matches, potential discrepancies and items not determined."
+      },
+      {
+        "title": "A discrepancy and request list",
+        "body": "A concise list of conflicting facts, missing documents and questions for the attorney to assess. Prepare follow-up wording only after the responsible reviewer decides what to request."
+      },
+      {
+        "title": "An approved client-summary format",
+        "body": "Turn the reviewed findings into the concise format your firm uses to explain the matter to its client. The attorney edits and approves the summary before release."
+      }
     ],
     "workflow": [
-      {"title": "Confirm the matter is eligible", "body": "A person selects the relevant documents. The workflow checks whether the required files are present and sufficiently readable for the agreed task."},
-      {"title": "Extract and compare", "body": "Locate the defined facts and compare the agreed sources. Preserve the evidence behind each proposed finding and flag uncertainty."},
-      {"title": "Review the evidence", "body": "The qualified reviewer checks references, resolves discrepancies and records decisions. The draft stays internal while questions remain open."},
-      {"title": "Approve the output", "body": "Prepare the agreed final format or client summary only after approval. Release follows your firm's authorization process."}
+      {
+        "title": "Check that the matter is eligible",
+        "body": "Confirm the transaction type and jurisdiction, then verify the approved document set is complete and readable enough for the agreed checks."
+      },
+      {
+        "title": "Locate the facts and their counterparts",
+        "body": "Extract the specified identifiers, descriptions and attachments. Find the relevant passages or plan areas in the other approved sources."
+      },
+      {
+        "title": "Prepare the evidence and open questions",
+        "body": "Assemble the comparison report, preserve conflicting sources and flag anything the supplied documents cannot establish."
+      },
+      {
+        "title": "Review and explain the result",
+        "body": "The attorney evaluates significance, corrects the draft and approves any requests or client summary. The system does not clear the transaction."
+      }
     ],
     "example": {
-      "label": "ILLUSTRATIVE WORKFLOW — NOT A CUSTOMER RESULT",
-      "title": "A property record that needs a closer look",
-      "body": "A reviewer supplies an approved document package for a defined transaction type. The workflow locates the requested property identifiers and flags an inconsistent description. It provides the relevant pages so the reviewer can decide what the difference means and what to request next.",
-      "input": "A reviewer-selected property document package and a jurisdiction-specific checklist agreed during scoping.",
-      "output": "A draft comparison table, source-linked findings, a discrepancy list and questions that could not be resolved from the supplied evidence.",
-      "reviewer": "The responsible attorney or other qualified professional evaluates significance and approves the final output."
+      "label": "ILLUSTRATIVE U.S. ADAPTATION — NOT A CUSTOMER RESULT",
+      "title": "The parking reference does not line up across the file.",
+      "body": "A buyer’s counsel reviews a condominium package using a locally approved checklist. A parking reference in one document differs from the corresponding exhibit. The workflow places both sources in the draft report and flags an unclear amendment. The attorney checks the evidence, determines whether the difference matters and decides which clarification to request.",
+      "input": "The attorney-selected transaction documents, relevant plans and exhibits, and the jurisdiction-specific comparison checklist.",
+      "output": "A source-linked comparison, the conflicting parking references, the unresolved amendment question and a draft matter summary.",
+      "reviewer": "The responsible real estate attorney interprets the documents, decides the legal significance and approves client-facing work."
     },
     "systems": {
-      "body": "We work from the matter sources your team approves. Scope includes where documents are read, where outputs are stored and who can access them. Public-record retrieval, if needed, is a separate feasibility question.",
-      "items": ["Approved matter folders", "Document-management systems", "Searchable PDFs and assessed scanned files", "Firm checklists and report templates"],
-      "footnote": "Document access, OCR quality and integration capabilities must be validated. The service supports review preparation; legal analysis, opinions and transaction decisions remain with the responsible professionals."
+      "body": "Use the matter folders and document-management process your firm approves. We define where the source files are read, where drafts are stored and which team members can review them.",
+      "items": [
+        "Approved matter folders",
+        "Document-management systems",
+        "Searchable PDFs and assessed scans",
+        "Firm diligence checklists and report templates"
+      ],
+      "footnote": "The initial offer uses documents your team selects. Public-record retrieval and additional jurisdictions require separate validation. Legal opinions and transaction decisions remain with the responsible professionals."
     },
     "pilot": {
-      "title": "Build the benchmark with your reviewer.",
-      "body": "Choose one jurisdiction and a repeatable document package. Use completed matters to define expected findings and distinguish critical errors from formatting issues. We agree the evidence requirements, uncertainty handling and written acceptance criteria before building the pilot.",
-      "includes": ["Map the review sequence and document eligibility", "Create a representative evaluation set", "Build extraction, comparison and evidence views", "Test missing pages, poor scans and conflicting sources", "Run a controlled pilot and train the designated reviewers"],
-      "measures": ["Evidence coverage for the agreed finding types", "Correctness against reviewer-approved historical examples", "Visibility of unresolved and critical exceptions", "Professional time spent checking and correcting the draft"]
+      "title": "Benchmark one transaction type with your attorney.",
+      "body": "Use completed matters from one jurisdiction to define the expected findings and evidence. Include unclear scans, missing pages and real discrepancies. The goal is a draft the reviewer can check efficiently, with important uncertainty still visible.",
+      "includes": [
+        "Agree the transaction type and document eligibility",
+        "Define the checklist and material error categories",
+        "Build extraction, comparison and evidence views",
+        "Compare historical outputs with attorney-approved findings",
+        "Run a controlled pilot and train the reviewers"
+      ],
+      "measures": [
+        "Preparation plus attorney-review minutes per eligible matter",
+        "Evidence coverage for material findings",
+        "Critical omissions, unsupported findings and corrections",
+        "Time from complete package to an approved client summary"
+      ]
     },
     "faqs": [
-      {"q": "Does this work across every U.S. jurisdiction?", "a": "Each project starts with a defined jurisdiction and document set. Terminology, records and review requirements vary. Additional jurisdictions are assessed and tested separately with your qualified reviewer before they enter the scope."},
-      {"q": "What happens when the source is missing or unreadable?", "a": "The expected behavior is agreed in advance: flag the missing evidence, identify the affected finding and route the matter for review. The workflow should preserve uncertainty where the supplied documents cannot support a conclusion."},
-      {"q": "Can the system issue a legal opinion or approve a transaction?", "a": "Those decisions remain with your professionals. We build document preparation and comparison workflows with defined review gates. Any client-facing summary is checked and authorized through your firm's process."}
+      {
+        "q": "Can you reuse the same workflow across states?",
+        "a": "The review pattern can transfer, but the document requirements and legal logic need local validation. Start with one jurisdiction and transaction type. Additional jurisdictions enter the scope after your qualified reviewer defines and tests the relevant checks."
+      },
+      {
+        "q": "What if a source is missing or the plan is unclear?",
+        "a": "The affected finding stays unresolved. The draft identifies the missing or unreadable evidence so the reviewer can request a better source or handle the point manually."
+      },
+      {
+        "q": "Does a fast draft mean the transaction is cleared?",
+        "a": "No. Draft preparation and legal approval are separate steps. The attorney determines what the documents mean and whether further work is required. Pilot timing includes the effort needed to review and correct the draft."
+      }
     ],
-    "cta": {"title": "Choose one document review worth improving.", "body": "Book an introductory call with Yuval. Describe the transaction type, jurisdiction and comparison your team repeats. We will discuss a bounded pilot and the evidence needed to evaluate it.", "label": "Discuss your document review workflow"},
-    "seo": {"title": "Real Estate Document Review Workflows | FutureProof Agents", "description": "Custom AI document comparison for U.S. real estate legal teams. Source-linked draft findings, scoped jurisdictions and qualified human review."}
+    "cta": {
+      "title": "Bring one property review your team repeats.",
+      "body": "Book a call with Yuval. Describe the transaction type, jurisdiction and documents your team compares. We will identify a focused diligence pilot and the completed matters needed to test it.",
+      "label": "Discuss your property-review workflow"
+    },
+    "seo": {
+      "title": "Property Due-Diligence Document Automation | FutureProof Agents",
+      "description": "Prepare source-linked property diligence reports for U.S. real estate counsel. Compare documents, surface discrepancies and support attorney review."
+    },
+    "businessValue": {
+      "title": "Move diligence forward without hiding the open questions.",
+      "body": "Our property-review work centers on a concrete problem: cross-checking plans, property descriptions and governing documents, then preparing evidence a lawyer can inspect. The U.S. offer adapts that pattern to your jurisdiction and matter type.",
+      "items": [
+        {
+          "title": "Put professional attention on the discrepancy",
+          "body": "Prepare the relevant facts and passages before review. The attorney can assess the significance of a difference with both sources available instead of restarting the document search."
+        },
+        {
+          "title": "Raise specific questions earlier",
+          "body": "Show a missing exhibit, conflicting unit reference or unsupported statement as an open item. Your team can prepare a focused request for the relevant party while the matter is still moving."
+        },
+        {
+          "title": "Support more consistent matter preparation",
+          "body": "Use the same agreed checklist and report structure across eligible matters. Measure paralegal preparation and attorney review together so faster drafting does not simply move work downstream."
+        }
+      ],
+      "timing": {
+        "title": "Test a same-day review-ready draft on eligible files.",
+        "body": "Same-day report preparation is a pilot objective to test after a complete, readable document package is received. It is not an achieved U.S. turnaround claim or a promise of same-day legal clearance. The benchmark records processing, correction and attorney review time separately."
+      }
+    }
   },
   {
     "slug": "executive-search-intelligence",
-    "image": {"src": "/images/projects/executive-search-intelligence-v1-960.webp", "small": "/images/projects/executive-search-intelligence-v1-480.webp", "alt": "Illustrative scene of search consultants preparing for a client conversation.", "caption": "Relationships begin with a conversation."},
-    "topic": "Executive search & relationship intelligence",
-    "kicker": "FOR U.S. EXECUTIVE SEARCH AND RECRUITING FIRMS",
-    "title": "Turn relationship history into a useful next conversation.",
-    "description": "Custom AI workflows that connect search context, client relationship history and consultant follow-ups inside your recruiting operations.",
-    "lead": "Your next client conversation may depend on something a colleague learned months ago. The note is in an inbox, the contact is in the CRM and the follow-up never became a task. FutureProof Agents helps organize that context into source-linked briefs and reviewable next actions, so consultants can act with a clearer picture of the relationship.",
+    "image": {
+      "src": "/images/projects/executive-search-intelligence-v2-960.webp",
+      "small": "/images/projects/executive-search-intelligence-v2-480.webp",
+      "alt": "Illustrative scene of a search consultant in a prepared client conversation.",
+      "caption": "A useful conversation starts with context."
+    },
+    "topic": "Retained-search business development",
+    "kicker": "FOR U.S. BOUTIQUE RETAINED-SEARCH FIRMS",
+    "title": "Turn the relationships you already have into better business conversations.",
+    "description": "Prepare client briefs, surface relevant follow-up opportunities and help retained-search partners develop accounts with the relationship context ready.",
+    "lead": "A former client mentioned a leadership change. A consultant promised to reconnect after a board meeting. The history is in the firm, but the next conversation never reaches the calendar. We build a relationship assistant that brings those signals and commitments together, prepares the client brief and puts a useful next action in front of the account owner.",
     "audience": [
-      "Boutique executive-search and recruiting firms with relationship-led business development.",
-      "Founders, managing partners and operations leads coordinating several consultants and active client accounts.",
-      "Teams with usable CRM or ATS records and a recurring need for client preparation, account follow-up or search handoffs."
+      "U.S. boutique retained executive-search firms selling senior leadership mandates through trusted relationships.",
+      "Founders, managing partners and practice leaders whose client development depends on remembered context and thoughtful follow-up.",
+      "Firms with a working ATS or CRM, several consultants and valuable account history spread across records, email and meeting notes."
     ],
     "problems": [
-      {"title": "Relationship context lives with individuals", "body": "Useful history sits across consultant notes, approved emails and CRM records. A shared briefing workflow can assemble the relevant sources while respecting the access your team has agreed. Consultants can check the context before using it."},
-      {"title": "The next conversation is easy to postpone", "body": "A promised introduction, account check-in or follow-up can lose its owner. We define the specific signals worth surfacing and prepare a review queue with the reason, supporting record and proposed next step."},
-      {"title": "Search context gets rebuilt at every handoff", "body": "A colleague joining an assignment needs the agreed brief, client preferences and latest decisions. The workflow can prepare a consistent handoff summary and show which details need confirmation before the consultant proceeds."}
+      {
+        "title": "The opportunity is buried in an old conversation",
+        "body": "A timing signal or hiring priority may be recorded in a note that the account owner has not reopened. Bring the relevant history forward with its source and date so the consultant can judge whether it still applies."
+      },
+      {
+        "title": "Partners prepare from a blank page",
+        "body": "Meeting preparation often means searching the CRM, asking colleagues and scanning email. A consistent brief gathers the agreed account context and makes unanswered questions explicit."
+      },
+      {
+        "title": "Good intentions never become an owned next step",
+        "body": "A promised introduction or post-meeting follow-up can disappear between people. The workflow proposes an owner and next action, then records the consultant’s decision."
+      }
     ],
     "deliverables": [
-      {"title": "A client relationship briefing", "body": "An agreed view of the organization, relevant contacts, previous interactions, open commitments and source links. Briefings are limited to the information your firm is authorized to use."},
-      {"title": "A reviewable follow-up queue", "body": "Proposed account actions based on rules your team defines, such as an overdue commitment or an agreed check-in date. Each suggestion includes its context and a consultant owner."},
-      {"title": "Search and meeting preparation", "body": "Draft preparation notes drawn from the approved assignment brief and relationship records. The consultant checks accuracy and relevance before a client meeting or internal handoff."},
-      {"title": "A controlled update workflow", "body": "Draft CRM notes, tasks and message copy that a person can edit and approve. Record updates and communication actions are individually scoped, with permissions and an audit trail."}
+      {
+        "title": "A weekly client-opportunity queue",
+        "body": "Account actions suggested from your approved rules, such as an agreed check-in date or open commitment. Each item includes the reason, relevant source and proposed consultant owner."
+      },
+      {
+        "title": "A partner-ready client brief",
+        "body": "A concise account view covering prior assignments, relevant contacts, client priorities, recent conversations and questions to confirm. Show source links and dates so the consultant can check freshness."
+      },
+      {
+        "title": "A thoughtful follow-up draft",
+        "body": "Prepare a short message or call outline tied to the actual relationship. The account owner edits the content, decides whether contact is appropriate and controls sending."
+      },
+      {
+        "title": "An opportunity and handoff record",
+        "body": "Capture the approved next step, its owner and the meeting outcome in the agreed CRM workflow. Keep context available when another consultant joins the account."
+      }
     ],
     "workflow": [
-      {"title": "Select the account context", "body": "Read the permitted CRM records and approved interaction sources for the defined client group. Resolve uncertain contact matches through review."},
-      {"title": "Prepare the relationship view", "body": "Assemble recent decisions, open commitments and source-linked history in the format your consultants agree to use."},
-      {"title": "Suggest a bounded next action", "body": "Apply agreed follow-up rules and prepare a task, meeting brief or message draft. Show why it was suggested."},
-      {"title": "Let the consultant decide", "body": "The consultant edits, dismisses or approves the suggestion. Sending and CRM changes occur only through the agreed authorization process."}
+      {
+        "title": "Select the client accounts and source rules",
+        "body": "Start with a defined account group and the CRM, meeting notes and business communications your firm permits the workflow to use."
+      },
+      {
+        "title": "Find the relevant commitment or signal",
+        "body": "Apply the follow-up rules your partners approve. Preserve the original source and date, and flag uncertain contact matches or stale context."
+      },
+      {
+        "title": "Prepare the business conversation",
+        "body": "Assemble the client brief, questions to confirm and a proposed next action. Draft the outreach only when the supporting relationship context is available."
+      },
+      {
+        "title": "Let the partner choose and follow through",
+        "body": "The account owner approves, edits or dismisses the suggestion. Record the actual next step and outcome so future preparation reflects what happened."
+      }
     ],
     "example": {
-      "label": "ILLUSTRATIVE WORKFLOW — NOT A CUSTOMER RESULT",
-      "title": "An account check-in with the context already assembled",
-      "body": "A consultant is preparing to reconnect with a previous client. The workflow brings together the last approved meeting note, an open commitment and the relevant assignment history. It drafts a short preparation brief and a possible follow-up for the consultant to edit.",
-      "input": "Authorized client account records, selected interaction notes, open tasks and the agreed follow-up rules.",
-      "output": "A source-linked relationship brief, an unresolved-question list and a draft next action assigned to the consultant.",
-      "reviewer": "The account-owning consultant decides whether the context is accurate, whether contact is appropriate and what to send."
+      "label": "ILLUSTRATIVE RETAINED-SEARCH SCENARIO — NOT A CUSTOMER RESULT",
+      "title": "A past client asked you to reconnect after the board meeting.",
+      "body": "A consultant’s note records a possible finance-leadership discussion after the next board meeting. When the agreed date arrives, the workflow surfaces the commitment, gathers the firm’s prior mandate history and prepares a brief for the account owner. The consultant checks whether the timing is still right and rewrites the suggested note before making contact. A conversation may become an opportunity; the system does not assume a mandate exists.",
+      "input": "Authorized account records, prior assignment context, the approved meeting note and the agreed follow-up date.",
+      "output": "A source-linked client brief, questions about the current need and a draft follow-up assigned to the relationship owner.",
+      "reviewer": "The account-owning consultant decides whether the context is current, what the commercial opportunity may be and whether to contact the client."
     },
     "systems": {
-      "body": "We assess the CRM, ATS and business communication tools your consultants already use. The scope identifies the records, fields and account permissions needed for the chosen workflow, plus how updates will be checked.",
-      "items": ["CRM and ATS account records", "Approved business email and calendar sources", "Meeting notes and assignment briefs", "Authorized enrichment or research providers"],
-      "footnote": "Connections depend on APIs, licenses and permitted use. External data sources require separate validation. This offer focuses on relationship operations; candidate ranking, hiring decisions and autonomous outreach are outside the starting scope."
+      "body": "Build around the ATS or CRM your consultants already use. Define the account records and interaction sources needed for the first client-development workflow, then confirm how approved updates return to the system.",
+      "items": [
+        "CRM and ATS client-account records",
+        "Approved business email and calendar sources",
+        "Meeting notes and previous assignment briefs",
+        "Authorized company research providers"
+      ],
+      "footnote": "Connections depend on APIs, licenses and permitted use. The starting offer covers client development and meeting preparation. Candidate ranking, hiring decisions and autonomous outreach are outside this scope."
     },
     "pilot": {
-      "title": "Test one relationship workflow with your consultants.",
-      "body": "Choose a defined group of client accounts and one useful output: meeting preparation, open-commitment follow-up or an assignment handoff. We establish the source rules and review process, then compare pilot outputs with what your team considers accurate and useful.",
-      "includes": ["Map the chosen consultant workflow", "Agree data access and contact-matching rules", "Build the briefing or follow-up process", "Test stale notes, duplicate contacts and missing context", "Run a consultant-reviewed pilot and document the handover"],
-      "measures": ["Time spent preparing a useful client brief", "Accuracy and completeness of the cited context", "Follow-up suggestions accepted, edited or dismissed", "Open commitments with a clear owner and next step"]
+      "title": "Test it on a defined group of existing client relationships.",
+      "body": "Choose accounts whose history your partners know well. Agree what makes a suggestion relevant, then test weekly opportunity review and meeting preparation against consultant judgment. Track actual follow-through before expanding the account group.",
+      "includes": [
+        "Map the client-development and meeting-preparation routine",
+        "Agree account access and useful follow-up signals",
+        "Build the opportunity queue and client brief",
+        "Test stale notes, duplicate contacts and missing context",
+        "Review real consultant use and document the handover"
+      ],
+      "measures": [
+        "Minutes to prepare a useful client-meeting brief",
+        "Suggestions accepted, edited or dismissed and why",
+        "Qualified client conversations from approved follow-ups",
+        "Opportunities and retained mandates over the measured sales cycle"
+      ]
     },
     "faqs": [
-      {"q": "Will we have to replace our ATS?", "a": "We start by assessing your current system and its access options. A focused workflow may sit alongside it. If data cleanup or migration is necessary, it becomes an explicit project decision with its own scope and checks."},
-      {"q": "Does this automatically contact clients or candidates?", "a": "The starting workflow prepares context and drafts for consultant review. Any later sending capability needs an agreed channel, authorization rules, recipient handling and controls. Automated contact is a separate implementation decision."},
-      {"q": "Do you rank candidates or decide who should be hired?", "a": "This page covers client relationship intelligence and consultant operations. Selection decisions remain with your team and its clients. The pilot can deliver useful account preparation and follow-up support without introducing candidate scoring."}
+      {
+        "q": "Do we need to replace our ATS or CRM?",
+        "a": "The starting point is your existing account system. We assess access and data quality, then define the smallest useful relationship workflow. A major migration is a separate project if the underlying system needs it."
+      },
+      {
+        "q": "Will it send outreach automatically?",
+        "a": "This offer prepares briefs and drafts for the account owner. The consultant controls recipient, timing and wording. Any later sending capability needs an explicitly agreed communication workflow."
+      },
+      {
+        "q": "How is this different from a candidate-sourcing tool?",
+        "a": "This project supports the commercial side of retained search: developing client relationships, preparing partners and following through on account opportunities. It does not score candidates or make hiring recommendations."
+      }
     ],
-    "cta": {"title": "Make the next client conversation easier to prepare.", "body": "Book an introductory call with Yuval. Bring one recurring briefing or follow-up task and the systems your consultants use. We will help define a focused pilot with a clear review process.", "label": "Discuss your search firm's workflow"},
-    "seo": {"title": "Executive Search Relationship Intelligence | FutureProof Agents", "description": "AI workflow implementation for executive-search firms. Prepare client briefs, organize relationship history and support consultant-reviewed follow-ups."}
+    "cta": {
+      "title": "Find the client conversations hiding in your own records.",
+      "body": "Book a call with Yuval. Bring one account-review or meeting-preparation routine and describe where the useful history lives. We will define a pilot around relevant conversations your partners can act on.",
+      "label": "Discuss your client-development workflow"
+    },
+    "seo": {
+      "title": "Retained Search Business Development AI | FutureProof Agents",
+      "description": "Turn executive-search relationship history into client briefs, relevant follow-ups and better business conversations. Consultant-reviewed workflows for U.S. firms."
+    },
+    "businessValue": {
+      "title": "Use the firm’s memory to develop the next mandate.",
+      "body": "The commercial priority in our search-firm work was stronger consultants and more relevant business opportunities. This offer focuses on client development: which account deserves attention, why now and what the partner should know before the conversation.",
+      "items": [
+        {
+          "title": "Reconnect with a reason",
+          "body": "Surface an agreed check-in, an unfulfilled commitment or an approved account signal with the supporting record. Give the consultant something specific to assess before reaching out."
+        },
+        {
+          "title": "Arrive prepared for the CEO or CHRO",
+          "body": "Assemble prior mandates, stated priorities, relationship history and open questions into a concise meeting brief. The partner can use preparation time to shape the conversation."
+        },
+        {
+          "title": "Keep the opportunity moving across the team",
+          "body": "Turn an approved next step into an owned task and record the outcome. A colleague can continue the relationship with the decisions and commitments in view."
+        }
+      ],
+      "timing": {
+        "title": "Prepare before the meeting. Review opportunities each week.",
+        "body": "Configure briefs around upcoming client meetings and an agreed weekly account review. The pilot measures time to a useful brief, accepted follow-up suggestions and meetings generated from approved actions. New mandates and revenue are tracked over the actual sales cycle; neither is assumed from a generated suggestion."
+      }
+    }
   }
 ]
