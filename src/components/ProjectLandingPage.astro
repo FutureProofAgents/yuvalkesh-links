@@ -4,6 +4,7 @@ import '../styles/project-pages.css';
 
 type TextList = string | string[];
 interface ProjectPage {
+  image: { src: string; small: string; alt: string; caption: string };
   slug: string; topic: string; kicker: string; title: string; description: string; lead: string; audience: TextList;
   problems: { title: string; body: string }[];
   deliverables: { title: string; body: string }[];
@@ -51,12 +52,12 @@ const structuredData = {
     <meta property="og:description" content={page.seo.description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:image" content={`${site}/yuval-keshtcher.jpg`} />
-    <meta property="og:image:alt" content="Yuval Keshtcher, founder of FutureProof Agents" />
+    <meta property="og:image" content={`${site}${page.image.src}`} />
+    <meta property="og:image:alt" content={page.image.alt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={page.seo.title} />
     <meta name="twitter:description" content={page.seo.description} />
-    <meta name="twitter:image" content={`${site}/yuval-keshtcher.jpg`} />
+    <meta name="twitter:image" content={`${site}${page.image.src}`} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <LocalFonts primary="inter" />
     <script is:inline src="/scripts/analytics.js" defer></script>
@@ -79,16 +80,10 @@ const structuredData = {
             <div class="project-hero-actions"><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a><a class="project-text-link" href="#deliverables">Explore the project <span aria-hidden="true">↓</span></a></div>
             <p class="project-caption">A focused conversation about your workflow, tools and first project.</p>
           </div>
-          <aside class="project-example" aria-labelledby="example-title">
-            <div class="project-example-header"><span class="project-mono">WORKFLOW / {number(0)}</span><span class="project-example-label">{page.example.label}</span></div>
-            <h2 id="example-title">{page.example.title}</h2>
-            <p class="project-example-intro">{page.example.body}</p>
-            <div class="project-evidence-row"><span class="project-evidence-mark" aria-hidden="true">01</span><div><h3>Source inputs</h3><ul>{asList(page.example.input).map((item) => <li>{item}</li>)}</ul></div></div>
-            <div class="project-evidence-connector" aria-hidden="true">↓</div>
-            <div class="project-evidence-row project-evidence-output"><span class="project-evidence-mark" aria-hidden="true">02</span><div><h3>Prepared for review</h3><ul>{asList(page.example.output).map((item) => <li>{item}</li>)}</ul></div></div>
-            <div class="project-reviewer"><span class="project-review-symbol" aria-hidden="true">↳</span><div><span>Human review</span><strong>{page.example.reviewer}</strong></div><span class="project-review-tag">REQUIRED</span></div>
-            <p class="project-example-note">Illustrative process. Scope and connections are agreed with your team.</p>
-          </aside>
+          <figure class="project-photo">
+            <div class="project-photo-frame"><img src={page.image.src} srcset={`${page.image.small} 480w, ${page.image.src} 960w`} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1200px) 44vw, 506px" width="960" height="1200" alt={page.image.alt} fetchpriority="high" decoding="async" /></div>
+            <figcaption><span>{page.image.caption}</span><small>AI-generated illustration</small></figcaption>
+          </figure>
         </section>
         <div class="project-audience"><span class="project-mono">BUILT FOR</span><p>{asList(page.audience).join(' · ')}</p></div>
       </div>
@@ -107,6 +102,20 @@ const structuredData = {
         <div class="project-section-heading"><div><p class="project-kicker">FROM WORKFLOW TO WORKING SYSTEM</p><h2 id="process-title">A clear route<br />from idea to use.</h2></div><p>Agree on the inputs, the people and the acceptance criteria before expanding.</p></div>
         <ol class="project-process">{page.workflow.map((item, i) => <li><span class="project-process-number">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></li>)}</ol>
         <div class="project-systems"><div><p class="project-kicker">YOUR EXISTING TOOLS</p><h3>Build around your systems.</h3><p>{page.systems.body}</p></div><div><ul class="project-system-list" aria-label="Systems and sources considered during scoping">{page.systems.items.map((item) => <li>{item}</li>)}</ul><p class="project-caption">{page.systems.footnote}</p></div></div>
+      </section>
+
+      <section class="project-worked-example project-wrap" aria-label="Illustrative workflow">
+          <aside class="project-example project-example-wide" aria-labelledby="example-title">
+            <div class="project-example-header"><span class="project-mono">WORKFLOW / {number(0)}</span><span class="project-example-label">{page.example.label}</span></div>
+            <h2 id="example-title">{page.example.title}</h2>
+            <p class="project-example-intro">{page.example.body}</p>
+            <div class="project-example-grid">
+            <div class="project-evidence-row"><span class="project-evidence-mark" aria-hidden="true">01</span><div><h3>Source inputs</h3><ul>{asList(page.example.input).map((item) => <li>{item}</li>)}</ul></div></div>
+            <div class="project-evidence-row project-evidence-output"><span class="project-evidence-mark" aria-hidden="true">02</span><div><h3>Prepared for review</h3><ul>{asList(page.example.output).map((item) => <li>{item}</li>)}</ul></div></div>
+            </div>
+            <div class="project-reviewer"><span class="project-review-symbol" aria-hidden="true">↳</span><div><span>Human review</span><strong>{page.example.reviewer}</strong></div><span class="project-review-tag">REQUIRED</span></div>
+            <p class="project-example-note">Illustrative process. Scope and connections are agreed with your team.</p>
+          </aside>
       </section>
 
       <section class="project-pilot project-wrap" aria-labelledby="pilot-title">

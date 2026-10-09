@@ -1,6 +1,7 @@
 [
   {
     "slug": "construction-document-workflows",
+    "image": {"src": "/images/projects/construction-document-workflows-v1-960.webp", "small": "/images/projects/construction-document-workflows-v1-480.webp", "alt": "Illustrative scene of a designer and project lead reviewing plans and material samples.", "caption": "Good work starts with the details."},
     "topic": "Construction & design-build",
     "kicker": "FOR U.S. REMODELING AND DESIGN-BUILD TEAMS",
     "title": "Turn project inputs into a Construction Set your designer can review.",
@@ -57,6 +58,7 @@
   },
   {
     "slug": "accounting-client-operations",
+    "image": {"src": "/images/projects/accounting-client-operations-v1-960.webp", "small": "/images/projects/accounting-client-operations-v1-480.webp", "alt": "Illustrative scene of accounting colleagues reviewing a client document package.", "caption": "More context. A clearer next step."},
     "topic": "Accounting & client operations",
     "kicker": "FOR U.S. CPA, BOOKKEEPING AND CLIENT ACCOUNTING FIRMS",
     "title": "Give every missing client document a clear next step.",
@@ -113,6 +115,7 @@
   },
   {
     "slug": "real-estate-document-review",
+    "image": {"src": "/images/projects/real-estate-document-review-v1-960.webp", "small": "/images/projects/real-estate-document-review-v1-480.webp", "alt": "Illustrative scene of legal colleagues comparing property documents.", "caption": "Evidence your team can work with."},
     "topic": "Real estate & legal document review",
     "kicker": "FOR U.S. REAL ESTATE LEGAL AND TRANSACTION TEAMS",
     "title": "Put the evidence beside every property-document finding.",
@@ -169,6 +172,7 @@
   },
   {
     "slug": "executive-search-intelligence",
+    "image": {"src": "/images/projects/executive-search-intelligence-v1-960.webp", "small": "/images/projects/executive-search-intelligence-v1-480.webp", "alt": "Illustrative scene of search consultants preparing for a client conversation.", "caption": "Relationships begin with a conversation."},
     "topic": "Executive search & relationship intelligence",
     "kicker": "FOR U.S. EXECUTIVE SEARCH AND RECRUITING FIRMS",
     "title": "Turn relationship history into a useful next conversation.",
