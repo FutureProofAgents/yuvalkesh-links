@@ -10,7 +10,7 @@
     "topic": "NYC renovation quotes & interior design",
     "kicker": "FOR NYC FIRMS RENOVATING HIGH-END HOMES",
     "title": "AI quote generation with interior design sketches.",
-    "description": "For premium NYC renovation firms. We implement agents that combine your pricing, room scope and interior design concepts in one branded client proposal.",
+    "description": "For premium NYC renovation firms. We implement agentic solutions that combine your pricing, room scope and interior design concepts in one branded client proposal.",
     "lead": "Your homeowner is waiting. Your estimator has the numbers, your designer has the vision, and someone still has to turn both into a proposal. Then the client changes a finish. Another revision. Another evening getting the quote ready instead of moving the sale forward.",
     "audience": [
       "You run a NYC renovation or design-build firm serving high-end apartment, brownstone or townhouse owners.",
@@ -131,7 +131,7 @@
     },
     "seo": {
       "title": "AI Renovation Quotes & Interior Design Sketches | FutureProof Agents",
-      "description": "For premium NYC renovation firms. We implement agents that combine your pricing, room scope and interior design concepts in one branded client proposal."
+      "description": "For premium NYC renovation firms. We implement agentic solutions that combine your pricing, room scope and interior design concepts in one branded client proposal."
     },
     "businessValue": {
       "title": "Spend less of the sale assembling the proposal.",
@@ -158,7 +158,7 @@
     "audienceTitle": "For the team selling high-end NYC renovations.",
     "painTitle": "A good opportunity can spend too long waiting on a proposal.",
     "painIntro": "The client has seen the property with you. Now they need a clear reason to choose your firm. The work between that visit and the proposal is where the momentum gets lost.",
-    "serviceLine": "We implement quote-and-design agents that bring your site notes, pricing and interior concept sketches into one branded proposal, connected to your CRM and project tools.",
+    "serviceLine": "We implement agentic solutions that bring your site notes, pricing and interior concept sketches into one branded proposal, connected to your CRM and project tools. Built with security in mind, with controlled access and human approval.",
     "integrations": [
       "hubspot",
       "salesforce",
@@ -180,7 +180,7 @@
     "topic": "Accounting close & payroll readiness",
     "kicker": "FOR U.S. CPA, CAS, BOOKKEEPING AND PAYROLL FIRMS",
     "title": "AI client-document checks and follow-ups for accounting firms.",
-    "description": "For CPA, bookkeeping and payroll firms. We implement agents that check document completeness, flag missing inputs and prepare client follow-ups in your existing tools.",
+    "description": "For CPA, bookkeeping and payroll firms. We implement agentic solutions that check document completeness, flag missing inputs and prepare client follow-ups in your existing tools.",
     "lead": "The close is due. One invoice is missing, the bank statement is for the wrong month and payroll is waiting on an approval. Your team checks the portal, searches the inbox and chases the client again. The work you need to finish is still waiting to begin.",
     "audience": [
       "You run a U.S. CPA, client accounting services, bookkeeping or payroll practice with recurring business clients.",
@@ -301,7 +301,7 @@
     },
     "seo": {
       "title": "AI Document Checks & Follow-Ups for Accounting Firms | FutureProof Agents",
-      "description": "For CPA, bookkeeping and payroll firms. We implement agents that check document completeness, flag missing inputs and prepare client follow-ups in your existing tools."
+      "description": "For CPA, bookkeeping and payroll firms. We implement agentic solutions that check document completeness, flag missing inputs and prepare client follow-ups in your existing tools."
     },
     "businessValue": {
       "title": "Make room for client work in the month you already have.",
@@ -328,7 +328,7 @@
     "audienceTitle": "For accounting firms tired of the monthly chase.",
     "painTitle": "You can’t plan the work when “almost ready” keeps changing.",
     "painIntro": "A package marked received can still be incomplete. By the time the right person finds the gap, the deadline is closer and someone has to contact the client again.",
-    "serviceLine": "We implement AI agents that check client packages, flag missing inputs and prepare follow-ups inside the tools your accounting team already uses.",
+    "serviceLine": "We implement agentic solutions that check client packages, flag missing inputs and prepare follow-ups inside the tools your accounting team already uses. Built with security in mind, with controlled access and human approval.",
     "integrations": [
       "quickbooks",
       "hubspot",
@@ -350,7 +350,7 @@
     "topic": "Property due diligence & document review",
     "kicker": "FOR U.S. REAL ESTATE TRANSACTION COUNSEL",
     "title": "AI property document review with source-linked findings.",
-    "description": "For real estate law firms. We implement agents that compare property documents, flag discrepancies and put the supporting evidence beside each finding for attorney review.",
+    "description": "For real estate law firms. We implement agentic solutions that compare property documents, flag discrepancies and put the supporting evidence beside each finding for attorney review.",
     "lead": "The client wants an answer. The unit description, plans and exhibits do not line up neatly, and the relevant amendment could be in another PDF. Before your attorney can assess the issue, someone has to find the right pages and repeat the comparison.",
     "audience": [
       "You work in a U.S. boutique or midsize real estate law firm advising buyers or investors on property acquisitions.",
@@ -471,7 +471,7 @@
     },
     "seo": {
       "title": "AI Property Document Review for Law Firms | FutureProof Agents",
-      "description": "For real estate law firms. We implement agents that compare property documents, flag discrepancies and put the supporting evidence beside each finding for attorney review."
+      "description": "For real estate law firms. We implement agentic solutions that compare property documents, flag discrepancies and put the supporting evidence beside each finding for attorney review."
     },
     "businessValue": {
       "title": "Give the attorney the issue and the evidence together.",
@@ -498,7 +498,7 @@
     "audienceTitle": "For property-law teams handling repeat transactions.",
     "painTitle": "Finding the evidence can take over the review.",
     "painIntro": "Your team knows what to look for. The frustration is locating it, comparing it and making sure the next reviewer can follow the same trail.",
-    "serviceLine": "We implement document-review agents that gather the relevant evidence and prepare comparisons inside your firm’s existing matter workflow.",
+    "serviceLine": "We implement agentic solutions that gather the relevant evidence and prepare document comparisons inside your firm’s existing matter workflow. Built with security in mind, with controlled access and human approval.",
     "integrations": [
       "hubspot",
       "salesforce",
@@ -520,7 +520,7 @@
     "topic": "Retained-search business development",
     "kicker": "FOR U.S. BOUTIQUE RETAINED-SEARCH FIRMS",
     "title": "AI client follow-ups and meeting briefs for executive search.",
-    "description": "For retained-search firms. We implement agents that turn CRM history, client commitments and prior mandates into prepared conversations and timely follow-ups.",
+    "description": "For retained-search firms. We implement agentic solutions that turn CRM history, client commitments and prior mandates into prepared conversations and timely follow-ups.",
     "lead": "A past client said, “Call me after the board meeting.” Then an active search took over. The note stayed in the CRM, the follow-up date passed and nobody picked it up. You have the relationships. Keeping the right conversations moving is the hard part.",
     "audience": [
       "You lead a U.S. boutique retained executive-search firm winning senior leadership mandates through established relationships.",
@@ -641,7 +641,7 @@
     },
     "seo": {
       "title": "AI Client Development for Retained Search Firms | FutureProof Agents",
-      "description": "For retained-search firms. We implement agents that turn CRM history, client commitments and prior mandates into prepared conversations and timely follow-ups."
+      "description": "For retained-search firms. We implement agentic solutions that turn CRM history, client commitments and prior mandates into prepared conversations and timely follow-ups."
     },
     "businessValue": {
       "title": "Keep client development moving between active mandates.",
@@ -668,7 +668,7 @@
     "audienceTitle": "For retained-search partners who also own the pipeline.",
     "painTitle": "Business development gets whatever time the active searches leave.",
     "painIntro": "The relationship is already there. The missed opportunity is often a forgotten commitment, scattered context or a next step everyone thought someone else owned.",
-    "serviceLine": "We implement relationship-development agents that bring account history, due follow-ups and meeting preparation into your existing CRM or ATS workflow.",
+    "serviceLine": "We implement agentic solutions that bring account history, due follow-ups and meeting preparation into your existing CRM or ATS workflow. Built with security in mind, with controlled access and human approval.",
     "integrations": [
       "hubspot",
       "salesforce",
