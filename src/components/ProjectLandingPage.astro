@@ -1,9 +1,11 @@
 ---
 import LocalFonts from './LocalFonts.astro';
 import '../styles/project-pages.css';
+import integrationCatalog from '../data/project-integrations.json';
 
 type TextList = string | string[];
 interface ProjectPage {
+  audienceTitle: string; painTitle: string; painIntro: string; serviceLine: string; integrations: string[];
   businessValue: { title: string; body: string; items: { title: string; body: string }[]; timing: { title: string; body: string } };
   image: { src: string; small: string; alt: string; caption: string };
   slug: string; topic: string; kicker: string; title: string; description: string; lead: string; audience: TextList;
@@ -24,6 +26,7 @@ const canonical = `${site}/pages/${page.slug}/`;
 const booking = 'https://calendar.app.google/uWpM7vrcaS4JAZTQ6';
 const asList = (value: TextList) => Array.isArray(value) ? value : [value];
 const number = (index: number) => String(index + 1).padStart(2, '0');
+const logos = page.integrations.map((key) => integrationCatalog[key as keyof typeof integrationCatalog]);
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -68,75 +71,85 @@ const structuredData = {
     <a class="project-skip" href="#main">Skip to content</a>
     <header class="project-header project-wrap">
       <a class="project-brand" href="/" aria-label="FutureProof Agents home"><img src="/favicon.svg" alt="" width="34" height="34" /><span>FutureProof <b>Agents</b></span></a>
-      <nav aria-label="Main navigation"><a href="/pages/">All projects</a><a class="project-nav-process" href="#process">The process</a><a class="project-button project-button-small" href={booking}>Let’s talk <span aria-hidden="true">↗</span></a></nav>
+      <nav aria-label="Main navigation"><a href="/pages/">All solutions</a><a class="project-nav-process" href="#process">The process</a><a class="project-button project-button-small" href={booking}>Let’s talk <span aria-hidden="true">↗</span></a></nav>
     </header>
     <main id="main">
       <div class="project-wrap">
-        <nav class="project-breadcrumb" aria-label="Breadcrumb"><a href="/pages/">AI projects</a><span aria-hidden="true">/</span><span aria-current="page">{page.topic}</span></nav>
+        <nav class="project-breadcrumb" aria-label="Breadcrumb"><a href="/pages/">Agentic solutions</a><span aria-hidden="true">/</span><span aria-current="page">{page.topic}</span></nav>
         <section class="project-hero" aria-labelledby="project-title">
           <div class="project-hero-copy">
             <p class="project-kicker"><span class="project-dot" aria-hidden="true"></span>{page.kicker}</p>
             <h1 id="project-title">{page.title}</h1>
             <p class="project-lead">{page.lead}</p>
-            <div class="project-hero-actions"><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a><a class="project-text-link" href="#deliverables">Explore the project <span aria-hidden="true">↓</span></a></div>
-            <p class="project-caption">A focused conversation about your workflow, tools and first project.</p>
+            <p class="project-service-line">{page.serviceLine}</p>
+            <div class="project-hero-actions"><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a><a class="project-text-link" href="#who">Is this for your firm? <span aria-hidden="true">↓</span></a></div>
+            <p class="project-caption">A conversation with Yuval about where work gets stuck and what to fix first.</p>
           </div>
           <figure class="project-photo">
             <div class="project-photo-frame"><img src={page.image.src} srcset={`${page.image.small} 480w, ${page.image.src} 960w`} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1200px) 44vw, 506px" width="960" height="1200" alt={page.image.alt} fetchpriority="high" decoding="async" /></div>
             <figcaption><span>{page.image.caption}</span><small>AI-generated illustration</small></figcaption>
           </figure>
         </section>
-        <div class="project-audience"><span class="project-mono">BUILT FOR</span><p>{asList(page.audience).join(' · ')}</p></div>
+        <section class="project-fit" id="who" aria-labelledby="audience-title">
+          <p class="project-kicker">WHO THIS IS FOR</p><h2 id="audience-title">{page.audienceTitle}</h2>
+          <div class="project-fit-grid">{asList(page.audience).map((item, i) => <div><h3>{['Your firm', 'Your role', 'Sound familiar?'][i]}</h3><p>{item}</p></div>)}</div>
+        </section>
       </div>
 
-      <section class="project-section project-wrap project-business" aria-labelledby="business-title">
-        <div class="project-section-heading"><div><p class="project-kicker">THE BUSINESS CASE</p><h2 id="business-title">{page.businessValue.title}</h2></div><p>{page.businessValue.body}</p></div>
-        <div class="project-value-list">{page.businessValue.items.map((item, i) => <article><span class="project-mono">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
-        <div class="project-timing"><h3>{page.businessValue.timing.title}</h3><p>{page.businessValue.timing.body}</p></div>
-      </section>
-
       <section class="project-section project-wrap project-problems" aria-labelledby="problems-title">
-        <div class="project-section-intro"><p class="project-kicker">THE WORK BETWEEN THE WORK</p><h2 id="problems-title">Where does the<br />process slow down?</h2><p>{page.description}</p></div>
+        <div class="project-section-intro"><p class="project-kicker">THE PROBLEM YOU KNOW TOO WELL</p><h2 id="problems-title">{page.painTitle}</h2><p>{page.painIntro}</p></div>
         <div class="project-problem-list">{page.problems.map((item, i) => <article><span class="project-mono">{number(i)}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></article>)}</div>
       </section>
 
-      <section class="project-deliverables-band" id="deliverables" aria-labelledby="deliverables-title"><div class="project-section project-wrap">
-        <div class="project-section-heading"><div><p class="project-kicker">THE PROJECT</p><h2 id="deliverables-title">What we build<br /><em>with your team.</em></h2></div><p>A defined workflow, connected to the work your people already do.</p></div>
-        <div class="project-deliverable-list">{page.deliverables.map((item, i) => <article><span class="project-deliverable-number">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
-      </div></section>
-
-      <section class="project-section project-wrap" id="process" aria-labelledby="process-title">
-        <div class="project-section-heading"><div><p class="project-kicker">FROM WORKFLOW TO WORKING SYSTEM</p><h2 id="process-title">A clear route<br />from idea to use.</h2></div><p>Agree on the inputs, the people and the acceptance criteria before expanding.</p></div>
-        <ol class="project-process">{page.workflow.map((item, i) => <li><span class="project-process-number">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></li>)}</ol>
-        <div class="project-systems"><div><p class="project-kicker">YOUR EXISTING TOOLS</p><h3>Build around your systems.</h3><p>{page.systems.body}</p></div><div><ul class="project-system-list" aria-label="Systems and sources considered during scoping">{page.systems.items.map((item) => <li>{item}</li>)}</ul><p class="project-caption">{page.systems.footnote}</p></div></div>
+      <section class="project-section project-wrap project-business" aria-labelledby="business-title">
+        <div class="project-section-heading"><div><p class="project-kicker">WHAT COULD CHANGE</p><h2 id="business-title">{page.businessValue.title}</h2></div><p>{page.businessValue.body}</p></div>
+        <div class="project-value-list">{page.businessValue.items.map((item, i) => <article><span class="project-mono">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
       </section>
 
       <section class="project-worked-example project-wrap" aria-label="Illustrative workflow">
           <aside class="project-example project-example-wide" aria-labelledby="example-title">
-            <div class="project-example-header"><span class="project-mono">WORKFLOW / {number(0)}</span><span class="project-example-label">{page.example.label}</span></div>
+            <div class="project-example-header"><span class="project-mono">IN YOUR BUSINESS</span><span class="project-example-label">{page.example.label}</span></div>
             <h2 id="example-title">{page.example.title}</h2>
             <p class="project-example-intro">{page.example.body}</p>
             <div class="project-example-grid">
-            <div class="project-evidence-row"><span class="project-evidence-mark" aria-hidden="true">01</span><div><h3>Source inputs</h3><ul>{asList(page.example.input).map((item) => <li>{item}</li>)}</ul></div></div>
-            <div class="project-evidence-row project-evidence-output"><span class="project-evidence-mark" aria-hidden="true">02</span><div><h3>Prepared for review</h3><ul>{asList(page.example.output).map((item) => <li>{item}</li>)}</ul></div></div>
+            <div class="project-evidence-row"><span class="project-evidence-mark" aria-hidden="true">01</span><div><h3>What your team starts with</h3><ul>{asList(page.example.input).map((item) => <li>{item}</li>)}</ul></div></div>
+            <div class="project-evidence-row project-evidence-output"><span class="project-evidence-mark" aria-hidden="true">02</span><div><h3>What the agents prepare</h3><ul>{asList(page.example.output).map((item) => <li>{item}</li>)}</ul></div></div>
             </div>
-            <div class="project-reviewer"><span class="project-review-symbol" aria-hidden="true">↳</span><div><span>Human review</span><strong>{page.example.reviewer}</strong></div><span class="project-review-tag">REQUIRED</span></div>
-            <p class="project-example-note">Illustrative process. Scope and connections are agreed with your team.</p>
+            <div class="project-reviewer"><span class="project-review-symbol" aria-hidden="true">↳</span><div><span>Your team stays in control</span><strong>{page.example.reviewer}</strong></div></div>
+            <p class="project-example-note">An illustrative example of the work we can implement for your firm.</p>
           </aside>
       </section>
 
+      <section class="project-deliverables-band" id="deliverables" aria-labelledby="deliverables-title"><div class="project-section project-wrap">
+        <div class="project-section-heading"><div><p class="project-kicker">AGENTS AT WORK</p><h2 id="deliverables-title">Less chasing.<br /><em>More work moving.</em></h2></div><p>We implement the agents, connect your tools and shape the work around your team.</p></div>
+        <div class="project-deliverable-list">{page.deliverables.map((item, i) => <article><span class="project-deliverable-number">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+      </div></section>
+
+      <section class="project-section project-wrap project-implementation" id="process" aria-labelledby="process-title">
+        <div class="project-section-heading"><div><p class="project-kicker">IMPLEMENTED FOR YOU</p><h2 id="process-title">We handle the build.<br /><em>Your team keeps moving.</em></h2></div><p>An agentic solution built around your business: AI agents that carry out the connected steps, with your team in control of key decisions.</p></div>
+        <ol class="project-process project-implementation-steps">
+          <li><span class="project-process-number">01</span><h3>Show us where it gets stuck.</h3><p>Walk us through one recurring bottleneck. We map the work, the people and the tools, then agree on a useful first implementation.</p></li>
+          <li><span class="project-process-number">02</span><h3>We build and connect it.</h3><p>We configure the agents around your process and connect the CRM, files and communication tools the work depends on.</p></li>
+          <li><span class="project-process-number">03</span><h3>Test it together. Put it to work.</h3><p>We test real examples with your team, refine the handoffs and train the people who will use it before rollout.</p></li>
+        </ol>
+        <div class="project-integrations" aria-labelledby="integrations-title"><p class="project-kicker">YOUR CRM. YOUR TOOLS.</p><h3 id="integrations-title">Built around the systems you already use.</h3><p>{page.systems.body}</p>
+          <ul class="project-integration-logos" aria-label="Example integration options">{logos.map((logo) => <li><img src={logo.src} width="32" height="32" alt="" loading="lazy" decoding="async" /><span>{logo.name}</span></li>)}</ul>
+          <p class="project-integration-note">Examples of tools we can connect. We confirm your software, access and required actions during mapping. Using something else? Tell us your setup.</p>
+        </div>
+      </section>
+
       <section class="project-pilot project-wrap" aria-labelledby="pilot-title">
-        <div class="project-pilot-intro"><p class="project-kicker">A FOCUSED FIRST STEP</p><h2 id="pilot-title">{page.pilot.title}</h2><p>{page.pilot.body}</p><a class="project-button project-button-light" href={booking}>Discuss a first project <span aria-hidden="true">↗</span></a></div>
-        <div class="project-pilot-details"><div><h3>Define the work</h3><ul>{page.pilot.includes.map((item) => <li>{item}</li>)}</ul></div><div><h3>Agree on what to measure</h3><ul>{page.pilot.measures.map((item) => <li>{item}</li>)}</ul></div></div>
+        <div class="project-pilot-intro"><p class="project-kicker">A FOCUSED FIRST STEP</p><h2 id="pilot-title">{page.pilot.title}</h2><p>{page.pilot.body}</p><a class="project-button project-button-light" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a></div>
+        <div class="project-pilot-proof"><h3>{page.businessValue.timing.title}</h3><p>{page.businessValue.timing.body}</p><details class="project-scope-details"><summary>What we test before expanding <span aria-hidden="true">+</span></summary><ul>{page.pilot.measures.map((item) => <li>{item}</li>)}</ul></details></div>
       </section>
 
       <section class="project-founder project-wrap" aria-labelledby="founder-title"><img src="/yuval-keshtcher.jpg" width="144" height="144" loading="lazy" decoding="async" alt="Yuval Keshtcher, founder of FutureProof Agents" /><div><p class="project-kicker">YOUR IMPLEMENTATION PARTNER</p><h2 id="founder-title">Work with FutureProof.</h2><p>I’m Yuval Keshtcher, founder of FutureProof Agents. We connect process mapping, AI development and your existing tools in one scoped project, from the first workflow conversation through testing and handover.</p><a class="project-text-link" href="/">Meet FutureProof Agents <span aria-hidden="true">↗</span></a></div></section>
 
       <section class="project-section project-wrap project-faq" aria-labelledby="faq-title"><div><p class="project-kicker">BEFORE WE START</p><h2 id="faq-title">Good questions.<br />Clear answers.</h2></div><div>{page.faqs.map((item) => <details><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div></section>
 
-      <section class="project-final-cta project-wrap" aria-labelledby="cta-title"><p class="project-kicker">LET’S MAP THE FIRST PROJECT</p><h2 id="cta-title">{page.cta.title}</h2><p>{page.cta.body}</p><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a></section>
+      <section class="project-final-cta project-wrap" aria-labelledby="cta-title"><p class="project-kicker">LET’S LOOK AT YOUR BOTTLENECK</p><h2 id="cta-title">{page.cta.title}</h2><p>{page.cta.body}</p><a class="project-button" href={booking}>{page.cta.label}<span aria-hidden="true">↗</span></a></section>
 
-      <aside class="project-related project-wrap" aria-labelledby="related-title"><div class="project-related-heading"><h2 id="related-title">Other workflows we build</h2><a class="project-text-link" href="/pages/">View all projects <span aria-hidden="true">↗</span></a></div><div class="project-related-list">{related.map((item) => <a href={`/pages/${item.slug}/`}><span>{item.topic}</span><span aria-hidden="true">↗</span></a>)}</div></aside>
+      <aside class="project-related project-wrap" aria-labelledby="related-title"><div class="project-related-heading"><h2 id="related-title">Other businesses we help</h2><a class="project-text-link" href="/pages/">View all projects <span aria-hidden="true">↗</span></a></div><div class="project-related-list">{related.map((item) => <a href={`/pages/${item.slug}/`}><span>{item.topic}</span><span aria-hidden="true">↗</span></a>)}</div></aside>
     </main>
     <footer class="project-footer project-wrap"><a class="project-brand" href="/"><img src="/favicon.svg" alt="" width="25" height="25" /><span>FutureProof <b>Agents</b></span></a><nav aria-label="Footer navigation"><a href="/pages/">AI projects</a><a href="/blog/">Articles</a><a href="/">About FutureProof</a></nav><p>© {new Date().getFullYear()} FutureProof Agents</p></footer>
   </body>

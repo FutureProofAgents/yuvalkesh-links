@@ -1,0 +1,44 @@
+{
+  "hubspot": {
+    "name": "HubSpot",
+    "src": "/images/integrations/hubspot.svg",
+    "source": "https://logos.composio.dev/api/hubspot",
+    "capabilitySource": "https://docs.composio.dev/toolkits/hubspot"
+  },
+  "salesforce": {
+    "name": "Salesforce",
+    "src": "/images/integrations/salesforce.svg",
+    "source": "https://logos.composio.dev/api/salesforce",
+    "capabilitySource": "https://docs.composio.dev/toolkits/salesforce"
+  },
+  "googledrive": {
+    "name": "Google Drive",
+    "src": "/images/integrations/googledrive.svg",
+    "source": "https://logos.composio.dev/api/googledrive",
+    "capabilitySource": "https://docs.composio.dev/toolkits/googledrive"
+  },
+  "gmail": {
+    "name": "Gmail",
+    "src": "/images/integrations/gmail.svg",
+    "source": "https://logos.composio.dev/api/gmail",
+    "capabilitySource": "https://docs.composio.dev/toolkits/gmail"
+  },
+  "outlook": {
+    "name": "Outlook",
+    "src": "/images/integrations/outlook.svg",
+    "source": "https://logos.composio.dev/api/outlook",
+    "capabilitySource": "https://docs.composio.dev/toolkits/outlook"
+  },
+  "slack": {
+    "name": "Slack",
+    "src": "/images/integrations/slack.svg",
+    "source": "https://logos.composio.dev/api/slack",
+    "capabilitySource": "https://docs.composio.dev/toolkits/slack"
+  },
+  "quickbooks": {
+    "name": "QuickBooks",
+    "src": "/images/integrations/quickbooks.svg",
+    "source": "https://logos.composio.dev/api/quickbooks",
+    "capabilitySource": "https://docs.composio.dev/toolkits/quickbooks"
+  }
+}

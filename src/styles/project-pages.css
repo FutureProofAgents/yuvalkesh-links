@@ -38,6 +38,7 @@
 .project-hero-copy{padding-top:20px;min-width:0}
 .project-hero h1{margin:24px 0}
 .project-lead{font-size:17px;line-height:1.8;color:#bcc6cf;max-width:640px}
+.project-service-line{margin-top:19px!important;font-size:15px;line-height:1.8;color:#dcecf7;max-width:620px}
 .project-hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px 20px;margin-top:30px}
 .project-caption{font-size:11px!important;line-height:1.8!important;color:#8e9eac!important;letter-spacing:0!important}
 .project-hero-copy>.project-caption{max-width:360px;margin-top:18px}
@@ -222,3 +223,29 @@
 .project-timing h3{font-size:22px;line-height:1.4}
 .project-timing p{font-size:13px;line-height:1.85;color:#b6c7d4}
 @media(max-width:760px){.project-value-list{grid-template-columns:1fr;gap:24px}.project-value-list h3{font-size:23px}.project-timing{grid-template-columns:1fr;gap:15px;padding:23px}.project-business .project-section-heading>p{max-width:none}}
+
+/* Prospect pages: clear buyer fit, a simple service story and recognizable tools. */
+.project-fit{padding:35px 0 39px;border-block:1px solid var(--project-line);scroll-margin-top:24px}
+.project-fit h2{font-size:30px;margin-top:13px;max-width:800px}
+.project-fit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:35px;margin-top:28px}
+.project-fit-grid h3{font-size:15px;color:#7ac8fb;margin-bottom:10px}
+.project-fit-grid p{font-size:14px;line-height:1.8;color:#bdc9d3}
+.project-business{padding-top:0;border-bottom:0}
+.project-worked-example{padding-top:0}
+.project-implementation-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.project-integrations{margin-top:48px;border:1px solid #314453;border-radius:8px;padding:30px;background:#0a121a}
+.project-integrations h3{font-size:27px;margin:12px 0}
+.project-integrations>p:not(.project-kicker){font-size:14px;line-height:1.8;color:#afc2d0;max-width:900px}
+.project-integration-logos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;list-style:none;margin:26px 0 20px;padding:0}
+.project-integration-logos li{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:102px;padding:14px 8px;border:1px solid #273b4b;border-radius:6px;background:#101e29;font-size:12px;font-weight:600;color:#e1ebf2}
+.project-integration-logos img{display:block;object-fit:contain;width:36px;height:36px}
+.project-integrations .project-integration-note{font-size:11px!important;color:#8fa5b6!important}
+.project-pilot-proof>h3{font-size:24px;line-height:1.35;margin-bottom:16px}
+.project-pilot-proof>p{font-size:14px;line-height:1.85;color:#b9d2e5}
+.project-scope-details{margin-top:22px;border-top:1px solid #365d79;padding-top:17px}
+.project-scope-details summary{display:flex;align-items:center;justify-content:space-between;gap:15px;cursor:pointer;font-size:13px;font-weight:650;list-style:none}
+.project-scope-details summary::-webkit-details-marker{display:none}
+.project-scope-details summary span{font-size:20px;color:#8bcfff}
+.project-scope-details ul{padding-left:18px;font-size:13px;line-height:1.9;color:#bdd3e4}
+@media(max-width:760px){.project-fit{padding:26px 0 29px}.project-fit h2{font-size:28px}.project-fit-grid{grid-template-columns:1fr;gap:21px;margin-top:23px}.project-fit-grid h3{margin-bottom:5px}.project-fit-grid p{font-size:14px}.project-service-line{font-size:14px}.project-business{padding-top:0}.project-implementation-steps{grid-template-columns:1fr;gap:24px}.project-integrations{padding:24px;margin-top:30px}.project-integrations h3{font-size:24px}.project-integration-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.project-integration-logos li{font-size:11px}.project-pilot-proof>h3{font-size:23px}}
+@media(max-width:420px){.project-integrations{padding:22px 17px}.project-integration-logos li{min-height:92px;padding:12px 5px}.project-integration-logos img{width:30px;height:30px}}
