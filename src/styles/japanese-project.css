@@ -1,0 +1,18 @@
+@font-face{font-family:"FP Noto Sans JP";src:url('/fonts/noto-sans-jp/futureproof-japanese-v1.woff') format('woff');font-style:normal;font-weight:100 900;font-display:swap}
+html[lang="ja"] .project-site{font-family:"Inter","FP Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;line-height:1.9;line-break:strict;word-break:normal;overflow-wrap:anywhere}
+html[lang="ja"] .project-hero h1{font-size:clamp(32px,4.1vw,53px);line-height:1.5;letter-spacing:-.035em;max-width:640px}
+html[lang="ja"] .project-lead{font-size:18px;line-height:1.95}
+html[lang="ja"] .project-hero-actions{align-items:flex-start}
+html[lang="ja"] .project-button{font-size:14px;line-height:1.65;text-align:left;white-space:normal}
+html[lang="ja"] .project-kicker{letter-spacing:.1em;line-height:1.9;font-size:12px}
+html[lang="ja"] h2{line-height:1.55;letter-spacing:-.025em;font-size:clamp(26px,3.3vw,40px)}
+html[lang="ja"] h3{line-height:1.7;letter-spacing:-.02em}
+html[lang="ja"] p,html[lang="ja"] li{line-height:1.95}
+html[lang="ja"] .project-header nav{gap:20px;font-size:12px}
+html[lang="ja"] .project-process h3,html[lang="ja"] .project-deliverable-list h3{font-size:22px}
+html[lang="ja"] .project-example h2{font-size:clamp(26px,3vw,36px)}
+html[lang="ja"] .project-mono{font-family:Inter,"FP Noto Sans JP",sans-serif}
+html[lang="ja"] .project-photo figcaption{font-size:11px}
+html[lang="ja"] .project-form-actions{gap:12px;flex-wrap:wrap}
+html[lang="ja"] .japan-provider{flex-basis:100%;margin:12px 0 0;font-size:11px;color:#a7b5c3}
+@media(max-width:760px){html[lang="ja"] .project-header nav>a:first-child{display:none}html[lang="ja"] .project-header .project-button-small{font-size:11px;padding:10px 12px}html[lang="ja"] .project-hero h1{font-size:35px}html[lang="ja"] .project-lead{font-size:16px}html[lang="ja"] .project-hero-actions .project-button{max-width:100%;font-size:13px}html[lang="ja"] .project-founder h2{font-size:27px}html[lang="ja"] .project-inquiry-intro h2{font-size:30px}html[lang="ja"] .project-breadcrumb{font-size:11px}}

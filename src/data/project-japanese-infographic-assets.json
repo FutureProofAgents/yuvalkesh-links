@@ -1,0 +1,28 @@
+[
+  {
+    "icp": "executive_search",
+    "slug": "executive-search-intelligence-ja",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/executive-search-intelligence-ja-flow-cover-v1.png",
+    "alt": "人材紹介会社の顧客対応フロー例。顧客との過去のやり取りと約束事項をもとに、AIが商談の事前資料とフォロー文面を準備し、担当者の確認・承認後に次のアクションをCRMへ記録します。",
+    "sha256": "01dababbdede16183854a848dd1676b97d4ea6d32be021ddacb2e9806935b8e5",
+    "bytes": 216830,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "executive_search",
+    "slug": "executive-search-intelligence-ja",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/executive-search-intelligence-ja-flow-hero-v1.png",
+    "alt": "人材紹介会社の顧客対応フロー例。顧客との過去のやり取りと約束事項をもとに、AIが商談の事前資料とフォロー文面を準備し、担当者の確認・承認後に次のアクションをCRMへ記録します。",
+    "sha256": "840e2e5e0ec028e1978c3da9fa8621ab7973821549555ca008ebfb89c4a89d0b",
+    "bytes": 120264,
+    "textFits": [],
+    "overflow": []
+  }
+]

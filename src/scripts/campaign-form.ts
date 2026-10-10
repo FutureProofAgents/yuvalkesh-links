@@ -1,5 +1,5 @@
 const form=document.querySelector<HTMLFormElement>('#lead-form')!;
-const he=form.dataset.language==='he',t=(en:string,heb:string)=>he?heb:en;
+const he=form.dataset.language==='he',ja=form.dataset.language==='ja',t=(en:string,heb:string,jpn=en)=>ja?jpn:he?heb:en;
 const steps=[...form.querySelectorAll<HTMLFieldSetElement>('[data-step]')];
 const lastStep=steps.length-1,needsStep=steps.findIndex(s=>s.querySelector('[name=solutions]'));
 const error=form.querySelector<HTMLElement>('#form-error')!,next=form.querySelector<HTMLButtonElement>('[data-next]')!,back=form.querySelector<HTMLButtonElement>('[data-back]')!,submit=form.querySelector<HTMLButtonElement>('[data-submit]')!;
@@ -18,12 +18,13 @@ try{
 document.querySelectorAll<HTMLAnchorElement>('a[data-language]').forEach(a=>{const u=new URL(a.href);keys.forEach(k=>{if(params.get(k))u.searchParams.set(k,params.get(k)!);});a.href=u.href;});
 const analytics=(event:string)=>(window as any).fpAnalytics?.(event);
 form.addEventListener('input',()=>{if(!started){analytics('lead_form_start');started=true;}},{once:true});
-function showStep(index:number,focus=true){step=index;steps.forEach((s,i)=>{s.hidden=i!==index;});form.querySelectorAll('[data-progress]').forEach((el,i)=>i===index?el.setAttribute('aria-current','step'):el.removeAttribute('aria-current'));back.hidden=index===0;next.hidden=index===lastStep;submit.hidden=index!==lastStep;form.querySelector('[data-step-count]')!.textContent=t(`Step ${index+1} of ${steps.length}`,`שלב ${index+1} מתוך ${steps.length}`);error.textContent='';if(focus){steps[index].querySelector<HTMLElement>('input,select,textarea')?.focus();}}
+function showStep(index:number,focus=true){step=index;steps.forEach((s,i)=>{s.hidden=i!==index;});form.querySelectorAll('[data-progress]').forEach((el,i)=>i===index?el.setAttribute('aria-current','step'):el.removeAttribute('aria-current'));back.hidden=index===0;next.hidden=index===lastStep;submit.hidden=index!==lastStep;form.querySelector('[data-step-count]')!.textContent=t(`Step ${index+1} of ${steps.length}`,`שלב ${index+1} מתוך ${steps.length}`,`ステップ${index+1} / ${steps.length}`);error.textContent='';if(focus){steps[index].querySelector<HTMLElement>('input,select,textarea')?.focus();}}
+if(ja)form.addEventListener('input',event=>{const el=event.target as HTMLInputElement;if(typeof el.setCustomValidity==='function')el.setCustomValidity('');});
 function validStep(index:number){
 
- for(const el of steps[index].querySelectorAll<HTMLInputElement>('input,textarea,select')){if(!el.checkValidity()){el.reportValidity();return false;}}
- if(index===needsStep&&!form.querySelector('input[name=solutions]:checked')){error.textContent=t('Please choose at least one area where we can help.','בחרו לפחות תחום אחד שבו נוכל לעזור.');form.querySelector<HTMLInputElement>('input[name=solutions]')?.focus();return false;}
- if(index===lastStep){const value=(form.elements.namedItem('linkedin_url') as HTMLInputElement).value.trim();if(value){try{const u=new URL(value);if(u.protocol!=='https:'||!/(^|\.)linkedin\.com$/.test(u.hostname))throw Error();}catch{error.textContent=t('Please use an HTTPS LinkedIn profile link, or leave it blank.','יש להזין קישור HTTPS לפרופיל LinkedIn, או להשאיר ריק.');return false;}}}
+ for(const el of steps[index].querySelectorAll<HTMLInputElement>('input,textarea,select')){if(ja)el.setCustomValidity('');if(!el.checkValidity()){if(ja){const message=el.validity.valueMissing?(el.type==='checkbox'?'ご同意のうえ、チェックを入れてください。':'必須項目を入力・選択してください。'):el.validity.typeMismatch?(el.type==='email'?'メールアドレスの形式をご確認ください。':'URLの形式をご確認ください。'):el.validity.tooShort?`${el.minLength}文字以上で入力してください。`:'入力内容をご確認ください。';el.setCustomValidity(message);error.textContent=message;}el.reportValidity();return false;}}
+ if(index===needsStep&&!form.querySelector('input[name=solutions]:checked')){error.textContent=t('Please choose at least one area where we can help.','בחרו לפחות תחום אחד שבו נוכל לעזור.','ご相談の分野を一つ以上選択してください。');form.querySelector<HTMLInputElement>('input[name=solutions]')?.focus();return false;}
+ if(index===lastStep){const value=(form.elements.namedItem('linkedin_url') as HTMLInputElement).value.trim();if(value){try{const u=new URL(value);if(u.protocol!=='https:'||!/(^|\.)linkedin\.com$/.test(u.hostname))throw Error();}catch{error.textContent=t('Please use an HTTPS LinkedIn profile link, or leave it blank.','יש להזין קישור HTTPS לפרופיל LinkedIn, או להשאיר ריק.','LinkedInプロフィールのHTTPSリンクを入力するか、空欄にしてください。');return false;}}}
  return true;
 }
 next.addEventListener('click',()=>{if(validStep(step)){showStep(step+1);analytics('lead_form_step');}});
@@ -32,8 +33,8 @@ form.addEventListener('submit',async e=>{
  e.preventDefault();if(busy)return;if(step<lastStep){next.click();return;}
  for(let i=0;i<steps.length;i++){if(i!==step){const fields=steps[i].querySelectorAll<HTMLInputElement>('[required]');if([...fields].some(el=>!el.checkValidity())){showStep(i);validStep(i);return;}}if(i===needsStep&&!form.querySelector('input[name=solutions]:checked')){showStep(needsStep);validStep(needsStep);return;}}
  if(!validStep(lastStep))return;
- const fd=new FormData(form),payload:any=Object.fromEntries(fd.entries());payload.solutions=fd.getAll('solutions');payload.consent=fd.get('consent')==='on';payload.language=he?'he':'en';payload.submission_id=submissionId;payload.attribution=attribution;
- busy=true;submit.disabled=true;back.disabled=true;const label=submit.textContent;submit.textContent=t('Sending…','שולחים…');error.textContent='';
+ const fd=new FormData(form),payload:any=Object.fromEntries(fd.entries());payload.solutions=fd.getAll('solutions');payload.consent=fd.get('consent')==='on';payload.language=ja?'ja':he?'he':'en';payload.submission_id=submissionId;payload.attribution=attribution;
+ busy=true;submit.disabled=true;back.disabled=true;const label=submit.textContent;submit.textContent=t('Sending…','שולחים…','送信しています…');error.textContent='';
  try{
   const response=await fetch('https://yuvalkesh-links.vercel.app/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(65000)});
   const result=await response.json();if(!response.ok||!result.ok)throw Error(response.status===429?'rate_limit':'save_failed');
@@ -42,6 +43,6 @@ form.addEventListener('submit',async e=>{
   // responses have no ID; analytics failures must never undo a saved inquiry.
   if(result.id){try{analytics('generate_lead');(window as any).fpGoogleAdsLead?.(result.id);}catch{/* Measurement is optional. */}}
   submissionId=crypto.randomUUID();
- }catch(e){error.textContent=(e as Error).message==='rate_limit'?t('We have received several requests. Please try again later or book a call.','התקבלו מספר פניות. נסו שוב מאוחר יותר או קבעו שיחה.'):t('We could not confirm your submission. Your details are still here. Please try again.','לא הצלחנו לאשר שהפנייה נקלטה. הפרטים נשמרו בטופס. נסו שוב.');analytics('lead_form_error');error.focus();}
+ }catch(e){error.textContent=(e as Error).message==='rate_limit'?t('We have received several requests. Please try again later or book a call.','התקבלו מספר פניות. נסו שוב מאוחר יותר או קבעו שיחה.','短時間に複数の送信がありました。時間をおいて再度お試しになるか、日程調整ページをご利用ください。'):t('We could not confirm your submission. Your details are still here. Please try again.','לא הצלחנו לאשר שהפנייה נקלטה. הפרטים נשמרו בטופס. נסו שוב.','送信完了を確認できませんでした。入力内容はフォームに残っています。再度お試しください。');analytics('lead_form_error');error.focus();}
  finally{busy=false;submit.disabled=false;back.disabled=false;submit.textContent=label;}
 });

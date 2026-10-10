@@ -49,6 +49,7 @@ const structuredData = {
     <title>{page.seo.title}</title>
     <meta name="description" content={page.seo.description} />
     <link rel="canonical" href={canonical} />
+    {page.slug === 'executive-search-intelligence' && <><link rel="alternate" hreflang="en" href={canonical} /><link rel="alternate" hreflang="ja" href={`${site}/ja/pages/executive-search-intelligence/`} /><link rel="alternate" hreflang="x-default" href={canonical} /></>}
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="FutureProof Agents" />
@@ -86,6 +87,7 @@ const structuredData = {
             <p class="project-service-line">{page.serviceLine}</p>
             <div class="project-hero-actions"><a class="project-button" href="#start" data-lead-cta="hero">{page.cta.label}<span aria-hidden="true">↗</span></a><a class="project-text-link" href="#who">Is this for your firm? <span aria-hidden="true">↓</span></a></div>
             <p class="project-caption">A conversation with Yuval about where work gets stuck and what to fix first.</p>
+            {page.slug === 'executive-search-intelligence' && <a class="project-text-link" href="/ja/pages/executive-search-intelligence/" lang="ja" hreflang="ja" data-language="ja">日本向け・日本語のページ <span aria-hidden="true">↗</span></a>}
           </div>
           <figure class="project-photo">
             <a class="project-photo-frame project-workflow-link" href={page.image.src} target="_blank" rel="noopener" aria-label={`Open the full-size ${page.topic} workflow diagram`}><img src={page.image.src} width="1000" height="1250" alt={page.image.alt} fetchpriority="high" decoding="async" /></a>

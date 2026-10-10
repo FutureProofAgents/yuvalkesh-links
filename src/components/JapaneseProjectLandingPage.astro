@@ -1,0 +1,160 @@
+---
+import LocalFonts from './LocalFonts.astro';
+import ProjectInquiryForm from './JapaneseProjectInquiryForm.astro';
+import '../styles/japanese-project.css';
+import '../styles/project-pages.css';
+import integrationCatalog from '../data/project-integrations.json';
+
+type TextList = string | string[];
+interface ProjectPage {
+  audienceTitle: string; painTitle: string; painIntro: string; serviceLine: string; integrations: string[];
+  businessValue: { title: string; body: string; items: { title: string; body: string }[]; timing: { title: string; body: string } };
+  image: { src: string; small: string; cover: string; alt: string; caption: string; kind: string };
+  slug: string; topic: string; kicker: string; title: string; description: string; lead: string; audience: TextList;
+  problems: { title: string; body: string }[];
+  deliverables: { title: string; body: string }[];
+  workflow: { title: string; body: string }[];
+  example: { title: string; body: string; input: TextList; output: TextList; reviewer: string; label: string };
+  systems: { body: string; items: string[]; footnote: string };
+  pilot: { title: string; body: string; includes: string[]; measures: string[] };
+  faqs: { q: string; a: string }[];
+  cta: { title: string; body: string; label: string };
+  seo: { title: string; description: string };
+}
+interface Props { page: ProjectPage }
+const { page } = Astro.props;
+const site = 'https://futureproofagents.com';
+const canonical = `${site}/ja/pages/executive-search-intelligence/`;
+const asList = (value: TextList) => Array.isArray(value) ? value : [value];
+const number = (index: number) => String(index + 1).padStart(2, '0');
+const logos = page.integrations.map((key) => integrationCatalog[key as keyof typeof integrationCatalog]);
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Service', '@id': `${canonical}#service`, name: page.seo.title.split(' | ')[0], description: page.seo.description,
+      serviceType: page.topic, provider: { '@type': 'Organization', name: 'FutureProof Agents', url: site },
+      areaServed: { '@type': 'Country', name: 'Japan' }, url: canonical, inLanguage: 'ja-JP' },
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${site}/` },
+      { '@type': 'ListItem', position: 2, name: '導入事例・ソリューション', item: `${site}/pages/` },
+      { '@type': 'ListItem', position: 3, name: page.topic, item: canonical },
+    ] },
+  ],
+};
+---
+<!doctype html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.seo.title}</title>
+    <meta name="description" content={page.seo.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ja" href={canonical} /><link rel="alternate" hreflang="en" href={`${site}/pages/executive-search-intelligence/`} /><link rel="alternate" hreflang="x-default" href={`${site}/pages/executive-search-intelligence/`} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FutureProof Agents" />
+    <meta property="og:title" content={page.seo.title} />
+    <meta property="og:description" content={page.seo.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image" content={`${site}${page.image.cover}`} />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
+    <meta property="og:image:alt" content={page.image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={page.seo.title} />
+    <meta name="twitter:description" content={page.seo.description} />
+    <meta name="twitter:image" content={`${site}${page.image.cover}`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <LocalFonts primary="inter" />
+    <script is:inline src="/scripts/analytics.js" defer></script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
+  </head>
+  <body class="project-site" data-project={page.slug}>
+    <a class="project-skip" href="#main">本文へ移動</a>
+    <header class="project-header project-wrap">
+      <a class="project-brand" href="/" aria-label="FutureProof Agents ホーム"><img src="/favicon.svg" alt="" width="34" height="34" /><span>FutureProof <b>Agents</b></span></a>
+      <nav aria-label="メインナビゲーション"><a href="/pages/">ソリューション一覧（英語）</a><a class="project-nav-process" href="#process">導入の流れ</a><a class="project-button project-button-small" href="#start" data-lead-cta="nav">ご相談はこちら <span aria-hidden="true">↗</span></a></nav>
+    </header>
+    <main id="main">
+      <div class="project-wrap">
+        <nav class="project-breadcrumb" aria-label="パンくずリスト"><a href="/pages/">ソリューション</a><span aria-hidden="true">/</span><span aria-current="page">{page.topic}</span></nav>
+        <section class="project-hero" aria-labelledby="project-title">
+          <div class="project-hero-copy">
+            <p class="project-kicker"><span class="project-dot" aria-hidden="true"></span>{page.kicker}</p>
+            <h1 id="project-title">{page.title}</h1>
+            <p class="project-lead">{page.lead}</p>
+            <p class="project-service-line">{page.serviceLine}</p>
+            <div class="project-hero-actions"><a class="project-button" href="#start" data-lead-cta="hero">{page.cta.label}<span aria-hidden="true">↗</span></a><a class="project-text-link" href="#who">対象となるチーム <span aria-hidden="true">↓</span></a></div>
+            <p class="project-caption">まずは業務の流れを確認します。具体的な範囲と費用は、その後にご提案します。</p>
+          </div>
+          <figure class="project-photo">
+            <a class="project-photo-frame project-workflow-link" href={page.image.src} target="_blank" rel="noopener" aria-label={`${page.topic}の業務フロー図を原寸で開く`}><img src={page.image.src} width="1000" height="1250" alt={page.image.alt} fetchpriority="high" decoding="async" /></a>
+            <figcaption><span>{page.image.caption}</span><a href={page.image.src} target="_blank" rel="noopener">図を大きく見る <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+        </section>
+        <section class="project-fit" id="who" aria-labelledby="audience-title">
+          <p class="project-kicker">対象となるチーム</p><h2 id="audience-title">{page.audienceTitle}</h2>
+          <div class="project-fit-grid">{asList(page.audience).map((item, i) => <div><h3>{['会社・チーム', 'ご担当者', 'こんなお悩みに'][i]}</h3><p>{item}</p></div>)}</div>
+        </section>
+      </div>
+
+      <section class="project-section project-wrap project-problems" aria-labelledby="problems-title">
+        <div class="project-section-intro"><p class="project-kicker">繰り返し起きる困りごと</p><h2 id="problems-title">{page.painTitle}</h2><p>{page.painIntro}</p></div>
+        <div class="project-problem-list">{page.problems.map((item, i) => <article><span class="project-mono">{number(i)}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></article>)}</div>
+      </section>
+
+      <section class="project-section project-wrap project-business" aria-labelledby="business-title">
+        <div class="project-section-heading"><div><p class="project-kicker">業務で目指す変化</p><h2 id="business-title">{page.businessValue.title}</h2></div><p>{page.businessValue.body}</p></div>
+        <div class="project-value-list">{page.businessValue.items.map((item, i) => <article><span class="project-mono">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+      </section>
+
+      <section class="project-worked-example project-wrap" aria-label="導入を想定した業務フロー">
+          <aside class="project-example project-example-wide" aria-labelledby="example-title">
+            <div class="project-example-header"><span class="project-mono">業務での使い方</span><span class="project-example-label">{page.example.label}</span></div>
+            <h2 id="example-title">{page.example.title}</h2>
+            <p class="project-example-intro">{page.example.body}</p>
+            <div class="project-example-grid">
+            <div class="project-evidence-row"><span class="project-evidence-mark" aria-hidden="true">01</span><div><h3>もとになる情報</h3><ul>{asList(page.example.input).map((item) => <li>{item}</li>)}</ul></div></div>
+            <div class="project-evidence-row project-evidence-output"><span class="project-evidence-mark" aria-hidden="true">02</span><div><h3>AIが準備するもの</h3><ul>{asList(page.example.output).map((item) => <li>{item}</li>)}</ul></div></div>
+            </div>
+            <div class="project-reviewer"><span class="project-review-symbol" aria-hidden="true">↳</span><div><span>判断は担当者が行います</span><strong>{page.example.reviewer}</strong></div></div>
+            <p class="project-example-note">導入イメージを示す例です。特定のお客様の成果を示すものではありません。</p>
+          </aside>
+      </section>
+
+      <section class="project-deliverables-band" id="deliverables" aria-labelledby="deliverables-title"><div class="project-section project-wrap">
+        <div class="project-section-heading"><div><p class="project-kicker">導入する仕組み</p><h2 id="deliverables-title">探し直す手間を減らし、<br /><em>次の行動を明確に。</em></h2></div><p>貴社のツールと運用に合わせて、準備・確認・記録の流れをつなぎます。</p></div>
+        <div class="project-deliverable-list">{page.deliverables.map((item, i) => <article><span class="project-deliverable-number">{number(i)}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+      </div></section>
+
+      <section class="project-section project-wrap project-implementation" id="process" aria-labelledby="process-title">
+        <div class="project-section-heading"><div><p class="project-kicker">設計から導入まで</p><h2 id="process-title">現場の業務から、<br /><em>使える仕組みへ。</em></h2></div><p>AIエージェントが複数の準備作業をつなぎ、重要な判断は貴社の担当者に残す構成です。</p></div>
+        <ol class="project-process project-implementation-steps">
+          <li><span class="project-process-number">01</span><h3>まず、一つの業務を整理します。</h3><p>繰り返し発生する手間を伺い、情報源、担当者、承認の流れを整理。最初に取り組む範囲と成果物を合意します。</p></li>
+          <li><span class="project-process-number">02</span><h3>既存ツールにつなぎ、実装します。</h3><p>既存機能でできることを確認したうえで、必要な連携とAIエージェントを構築します。アクセス範囲は業務に必要な情報に限定します。</p></li>
+          <li><span class="project-process-number">03</span><h3>実例で確かめて、運用へ。</h3><p>出典、人物・企業の一致、文面、承認手順を貴社の実例で確認。修正と操作説明を行い、対象を絞って運用を始めます。</p></li>
+        </ol>
+        <div class="project-integrations" aria-labelledby="integrations-title"><p class="project-kicker">既存のCRM・メールを活用</p><h3 id="integrations-title">今お使いのツールから考えます。</h3><p>{page.systems.body}</p>
+          <ul class="project-integration-logos" aria-label="連携を検討できるツールの例">{logos.map((logo) => <li><img src={logo.src} width="32" height="32" alt="" loading="lazy" decoding="async" /><span>{logo.name}</span></li>)}</ul>
+          <p class="project-integration-note">表示は連携を検討するツールの例です。接続可否は、契約プラン、API、権限、必要な操作を確認して判断します。別のツールをお使いの場合もお知らせください。</p>
+        </div>
+      </section>
+
+      <section class="project-pilot project-wrap" aria-labelledby="pilot-title">
+        <div class="project-pilot-intro"><p class="project-kicker">小さく始める導入</p><h2 id="pilot-title">{page.pilot.title}</h2><p>{page.pilot.body}</p><a class="project-button project-button-light" href="#start" data-lead-cta="pilot">{page.cta.label}<span aria-hidden="true">↗</span></a></div>
+        <div class="project-pilot-proof"><h3>{page.businessValue.timing.title}</h3><p>{page.businessValue.timing.body}</p><details class="project-scope-details"><summary>対象を広げる前に確認すること <span aria-hidden="true">+</span></summary><ul>{page.pilot.measures.map((item) => <li>{item}</li>)}</ul></details></div>
+      </section>
+
+      <section class="project-founder project-wrap" aria-labelledby="founder-title"><img src="/yuval-keshtcher.jpg" width="144" height="144" loading="lazy" decoding="async" alt="FutureProof Agents 代表 Yuval Keshtcher" /><div><p class="project-kicker">導入を担当する事業者</p><h2 id="founder-title">イスラエルから、貴社の業務改善を支援します。</h2><p>代表のYuval Keshtcherです。米国とイスラエルのお客様を支援し、現在、日本市場への展開を進めています。日本国内の拠点はありません。打ち合わせの対応言語、時差、連絡方法は事前に確認します。</p><a class="project-text-link" href="/">FutureProofについて（英語） <span aria-hidden="true">↗</span></a></div></section>
+
+      <section class="project-section project-wrap project-faq" aria-labelledby="faq-title"><div><p class="project-kicker">ご相談の前に</p><h2 id="faq-title">よくあるご質問</h2></div><div>{page.faqs.map((item) => <details><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div></section>
+
+      <ProjectInquiryForm slug={page.slug} topic={page.topic} title={page.cta.title} body={page.cta.body} />
+
+      <aside class="project-related project-wrap" aria-label="関連ページ"><div class="project-related-heading"><h2>英語のページもご覧いただけます</h2><a class="project-text-link" href="/pages/executive-search-intelligence/" lang="en" hreflang="en" data-language="en">English version <span aria-hidden="true">↗</span></a></div></aside>
+    </main>
+    <footer class="project-footer project-wrap"><a class="project-brand" href="/"><img src="/favicon.svg" alt="" width="25" height="25" /><span>FutureProof <b>Agents</b></span></a><nav aria-label="フッターナビゲーション"><a href="/pages/">ソリューション（英語）</a><a href="/blog/">記事（英語）</a><a href="/">会社紹介（英語）</a></nav><p>© {new Date().getFullYear()} FutureProof Agents</p><p class="japan-provider">運営：FUTUREPROOF EXPERIENCE LTD（イスラエル・法人番号 516322831）<br />3 HaShlosha Street, Tel Aviv-Yafo 6706059, Israel<br />お問い合わせ：<a href="mailto:y@futureproofagents.com">y@futureproofagents.com</a></p></footer>
+  </body>
+</html>

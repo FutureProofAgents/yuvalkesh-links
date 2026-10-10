@@ -28,6 +28,8 @@
 .solution-card-image img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}
 .solution-card-image .solution-diagram-link{padding:9px 18px;background:#0b141d;color:#9bd5fc;font-size:11px;text-align:right}
 .solution-card-image a:focus-visible{outline:3px solid #6bc1fc;outline-offset:-3px}
+.solution-japan-link{display:inline-block;margin:0 0 20px;padding:8px 12px;border:1px solid #36586f;border-radius:5px;color:#9bd5fc;font-size:12px;line-height:1.8}
+.solution-japan-link:focus-visible{outline:2px solid #6bc1fc;outline-offset:3px}
 .solution-card-body{padding:25px 27px 0;display:flex;flex-direction:column;flex:1}
 .solution-card-body>.project-kicker{font-size:9px!important;letter-spacing:.11em!important;margin-bottom:13px}
 .solution-card h3{font-size:28px;line-height:1.23;letter-spacing:-.035em;max-width:490px;text-wrap:balance}

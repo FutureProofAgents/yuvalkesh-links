@@ -9,6 +9,7 @@
   const hasAds = /^AW-\d+\/[A-Za-z0-9_-]+$/.test(adsConversion);
   const adsId = hasAds ? adsConversion.split('/')[0] : '';
   const he = document.documentElement.lang === 'he';
+  const ja = document.documentElement.lang === 'ja';
   let enabled = false;
   let loaded = false;
   let analyticsConfigured = false;
@@ -80,13 +81,13 @@
     }
   }
   const allowed = new Set(['whatsapp_click', 'booking_click', 'newsletter_signup', 'lead_cta_click', 'lead_form_start', 'lead_form_step', 'lead_form_error', 'generate_lead']);
-  const projectIcps = { 'distributor-order-intake': 'distribution', 'maintenance-renewals-repair-quotes': 'maintenance_services', 'fund-investor-relations': 'fund_ir', 'construction-document-workflows': 'construction', 'accounting-client-operations': 'accounting', 'real-estate-document-review': 'property_law', 'executive-search-intelligence': 'executive_search', 'immigration-case-operations': 'immigration_law', 'personal-injury-care-coordination': 'pi_care_coordination' };
+  const projectIcps = { 'executive-search-intelligence-japan': 'executive_search', 'distributor-order-intake': 'distribution', 'maintenance-renewals-repair-quotes': 'maintenance_services', 'fund-investor-relations': 'fund_ir', 'construction-document-workflows': 'construction', 'accounting-client-operations': 'accounting', 'real-estate-document-review': 'property_law', 'executive-search-intelligence': 'executive_search', 'immigration-case-operations': 'immigration_law', 'personal-injury-care-coordination': 'pi_care_coordination' };
   window.fpAnalytics = (event, metadata = {}) => {
     if (!enabled || !allowed.has(event)) return;
     const project = document.body.dataset.project;
     const context = Object.hasOwn(projectIcps, project) ? { project_slug: project, icp: projectIcps[project] } : {};
     if (['nav', 'hero', 'pilot'].includes(metadata.cta_location)) context.cta_location = metadata.cta_location;
-    gtag('event', event, { send_to: id, page_path: location.pathname, language: he ? 'he' : 'en', ...context, transport_type: 'beacon' });
+    gtag('event', event, { send_to: id, page_path: location.pathname, language: ja ? 'ja' : he ? 'he' : 'en', ...context, transport_type: 'beacon' });
   };
   window.fpGoogleAdsLead = (leadId) => {
     if (!adsEnabled || typeof leadId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(leadId) || sentLeads.has(leadId)) return false;
@@ -106,14 +107,14 @@
     if (a.hasAttribute('data-lead-cta') && u.origin === location.origin && u.pathname === location.pathname && u.hash === '#start') window.fpAnalytics('lead_cta_click', { cta_location: a.dataset.leadCta });
   });
   const panel = document.createElement('section');
-  const preferenceLabel = he ? 'העדפות מדידה' : hasAds ? 'Measurement preferences' : 'Analytics preferences';
+  const preferenceLabel = ja ? 'アクセス解析の設定' : he ? 'העדפות מדידה' : hasAds ? 'Measurement preferences' : 'Analytics preferences';
   panel.setAttribute('aria-label', preferenceLabel);
   panel.dir = he ? 'rtl' : 'ltr';
   panel.className = 'fp-consent';
   const text = document.createElement('p');
   text.textContent = hasAds
     ? 'Allow Google Analytics and Google Ads measurement cookies to help us improve this website and measure inquiries from ads? We share ad-click identifiers and a submission ID, never your form answers. No personalized advertising.'
-    : he ? 'לאפשר מדידה ב־Google Analytics כדי לעזור לנו לשפר את האתר? ללא פרסום מותאם אישית.' : 'Allow Google Analytics to help us improve this website? No personalized advertising.';
+    : ja ? 'サイト改善のため、Google Analyticsによるアクセス解析を許可しますか。パーソナライズ広告には使用しません。' : he ? 'לאפשר מדידה ב־Google Analytics כדי לעזור לנו לשפר את האתר? ללא פרסום מותאם אישית.' : 'Allow Google Analytics to help us improve this website? No personalized advertising.';
   panel.append(text);
   const settings = document.createElement('button');
   settings.className = 'fp-consent-settings';
@@ -125,7 +126,7 @@
     if (value === 'granted') { enable(); enableAds(); } else { disable(); }
     panel.hidden = true; settings.hidden = false;
   }
-  for (const [value, label] of [['granted', he ? 'לאפשר' : 'Allow'], ['denied', he ? 'לא תודה' : 'No thanks']]) {
+  for (const [value, label] of [['granted', ja ? '許可する' : he ? 'לאפשר' : 'Allow'], ['denied', ja ? '許可しない' : he ? 'לא תודה' : 'No thanks']]) {
     const button = document.createElement('button'); button.type = 'button'; button.textContent = label;
     button.onclick = () => choose(value); panel.append(button);
   }

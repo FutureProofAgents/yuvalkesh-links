@@ -63,6 +63,7 @@ const schema = { '@context': 'https://schema.org', '@graph': [
             <div class="solution-card-body">
               <h3><a href={`/pages/${page.slug}/`}>{page.title}</a></h3>
               <p class="solution-card-description">{page.description}</p>
+              {page.slug === 'executive-search-intelligence' && <a class="solution-japan-link" href="/ja/pages/executive-search-intelligence/" lang="ja" hreflang="ja">Japan / 日本向け・日本語のページ <span aria-hidden="true">↗</span></a>}
               <p class="solution-card-audience"><strong>For</strong> {sector.audience}</p>
               <div class="solution-card-integrations"><span>Example tools</span><ul aria-label="Example integration tools">{page.integrations.slice(0,3).map(key => { const logo = integrations[key as keyof typeof integrations]; return <li><img src={logo.src} alt="" width="19" height="19" loading="lazy" /><span>{logo.name}</span></li>; })}</ul></div>
               <a class="solution-card-link" href={`/pages/${page.slug}/`} aria-label={`Explore ${page.topic}`}>Explore the solution <span aria-hidden="true">↗</span></a>

@@ -47,3 +47,15 @@ test('project inquiries can leave budget undecided without changing the accounti
  assert.ok(!p.challenge.includes('$5,000+ understood'));
  assert.throws(()=>validate({...accounting(),project_budget:'not_sure'}),/project_budget/);
 });
+
+test('Japanese inquiry owns its locale, market and canonical route',()=>{
+ const p=validate({...accounting(),form_type:'project_jp',project_slug:'executive-search-intelligence-japan',language:'ja',project_budget:'not_sure',landing_page:'https://attacker.example/',market:'global'});
+ assert.equal(p.language,'ja');assert.equal(p.market,'japan');assert.equal(p.revenue_currency,'USD');
+ assert.equal(p.landing_page,'https://futureproofagents.com/ja/pages/executive-search-intelligence/');
+ assert.deepEqual(p.attribution.form,{type:'project_jp',project_slug:'executive-search-intelligence-japan',icp:'executive_search',country:'JP',locale:'ja'});
+ assert.equal(sheetValues({...row(),...p})[16],'ja');assert.equal(p.attribution.last.gclid,'test-click');
+});
+test('Japan cannot be misrouted through an English form or an unregistered project',()=>{
+ const valid={...accounting(),form_type:'project_jp',project_slug:'executive-search-intelligence-japan',language:'ja'};
+ for(const patch of [{language:'en'},{language:'he'},{language:'xx'},{project_slug:'executive-search-intelligence'},{project_slug:'__proto__'},{form_type:'project_us'},{form_type:'accounting_us'},{form_type:''},{consent:false}])assert.throws(()=>validate({...valid,...patch}));
+});

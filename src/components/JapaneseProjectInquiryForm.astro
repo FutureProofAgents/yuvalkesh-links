@@ -1,0 +1,44 @@
+---
+interface Props { slug: string; topic: string; title: string; body: string }
+const { slug, topic, title, body } = Astro.props;
+const hint = { business: '例：外資系企業やスタートアップ向けの人材紹介。', tools: 'CRM、メール、商談メモの管理ツールなど', challenge: '商談準備や顧客フォローで、どの作業に手間がかかっていますか。機密情報は記載しないでください。', solution: 'sales' };
+---
+<section class="project-inquiry project-wrap" id="start" aria-labelledby="inquiry-title">
+  <div class="project-inquiry-intro"><p class="project-kicker">まずは、一つの業務から</p><h2 id="inquiry-title">{title}</h2><p>{body}</p>
+    <ol><li>お困りの業務と、お使いのツールをお知らせください。</li><li>内容を確認し、ご相談の進め方をご連絡します。</li><li>送信後、日程調整のリンクもご利用いただけます。</li></ol>
+    <p class="project-caption">簡単なご説明で構いません。履歴書、候補者情報、顧客の機密資料、パスワードは送らないでください。</p>
+  </div>
+  <div class="project-inquiry-card">
+    <form id="lead-form" data-language="ja" novalidate>
+      <input type="hidden" name="form_type" value="project_jp" /><input type="hidden" name="project_slug" value={slug} />
+      <input type="hidden" name="revenue_band" value="undisclosed" /><input type="hidden" name="revenue_currency" value="USD" />
+      <input type="hidden" name="solutions" value={hint.solution} /><input type="hidden" name="linkedin_url" value="" />
+      <div class="project-form-progress" aria-label="入力の進み具合"><span data-progress="0" aria-current="step"><b>1</b>ご相談内容</span><span data-progress="1"><b>2</b>ご連絡先</span></div>
+      <p class="project-form-note">「任意」以外は必須です。ご相談の対象： {topic}。</p>
+      <div class="project-form-trap" aria-hidden="true"><label>ウェブサイト<input name="website_check" tabindex="-1" autocomplete="off" /></label></div>
+      <fieldset data-step="0"><legend>どの業務に手間がかかっていますか。</legend>
+        <label>会社名<input name="company" required minlength="2" maxlength="160" autocomplete="organization" /></label>
+        <label>事業内容<textarea name="business_description" required minlength="5" maxlength="800" rows="2" placeholder={hint.business}></textarea></label>
+        <div class="project-form-row"><label>チームの人数<select name="team_size" required><option value="">選択してください</option><option value="1_4">1〜4名</option><option value="5_10">5〜10名</option><option value="11_30">11〜30名</option><option value="31_100">31〜100名</option><option value="100_plus">101名以上</option></select></label>
+          <label>想定ご予算（米ドル）<select name="project_budget" required><option value="">選択してください</option><option value="not_sure">まだ決まっていない</option><option value="5k_10k">5,000〜10,000米ドル</option><option value="10k_25k">10,000〜25,000米ドル</option><option value="25k_plus">25,000米ドル以上</option></select></label></div>
+        <label>現在お使いのCRM・ツール<input name="current_software" required minlength="2" maxlength="200" placeholder={hint.tools} /><small>「スプレッドシート」「未確認」でも構いません。</small></label>
+        <label>改善したい業務<textarea name="challenge" required minlength="10" maxlength="1000" rows="3" placeholder={hint.challenge}></textarea></label>
+      </fieldset>
+      <fieldset data-step="1" hidden><legend>ご連絡先をお知らせください。</legend>
+        <label>お名前<input name="full_name" required minlength="2" maxlength="120" autocomplete="name" /></label>
+        <label>役職・ご担当<input name="job_title" required minlength="2" maxlength="120" autocomplete="organization-title" placeholder="代表、法人営業責任者、業務責任者など" /></label>
+        <label>会社のメールアドレス<input name="email" type="email" required maxlength="180" autocomplete="email" /></label>
+        <label>電話番号（任意）<input name="phone" type="tel" maxlength="60" autocomplete="tel" /></label>
+        <label>会社のウェブサイト（任意）<input name="firm_website" type="url" maxlength="250" autocomplete="url" placeholder="https://yourcompany.com" /></label>
+        <label class="project-form-consent"><input type="checkbox" name="consent" required /><span>記載した情報を、イスラエルを拠点とするFutureProof Agentsが本件の確認・回答に利用することに同意します。<a href="#inquiry-privacy">個人情報の取扱い</a>をご確認ください。</span></label>
+      </fieldset>
+      <p id="form-error" role="alert" tabindex="-1"></p>
+      <div class="project-form-actions"><button type="button" data-back hidden>戻る</button><span data-step-count>ステップ1 / 2</span><button class="project-button" type="button" data-next>次へ <span aria-hidden="true">→</span></button><button class="project-button" type="submit" data-submit hidden>この内容で相談する <span aria-hidden="true">↗</span></button></div>
+      <noscript><p>フォームの送信にはJavaScriptを有効にしてください。または、<a href="https://calendar.app.google/uWpM7vrcaS4JAZTQ6">日程調整ページ（英語）をご利用ください</a>。</p></noscript>
+    </form>
+    <div id="form-success" tabindex="-1" hidden><p class="project-kicker">お問い合わせを受け付けました</p><h3>内容を確認し、折り返しご連絡します。</h3><p>ご相談内容を確認し、記載されたメールアドレスへご連絡します。日程調整ページは英語です。対応言語と時差は事前に確認します。</p><a class="project-button" href="https://calendar.app.google/uWpM7vrcaS4JAZTQ6" target="_blank" rel="noopener noreferrer">日程を選ぶ（英語） <span aria-hidden="true">↗</span></a></div>
+    <p class="project-form-note">この送信によって、広告メールに登録されることはありません。</p>
+  </div>
+</section>
+<section class="project-inquiry-privacy project-wrap" id="inquiry-privacy"><details><summary>お問い合わせ情報の取扱い</summary><p>イスラエルを拠点とするFutureProof Agentsが、ご相談内容の確認と回答のために、事業・連絡先情報を利用します。情報は非公開のリード管理データベース、CRM、Googleスプレッドシートに保存し、担当チームへメールで通知します。お問い合わせ対応には海外のサービスを使用します。流入元やキャンペーン情報は、ご相談のきっかけを把握するために保存します。迷惑送信対策には、ネットワーク識別子をハッシュ化して使用します。任意のGoogle Analyticsではページやボタンの利用状況を計測しますが、お名前、連絡先、フォームの回答内容、見込み顧客の識別子をGoogleへ送りません。計測を拒否してもフォームは利用できます。送信によって広告メールに登録されることはありません。情報の確認・訂正・削除に関するお問い合わせは、<a href="mailto:y@futureproofagents.com">y@futureproofagents.com</a>へご連絡ください。</p></details></section>
+<script src="../scripts/campaign-form.ts"></script>
