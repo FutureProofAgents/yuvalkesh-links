@@ -1018,5 +1018,519 @@
       "slack"
     ],
     "sector": "Personal injury care coordination"
+  },
+  {
+    "slug": "distributor-order-intake",
+    "image": {
+      "src": "/images/projects/distributor-order-intake-v1-960.webp",
+      "small": "/images/projects/distributor-order-intake-v1-480.webp",
+      "alt": "Illustrative scene of an order coordinator reviewing a purchase order beside a warehouse.",
+      "caption": "Get the order ready for the next step."
+    },
+    "topic": "Distribution & wholesale",
+    "kicker": "FOR DISTRIBUTORS AND WHOLESALERS",
+    "title": "AI purchase-order intake into your ERP.",
+    "description": "For B2B distributors and wholesalers. We implement agentic solutions that turn customer purchase orders into checked sales-order drafts in your existing ERP.",
+    "lead": "A customer sends a purchase order. Your team still has to match the account, find the right item codes, check pack sizes and retype the lines. While the order waits for entry, the next email lands in the same inbox.",
+    "audience": [
+      "You run a US specialty distributor or wholesaler with repeat B2B customers and a working ERP.",
+      "You are the owner, operations leader or order-desk manager responsible for getting accurate orders ready for fulfilment.",
+      "Your team still handles a repeatable gap between incoming customer orders and the ERP, after the native import or EDI tools have done what they can."
+    ],
+    "problems": [
+      {
+        "title": "Every customer writes the order differently",
+        "body": "One buyer uses your SKU. Another uses its own item code or orders by the case. Staff need to translate the request into the fields your system expects."
+      },
+      {
+        "title": "A routine order still needs another round of typing",
+        "body": "Details are copied from an email, PDF or approved customer portal into the ERP. The work grows with the number of lines, even when the customer and products are familiar."
+      },
+      {
+        "title": "The exception hides inside the order",
+        "body": "A changed delivery address, an unclear unit or a repeated PO number needs attention. Your team needs to see that issue before the order moves forward."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "One approved route from the incoming order",
+        "body": "Connect the agreed inbox, file source or supported B2B feed. Keep the original purchase order linked to the work so staff can check what the customer actually requested."
+      },
+      {
+        "title": "Sales-order drafts matched to your rules",
+        "body": "Prepare the customer, ship-to location, item, quantity, unit, price and currency using your approved records and mappings. Flag missing matches and conflicting terms rather than inventing a value."
+      },
+      {
+        "title": "A review screen for the decisions that matter",
+        "body": "Show the source beside the proposed fields. Highlight possible duplicates, item or pack-size ambiguity and pricing exceptions. An authorised team member approves the order draft or returns it for clarification."
+      },
+      {
+        "title": "A visible result in the ERP",
+        "body": "Use the supported API or approved import route to create the agreed draft or approved order. Record the outcome, preserve its source and show failures or retries clearly so the same order is not silently created twice."
+      }
+    ],
+    "workflow": [
+      {
+        "title": "Receive the order",
+        "body": "Read the agreed incoming source and preserve the customer’s original PO."
+      },
+      {
+        "title": "Prepare the draft",
+        "body": "Match fields to approved customer and product data; apply the agreed rules."
+      },
+      {
+        "title": "Resolve exceptions",
+        "body": "The reviewer checks uncertain fields, duplicate warnings and changes."
+      },
+      {
+        "title": "Record the approved order",
+        "body": "Use the agreed ERP route and make the outcome visible to the order desk."
+      }
+    ],
+    "example": {
+      "label": "ILLUSTRATIVE EXAMPLE",
+      "title": "Twelve order lines. One changed pack size. A draft ready to check.",
+      "body": "A repeat customer emails a twelve-line PO using its own product codes. The agent matches the known items, prepares the ship-to address and flags one line where the customer ordered cases but the ERP lists individual units. The order coordinator checks that line against the source, confirms the conversion and approves the draft. The ERP receives the agreed order with the original PO attached or linked.",
+      "input": "The customer PO, approved customer/item mappings, unit conversions and your order-entry rules.",
+      "output": "A reviewable sales-order draft, a short exception list and a recorded ERP result.",
+      "reviewer": "Your order-desk or operations owner approves uncertain fields and consequential updates."
+    },
+    "systems": {
+      "body": "Your ERP remains the order system of record. We review its existing import, document-capture and EDI functions first, then connect the sources or checks that still require manual work.",
+      "items": [
+        "Approved email/PDF or B2B order source",
+        "Customer, product and unit-of-measure records",
+        "Your existing ERP and supported order-entry route",
+        "Order review and exception ownership"
+      ],
+      "footnote": "Connections depend on the exact product, plan, permissions and supported interface. Existing native capabilities are part of the solution review."
+    },
+    "pilot": {
+      "title": "Start with one customer format and a real sample of orders.",
+      "body": "Choose a recurring order type that still needs manual handling. We review the native ERP options, map the remaining gap and agree what an acceptable draft looks like. Test ordinary orders, changes, duplicates and missing information before enabling live writes.",
+      "includes": [
+        "Review current native ERP/import capabilities",
+        "Map one source and customer order format",
+        "Confirm master data, rules and reviewer",
+        "Test draft quality and exception handling",
+        "Verify the ERP result and train the order desk"
+      ],
+      "measures": [
+        "Staff handling time per order",
+        "Time from receipt to an approved order draft",
+        "Fields corrected during review",
+        "Exceptions and duplicate orders requiring attention"
+      ]
+    },
+    "faqs": [
+      {
+        "q": "Who is this for?",
+        "a": "Distributors and wholesalers with recurring B2B orders, an order desk and a specific manual gap between customer requests and their ERP. We confirm the order volume and handling process before recommending a build."
+      },
+      {
+        "q": "What if our ERP already imports purchase orders?",
+        "a": "We check that first. Native document capture, EDI or order-import features may cover the need. We implement only an agreed remaining gap, such as customer-specific item mapping, an unsupported source or exception handling."
+      },
+      {
+        "q": "Will you replace our ERP?",
+        "a": "The starting point is your existing ERP and approved records. We map the supported integration or import route, implement the agreed workflow and train the people who operate it."
+      },
+      {
+        "q": "Can the agent approve prices or substitute products?",
+        "a": "It prepares fields using your approved rules and data. Unclear prices, product substitutions, unit conversions and other consequential changes go to the named reviewer under the approval policy you agree."
+      },
+      {
+        "q": "How quickly can we process an order?",
+        "a": "We measure that on your sample orders. Order formats, data quality, review rules and ERP access determine the result. We agree the rollout and acceptance checks after mapping; there is no blanket speed or accuracy guarantee."
+      }
+    ],
+    "cta": {
+      "title": "Which orders still need your team to retype them?",
+      "body": "Walk through one recurring order type with Yuval: where it arrives, what staff change and how it reaches the ERP. We’ll identify the smallest useful implementation. Please keep customer order details out of the enquiry form.",
+      "label": "Talk about your order intake"
+    },
+    "seo": {
+      "title": "AI Purchase-Order Intake for Distributors | FutureProof Agents",
+      "description": "We implement agentic solutions that prepare checked ERP sales-order drafts from customer purchase orders, with exception handling and human approval."
+    },
+    "businessValue": {
+      "title": "Move the order forward with less preparation work.",
+      "body": "Give your order desk a prepared draft and a clear list of decisions. Staff can spend their attention on the lines that need judgment while routine information is assembled from the source.",
+      "items": [
+        {
+          "title": "Create capacity at the order desk",
+          "body": "Measure how much time staff spend preparing and correcting each order before and after the pilot. Use that result to decide which formats are worth adding."
+        },
+        {
+          "title": "Find the issue before fulfilment",
+          "body": "Make changed addresses, unclear units, missing item matches and possible duplicates visible during review, with the original request beside them."
+        },
+        {
+          "title": "See where each order is waiting",
+          "body": "Keep received, awaiting-review, exception and ERP-recorded states visible to the team. A failed import should have an owner and a next action."
+        }
+      ],
+      "timing": {
+        "title": "Prove one complete order flow before expanding.",
+        "body": "Start in draft or simulation mode. Compare staff handling time, corrections and exceptions on real examples, then enable the agreed ERP writes once the acceptance checks pass."
+      }
+    },
+    "audienceTitle": "For the team between the customer’s PO and the warehouse.",
+    "painTitle": "The customer has placed the order. Your team still has to build it.",
+    "painIntro": "A purchase order is only useful when its details match the way your business sells, ships and records products. That translation work is where routine orders can slow down.",
+    "serviceLine": "We implement agentic solutions around your existing order-entry tools, from the incoming purchase order to a checked ERP draft and approved next step. Built with security in mind, with controlled access and human approval.",
+    "integrations": [
+      "outlook",
+      "gmail",
+      "googledrive"
+    ],
+    "sector": "Distribution & wholesale"
+  },
+  {
+    "slug": "maintenance-renewals-repair-quotes",
+    "image": {
+      "src": "/images/projects/maintenance-renewals-repair-quotes-v1-960.webp",
+      "small": "/images/projects/maintenance-renewals-repair-quotes-v1-480.webp",
+      "alt": "Illustrative scene of a maintenance technician documenting an equipment finding.",
+      "caption": "Keep the finding connected to the follow-up."
+    },
+    "topic": "Maintenance renewals and repair quotes",
+    "kicker": "FOR COMMERCIAL MAINTENANCE AND FIELD SERVICE TEAMS",
+    "title": "AI renewal proposals and repair quotes for maintenance teams.",
+    "description": "We implement agentic solutions that prepare service-agreement renewals, track approved follow-up and turn technician findings into reviewed repair-quote drafts.",
+    "lead": "The service agreement is due for renewal. Someone still has to find last year’s proposal, check the scope and send the new version. Meanwhile, a technician’s report is waiting in the inbox, and the repair quote has not reached the customer. Your team has done the fieldwork. The office handoff is still unfinished.",
+    "audience": [
+      "You run a US commercial maintenance or field-service business with recurring service agreements, such as HVAC, fire and life safety, security or equipment service.",
+      "You are the owner, service manager or operations lead responsible for renewals, technician reports and repair follow-up.",
+      "Your team still rebuilds proposals or moves findings between an ERP, field-service system, forms, email and spreadsheets, despite the features already available in your software."
+    ],
+    "problems": [
+      {
+        "title": "A recurring renewal becomes another manual job",
+        "body": "Finding the prior proposal, checking the right site and updating the dates and terms takes office time before the customer sees anything."
+      },
+      {
+        "title": "The report arrives before the follow-up does",
+        "body": "A technician records a finding, but the form waits for review. The person preparing the repair quote has to reopen the file and reconstruct what needs attention."
+      },
+      {
+        "title": "No one can see the next step across the whole queue",
+        "body": "Sent proposals, unanswered renewals and accepted work sit in different places. Staff chase updates instead of seeing which customer needs a decision and who owns it."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "A renewal queue with reviewable proposal drafts",
+        "body": "Bring due agreements and the previous approved scope into one queue. Prepare updated dates, terms and prices from your rules, with missing or conflicting information clearly flagged."
+      },
+      {
+        "title": "Approved sending and follow-up in your workflow",
+        "body": "Connect the reviewer, authorized mailbox and shared status record. Record what was approved and sent, apply agreed reminder rules and hand accepted work to scheduling."
+      },
+      {
+        "title": "An optional technician report and repair module",
+        "body": "Surface reported findings beside their source, assign a reviewer and prepare repair-quote drafts from confirmed work and approved parts and labor pricing. Keep technical judgment and release with your team."
+      },
+      {
+        "title": "Controls and a practical handover",
+        "body": "Make duplicate records, missing fields and failed syncs visible. Test the workflow on past work, run a controlled pilot and train the office and service owners who will use it."
+      }
+    ],
+    "workflow": [
+      {
+        "title": "Find the agreements coming due",
+        "body": "Use the agreed renewal dates, customer and site records to prepare the working list. Flag missing records instead of guessing."
+      },
+      {
+        "title": "Prepare the proposal for review",
+        "body": "Reuse the approved scope and apply current pricing rules. Show changes and open questions to the commercial reviewer."
+      },
+      {
+        "title": "Send with approval and track the reply",
+        "body": "Release the approved version through the agreed channel, record its status and route replies or overdue follow-up to the owner."
+      },
+      {
+        "title": "Hand approved work to the service team",
+        "body": "Create the agreed scheduling handoff. If the report module is included, bring subsequent technician findings into a separate review and repair-draft queue."
+      }
+    ],
+    "example": {
+      "label": "ILLUSTRATIVE EXAMPLE",
+      "title": "A building’s annual service agreement is due next month.",
+      "body": "A commercial maintenance team has last year’s proposal in its ERP and the site details in its service system. The workflow prepares the renewal and flags a changed contact and an unconfirmed price adjustment. The service manager checks both before sending. After the visit, a technician records a replacement recommendation. In the separately scoped report module, that finding appears with its source for technical review; approved work becomes a repair-quote draft.",
+      "input": "Renewal dates, approved prior proposals, customer and site records, current pricing rules and, for the report module, completed technician forms.",
+      "output": "A reviewed renewal draft with an owner and next action, plus a separate repair-draft queue for confirmed technician findings.",
+      "reviewer": "Your service manager or estimator approves scope and pricing. Qualified staff assess technical findings; the authorized owner releases customer messages."
+    },
+    "systems": {
+      "body": "We check what your existing ERP and field-service software can already do before proposing a build. Then we map the remaining manual work and connect the supported records, forms and communication channels.",
+      "items": [
+        "ERP or field-service agreement and quote records",
+        "Technician forms and approved PDF or email intake",
+        "Authorized email and shared follow-up tasks",
+        "Scheduling handoffs in the tools your team uses"
+      ],
+      "footnote": "Connections depend on the exact product, plan, permissions and available API or approved import route. Built-in renewal features may solve part of the problem without custom development."
+    },
+    "pilot": {
+      "title": "Start with one renewal month and one agreement type.",
+      "body": "Use a completed renewal period to establish the correct customer list, proposals and review steps. Test the workflow against those examples before a controlled live cycle. Add technician reports only as a separately agreed module.",
+      "includes": [
+        "Check native software features and identify the remaining gap",
+        "Map customer, site, renewal date and prior proposal records",
+        "Agree pricing rules, reviewer and permitted follow-up",
+        "Test missing data, duplicate runs and failed handoffs",
+        "Train the team and compare the pilot with the current process"
+      ],
+      "measures": [
+        "Staff preparation and review minutes per renewal",
+        "Due agreements without a reviewed proposal or owner",
+        "Quote corrections and duplicate records before release",
+        "Time from confirmed technician finding to reviewed repair draft"
+      ]
+    },
+    "faqs": [
+      {
+        "q": "Who should use this?",
+        "a": "Commercial service businesses that manage recurring maintenance agreements and still have a repeatable office handoff to improve. We confirm the volume, workflow owner and existing software capabilities before recommending a build."
+      },
+      {
+        "q": "What if our field-service software already has renewals?",
+        "a": "We start there. Configuration or better use of native features may be enough. A custom agentic solution makes sense when a specific gap remains, such as customer-specific rules, incomplete source data or a handoff between systems."
+      },
+      {
+        "q": "Can this work with our ERP, forms and email?",
+        "a": "We review your exact systems, access and data first. The first implementation uses a defined set of supported connections or approved imports. We do not assume every system exposes the same fields or actions."
+      },
+      {
+        "q": "Does the agent decide whether equipment is safe or a repair is required?",
+        "a": "No. It organizes reported findings and prepares work for review. Qualified service staff retain technical and safety decisions, and your commercial owner approves pricing and customer-facing work."
+      },
+      {
+        "q": "Are technician reports included in the first renewal project?",
+        "a": "They are a separate module. We can scope finding review, repair-quote drafts and later form preparation once the source records, pricing and supported access are confirmed."
+      },
+      {
+        "q": "How quickly will this improve the process?",
+        "a": "We agree the implementation schedule after reviewing your tools and examples. The pilot compares preparation, review and handoff time with your current process. We do not assume a time-saving or renewal-rate result in advance."
+      }
+    ],
+    "cta": {
+      "title": "Which renewal is still waiting for someone to rebuild it?",
+      "body": "Walk through a recent renewal with Yuval: the previous proposal, the review and the follow-up. We’ll check the tools you already have and identify a practical first workflow to implement.",
+      "label": "Talk about your renewal workflow"
+    },
+    "seo": {
+      "title": "AI Maintenance Renewals and Repair Quotes | FutureProof Agents",
+      "description": "Agentic solutions for commercial maintenance teams. Prepare reviewed renewal proposals, track follow-up and scope technician-report-to-repair-quote workflows."
+    },
+    "businessValue": {
+      "title": "Keep the office work moving after the service is due.",
+      "body": "Give the service team a clear queue of renewal drafts and next actions. When technician findings need follow-up, keep the original evidence beside the person responsible for reviewing it.",
+      "items": [
+        {
+          "title": "Use office time for the exceptions",
+          "body": "Prepare repeat information from approved records so staff can focus on changed terms, missing details and customer decisions."
+        },
+        {
+          "title": "Make renewal ownership visible",
+          "body": "See which agreements are due, which proposals are waiting for approval and which replies need attention. Measure follow-through across the renewal cycle."
+        },
+        {
+          "title": "Move confirmed findings toward a reviewed quote",
+          "body": "In the optional report module, link each finding to its source and next action. Reduce the need to rediscover the same detail across forms, emails and quote drafts."
+        }
+      ],
+      "timing": {
+        "title": "Measure the work your team can control.",
+        "body": "Compare preparation and review time on your own renewals, including exceptions. Track the report-to-reviewed-draft interval separately from customer response or repair scheduling; a prepared draft does not establish a sale."
+      }
+    },
+    "audienceTitle": "For the team responsible for recurring service revenue.",
+    "painTitle": "The renewal and the repair quote are waiting on the office handoff.",
+    "painIntro": "Recurring agreements and technician reports should reach the right reviewer with the source information intact. Manual copying and scattered follow-up make that harder than it needs to be.",
+    "serviceLine": "We implement agentic solutions around your renewal and service workflows, with reviewed proposal drafts, clear ownership and supported connections to your existing tools. Built with security in mind, with controlled access and human approval.",
+    "integrations": [
+      "outlook",
+      "gmail",
+      "googledrive",
+      "hubspot",
+      "salesforce",
+      "slack"
+    ],
+    "sector": "Maintenance & field service"
+  },
+  {
+    "slug": "fund-investor-relations",
+    "image": {
+      "src": "/images/projects/fund-investor-relations-v1-960.webp",
+      "small": "/images/projects/fund-investor-relations-v1-480.webp",
+      "alt": "Illustrative scene of an investor-relations director preparing a meeting brief.",
+      "caption": "Arrive with the relationship context ready."
+    },
+    "topic": "Fund investor relations",
+    "kicker": "FOR PRIVATE-FUND INVESTOR RELATIONS TEAMS",
+    "title": "AI investor meeting briefs and CRM updates.",
+    "description": "Agentic solutions for fund investor-relations teams: capture approved interactions, resolve contacts and prepare CRM updates and meeting briefs for review.",
+    "lead": "The investor meeting happened. The notes are in an inbox, the contact sits under two company names, and the CRM still shows the previous conversation. Before the next meeting, someone has to reconstruct the relationship again.",
+    "audience": [
+      "US private equity and venture capital firms with a dedicated investor-relations or investor-services team.",
+      "IR leaders, operations managers and CRM owners responsible for keeping investor interactions and relationship records usable.",
+      "Teams whose approved calendar, email and meeting information still needs manual classification, contact matching or review before it reaches the CRM."
+    ],
+    "problems": [
+      {
+        "title": "The meeting does not become a useful record",
+        "body": "A calendar entry tells you who attended. It may not explain why the conversation mattered, which fund or organisation it concerned, or what belongs in the relationship history."
+      },
+      {
+        "title": "The right person is hard to match",
+        "body": "A new role, subsidiary or duplicate company record can leave staff unsure where to put the interaction. A confident-looking match is not enough when the history could attach to the wrong investor."
+      },
+      {
+        "title": "Preparation starts with a search across tools",
+        "body": "Meeting notes, previous conversations and approved research sit in different places. The next brief can miss a recent interaction or repeat an outdated fact unless someone checks the sources."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "An agreed interaction-capture workflow",
+        "body": "Connect one approved mailbox, calendar or export. Apply the IR team’s rules to propose which interactions belong in the CRM, with a clear reason and the original source beside each decision."
+      },
+      {
+        "title": "Contact matching with visible uncertainty",
+        "body": "Search existing people, organisations and interactions before proposing a new record. Show possible matches and missing fields; route ambiguous identities and conflicting details to the team."
+      },
+      {
+        "title": "Reviewed CRM updates",
+        "body": "Give a named reviewer a queue of proposed activities, tags and profile changes. Approved updates use the permitted write path, retain their source and expose failed or duplicate operations for follow-up."
+      },
+      {
+        "title": "A meeting-brief module when the record is ready",
+        "body": "Prepare a concise, editable brief from authorised relationship history and agreed research sources. Cite material facts, flag gaps and separate read-only preparation from any proposed CRM changes."
+      }
+    ],
+    "workflow": [
+      {
+        "title": "Capture the approved interaction",
+        "body": "Read the agreed source and date range. Record what arrived and distinguish IR activity from unrelated meetings using your reviewed rules."
+      },
+      {
+        "title": "Resolve the people and organisations",
+        "body": "Compare the source with existing CRM records. Surface possible duplicates, missing contacts and uncertain matches before a record is changed."
+      },
+      {
+        "title": "Review the proposed update",
+        "body": "Show the source, classification and proposed fields together. Your IR reviewer approves, corrects or rejects each item in the pilot."
+      },
+      {
+        "title": "Write once and prepare the next conversation",
+        "body": "Apply approved changes through the supported CRM connection, keep a traceable result and use the reviewed history in the next meeting brief."
+      }
+    ],
+    "example": {
+      "label": "ILLUSTRATIVE EXAMPLE",
+      "title": "One investor meeting. A reviewed record. A better starting point next time.",
+      "body": "An IR associate selects an approved meeting and its notes. The workflow finds two organisations with similar names and asks the associate to confirm the right one. It prepares the interaction, participants and next-action fields for review. After approval, the CRM records the update with a link to its source. A later meeting brief can use that reviewed interaction and flag anything still missing.",
+      "input": "An approved calendar event, permitted conversation notes, existing CRM records and the IR team’s classification rules.",
+      "output": "A source-linked interaction draft, resolved or flagged contacts, a review decision and a recorded CRM write result; an optional meeting brief uses the reviewed history.",
+      "reviewer": "Your designated IR or operations reviewer confirms relevance, identity and the permitted change."
+    },
+    "systems": {
+      "body": "We begin with the CRM and Microsoft or Google tools you already use. Review native capture and reporting features first, then scope any remaining gap in classification, entity matching, review or handoff. Backstop and Outlook are examples to assess, not a claim that a custom build is always needed.",
+      "items": [
+        "Approved Outlook or Google calendar and email sources",
+        "Backstop or your existing relationship CRM, subject to supported access",
+        "Permitted meeting notes and document stores",
+        "Public or licensed research sources agreed for the brief"
+      ],
+      "footnote": "Product capabilities, API permissions, data licences and retention rules are checked before implementation. Access to investor data and CRM writes stays within the approved scope."
+    },
+    "pilot": {
+      "title": "Start with one source and a representative set of interactions.",
+      "body": "Your IR lead and CRM owner choose a bounded sample, including ambiguous contacts and irrelevant meetings. We compare the native workflow with the remaining manual work, agree review rules and test the complete source-to-record path before expanding.",
+      "includes": [
+        "Check native product features and identify the remaining manual gap",
+        "Agree source access, classification rules and required CRM fields",
+        "Test exact matches, ambiguous identities, exclusions and repeated inputs",
+        "Run a human review queue and verify approved write results",
+        "Document permissions, failed-write recovery and operational ownership"
+      ],
+      "measures": [
+        "Time spent preparing each reviewed interaction",
+        "Agreement between proposed classification and reviewer decisions",
+        "Correct identity matches and unresolved exceptions",
+        "Duplicate records avoided during replay tests",
+        "Time to prepare a source-checked meeting brief"
+      ]
+    },
+    "faqs": [
+      {
+        "q": "What if Backstop already connects to Outlook?",
+        "a": "That is the first thing to check. Native CRM and Outlook features may already solve the problem. A custom workflow is worth discussing when an agreed gap remains, such as your relevance rules, ambiguous entities, approved historical imports or a handoff that existing configuration does not cover."
+      },
+      {
+        "q": "Will it write to the CRM automatically?",
+        "a": "The pilot uses a named reviewer and explicit approval before writes. Any later automation needs separately agreed categories, permissions and validation. Ambiguous records remain visible for review; they are not silently merged."
+      },
+      {
+        "q": "Can we start with meeting briefs instead?",
+        "a": "Yes. A read-only briefing pilot can be the first module when preparation is the priority. We agree the source set and output, show citations and missing information, and scope CRM write-back separately."
+      },
+      {
+        "q": "Can this process historical calendars and notes?",
+        "a": "An approved historical date range can be a separate, bounded batch. We reconcile inputs and outputs, check duplicates and test recovery before extending the period. A historical import is not assumed to be part of the first ongoing workflow."
+      },
+      {
+        "q": "Does the agent decide which investors to approach or what to invest in?",
+        "a": "The workflow prepares operational records and meeting context for your team. Investment judgments, fundraising strategy and investor communications remain with authorised people. No investment or fundraising result is promised."
+      },
+      {
+        "q": "What do we need for the first discussion?",
+        "a": "An IR process owner, a CRM administrator and a few representative examples of the manual handoff. Describe the source and required output first; share sensitive investor information only through an agreed access process."
+      }
+    ],
+    "cta": {
+      "title": "Where does the last investor conversation disappear?",
+      "body": "Walk through one approved interaction with Yuval, from the calendar or notes to the CRM and the next meeting brief. We’ll identify a useful first workflow and check whether your current tools already cover it.",
+      "label": "Discuss your IR workflow"
+    },
+    "seo": {
+      "title": "AI Investor Meeting Briefs & CRM Updates | FutureProof Agents",
+      "description": "For private-fund IR teams. We implement reviewed interaction capture, contact resolution, controlled CRM updates and source-linked investor meeting briefs."
+    },
+    "businessValue": {
+      "title": "Keep relationship context ready for the next conversation.",
+      "body": "A useful CRM record lets the next person understand what happened, which relationship it belongs to and what still needs attention. We connect that record to a reviewed preparation workflow.",
+      "items": [
+        {
+          "title": "Less reconstruction before meetings",
+          "body": "Bring approved interaction history and source-backed context into a brief. Measure preparation effort on your team’s own examples."
+        },
+        {
+          "title": "Fewer uncertain entries hidden in the CRM",
+          "body": "Keep ambiguous names, incomplete profiles and conflicting facts in a visible review queue instead of silently choosing a match."
+        },
+        {
+          "title": "A handoff the team can follow",
+          "body": "Record the source, reviewer and outcome of each approved change. Operations can see unresolved items and failed writes before they become missing history."
+        }
+      ],
+      "timing": {
+        "title": "Prove the source-to-record handoff before adding more data.",
+        "body": "Validate one interaction type, reviewer and write path first. Agree rollout timing after access checks and pilot results; profile enrichment and briefing modules can follow as separately scoped work."
+      }
+    },
+    "audienceTitle": "For the team responsible for investor relationship history.",
+    "painTitle": "An investor conversation should leave more than a calendar entry.",
+    "painIntro": "The recurring work is deciding what matters, matching the right entities and recording enough context for the next person. That judgment needs clear rules and review, even when the data arrives automatically.",
+    "serviceLine": "We implement agentic solutions around your investor-relations workflow: approved interaction capture, contact resolution, a human review queue and controlled CRM updates, with source-linked briefs as an optional module. Built with security in mind, with controlled access and human approval.",
+    "integrations": [
+      "outlook",
+      "googledrive",
+      "salesforce",
+      "hubspot"
+    ],
+    "sector": "Funds & investor relations"
   }
 ]

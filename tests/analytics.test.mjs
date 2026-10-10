@@ -111,8 +111,8 @@ test('project CTA clicks respect consent and include only approved page context'
 });
 
 
-test('new legal and care-coordination pages retain the correct sector without contact data in analytics', () => {
-  for (const [slug, icp] of [['immigration-case-operations', 'immigration_law'], ['personal-injury-care-coordination', 'pi_care_coordination']]) {
+test('sector pages retain the correct ICP without contact data in analytics', () => {
+  for (const [slug, icp] of [['immigration-case-operations', 'immigration_law'], ['personal-injury-care-coordination', 'pi_care_coordination'], ['distributor-order-intake', 'distribution'], ['maintenance-renewals-repair-quotes', 'maintenance_services'], ['fund-investor-relations', 'fund_ir']]) {
     const p = page({ads: false, project: slug});
     p.choose('Allow');
     p.window.fpAnalytics('lead_form_start', {email: 'private@example.com', challenge: 'Private case details'});
