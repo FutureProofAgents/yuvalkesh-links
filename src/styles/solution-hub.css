@@ -4,16 +4,22 @@
 .solution-hub-hero .project-lead{max-width:760px;font-size:18px;line-height:1.8}
 .solution-hub-service{margin-top:18px!important;color:#8da3b5;font-size:13px;line-height:1.8}
 .solution-sector-nav{border-block:1px solid var(--project-line);padding:23px 0 26px;display:flex;flex-direction:column;gap:15px;margin-bottom:39px}
+.solution-sector-nav[hidden],.solution-sector[hidden]{display:none}
 .solution-sector-nav>.project-mono{color:#8195a6;font-size:10px;letter-spacing:.08em}
 .solution-sector-nav>div{display:flex;flex-wrap:wrap;gap:10px}
-.solution-sector-nav a{display:inline-flex;align-items:center;gap:24px;min-height:44px;padding:10px 16px;border:1px solid #34434f;border-radius:5px;font-size:13px;font-weight:550;line-height:1.5;background:#0c1217;color:#c5d4df;transition:border-color .18s ease,background .18s ease}
-.solution-sector-nav a>span{color:#61b8f4;font-size:15px}
-.solution-sector-nav a:hover{border-color:#6aa9d4;background:#101f2a}
+.solution-sector-nav a,.solution-sector-nav button{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;min-height:44px;padding:10px 16px;border:1px solid #34434f;border-radius:5px;font:550 13px/1.5 Inter,system-ui,sans-serif;text-align:left;background:#0c1217;color:#c5d4df;transition:border-color .18s ease,background .18s ease}
+.solution-sector-nav button{cursor:pointer}
+.solution-sector-nav button>span{color:#8da8bb;font-size:11px}
+.solution-sector-nav a:hover,.solution-sector-nav button:hover{border-color:#6aa9d4;background:#101f2a}
+.solution-sector-nav button[aria-pressed="true"]{border-color:#6fc6ff;background:#174665;color:#fff;box-shadow:inset 0 0 0 1px #6fc6ff}
+.solution-sector-nav button[aria-pressed="true"]>span{color:#fff}
+.solution-sector-nav button:focus-visible,.solution-sector-nav a:focus-visible{outline:3px solid #a6ddff;outline-offset:3px}
+.solution-filter-status{font-size:13px;line-height:1.7;color:#b1c4d2;margin:0!important}
 .solution-sector-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:42px 30px}
 .solution-sector{min-width:0;scroll-margin-top:24px;display:flex;flex-direction:column}
-.solution-sector-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:17px}
-.solution-sector-heading h2{font-size:19px;letter-spacing:-.025em;line-height:1.35}
-.solution-sector-heading>span{flex-shrink:0;color:#758b9d;font-size:11px}
+.solution-card-industry{padding:18px 27px 20px;background:#10202b;border-bottom:1px solid #2a3b48}
+.solution-card-industry>.project-mono{display:block;color:#7bceff;font-size:9px;letter-spacing:.1em;margin-bottom:6px}
+.solution-card-industry h2{color:#f2f7fb;font-size:19px;font-weight:650;letter-spacing:-.02em;line-height:1.35}
 .solution-sector-offers{display:grid;gap:24px;flex:1}
 .solution-card{display:flex;flex-direction:column;border:1px solid #2a3b48;border-radius:8px;overflow:hidden;background:#0b1117;transition:border-color .18s ease}
 .solution-card:hover,.solution-card:focus-within{border-color:#4b7898}
@@ -37,9 +43,9 @@
 .solution-card-link:hover{color:#c0e6ff!important}
 .solution-catalog-note{font-size:11px;line-height:1.8;color:#8197a9;margin-top:24px!important}
 @media(max-width:1020px){.solution-card-body{padding-inline:22px}.solution-card h3{font-size:26px}.solution-sector-grid{gap:34px 24px}}
-@media(max-width:760px){.solution-hub-hero{padding-block:44px 34px}.solution-hub-hero h1{font-size:clamp(43px,8vw,60px);margin-block:21px}.solution-hub-hero .project-lead{font-size:16px}.solution-hub-service{font-size:12px}.solution-sector-nav{margin-bottom:30px;padding-block:20px;gap:13px}.solution-sector-nav>div{gap:8px}.solution-sector-nav a{font-size:12px;padding:10px 13px;gap:17px}.solution-sector-grid{grid-template-columns:1fr;gap:33px}.solution-sector-heading{margin-bottom:14px}.solution-sector-heading h2{font-size:19px}.solution-card-body{padding:23px 24px 0}.solution-card h3{font-size:28px;max-width:570px}.solution-card-description{font-size:13px}.solution-card-image>img{aspect-ratio:16/9}.solution-catalog-note{font-size:10px}}
-@media(max-width:420px){.solution-hub-hero h1{font-size:44px}.solution-card-body{padding-inline:20px}.solution-card h3{font-size:26px}.solution-sector-nav a{gap:12px;font-size:11px;padding-inline:11px}.solution-card-integrations ul{gap:8px 13px}.solution-sector-heading h2{font-size:18px}}
-@media print{.solution-sector-nav{display:none}.solution-hub-hero{padding-block:24px}.solution-hub-hero h1{font-size:38px}.solution-card{background:white;break-inside:avoid}.solution-card-image>img{max-height:160px}.solution-card-integrations,.solution-card-link{display:none}.solution-card-body{padding-bottom:20px}.solution-sector-grid{gap:25px}.solution-sector-heading{break-after:avoid}}
+@media(max-width:760px){.solution-hub-hero{padding-block:44px 34px}.solution-hub-hero h1{font-size:clamp(43px,8vw,60px);margin-block:21px}.solution-hub-hero .project-lead{font-size:16px}.solution-hub-service{font-size:12px}.solution-sector-nav{margin-bottom:30px;padding-block:20px;gap:13px}.solution-sector-nav>div{gap:8px}.solution-sector-nav a,.solution-sector-nav button{font-size:12px;padding:10px 13px;gap:17px}.solution-sector-grid{grid-template-columns:1fr;gap:33px}.solution-card-industry{padding:16px 24px 18px}.solution-card-body{padding:23px 24px 0}.solution-card h3{font-size:28px;max-width:570px}.solution-card-description{font-size:13px}.solution-card-image>img{aspect-ratio:16/9}.solution-catalog-note{font-size:10px}}
+@media(max-width:420px){.solution-hub-hero h1{font-size:44px}.solution-card-body{padding-inline:20px}.solution-card h3{font-size:26px}.solution-sector-nav a,.solution-sector-nav button{gap:12px;font-size:11px;padding-inline:11px}.solution-card-integrations ul{gap:8px 13px}.solution-card-industry{padding-inline:20px}.solution-card-industry h2{font-size:18px}}
+@media print{.solution-sector-nav{display:none}.solution-hub-hero{padding-block:24px}.solution-hub-hero h1{font-size:38px}.solution-card{background:white;break-inside:avoid}.solution-card-image>img{max-height:160px}.solution-card-integrations,.solution-card-link{display:none}.solution-card-body{padding-bottom:20px}.solution-sector-grid{gap:25px}.solution-card-industry{break-after:avoid}}
 
 /* Portrait photographs need a higher crop in the wide catalog cards. */
 .solution-card-image img[src*="executive-search-intelligence-v3-"]{object-position:50% 20%}
