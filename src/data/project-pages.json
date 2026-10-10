@@ -2,10 +2,10 @@
   {
     "slug": "construction-document-workflows",
     "image": {
-      "src": "/images/projects/construction-document-workflows-v2-960.webp",
-      "small": "/images/projects/construction-document-workflows-v2-480.webp",
-      "alt": "Illustrative scene of a NYC renovation team reviewing a proposal with an interior concept and itemized quote.",
-      "caption": "The design and the quote, in one conversation."
+      "src": "/images/projects/construction-document-workflows-v3-960.webp",
+      "small": "/images/projects/construction-document-workflows-v3-480.webp",
+      "alt": "Illustrative scene of a renovation project lead checking cabinetry in a premium brownstone interior.",
+      "caption": "A clearer scope starts with the space."
     },
     "topic": "NYC renovation quotes & interior design",
     "kicker": "FOR NYC FIRMS RENOVATING HIGH-END HOMES",
@@ -172,9 +172,9 @@
   {
     "slug": "accounting-client-operations",
     "image": {
-      "src": "/images/projects/accounting-client-operations-v2-960.webp",
-      "small": "/images/projects/accounting-client-operations-v2-480.webp",
-      "alt": "Illustrative scene of an accounting manager checking a client document package.",
+      "src": "/images/projects/accounting-client-operations-v3-960.webp",
+      "small": "/images/projects/accounting-client-operations-v3-480.webp",
+      "alt": "Illustrative overhead view of an accountant organizing client documents.",
       "caption": "Get the client package ready for the work."
     },
     "topic": "Accounting close & payroll readiness",
@@ -342,9 +342,9 @@
   {
     "slug": "real-estate-document-review",
     "image": {
-      "src": "/images/projects/real-estate-document-review-v2-960.webp",
-      "small": "/images/projects/real-estate-document-review-v2-480.webp",
-      "alt": "Illustrative scene of a property attorney comparing a survey and transaction documents.",
+      "src": "/images/projects/real-estate-document-review-v3-960.webp",
+      "small": "/images/projects/real-estate-document-review-v3-480.webp",
+      "alt": "Illustrative scene of a property attorney reviewing a plan beside a city office window.",
       "caption": "Put the evidence beside the issue."
     },
     "topic": "Property due diligence & document review",
@@ -512,9 +512,9 @@
   {
     "slug": "executive-search-intelligence",
     "image": {
-      "src": "/images/projects/executive-search-intelligence-v2-960.webp",
-      "small": "/images/projects/executive-search-intelligence-v2-480.webp",
-      "alt": "Illustrative scene of a search consultant in a prepared client conversation.",
+      "src": "/images/projects/executive-search-intelligence-v3-960.webp",
+      "small": "/images/projects/executive-search-intelligence-v3-480.webp",
+      "alt": "Illustrative scene of a search partner and client talking between meetings.",
       "caption": "A useful conversation starts with context."
     },
     "topic": "Retained-search business development",
@@ -678,5 +678,345 @@
       "slack"
     ],
     "sector": "Executive search"
+  },
+  {
+    "slug": "immigration-case-operations",
+    "image": {
+      "src": "/images/projects/immigration-case-operations-v3-960.webp",
+      "small": "/images/projects/immigration-case-operations-v3-480.webp",
+      "alt": "Illustrative scene of a law-office coordinator preparing for a client arrival.",
+      "caption": "Keep the next step moving."
+    },
+    "topic": "Immigration intake and case operations",
+    "kicker": "FOR U.S. IMMIGRATION LAW FIRMS",
+    "title": "AI intake and case workflows for immigration law firms.",
+    "description": "We implement agentic solutions that turn approved intake notes into the right questionnaires, document requests and case tasks, with attorney approval and connections to your existing tools.",
+    "lead": "The consultation is over, but the client is still waiting for the next step. Someone needs to confirm the case type, choose the right questionnaire, prepare the document request and update the case system. When that handoff depends on one busy person, the whole team waits.",
+    "audienceTitle": "For immigration partners and the teams keeping cases moving.",
+    "audience": [
+      "You run a U.S. immigration law firm with repeat family, employment or investor case workflows.",
+      "You are the managing partner, operations manager or senior paralegal responsible for intake, case preparation and client follow-up.",
+      "Your team uses a case system, email and shared files, but still copies information and chases the next step by hand."
+    ],
+    "painTitle": "The work between the legal decisions keeps piling up.",
+    "painIntro": "Your attorneys know which work needs their judgment. Routine handoffs, missing documents and disconnected status updates keep pulling them back into administration.",
+    "problems": [
+      {
+        "title": "A good consultation becomes a slow start",
+        "body": "The intake notes are ready, but selecting the right document pack and drafting the next email still sits in someone’s queue. The client calls again because they do not know what to send."
+      },
+      {
+        "title": "The same facts are entered in several places",
+        "body": "A client’s details move from the consultation notes to a questionnaire, case record, engagement letter and billing system. Every handoff creates another place to check and correct."
+      },
+      {
+        "title": "Case status lives with the person who last touched it",
+        "body": "The office has to search email, spreadsheets and case notes to answer a client, find a missing document or establish who owns the next action."
+      }
+    ],
+    "serviceLine": "FutureProof builds and implements agentic solutions around your firm’s actual case workflows. Built with security in mind, with controlled access and human approval.",
+    "deliverables": [
+      {
+        "title": "Prepare the next step while the intake is still fresh",
+        "body": "Turn approved consultation notes and a staff-confirmed case type into the appropriate questionnaire, document checklist and draft client message. Your team reviews the pack before anything goes out."
+      },
+      {
+        "title": "Give each case a clear owner and next action",
+        "body": "Keep approved case details, received documents, missing items and assigned tasks together. Show what needs attention without making staff reconstruct the case from email."
+      },
+      {
+        "title": "Keep scheduling and billing connected to the matter",
+        "body": "Where supported, connect consultation bookings, engagement status and invoice follow-up to the case record. Define approvals and reconcile exceptions with the team that owns the work."
+      },
+      {
+        "title": "Expand after the first workflow proves useful",
+        "body": "Add attorney-reviewed form preparation, case reporting, office routines or a broader custom platform in agreed stages. Migration from an existing case system gets its own export, validation and acceptance plan."
+      }
+    ],
+    "workflow": [
+      {
+        "title": "Confirm the intake and case type",
+        "body": "Use the sources and consent process your firm approves. An authorized team member confirms the matter type, required templates and the scope of the next step."
+      },
+      {
+        "title": "Prepare the document pack",
+        "body": "Assemble the correct questionnaire, checklist, engagement draft and follow-up message. Flag missing or conflicting facts for a person to resolve."
+      },
+      {
+        "title": "Review before sending",
+        "body": "The assigned reviewer checks recipients, case details and wording. Approved communication is sent through the firm’s supported tools and recorded with the case."
+      },
+      {
+        "title": "Track the work that follows",
+        "body": "Update the checklist as documents arrive, surface agreed deadlines and assign outstanding tasks. Attorneys remain responsible for legal decisions, final documents and filings."
+      }
+    ],
+    "example": {
+      "label": "ILLUSTRATIVE WORKFLOW",
+      "title": "The client knows what to send after the consultation.",
+      "body": "After a consultation, the attorney confirms the case type and records the agreed next steps. The workflow selects the firm’s approved questionnaire and document checklist, drafts the client email and creates tasks for the case team. A paralegal checks the pack, the designated reviewer approves it and the case record shows what was requested and what is still missing.",
+      "input": "Approved intake notes, a confirmed case type, current firm templates and the client details your team has checked.",
+      "output": "A draft questionnaire and document request, assigned case tasks and a record of approved client communication.",
+      "reviewer": "The responsible attorney or authorized team member approves the pack. Legal eligibility, advice and filing decisions stay with the attorney."
+    },
+    "systems": {
+      "body": "Start with the tools your team already uses. We assess the available access to your case system, email, calendar, document storage and billing tools before agreeing the connections.",
+      "items": [
+        "LollyLaw and other case systems where supported",
+        "Outlook, calendars and approved communication channels",
+        "Document folders, e-signature and firm templates",
+        "QuickBooks or supported billing tools"
+      ],
+      "footnote": "Tool names describe possible integration targets, not partnerships or guaranteed access. USCIS connections depend on available official capabilities and approvals; a first project can work with staff-reviewed case data without direct filing automation."
+    },
+    "pilot": {
+      "title": "Start with one repeat intake workflow.",
+      "body": "Choose a case type your firm handles regularly. Map the current handoff, agree the approved templates and test the workflow on representative examples before a controlled rollout. We handle the implementation and train the team using it.",
+      "includes": [
+        "Map the intake handoff and its approval owner",
+        "Agree one case type and the correct document pack",
+        "Build the supported connections and draft preparation",
+        "Test missing facts, exceptions and recipient checks",
+        "Run a controlled rollout with a clear acceptance checklist"
+      ],
+      "measures": [
+        "Time from approved intake to an approved document request",
+        "Staff preparation and review minutes per case",
+        "Missing items, corrections and duplicate data entry",
+        "Cases with a named owner and a current next action"
+      ]
+    },
+    "faqs": [
+      {
+        "q": "Is this a new software subscription?",
+        "a": "It is an implementation service. We map the workflow, build the agents and connections, test them with your team and support the agreed rollout. A broader custom platform is a separate scope when that fits your firm."
+      },
+      {
+        "q": "Can you work with our current CRM and case tools?",
+        "a": "We build around your existing setup where access is supported. During mapping, we check software plans, permissions and integration options before committing to a connection or migration."
+      },
+      {
+        "q": "How do you handle confidential case information?",
+        "a": "We agree which records the workflow may access, who can review drafts and which providers and retention settings your firm permits. Access controls and approval steps are tested before live use."
+      },
+      {
+        "q": "Will an agent give legal advice or file applications?",
+        "a": "The offer supports preparation and office operations. Attorneys own legal advice, eligibility assessments, final review and filing. Any official system connection needs separate validation and authorization."
+      },
+      {
+        "q": "How fast can our office use it?",
+        "a": "We set the rollout plan after mapping one workflow and confirming access. The pilot measures preparation and review together. Timing depends on the scope, templates, integrations and availability of your reviewers."
+      }
+    ],
+    "cta": {
+      "title": "Where does a new case get stuck after the consultation?",
+      "body": "Talk through one intake-to-document handoff with Yuval. We’ll look at the tools, the approval steps and a focused first implementation for your firm.",
+      "label": "Talk about your intake workflow"
+    },
+    "seo": {
+      "title": "AI Immigration Intake and Case Workflows | FutureProof Agents",
+      "description": "Agentic solutions implemented for U.S. immigration law firms. Prepare questionnaires, document requests and case tasks around your tools, with human approval."
+    },
+    "businessValue": {
+      "title": "Move the case forward without rebuilding the handoff.",
+      "body": "Prepare the routine work around each legal decision so staff can review a complete next step. Measure whether the change reduces waiting, repeated entry and follow-up effort.",
+      "items": [
+        {
+          "title": "Make the next step clear to the client",
+          "body": "An approved request explains which documents are needed and where the client should send them. The case team can see what has arrived and what still needs attention."
+        },
+        {
+          "title": "Give staff fewer places to check",
+          "body": "Bring the agreed case information, assigned work and communication history into the view your team uses. Keep unresolved questions visible instead of guessing missing facts."
+        },
+        {
+          "title": "Build a practical path to a larger platform",
+          "body": "Use the first workflow to establish your templates, permissions and acceptance checks. Add scheduling, billing, reporting and broader case operations as their business value becomes clear."
+        }
+      ],
+      "timing": {
+        "title": "Measure the handoff your team can control.",
+        "body": "Track the time from complete, approved intake notes to a reviewed document request. This is an office-workflow measure, not a promise about government processing times or case outcomes."
+      }
+    },
+    "integrations": [
+      "outlook",
+      "googledrive",
+      "hubspot",
+      "salesforce",
+      "gmail",
+      "slack"
+    ],
+    "sector": "Immigration law"
+  },
+  {
+    "slug": "personal-injury-care-coordination",
+    "image": {
+      "src": "/images/projects/personal-injury-care-coordination-v3-960.webp",
+      "small": "/images/projects/personal-injury-care-coordination-v3-480.webp",
+      "alt": "Illustrative scene of a coordination-team manager taking a business call.",
+      "caption": "Give every partner enquiry an owner."
+    },
+    "topic": "Personal injury care coordination",
+    "kicker": "FOR PERSONAL INJURY CARE COORDINATION TEAMS",
+    "title": "Agentic lead intake and partner follow-up.",
+    "description": "For personal injury care-coordination teams. We implement agentic solutions that connect website enquiries, partner conversations and approved follow-up in your CRM.",
+    "lead": "An attorney asks about your service. A provider follows up by email. Someone takes the call, but the next person cannot find what was agreed. A useful introduction is now waiting for your team to reconstruct the conversation.",
+    "audience": [
+      "You run a US personal-injury care-coordination, medical referral or case-management service working with attorney firms and providers.",
+      "You are the founder, operations leader or partnership lead responsible for turning business enquiries into active relationships.",
+      "Your team receives enquiries through forms, email and calls, but ownership, conversation history and the next step are scattered."
+    ],
+    "problems": [
+      {
+        "title": "The enquiry arrives without a clear owner",
+        "body": "A form reaches a spreadsheet or shared inbox. Unless someone picks it up, no one knows whether the attorney or provider has received a response."
+      },
+      {
+        "title": "The next conversation starts from scratch",
+        "body": "One person has the email, another has the meeting notes and a third remembers the call. Preparing a useful follow-up takes a round of internal messages."
+      },
+      {
+        "title": "A good introduction has no next step",
+        "body": "The initial conversation went well, but the promised information or follow-up task is missing. Your team needs to see what is waiting before the relationship goes quiet."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "A page that turns interest into a useful enquiry",
+        "body": "Present your approved service clearly and capture the business contact, organisation, enquiry type and source where available. Route the form into a shared record with access for the named team."
+      },
+      {
+        "title": "Content that answers a potential partner’s questions",
+        "body": "An optional marketing phase can add an editable blog, reviewed articles, search setup and tested enquiry measurement. We agree the topics and claims with you, then track actual visits and enquiries."
+      },
+      {
+        "title": "An optional CRM and agent for the next action",
+        "body": "Bring business contacts, owners, stages and tasks together with authorised email and meeting context. Connect one agreed agent so your team can retrieve the history, prepare a follow-up draft and request permitted updates."
+      },
+      {
+        "title": "A review step your team controls",
+        "body": "Show the source context beside the draft. An authorised person approves outbound messages and consequential changes. Expose failed imports or syncs so an enquiry does not disappear behind a success message."
+      }
+    ],
+    "workflow": [
+      {
+        "title": "Capture the business enquiry",
+        "body": "Record the contact, organisation, enquiry category and available source without asking for patient details."
+      },
+      {
+        "title": "Assign the relationship owner",
+        "body": "Create the agreed owner and next-action task in the shared lead record."
+      },
+      {
+        "title": "Prepare the next conversation",
+        "body": "Retrieve permitted emails and meeting context; draft a response or flag a missing answer."
+      },
+      {
+        "title": "Review and follow through",
+        "body": "An authorised team member approves the message, records the outcome and sets the next step."
+      }
+    ],
+    "example": {
+      "label": "ILLUSTRATIVE EXAMPLE",
+      "title": "An attorney enquiry. One owner. A follow-up with the context intact.",
+      "body": "A law-firm office manager asks how to work with your coordination service. The website records the business enquiry and assigns your partnership lead. After a call, the agreed meeting notes appear beside the contact. The agent prepares the promised follow-up with the open question highlighted. Your lead reviews it and approves sending. This example concerns the business relationship, before any patient case is shared.",
+      "input": "Approved service information, the business enquiry, the authorised contact history and your routing rules.",
+      "output": "One business-lead record with an owner, source context, a follow-up draft and a dated next action.",
+      "reviewer": "Your relationship owner checks the facts and authorises the message."
+    },
+    "systems": {
+      "body": "Keep the email, documents and meeting tools your team uses. We map the sources and permissions first, then connect the agreed records to your CRM or build the scoped workspace you need.",
+      "items": [
+        "Business enquiry forms and lead spreadsheets",
+        "Authorised email and meeting notes",
+        "CRM contacts, organisations and tasks",
+        "One agreed existing agent interface"
+      ],
+      "footnote": "These connections handle business leads. Patient treatment records and medical workflows require a separate scope and data-access review."
+    },
+    "pilot": {
+      "title": "Start with one enquiry type and a handful of past conversations.",
+      "body": "Choose a repeatable attorney or provider business enquiry. We map the current handoff, agree the shared record and reviewer, then test captured enquiries and reviewed follow-ups before your team uses the flow live.",
+      "includes": [
+        "Map enquiry to owner and next step",
+        "Agree the form fields and approved service claims",
+        "Test the page and capture destination",
+        "Scope any CRM, history import and agent connection separately",
+        "Train the owner and test failed-sync visibility"
+      ],
+      "measures": [
+        "Time from enquiry to assigned owner",
+        "Time to the first reviewed response",
+        "Business leads without a next action",
+        "Actual qualified partner conversations and outcomes"
+      ]
+    },
+    "faqs": [
+      {
+        "q": "Who is this for?",
+        "a": "Care-coordination, medical referral and case-management teams serving personal-injury attorneys and providers. The first workflow is your business enquiry and partnership process. We confirm that process exists before proposing a build."
+      },
+      {
+        "q": "What do you implement for us?",
+        "a": "We map the workflow, finalise the agreed page and lead capture, connect the approved tools, test the handoff and train your team. Marketing content and a custom CRM with agent access can be separately selected phases."
+      },
+      {
+        "q": "Can this work with our existing CRM and email?",
+        "a": "We review your exact products, plans and permissions during mapping. Supported connections or approved imports bring the agreed context into the record. We do not assume access to every channel or historical conversation."
+      },
+      {
+        "q": "Does this also track patients and treatment visits?",
+        "a": "That is a separate platform project. We can map referral intake, staff follow-up, missed-visit exceptions and attorney-visible status, then validate the required systems and data controls. It is not included in the business-lead website or CRM scope. Treatment decisions remain with qualified people."
+      },
+      {
+        "q": "How soon will we see a result?",
+        "a": "We agree the rollout around one complete handoff and measure it on your own examples. Track enquiry ownership, review time and follow-through before expanding. We do not promise a response-rate, ranking or patient-outcome improvement."
+      }
+    ],
+    "cta": {
+      "title": "Where does a useful partner enquiry wait today?",
+      "body": "Walk through one recent business enquiry with Yuval: how it arrived, who picked it up and what happened next. We’ll identify a practical first workflow to implement. Please keep patient details out of the enquiry.",
+      "label": "Talk about your enquiry workflow"
+    },
+    "seo": {
+      "title": "Agentic Lead Intake for PI Care Coordination | FutureProof Agents",
+      "description": "For personal injury care-coordination teams. We implement agentic solutions for business enquiry capture, partner context and approved CRM follow-up."
+    },
+    "businessValue": {
+      "title": "Give every promising introduction a clear next step.",
+      "body": "Connect the point where someone asks about your service with the person responsible for the reply. Your team can see the history and move the relationship forward without rebuilding the conversation.",
+      "items": [
+        {
+          "title": "Respond while the enquiry is still relevant",
+          "body": "Put ownership and a next action beside the incoming request. Measure elapsed time to the first reviewed response."
+        },
+        {
+          "title": "Prepare from the actual conversation",
+          "body": "Use permitted email and meeting context to assemble the follow-up. Keep open questions visible for the person approving it."
+        },
+        {
+          "title": "See which relationships are progressing",
+          "body": "Review actual conversations, qualified opportunities and overdue next steps in the CRM. Page views alone do not establish a useful partner relationship."
+        }
+      ],
+      "timing": {
+        "title": "Prove the handoff before adding more channels.",
+        "body": "Test one enquiry type from capture through approved follow-up, including missing information and failed imports. Compare preparation and response time with your existing process; agree the next phase from those results."
+      }
+    },
+    "audienceTitle": "For the team building attorney and provider relationships.",
+    "painTitle": "The next relationship should not depend on someone remembering the last call.",
+    "painIntro": "Business enquiries cross your website, inbox and meetings. The opportunity stalls when the conversation reaches the team without a clear owner or next action.",
+    "serviceLine": "We implement agentic solutions around your business enquiry and partnership workflow, with lead capture, shared context and reviewed follow-up connected to your CRM and tools. Built with security in mind, with controlled access and human approval.",
+    "integrations": [
+      "hubspot",
+      "salesforce",
+      "googledrive",
+      "gmail",
+      "outlook",
+      "slack"
+    ],
+    "sector": "Personal injury care coordination"
   }
 ]

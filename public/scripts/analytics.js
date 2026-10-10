@@ -80,7 +80,7 @@
     }
   }
   const allowed = new Set(['whatsapp_click', 'booking_click', 'newsletter_signup', 'lead_cta_click', 'lead_form_start', 'lead_form_step', 'lead_form_error', 'generate_lead']);
-  const projectIcps = { 'construction-document-workflows': 'construction', 'accounting-client-operations': 'accounting', 'real-estate-document-review': 'property_law', 'executive-search-intelligence': 'executive_search' };
+  const projectIcps = { 'construction-document-workflows': 'construction', 'accounting-client-operations': 'accounting', 'real-estate-document-review': 'property_law', 'executive-search-intelligence': 'executive_search', 'immigration-case-operations': 'immigration_law', 'personal-injury-care-coordination': 'pi_care_coordination' };
   window.fpAnalytics = (event, metadata = {}) => {
     if (!enabled || !allowed.has(event)) return;
     const project = document.body.dataset.project;

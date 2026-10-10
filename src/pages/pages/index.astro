@@ -7,13 +7,15 @@ import '../../styles/solution-hub.css';
 const site = 'https://futureproofagents.com';
 const canonical = `${site}/pages/`;
 const title = 'Agentic Solutions by Industry | FutureProof Agents';
-const description = 'Explore agentic solutions for construction, accounting, property law and executive search. FutureProof builds and implements agents around your existing CRM, tools and team.';
+const description = 'Explore agentic solutions implemented for construction, accounting, property and immigration law, executive search and personal injury care coordination.';
 const booking = 'https://calendar.app.google/uWpM7vrcaS4JAZTQ6';
 const sectors = [
   { id: 'construction', name: 'Construction & renovation', audience: 'NYC renovation and design-build firms serving high-end homeowners.' },
   { id: 'accounting', name: 'Accounting & payroll', audience: 'U.S. CPA, bookkeeping and payroll firms with recurring client work.' },
   { id: 'property-law', name: 'Property law', audience: 'U.S. real estate attorneys and transaction teams reviewing property files.' },
   { id: 'executive-search', name: 'Executive search', audience: 'U.S. retained-search firms developing relationships with hiring executives.' },
+  { id: 'immigration-law', name: 'Immigration law', audience: 'U.S. immigration firms moving clients from consultation to document requests and case tasks.' },
+  { id: 'personal-injury-care-coordination', name: 'Personal injury care coordination', audience: 'U.S. care-coordination and referral teams developing attorney and provider relationships.' },
 ].map(sector => ({ ...sector, solutions: pages.filter(page => page.sector === sector.name) }));
 const schema = { '@context': 'https://schema.org', '@graph': [
   { '@type': 'CollectionPage', name: title, description, url: canonical, inLanguage: 'en-US', mainEntity: { '@type': 'ItemList', itemListElement: pages.map((page, i) => ({ '@type': 'ListItem', position: i + 1, name: page.topic, url: `${canonical}${page.slug}/` })) } },
