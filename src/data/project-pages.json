@@ -2,10 +2,12 @@
   {
     "slug": "construction-document-workflows",
     "image": {
-      "src": "/images/projects/construction-document-workflows-v3-960.webp",
-      "small": "/images/projects/construction-document-workflows-v3-480.webp",
-      "alt": "Illustrative scene of a renovation project lead checking cabinetry in a premium brownstone interior.",
-      "caption": "A clearer scope starts with the space."
+      "src": "/images/projects/construction-document-workflows-flow-hero-v1.png",
+      "small": "/images/projects/construction-document-workflows-flow-hero-v1.png",
+      "cover": "/images/projects/construction-document-workflows-flow-cover-v1.png",
+      "alt": "Illustrative construction workflow: site brief, scope and pricing with interior concepts, estimator and designer approval, then one branded client proposal.",
+      "caption": "From site visit & client brief to one client proposal.",
+      "kind": "workflow"
     },
     "topic": "NYC renovation quotes & interior design",
     "kicker": "FOR NYC FIRMS RENOVATING HIGH-END HOMES",
@@ -172,10 +174,12 @@
   {
     "slug": "accounting-client-operations",
     "image": {
-      "src": "/images/projects/accounting-client-operations-v3-960.webp",
-      "small": "/images/projects/accounting-client-operations-v3-480.webp",
-      "alt": "Illustrative overhead view of an accountant organizing client documents.",
-      "caption": "Get the client package ready for the work."
+      "src": "/images/projects/accounting-client-operations-flow-hero-v1.png",
+      "small": "/images/projects/accounting-client-operations-flow-hero-v1.png",
+      "cover": "/images/projects/accounting-client-operations-flow-cover-v1.png",
+      "alt": "Illustrative accounting workflow: client files and checklist, readiness checks and follow-up draft, coordinator review, then a checked work package with owned exceptions.",
+      "caption": "From client files + checklist to checked work package.",
+      "kind": "workflow"
     },
     "topic": "Accounting close & payroll readiness",
     "kicker": "FOR U.S. CPA, CAS, BOOKKEEPING AND PAYROLL FIRMS",
@@ -342,10 +346,12 @@
   {
     "slug": "real-estate-document-review",
     "image": {
-      "src": "/images/projects/real-estate-document-review-v3-960.webp",
-      "small": "/images/projects/real-estate-document-review-v3-480.webp",
-      "alt": "Illustrative scene of a property attorney reviewing a plan beside a city office window.",
-      "caption": "Put the evidence beside the issue."
+      "src": "/images/projects/real-estate-document-review-flow-hero-v1.png",
+      "small": "/images/projects/real-estate-document-review-flow-hero-v1.png",
+      "cover": "/images/projects/real-estate-document-review-flow-cover-v1.png",
+      "alt": "Illustrative property-law workflow: approved documents and checklist, source comparisons and open questions, attorney review, then a source-linked matter summary.",
+      "caption": "From matter files + checklist to source-linked summary.",
+      "kind": "workflow"
     },
     "topic": "Property due diligence & document review",
     "kicker": "FOR U.S. REAL ESTATE TRANSACTION COUNSEL",
@@ -512,10 +518,12 @@
   {
     "slug": "executive-search-intelligence",
     "image": {
-      "src": "/images/projects/executive-search-intelligence-v3-960.webp",
-      "small": "/images/projects/executive-search-intelligence-v3-480.webp",
-      "alt": "Illustrative scene of a search partner and client talking between meetings.",
-      "caption": "A useful conversation starts with context."
+      "src": "/images/projects/executive-search-intelligence-flow-hero-v1.png",
+      "small": "/images/projects/executive-search-intelligence-flow-hero-v1.png",
+      "cover": "/images/projects/executive-search-intelligence-flow-cover-v1.png",
+      "alt": "Illustrative executive-search business-development workflow: client history and commitments, relationship brief and follow-up draft, partner review, then a prepared call and CRM next action.",
+      "caption": "From client history + commitments to prepared call + next action.",
+      "kind": "workflow"
     },
     "topic": "Retained-search business development",
     "kicker": "FOR U.S. BOUTIQUE RETAINED-SEARCH FIRMS",
@@ -682,10 +690,12 @@
   {
     "slug": "immigration-case-operations",
     "image": {
-      "src": "/images/projects/immigration-case-operations-v3-960.webp",
-      "small": "/images/projects/immigration-case-operations-v3-480.webp",
-      "alt": "Illustrative scene of a law-office coordinator preparing for a client arrival.",
-      "caption": "Keep the next step moving."
+      "src": "/images/projects/immigration-case-operations-flow-hero-v1.png",
+      "small": "/images/projects/immigration-case-operations-flow-hero-v1.png",
+      "cover": "/images/projects/immigration-case-operations-flow-cover-v1.png",
+      "alt": "Illustrative immigration-law workflow: approved intake and confirmed case type, document pack and case tasks, authorized review, then a client request and tracked missing items.",
+      "caption": "From intake + case type to document pack + case tasks.",
+      "kind": "workflow"
     },
     "topic": "Immigration intake and case operations",
     "kicker": "FOR U.S. IMMIGRATION LAW FIRMS",
@@ -852,10 +862,12 @@
   {
     "slug": "personal-injury-care-coordination",
     "image": {
-      "src": "/images/projects/personal-injury-care-coordination-v3-960.webp",
-      "small": "/images/projects/personal-injury-care-coordination-v3-480.webp",
-      "alt": "Illustrative scene of a coordination-team manager taking a business call.",
-      "caption": "Give every partner enquiry an owner."
+      "src": "/images/projects/personal-injury-care-coordination-flow-hero-v1.png",
+      "small": "/images/projects/personal-injury-care-coordination-flow-hero-v1.png",
+      "cover": "/images/projects/personal-injury-care-coordination-flow-cover-v1.png",
+      "alt": "Illustrative personal-injury care-coordination business workflow: partner enquiry, an optional shared CRM lead and follow-up draft, relationship-owner approval, then a reply and next action. No patient case details.",
+      "caption": "From business enquiry to partner reply + next action.",
+      "kind": "workflow"
     },
     "topic": "Personal injury care coordination",
     "kicker": "FOR PERSONAL INJURY CARE COORDINATION TEAMS",
@@ -1022,10 +1034,12 @@
   {
     "slug": "distributor-order-intake",
     "image": {
-      "src": "/images/projects/distributor-order-intake-v1-960.webp",
-      "small": "/images/projects/distributor-order-intake-v1-480.webp",
-      "alt": "Illustrative scene of an order coordinator reviewing a purchase order beside a warehouse.",
-      "caption": "Get the order ready for the next step."
+      "src": "/images/projects/distributor-order-intake-flow-hero-v1.png",
+      "small": "/images/projects/distributor-order-intake-flow-hero-v1.png",
+      "cover": "/images/projects/distributor-order-intake-flow-cover-v1.png",
+      "alt": "Illustrative distribution workflow: customer PO and approved records, sales-order draft and exception check, order-desk approval, then a recorded ERP order with source and sync status.",
+      "caption": "From customer po + item records to recorded erp order.",
+      "kind": "workflow"
     },
     "topic": "Distribution & wholesale",
     "kicker": "FOR DISTRIBUTORS AND WHOLESALERS",
@@ -1189,10 +1203,12 @@
   {
     "slug": "maintenance-renewals-repair-quotes",
     "image": {
-      "src": "/images/projects/maintenance-renewals-repair-quotes-v1-960.webp",
-      "small": "/images/projects/maintenance-renewals-repair-quotes-v1-480.webp",
-      "alt": "Illustrative scene of a maintenance technician documenting an equipment finding.",
-      "caption": "Keep the finding connected to the follow-up."
+      "src": "/images/projects/maintenance-renewals-repair-quotes-flow-hero-v1.png",
+      "small": "/images/projects/maintenance-renewals-repair-quotes-flow-hero-v1.png",
+      "cover": "/images/projects/maintenance-renewals-repair-quotes-flow-cover-v1.png",
+      "alt": "Illustrative maintenance workflow: due agreements and prior scope, renewal proposals with an optional repair-draft module, service-manager review, then approved proposals and scheduling handoffs.",
+      "caption": "From due service agreements to proposal + service handoff.",
+      "kind": "workflow"
     },
     "topic": "Maintenance renewals and repair quotes",
     "kicker": "FOR COMMERCIAL MAINTENANCE AND FIELD SERVICE TEAMS",
@@ -1363,10 +1379,12 @@
   {
     "slug": "fund-investor-relations",
     "image": {
-      "src": "/images/projects/fund-investor-relations-v1-960.webp",
-      "small": "/images/projects/fund-investor-relations-v1-480.webp",
-      "alt": "Illustrative scene of an investor-relations director preparing a meeting brief.",
-      "caption": "Arrive with the relationship context ready."
+      "src": "/images/projects/fund-investor-relations-flow-hero-v1.png",
+      "small": "/images/projects/fund-investor-relations-flow-hero-v1.png",
+      "cover": "/images/projects/fund-investor-relations-flow-cover-v1.png",
+      "alt": "Illustrative fund investor-relations workflow: approved interactions and CRM history, activity drafts and contact matching, IR review, then recorded CRM updates and an optional meeting brief.",
+      "caption": "From ir interactions + crm history to reviewed crm + optional brief.",
+      "kind": "workflow"
     },
     "topic": "Fund investor relations",
     "kicker": "FOR PRIVATE-FUND INVESTOR RELATIONS TEAMS",

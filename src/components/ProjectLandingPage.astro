@@ -8,7 +8,7 @@ type TextList = string | string[];
 interface ProjectPage {
   audienceTitle: string; painTitle: string; painIntro: string; serviceLine: string; integrations: string[];
   businessValue: { title: string; body: string; items: { title: string; body: string }[]; timing: { title: string; body: string } };
-  image: { src: string; small: string; alt: string; caption: string };
+  image: { src: string; small: string; cover: string; alt: string; caption: string; kind: string };
   slug: string; topic: string; kicker: string; title: string; description: string; lead: string; audience: TextList;
   problems: { title: string; body: string }[];
   deliverables: { title: string; body: string }[];
@@ -56,12 +56,14 @@ const structuredData = {
     <meta property="og:description" content={page.seo.description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:image" content={`${site}${page.image.src}`} />
+    <meta property="og:image" content={`${site}${page.image.cover}`} />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
     <meta property="og:image:alt" content={page.image.alt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={page.seo.title} />
     <meta name="twitter:description" content={page.seo.description} />
-    <meta name="twitter:image" content={`${site}${page.image.src}`} />
+    <meta name="twitter:image" content={`${site}${page.image.cover}`} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <LocalFonts primary="inter" />
     <script is:inline src="/scripts/analytics.js" defer></script>
@@ -86,8 +88,8 @@ const structuredData = {
             <p class="project-caption">A conversation with Yuval about where work gets stuck and what to fix first.</p>
           </div>
           <figure class="project-photo">
-            <div class="project-photo-frame"><img src={page.image.src} srcset={`${page.image.small} 480w, ${page.image.src} 960w`} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1200px) 44vw, 506px" width="960" height="1200" alt={page.image.alt} fetchpriority="high" decoding="async" /></div>
-            <figcaption><span>{page.image.caption}</span><small>AI-generated illustration</small></figcaption>
+            <a class="project-photo-frame project-workflow-link" href={page.image.src} target="_blank" rel="noopener" aria-label={`Open the full-size ${page.topic} workflow diagram`}><img src={page.image.src} width="1000" height="1250" alt={page.image.alt} fetchpriority="high" decoding="async" /></a>
+            <figcaption><span>{page.image.caption}</span><a href={page.image.src} target="_blank" rel="noopener">View full workflow <span aria-hidden="true">↗</span></a></figcaption>
           </figure>
         </section>
         <section class="project-fit" id="who" aria-labelledby="audience-title">

@@ -59,7 +59,7 @@ const schema = { '@context': 'https://schema.org', '@graph': [
         {sectors.map(sector => <section class="solution-sector" id={sector.id} data-sector={sector.id} data-sector-name={sector.name} aria-label={sector.name}>
           <div class="solution-sector-offers">{sector.solutions.map(page => <article class="solution-card">
             <header class="solution-card-industry"><span class="project-mono">INDUSTRY</span><h2>{sector.name}</h2></header>
-            <div class="solution-card-image"><img src={page.image.small} srcset={`${page.image.small} 480w, ${page.image.src} 960w`} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1200px) 46vw, 559px" width="480" height="600" alt={page.image.alt} loading="lazy" decoding="async" /><span>AI-generated illustration</span></div>
+            <div class="solution-card-image"><a href={page.image.cover} target="_blank" rel="noopener" aria-label={`Open the full-size ${page.topic} workflow diagram`}><img src={page.image.cover} width="1600" height="900" alt={page.image.alt} loading="lazy" decoding="async" /></a><a class="solution-diagram-link" href={page.image.cover} target="_blank" rel="noopener">View full workflow <span aria-hidden="true">↗</span></a></div>
             <div class="solution-card-body">
               <h3><a href={`/pages/${page.slug}/`}>{page.title}</a></h3>
               <p class="solution-card-description">{page.description}</p>

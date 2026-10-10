@@ -24,8 +24,10 @@
 .solution-card{display:flex;flex-direction:column;border:1px solid #2a3b48;border-radius:8px;overflow:hidden;background:#0b1117;transition:border-color .18s ease}
 .solution-card:hover,.solution-card:focus-within{border-color:#4b7898}
 .solution-card-image{position:relative;background:#18232b;overflow:hidden}
-.solution-card-image>img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center 34%}
-.solution-card-image>span{position:absolute;right:10px;bottom:9px;padding:3px 7px;border-radius:3px;background:#07121ed4;color:#d5e1e9;font-size:8px;line-height:1.6}
+.solution-card-image>a{display:block}
+.solution-card-image img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}
+.solution-card-image .solution-diagram-link{padding:9px 18px;background:#0b141d;color:#9bd5fc;font-size:11px;text-align:right}
+.solution-card-image a:focus-visible{outline:3px solid #6bc1fc;outline-offset:-3px}
 .solution-card-body{padding:25px 27px 0;display:flex;flex-direction:column;flex:1}
 .solution-card-body>.project-kicker{font-size:9px!important;letter-spacing:.11em!important;margin-bottom:13px}
 .solution-card h3{font-size:28px;line-height:1.23;letter-spacing:-.035em;max-width:490px;text-wrap:balance}
@@ -48,9 +50,3 @@
 @media print{.solution-sector-nav{display:none}.solution-hub-hero{padding-block:24px}.solution-hub-hero h1{font-size:38px}.solution-card{background:white;break-inside:avoid}.solution-card-image>img{max-height:160px}.solution-card-integrations,.solution-card-link{display:none}.solution-card-body{padding-bottom:20px}.solution-sector-grid{gap:25px}.solution-card-industry{break-after:avoid}}
 
 /* Portrait photographs need a higher crop in the wide catalog cards. */
-.solution-card-image img[src*="executive-search-intelligence-v3-"]{object-position:50% 20%}
-.solution-card-image img[src*="immigration-case-operations-v3-"]{object-position:50% 12%}
-.solution-card-image img[src*="real-estate-document-review-v3-"]{object-position:50% 20%}
-.solution-card-image img[src*="personal-injury-care-coordination-v3-"]{object-position:50% 25%}
-.solution-card-image img[src*="maintenance-renewals-repair-quotes-v1-"]{object-position:50% 12%}
-.solution-card-image img[src*="fund-investor-relations-v1-"]{object-position:50% 15%}

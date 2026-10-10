@@ -1,0 +1,299 @@
+[
+  {
+    "icp": "construction",
+    "slug": "construction-document-workflows",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/construction-document-workflows-flow-cover-v1.png",
+    "alt": "Illustrative construction workflow: site brief, scope and pricing with interior concepts, estimator and designer approval, then one branded client proposal.",
+    "sha256": "75bd6b231feded3a0c790cda5ce32a346433a372a5695507059d0b60401bac20",
+    "bytes": 518908,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "construction",
+    "slug": "construction-document-workflows",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/construction-document-workflows-flow-hero-v1.png",
+    "alt": "Illustrative construction workflow: site brief, scope and pricing with interior concepts, estimator and designer approval, then one branded client proposal.",
+    "sha256": "18cd244a8c6e33f12554b4ab91628e4f079d9ed2596432ca138a7afafecc0c78",
+    "bytes": 297175,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "accounting",
+    "slug": "accounting-client-operations",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/accounting-client-operations-flow-cover-v1.png",
+    "alt": "Illustrative accounting workflow: client files and checklist, readiness checks and follow-up draft, coordinator review, then a checked work package with owned exceptions.",
+    "sha256": "f85ea9b55f83f6be086f5eb99f88e85b29f5aa0a98e4f6786ae8666440888700",
+    "bytes": 214068,
+    "textFits": [
+      {
+        "text": "Your tools. Your team. Your decision.",
+        "before": 18.1,
+        "size": 17.9
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "icp": "accounting",
+    "slug": "accounting-client-operations",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/accounting-client-operations-flow-hero-v1.png",
+    "alt": "Illustrative accounting workflow: client files and checklist, readiness checks and follow-up draft, coordinator review, then a checked work package with owned exceptions.",
+    "sha256": "46aeb8f74a9ce4f8bd05485a8235ea864a7b6872fbf3388ab3e6d5e5b819c5d1",
+    "bytes": 114669,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "property_law",
+    "slug": "real-estate-document-review",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/real-estate-document-review-flow-cover-v1.png",
+    "alt": "Illustrative property-law workflow: approved documents and checklist, source comparisons and open questions, attorney review, then a source-linked matter summary.",
+    "sha256": "8327973a9de6a9277148acb18a7031d51984ee4b22dea783d8eff8ce4c22fc91",
+    "bytes": 214668,
+    "textFits": [
+      {
+        "text": "Your tools. Your team. Your decision.",
+        "before": 18.1,
+        "size": 17.9
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "icp": "property_law",
+    "slug": "real-estate-document-review",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/real-estate-document-review-flow-hero-v1.png",
+    "alt": "Illustrative property-law workflow: approved documents and checklist, source comparisons and open questions, attorney review, then a source-linked matter summary.",
+    "sha256": "3c80555596fd9cb453002a099bebff750d342c8814cdc5d5a4a21bc25304390b",
+    "bytes": 115306,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "executive_search",
+    "slug": "executive-search-intelligence",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/executive-search-intelligence-flow-cover-v1.png",
+    "alt": "Illustrative executive-search business-development workflow: client history and commitments, relationship brief and follow-up draft, partner review, then a prepared call and CRM next action.",
+    "sha256": "736b72e406eab6a42aa9576b4da8de58e7dd54f0d5ab96ae5976e375baf1041a",
+    "bytes": 214160,
+    "textFits": [
+      {
+        "text": "Your tools. Your team. Your decision.",
+        "before": 18.1,
+        "size": 17.9
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "icp": "executive_search",
+    "slug": "executive-search-intelligence",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/executive-search-intelligence-flow-hero-v1.png",
+    "alt": "Illustrative executive-search business-development workflow: client history and commitments, relationship brief and follow-up draft, partner review, then a prepared call and CRM next action.",
+    "sha256": "15e032980d52b05ba9f512dce40f62d90f28a05d129ef49ef90a3a178f8686b8",
+    "bytes": 113123,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "immigration_law",
+    "slug": "immigration-case-operations",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/immigration-case-operations-flow-cover-v1.png",
+    "alt": "Illustrative immigration-law workflow: approved intake and confirmed case type, document pack and case tasks, authorized review, then a client request and tracked missing items.",
+    "sha256": "1d67616145f479b525d2509f10d8531887ac0a3671f61a1338656db6c51f70cb",
+    "bytes": 214786,
+    "textFits": [
+      {
+        "text": "Your tools. Your team. Your decision.",
+        "before": 18.1,
+        "size": 17.9
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "icp": "immigration_law",
+    "slug": "immigration-case-operations",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/immigration-case-operations-flow-hero-v1.png",
+    "alt": "Illustrative immigration-law workflow: approved intake and confirmed case type, document pack and case tasks, authorized review, then a client request and tracked missing items.",
+    "sha256": "c5dd402478102d91acd760138145f1802f23505bac455af5fd38994f2da27520",
+    "bytes": 116551,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "pi_care_coordination",
+    "slug": "personal-injury-care-coordination",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/personal-injury-care-coordination-flow-cover-v1.png",
+    "alt": "Illustrative personal-injury care-coordination business workflow: partner enquiry, an optional shared CRM lead and follow-up draft, relationship-owner approval, then a reply and next action. No patient case details.",
+    "sha256": "1794b0735d4eb8c0d2be451e9f8d1c0d0fc8626cb39cefb304a145a21c6eb641",
+    "bytes": 214749,
+    "textFits": [
+      {
+        "text": "Your tools. Your team. Your decision.",
+        "before": 18.1,
+        "size": 17.9
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "icp": "pi_care_coordination",
+    "slug": "personal-injury-care-coordination",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/personal-injury-care-coordination-flow-hero-v1.png",
+    "alt": "Illustrative personal-injury care-coordination business workflow: partner enquiry, an optional shared CRM lead and follow-up draft, relationship-owner approval, then a reply and next action. No patient case details.",
+    "sha256": "b81023a56bf9bbfe0a8d18f505091b8f1c8fc0769a08f3bc40ac731be076face",
+    "bytes": 115421,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "distribution",
+    "slug": "distributor-order-intake",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/distributor-order-intake-flow-cover-v1.png",
+    "alt": "Illustrative distribution workflow: customer PO and approved records, sales-order draft and exception check, order-desk approval, then a recorded ERP order with source and sync status.",
+    "sha256": "f203c094badeb73f1ee75cb7794b9221042dcad4ecead0de7d14c8b30fc315ea",
+    "bytes": 214497,
+    "textFits": [
+      {
+        "text": "Customer PO +",
+        "before": 28.9,
+        "size": 28.8
+      },
+      {
+        "text": "Approved item mappings",
+        "before": 16.7,
+        "size": 16.6
+      },
+      {
+        "text": "Your tools. Your team. Your decision.",
+        "before": 18.1,
+        "size": 17.9
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "icp": "distribution",
+    "slug": "distributor-order-intake",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/distributor-order-intake-flow-hero-v1.png",
+    "alt": "Illustrative distribution workflow: customer PO and approved records, sales-order draft and exception check, order-desk approval, then a recorded ERP order with source and sync status.",
+    "sha256": "94ec836f10a124744ab7fcdfdf9bf48b9fdfa81d6823488f7eebd2d6781fa5f5",
+    "bytes": 115928,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "maintenance_services",
+    "slug": "maintenance-renewals-repair-quotes",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/maintenance-renewals-repair-quotes-flow-cover-v1.png",
+    "alt": "Illustrative maintenance workflow: due agreements and prior scope, renewal proposals with an optional repair-draft module, service-manager review, then approved proposals and scheduling handoffs.",
+    "sha256": "d405d987c2a4662f28a0fe4909feed691fb88274e5ff85b97f183662a285d350",
+    "bytes": 216682,
+    "textFits": [
+      {
+        "text": "Service manager",
+        "before": 25.6,
+        "size": 25.5
+      },
+      {
+        "text": "Your tools. Your team. Your decision.",
+        "before": 18.1,
+        "size": 17.9
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "icp": "maintenance_services",
+    "slug": "maintenance-renewals-repair-quotes",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/maintenance-renewals-repair-quotes-flow-hero-v1.png",
+    "alt": "Illustrative maintenance workflow: due agreements and prior scope, renewal proposals with an optional repair-draft module, service-manager review, then approved proposals and scheduling handoffs.",
+    "sha256": "726b161bfb77449b49aaec3a80e6d87dea40bd26fef608c93f653dfaf9b59b7d",
+    "bytes": 116101,
+    "textFits": [],
+    "overflow": []
+  },
+  {
+    "icp": "fund_ir",
+    "slug": "fund-investor-relations",
+    "kind": "cover",
+    "width": 1600,
+    "height": 900,
+    "url": "https://futureproofagents.com/images/projects/fund-investor-relations-flow-cover-v1.png",
+    "alt": "Illustrative fund investor-relations workflow: approved interactions and CRM history, activity drafts and contact matching, IR review, then recorded CRM updates and an optional meeting brief.",
+    "sha256": "2cbad847302aaa5a3bb1b6cbdb7bd03a4c9a77ed5cc06e26215750306c0e1c34",
+    "bytes": 217184,
+    "textFits": [
+      {
+        "text": "Your tools. Your team. Your decision.",
+        "before": 18.1,
+        "size": 17.9
+      }
+    ],
+    "overflow": []
+  },
+  {
+    "icp": "fund_ir",
+    "slug": "fund-investor-relations",
+    "kind": "hero",
+    "width": 1000,
+    "height": 1250,
+    "url": "https://futureproofagents.com/images/projects/fund-investor-relations-flow-hero-v1.png",
+    "alt": "Illustrative fund investor-relations workflow: approved interactions and CRM history, activity drafts and contact matching, IR review, then recorded CRM updates and an optional meeting brief.",
+    "sha256": "75aeb31f7daca428a308044f4d7dc5b34e926fc2cb3d1d1d3cea7bfed4e5e836",
+    "bytes": 115809,
+    "textFits": [],
+    "overflow": []
+  }
+]
