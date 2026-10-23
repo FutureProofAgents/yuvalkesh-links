@@ -110,37 +110,54 @@ const REVENUE_LABELS = {
 };
 const EMPLOYEE_OPTIONS = ['1-10', '11-50', '51-200', '201-1000', '1000+'];
 
-async function saveRequest(payload) {
+async function saveRequest(payload, { partial }) {
   const escapedEmail = payload.email.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
   const existing = await executeTool('AIRTABLE_LIST_RECORDS', {
     baseId: AIRTABLE_BASE_ID, tableIdOrName: AIRTABLE_TABLE_ID,
     filterByFormula: `LOWER({Email})='${escapedEmail}'`, maxRecords: 1, pageSize: 1,
   });
   const record = getFirstRecord(existing);
-  const fields = {
+  const current = record?.fields || {};
+  const candidate = {
     Email: payload.email,
     'Full Name': payload.fullName,
     'Phone/WhatsApp': payload.phone,
     'Job Title': payload.jobTitle,
     Organization: payload.organization,
+    'About Business': payload.aboutBusiness,
     'Annual Revenue': payload.annualRevenue,
     Employees: payload.employees,
     'Current AI Usage': payload.currentAiUsage,
     'Main Challenge': payload.mainChallenge,
     'Preferred Language': payload.preferredLanguage,
+    'Last Step': payload.lastStep,
+    'Session ID': payload.sessionId,
     Source: 'futureproof-consulting-30min',
     Page: payload.page,
-    'Signed Up At': payload.signedUpAt,
     'User Agent': payload.userAgent,
-    Consent: true,
   };
-  if (record?.id) {
-    // Repeated requests update details but never reset Yuval's pipeline status.
-    if (!record?.fields?.Status) fields.Status = 'new';
-    return executeTool('AIRTABLE_UPDATE_RECORD', { baseId: AIRTABLE_BASE_ID, tableIdOrName: AIRTABLE_TABLE_ID, recordId: record.id, fields });
+  // Never overwrite a filled field with an empty value.
+  const fields = {};
+  for (const [key, value] of Object.entries(candidate)) {
+    if (value !== undefined && value !== null && value !== '') fields[key] = value;
   }
-  fields.Status = 'new';
-  return executeTool('AIRTABLE_CREATE_RECORDS', { baseId: AIRTABLE_BASE_ID, tableIdOrName: AIRTABLE_TABLE_ID, records: [{ fields }] });
+  if (!current['Signed Up At']) fields['Signed Up At'] = payload.signedUpAt;
+  const status = current.Status;
+  if (partial) {
+    // A partial save never downgrades a completed request.
+    if (current.Completed) delete fields['Last Step'];
+    if (!status || status === 'partial') fields.Status = current.Completed ? status || 'new' : 'partial';
+  } else {
+    fields.Completed = true;
+    fields.Consent = true;
+    fields['Last Step'] = 'submitted';
+    // Keep Yuval's pipeline status (contacted/booked/...) if already set.
+    if (!status || status === 'partial') fields.Status = 'new';
+  }
+  if (record?.id) {
+    return executeTool('AIRTABLE_UPDATE_RECORD', { baseId: AIRTABLE_BASE_ID, tableIdOrName: AIRTABLE_TABLE_ID, recordId: record.id, fields, typecast: true });
+  }
+  return executeTool('AIRTABLE_CREATE_RECORDS', { baseId: AIRTABLE_BASE_ID, tableIdOrName: AIRTABLE_TABLE_ID, records: [{ fields }], typecast: true });
 }
 
 export default async function handler(request, response) {
@@ -165,8 +182,7 @@ export default async function handler(request, response) {
   // Honeypot: pretend success for bots.
   if (clean(body.company, 100)) return send(response, 200, { ok: true });
 
-  if (body.consent !== true) return send(response, 400, { ok: false, error: 'Consent is required' });
-
+  const partial = body.partial === true;
   const email = clean(body.email, 180).toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
     return send(response, 400, { ok: false, error: 'Valid email is required' });
@@ -176,25 +192,31 @@ export default async function handler(request, response) {
   const phone = clean(body.phone, 30);
   const jobTitle = clean(body.jobTitle, 120);
   const organization = clean(body.organization, 160);
+  const aboutBusiness = clean(body.aboutBusiness, 2000);
   const mainChallenge = clean(body.mainChallenge, 2000);
   const currentAiUsage = clean(body.currentAiUsage, 2000);
-  if (fullName.length < 2 || jobTitle.length < 2 || organization.length < 2) {
-    return send(response, 400, { ok: false, error: 'Name, role and organization are required' });
+  const phoneOk = /^[+\d][\d\s()\-.]{6,29}$/.test(phone);
+  const annualRevenue = REVENUE_LABELS[body.annualRevenue] || '';
+  const employees = EMPLOYEE_OPTIONS.includes(body.employees) ? body.employees : '';
+
+  if (!partial) {
+    if (body.consent !== true) return send(response, 400, { ok: false, error: 'Consent is required' });
+    if (fullName.length < 2 || jobTitle.length < 2 || organization.length < 2) {
+      return send(response, 400, { ok: false, error: 'Name, role and organization are required' });
+    }
+    if (!phoneOk) return send(response, 400, { ok: false, error: 'Valid phone / WhatsApp number is required' });
+    if (aboutBusiness.length < 5) return send(response, 400, { ok: false, error: 'Business description is required' });
+    if (!annualRevenue) return send(response, 400, { ok: false, error: 'Annual revenue is required' });
+    if (!employees) return send(response, 400, { ok: false, error: 'Number of employees is required' });
+    if (mainChallenge.length < 5) return send(response, 400, { ok: false, error: 'Main challenge is required' });
   }
-  if (!/^[+\d][\d\s()\-.]{6,29}$/.test(phone)) {
-    return send(response, 400, { ok: false, error: 'Valid phone / WhatsApp number is required' });
-  }
-  const annualRevenue = REVENUE_LABELS[body.annualRevenue];
-  if (!annualRevenue) return send(response, 400, { ok: false, error: 'Annual revenue is required' });
-  if (!EMPLOYEE_OPTIONS.includes(body.employees)) {
-    return send(response, 400, { ok: false, error: 'Number of employees is required' });
-  }
-  if (mainChallenge.length < 5) return send(response, 400, { ok: false, error: 'Main challenge is required' });
 
   const payload = {
-    email, fullName, phone, jobTitle, organization, annualRevenue,
-    employees: body.employees, mainChallenge, currentAiUsage,
-    preferredLanguage: body.preferredLanguage === 'en' ? 'English' : body.preferredLanguage === 'he' ? 'Hebrew' : (lang === 'he' ? 'Hebrew' : 'English'),
+    email, fullName, phone: phoneOk ? phone : '', jobTitle, organization, aboutBusiness, annualRevenue,
+    employees, mainChallenge, currentAiUsage,
+    preferredLanguage: body.preferredLanguage === 'en' ? 'English' : body.preferredLanguage === 'he' ? 'Hebrew' : (partial ? '' : (lang === 'he' ? 'Hebrew' : 'English')),
+    lastStep: clean(body.lastStep, 60),
+    sessionId: clean(body.sessionId, 80),
     signedUpAt: new Date().toISOString(),
     page: clean(body.page, 300) || `https://futureproofagents.com/${lang === 'he' ? 'he/' : ''}consulting/`,
     userAgent: clean(request.headers['user-agent'], 500),
@@ -204,8 +226,8 @@ export default async function handler(request, response) {
     if (!COMPOSIO_USER_API_KEY || !COMPOSIO_ORG_ID || !COMPOSIO_PROJECT_ID || !COMPOSIO_USER_ID) {
       throw new Error('Consulting request service unavailable');
     }
-    await saveRequest(payload);
-    return send(response, 202, { ok: true, status: 'new' });
+    await saveRequest(payload, { partial });
+    return send(response, 202, { ok: true, status: partial ? 'partial' : 'new' });
   } catch (error) {
     console.error('[consulting] request failed:', error?.message || 'unknown error');
     return send(response, 502, { ok: false, error: 'Could not complete request' });

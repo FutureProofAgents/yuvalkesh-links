@@ -394,10 +394,10 @@ const copy = he
     .stepper-progress{flex:1;height:6px;border-radius:99px;background:#1b2229;overflow:hidden}
     .stepper-progress span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--blue),#7cc8ff);transition:width .45s cubic-bezier(.2,.8,.2,1)}
     .stepper-count{font-variant-numeric:tabular-nums;white-space:nowrap}
-    .steps{display:grid;overflow-x:clip;overflow-y:visible;padding:2px}
-    .step{grid-area:1/1;display:flex;flex-direction:column;gap:14px;opacity:0;visibility:hidden;transform:translateX(calc(var(--from,1) * 40px));transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s;pointer-events:none}
+    .steps{position:relative;overflow-x:clip;overflow-y:visible;padding:2px}
+    .step{position:absolute;inset:0 0 auto 0;display:flex;flex-direction:column;gap:14px;opacity:0;visibility:hidden;transform:translateX(calc(var(--from,1) * 40px));transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s;pointer-events:none}
     [dir='rtl'] .step{transform:translateX(calc(var(--from,1) * -40px))}
-    .step.is-active{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s;pointer-events:auto}
+    .step.is-active{position:relative;opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s;pointer-events:auto}
     .step-q{margin:0;font-size:clamp(22px,5.4vw,30px);line-height:1.25;font-weight:800;color:#fff}
     .step-q .num{display:inline-block;margin-inline-end:8px;color:var(--blue);font-size:.6em;vertical-align:middle}
     .step-hint{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
@@ -423,7 +423,7 @@ const copy = he
     .stepper-nav[hidden]{display:none}
     .stepper-nav .back[hidden],.stepper-nav .skip[hidden]{display:none}
     .stepper-nav .enter-hint{margin-inline-start:auto;font-size:12px;color:var(--muted)}
-    .stepper-done{grid-area:1/1;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px 0}
+    .stepper-done{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px 0}
     .stepper-done[hidden]{display:none}
     .stepper-done .party{font-size:64px;line-height:1;animation:pop .7s cubic-bezier(.2,1.6,.4,1) both}
     .stepper-done h3{margin:0;font-size:clamp(24px,6vw,34px);color:#fff}
@@ -432,6 +432,11 @@ const copy = he
     .confetti i{position:absolute;top:-12px;width:8px;height:14px;border-radius:2px;opacity:0;animation:fall 2.4s ease-in forwards}
     @keyframes pop{from{transform:scale(.2) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
     @keyframes fall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(520px) rotate(540deg)}}
+    .about-yuval{display:flex;align-items:center;gap:16px;max-width:640px;margin:0 auto 16px;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:#0b1015;text-align:start}
+    .about-yuval img{width:64px;height:64px;flex:none;border-radius:50%;object-fit:cover;border:2px solid var(--blue)}
+    .about-yuval b{display:block;color:#fff;font-size:16px;margin-bottom:4px}
+    .about-yuval p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+    @media (max-width:680px){.hero{padding-bottom:12px}.about-yuval{margin-bottom:12px;padding:12px 14px;gap:12px}.about-yuval img{width:52px;height:52px}.step-q{font-size:22px}.steps{min-height:0}}
     .closing-cta{display:inline-block;margin-top:18px;padding:14px 28px;border-radius:12px;background:var(--blue);color:#000;font-weight:700;text-decoration:none}
     @media (max-width:680px){.stepper{padding:20px 16px 18px;border-radius:16px}.stepper-nav .enter-hint{display:none}.stepper-nav .next{flex:1}}
     @media (prefers-reduced-motion:reduce){.step,.step.is-active,.stepper-progress span{transition:none!important;transform:none!important}.stepper-done .party,.confetti i{animation:none!important}.confetti{display:none}}
@@ -464,6 +469,13 @@ const copy = he
       </section>
 
       <section class="section" id="register">
+        <aside class="about-yuval reveal">
+          <img src="/avatar.jpg" width="64" height="64" alt={he ? 'יובל קשטכר' : 'Yuval Keshtcher'} />
+          <div>
+            <b>{he ? 'נעים מאוד, אני יובל קשטכר' : 'Hi, I am Yuval Keshtcher'}</b>
+            <p>{he ? 'מייסד FutureProof Agents, בונה סוכני AI בהתאמה אישית לעסקים ומוביל את קהילת הוואטסאפ ״בינה מלאכותית עסקית״. לפני כן הקמתי את UX Writing Hub, בית הספר הבינלאומי לכתיבת חוויית משתמש, עם יותר מאלף בוגרים בחברות הגדולות בעולם.' : 'Founder of FutureProof Agents. I build custom AI agents for businesses and lead the WhatsApp community “בינה מלאכותית עסקית” (Business AI). Before that I founded UX Writing Hub, the international UX writing school, with 1,000+ graduates at the world’s biggest companies.'}</p>
+          </div>
+        </aside>
         <form class="stepper" data-stepper novalidate>
           <div class="confetti" aria-hidden="true"></div>
           <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
@@ -473,12 +485,7 @@ const copy = he
           </div>
           <div class="steps">
             <div class="step" data-step data-req>
-              <h2 class="step-q">{he ? 'היי! איך קוראים לך? 👋' : 'Hi there! What is your name? 👋'}</h2>
-              <p class="step-hint">{he ? 'ככה נדע איך לפנות אליך בשיחה.' : 'So we know what to call you on the call.'}</p>
-              <input name="fullName" type="text" autocomplete="name" minlength="2" maxlength="120" required data-msg={he ? 'רק השם, בבקשה (לפחות 2 אותיות) 🙂' : 'Just your name, please (at least 2 letters) 🙂'} />
-            </div>
-            <div class="step" data-step data-req>
-              <h2 class="step-q" data-tpl={he ? 'נעים מאוד, {n}! לאיזה מייל נשלח את פרטי השיחה?' : 'Nice to meet you, {n}! Where should we email the details?'}>{he ? 'נעים מאוד! לאיזה מייל נשלח את פרטי השיחה?' : 'Nice to meet you! Where should we email the details?'}</h2>
+              <h2 class="step-q">{he ? 'היי! 👋 לאיזה מייל נשלח את פרטי השיחה?' : 'Hi there! 👋 Where should we email the session details?'}</h2>
               <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="180" required data-msg={he ? 'נראה שחסר משהו במייל — אפשר לבדוק שוב?' : 'That email looks a little off — mind checking it?'} />
             </div>
             <div class="step" data-step data-req>
@@ -487,12 +494,22 @@ const copy = he
               <input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" required data-msg={he ? 'המספר נראה קצר מדי — אפשר עם קידומת, למשל 050-1234567' : 'That number looks too short — e.g. +972 50 123 4567'} />
             </div>
             <div class="step" data-step data-req>
-              <h2 class="step-q" data-tpl={he ? 'מה התפקיד שלך, {n}?' : 'What is your role, {n}?'}>{he ? 'מה התפקיד שלך?' : 'What is your role?'}</h2>
+              <h2 class="step-q">{he ? 'ואיך קוראים לך?' : 'And what is your name?'}</h2>
+              <p class="step-hint">{he ? 'ככה נדע איך לפנות אליך בשיחה.' : 'So we know what to call you on the call.'}</p>
+              <input name="fullName" type="text" autocomplete="name" minlength="2" maxlength="120" required data-msg={he ? 'רק השם, בבקשה (לפחות 2 אותיות) 🙂' : 'Just your name, please (at least 2 letters) 🙂'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q" data-tpl={he ? 'נעים מאוד, {n}! מה התפקיד שלך?' : 'Nice to meet you, {n}! What is your role?'}>{he ? 'מה התפקיד שלך?' : 'What is your role?'}</h2>
               <input name="jobTitle" type="text" autocomplete="organization-title" minlength="2" maxlength="120" required placeholder={copy.f.jobPh} data-msg={he ? 'ספר/י לנו בכמה מילים מה התפקיד' : 'Tell us your role in a few words'} />
             </div>
             <div class="step" data-step data-req>
               <h2 class="step-q">{he ? 'ואיך קוראים לעסק? 🏢' : 'And what is the business called? 🏢'}</h2>
               <input name="organization" type="text" autocomplete="organization" minlength="2" maxlength="160" required data-msg={he ? 'רק שם העסק או החברה' : 'Just the company or business name'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'ספרו בכמה מילים על העסק' : 'Tell us about the business in a few words'}</h2>
+              <p class="step-hint">{he ? 'מה אתם עושים, למי אתם מוכרים ואיך נראה יום עבודה רגיל.' : 'What you do, who you sell to and what a typical work day looks like.'}</p>
+              <textarea name="aboutBusiness" minlength="5" maxlength="2000" required data-msg={he ? 'עוד כמה מילים על העסק, בבקשה 🙏' : 'A few more words about the business, please 🙏'}></textarea>
             </div>
             <div class="step" data-step data-req data-choice>
               <h2 class="step-q">{he ? 'מה גובה המחזור השנתי, בערך?' : 'Roughly what is your annual revenue?'}</h2>
@@ -578,6 +595,58 @@ const copy = he
       var sending = false;
       var field = function (name) { return form.querySelector('[name="' + name + '"]'); };
       var val = function (name) { var el = field(name); return el ? el.value.trim() : ''; };
+      var sessionId = (function () {
+        try {
+          var k = 'fp_consult_sid';
+          var v = sessionStorage.getItem(k);
+          if (!v) { v = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2)); sessionStorage.setItem(k, v); }
+          return v;
+        } catch (e) { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+      })();
+      var submitted = false;
+      var partialTimer = null;
+      var pendingStep = '';
+      function collect() {
+        return {
+          fullName: val('fullName'),
+          email: val('email'),
+          phone: val('phone'),
+          jobTitle: val('jobTitle'),
+          organization: val('organization'),
+          aboutBusiness: val('aboutBusiness'),
+          annualRevenue: val('annualRevenue'),
+          employees: val('employees'),
+          mainChallenge: val('mainChallenge'),
+          currentAiUsage: val('currentAiUsage'),
+          preferredLanguage: val('preferredLanguage') || lang,
+          company: field('company').value,
+          sessionId: sessionId,
+          lang: lang,
+          page: location.href,
+        };
+      }
+      function flushPartial() {
+        clearTimeout(partialTimer);
+        partialTimer = null;
+        if (submitted || !pendingStep) return;
+        var data = collect();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) return;
+        data.partial = true;
+        data.lastStep = pendingStep;
+        pendingStep = '';
+        // Fire-and-forget: never blocks or surfaces errors in the UI.
+        try {
+          fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), keepalive: true }).catch(function () {});
+        } catch (e) {}
+      }
+      function savePartial(step) {
+        var el = step.querySelector('[name]:not([name=company])');
+        pendingStep = el ? el.name : 'step';
+        clearTimeout(partialTimer);
+        partialTimer = setTimeout(flushPartial, 900);
+      }
+      window.addEventListener('pagehide', flushPartial);
+      document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flushPartial(); });
       var firstName = function () { return val('fullName').split(/\s+/)[0] || ''; };
 
       function personalize() {
@@ -636,6 +705,7 @@ const copy = he
         var step = steps[cur];
         if (!validate(step)) { focusStep(step); return; }
         if (step.hasAttribute('data-last')) return submit();
+        savePartial(step);
         show(cur + 1, 1);
       }
 
@@ -658,29 +728,19 @@ const copy = he
         next.disabled = true;
         next.textContent = next.dataset.loading;
         err.textContent = '';
+        clearTimeout(partialTimer);
+        pendingStep = '';
         try {
+          var payload = collect();
+          payload.consent = field('consent').checked;
           var response = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              fullName: val('fullName'),
-              email: val('email'),
-              phone: val('phone'),
-              jobTitle: val('jobTitle'),
-              organization: val('organization'),
-              annualRevenue: val('annualRevenue'),
-              employees: val('employees'),
-              mainChallenge: val('mainChallenge'),
-              currentAiUsage: val('currentAiUsage'),
-              preferredLanguage: val('preferredLanguage') || lang,
-              consent: field('consent').checked,
-              company: field('company').value,
-              lang: lang,
-              page: location.href,
-            }),
+            body: JSON.stringify(payload),
           });
           var result = await response.json();
           if (!response.ok || !result.ok) throw new Error('request failed');
+          submitted = true;
           steps.forEach(function (s) { s.classList.remove('is-active'); s.inert = true; });
           nav.hidden = true;
           bar.style.width = '100%';
@@ -714,7 +774,7 @@ const copy = he
 
       next.addEventListener('click', advance);
       back.addEventListener('click', function () { if (cur > 0) show(cur - 1, -1); });
-      skip.addEventListener('click', function () { show(cur + 1, 1); });
+      skip.addEventListener('click', function () { savePartial(steps[cur]); show(cur + 1, 1); });
       form.addEventListener('submit', function (e) { e.preventDefault(); advance(); });
       form.addEventListener('keydown', function (e) {
         var step = steps[cur];
