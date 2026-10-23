@@ -1,0 +1,544 @@
+---
+import LocalFonts from './LocalFonts.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+
+interface Props {
+  lang: 'en' | 'he';
+}
+
+const { lang } = Astro.props;
+const he = lang === 'he';
+const site = Astro.site!.href.replace(/\/$/, '');
+const pagePath = he ? '/he/consulting/' : '/consulting/';
+
+const revenueOptions = [
+  ['up_to_1m', 'עד 1 מיליון ₪', 'Up to ₪1M'],
+  ['1_5m', '1-5 מיליון ₪', '₪1-5M'],
+  ['5_20m', '5-20 מיליון ₪', '₪5-20M'],
+  ['20_100m', '20-100 מיליון ₪', '₪20-100M'],
+  ['over_100m', 'מעל 100 מיליון ₪', 'Over ₪100M'],
+];
+const employeeOptions = ['1-10', '11-50', '51-200', '201-1000', '1000+'];
+
+const copy = he
+  ? {
+      title: 'שיחת ייעוץ AI חינם של 30 דקות עם יובל קשטכר | FutureProof Agents',
+      description: 'לבעלי עסקים ומנהלים מקהילת הוואטסאפ "בינה מלאכותית עסקית": שיחת ייעוץ אישית של 30 דקות, ללא עלות, למיפוי המקומות שבהם סוכן AI מותאם יחסוך לכם זמן וכסף.',
+      eyebrow: 'לחברי קהילת "בינה מלאכותית עסקית" · מספר המקומות מוגבל',
+      headlineA: '30 דקות עם יובל.',
+      headlineB: 'מפה ברורה ל־AI בעסק שלכם.',
+      intro: 'שיחת ייעוץ אישית וחינמית לבעלי עסקים ומנהלים מקהילת הוואטסאפ "בינה מלאכותית עסקית". נעבור יחד על התהליכים בעסק ונמפה איפה סוכן AI מותאם אישית יכול לחסוך לכם זמן וכסף — בענן מאובטח, בלי שהמודלים יתאמנו על המידע שלכם.',
+      cta: 'שריינו לי שיחה',
+      loading: 'שולחים…',
+      note: 'מספר השיחות מוגבל. נעבור על כל בקשה ונחזור אליכם בוואטסאפ או במייל לתיאום מועד.',
+      success: 'תודה! הבקשה התקבלה. נחזור אליכם בקרוב בוואטסאפ או במייל כדי לתאם את השיחה.',
+      error: 'משהו השתבש. נסו שוב בעוד רגע.',
+      proof: ['30 דקות, ללא עלות', 'מקומות מוגבלים', 'ענן מאובטח', 'המודלים לא מתאמנים על המידע שלכם'],
+      getEyebrow: 'מה מקבלים בשיחה',
+      getTitle: 'לא הרצאה. מפה פרקטית לעסק שלכם.',
+      getIntro: 'בסוף 30 הדקות תדעו איפה AI באמת שווה את ההשקעה אצלכם — ומה עדיף לדחות.',
+      gets: [
+        ['01', 'מיפוי הזדמנויות', 'נזהה 2-3 תהליכים שבהם סוכן AI מותאם אישית יכול לחסוך שעות עבודה וכסף כבר ברבעון הקרוב.'],
+        ['02', 'ענן מאובטח', 'איך מריצים סוכנים בסביבה מאובטחת ומבודדת, עם שליטה מלאה בהרשאות ובגישה למידע.'],
+        ['03', 'המידע שלכם נשאר שלכם', 'עבודה עם מודלים שלא מתאמנים על המידע העסקי שלכם, ומה לבדוק מול כל ספק.'],
+        ['04', 'צעד ראשון ברור', 'המלצה קונקרטית אחת להתחיל איתה — עם מדד הצלחה ואחראי.'],
+      ],
+      closingEyebrow: 'מספר המקומות מוגבל',
+      closingTitle: 'רוצים לבדוק מה AI יכול לעשות לעסק שלכם?',
+      closingText: 'ספרו לי קצת על העסק ועל האתגר המרכזי. אני עובר על כל בקשה בעצמי ומתאם שיחה עם מי שיש התאמה.',
+      cta2: 'להרשמה לשיחה',
+      f: {
+        fullName: 'שם מלא', email: 'מייל', phone: 'טלפון / וואטסאפ', jobTitle: 'תפקיד', jobPh: 'למשל: מנכ״ל, בעלים, סמנכ״לית',
+        organization: 'חברה / עסק', revenue: 'מחזור הכנסות שנתי', employees: 'מספר עובדים', choose: 'בחירה',
+        aiUsage: 'איך אתם משתמשים היום ב־AI? (לא חובה)', challenge: 'מה האתגר המרכזי שהייתם רוצים לפתור?',
+        language: 'שפה מועדפת לשיחה', hebrew: 'עברית', english: 'אנגלית',
+        consent: 'אני מאשר/ת שיצרו איתי קשר בוואטסאפ, בטלפון או במייל לתיאום השיחה.',
+      },
+    }
+  : {
+      title: 'Free 30-minute AI consulting session with Yuval Keshtcher | FutureProof Agents',
+      description: 'For business owners and executives from the "Business AI" WhatsApp community: a free, personal 30-minute session to map where a custom AI agent can save you time and money.',
+      eyebrow: 'For "Business AI" community members · Limited spots',
+      headlineA: '30 minutes with Yuval.',
+      headlineB: 'A clear AI map for your business.',
+      intro: 'A free, personal consulting session for business owners and executives from the "Business AI" (בינה מלאכותית עסקית) WhatsApp community. We will walk through your operations and map where a custom AI agent can save you time and money — on a secure cloud, with models that do not train on your data.',
+      cta: 'Book my session',
+      loading: 'Sending…',
+      note: 'Spots are limited. I review every request and will reach out by WhatsApp or email to schedule.',
+      success: 'Thank you! Your request was received. We will reach out shortly by WhatsApp or email to schedule your session.',
+      error: 'That did not go through. Try again in a moment.',
+      proof: ['30 minutes, free', 'Limited spots', 'Secure cloud', 'Models never train on your data'],
+      getEyebrow: 'What you get',
+      getTitle: 'Not a lecture. A practical map for your business.',
+      getIntro: 'In 30 minutes you will know where AI is truly worth the investment for you — and what to hold off on.',
+      gets: [
+        ['01', 'Opportunity map', 'We identify 2-3 processes where a custom AI agent can save hours and money as soon as next quarter.'],
+        ['02', 'Secure cloud', 'How to run agents in an isolated, secure environment with full control over permissions and data access.'],
+        ['03', 'Your data stays yours', 'Working with models that do not train on your business data, and what to check with every vendor.'],
+        ['04', 'A clear first step', 'One concrete recommendation to start with — with a success metric and an owner.'],
+      ],
+      closingEyebrow: 'Limited spots',
+      closingTitle: 'Want to see what AI can do for your business?',
+      closingText: 'Tell me a little about your business and your main challenge. I review every request myself and schedule a call where there is a fit.',
+      cta2: 'Request a session',
+      f: {
+        fullName: 'Full name', email: 'Email', phone: 'Phone / WhatsApp', jobTitle: 'Role', jobPh: 'e.g. CEO, Owner, VP',
+        organization: 'Company / business', revenue: 'Annual revenue', employees: 'Number of employees', choose: 'Choose',
+        aiUsage: 'How do you use AI today? (optional)', challenge: 'What is the main challenge you would like to solve?',
+        language: 'Preferred language for the call', hebrew: 'Hebrew', english: 'English',
+        consent: 'I agree to be contacted by WhatsApp, phone or email to schedule the session.',
+      },
+    };
+---
+<!DOCTYPE html>
+<html lang={lang} dir={he ? 'rtl' : 'ltr'}>
+<head>
+  <script is:inline defer src="/scripts/analytics.js"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{copy.title}</title>
+  <meta name="description" content={copy.description} />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href={`${site}${pagePath}`} />
+  <link rel="alternate" hreflang="en" href={`${site}/consulting/`} />
+  <link rel="alternate" hreflang="he" href={`${site}/he/consulting/`} />
+  <link rel="alternate" hreflang="x-default" href={`${site}/he/consulting/`} />
+  <meta property="og:title" content={copy.title} />
+  <meta property="og:description" content={copy.description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`${site}${pagePath}`} />
+  <meta property="og:image" content={`${site}/avatar.jpg`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <LocalFonts hebrew={lang === 'he'} primary={lang === 'he' ? 'heebo' : 'inter'} />
+  <style is:inline>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --blue: #1d9bf0;
+      --blue-soft: rgba(29, 155, 240, 0.13);
+      --ink: #e7e9ea;
+      --muted: #8b949e;
+      --panel: #101214;
+      --panel-2: #16181c;
+      --line: #2f3336;
+      --black: #000;
+    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      min-height: 100vh;
+      background: var(--black);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+    html[dir='rtl'] body { font-family: 'Heebo', Arial, sans-serif; }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -280px 0 auto;
+      margin: auto;
+      width: min(760px, 100%);
+      height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,155,240,.2), rgba(29,155,240,0) 68%);
+      filter: blur(24px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    a { color: inherit; }
+    .confirmation-banner { padding:20px 24px; margin-top:28px; border:1px solid #327250; border-radius:14px; background:#0d251b; color:#b9efce; line-height:1.6; }
+    .header-shell { width: min(1116px, calc(100% - 40px)); margin-inline: auto; }
+    h1, h2 { text-wrap: balance; overflow-wrap: break-word; }
+    .site-shell { position: relative; z-index: 1; }
+    .topbar {
+      width: min(1080px, calc(100% - 36px));
+      height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: -.25px;
+    }
+    .brand svg { width: 30px; height: 30px; }
+    .brand span { color: var(--blue); }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-link, .lang {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 15px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 750;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .nav-link { border-color: transparent; }
+    .nav-link:hover, .lang:hover { color: #fff; border-color: #454a50; background: rgba(255,255,255,.03); }
+    main { width: min(860px, calc(100% - 36px)); margin: 0 auto; }
+    .hero {
+      text-align: center;
+      padding: 76px 0 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+    h1 {
+      max-width: 820px;
+      margin: 22px auto 0;
+      font-size: clamp(36px, 6.2vw, 68px);
+      line-height: 1.12;
+      letter-spacing: -2.5px;
+      font-weight: 900;
+      color: #fff;
+    }
+    html[dir='rtl'] .eyebrow { letter-spacing: .2px; text-transform: none; }
+    html[dir='rtl'] h1 { line-height: 1.08; letter-spacing: -1.6px; }
+    h1 span { display: block; color: var(--blue); }
+    .hero-copy {
+      max-width: 650px;
+      margin: 28px auto 0;
+      color: #c7cbd0;
+      font-size: clamp(16px, 2.4vw, 19px);
+      line-height: 1.72;
+    }
+    .signup-wrap { width: min(620px, 100%); margin: 38px auto 0; }
+    .signup-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+    .consent { grid-column:1/-1; display:flex; align-items:flex-start; gap:10px; text-align:start; font-size:13px; line-height:1.6; color:#bcc6d0; margin-top:4px; cursor:pointer; }
+    .consent input { margin-top:4px; width:18px; height:18px; flex-shrink:0; accent-color:var(--blue); }
+    .signup-form input[type='email'] {
+      min-width: 0;
+      min-height: 58px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--panel-2);
+      color: #fff;
+      padding: 0 18px;
+      font: inherit;
+      font-size: 15px;
+      direction: ltr;
+      text-align: left;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .signup-form input[type='email']::placeholder { color: #a0aab5; }
+    .signup-form input[type='email']:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(29,155,240,.12); }
+    .signup-form button {
+      min-height: 58px;
+      border: 0;
+      border-radius: 13px;
+      padding: 0 24px;
+      background: var(--blue);
+      color: #001522;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .2s, filter .2s, box-shadow .2s;
+      box-shadow: 0 10px 30px rgba(29,155,240,.2);
+    }
+    .signup-form button:hover { transform: translateY(-2px); filter: brightness(1.08); box-shadow: 0 14px 34px rgba(29,155,240,.28); }
+    .signup-form button:disabled { cursor: wait; opacity: .66; transform: none; }
+    .form-note, .form-status { margin-top: 11px; color: #a0aab5; font-size: 12.5px; line-height: 1.5; }
+    .form-status:empty { display: none; }
+    .form-status[data-state='success'] { color: #56d889; }
+    .form-status[data-state='error'] { color: #ff7a8a; }
+    .honeypot { position: absolute !important; inset-inline-start: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+    .proof-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px 22px;
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 650;
+    }
+    .proof-row span { display: inline-flex; align-items: center; gap: 8px; }
+    .proof-row span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 10px var(--blue); }
+    .rule { border: 0; height: 1px; background: var(--line); margin: 0; }
+    .section { padding: 76px 0; }
+    .section-head { max-width: 650px; margin-bottom: 32px; }
+    .section-head.center { margin-inline: auto; text-align: center; }
+    h2 { margin-top: 12px; color: #fff; font-size: clamp(30px, 5vw, 46px); line-height: 1.1; letter-spacing: -2px; font-weight: 900; }
+    html[dir='rtl'] h2 { letter-spacing: -.7px; }
+    .section-head p { margin-top: 14px; color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+    .issue-grid { border: 1px solid var(--line); border-radius: 20px; background: rgba(16,18,20,.84); overflow: hidden; }
+    .issue-row {
+      display: grid;
+      grid-template-columns: 64px 185px 1fr;
+      gap: 18px;
+      align-items: center;
+      min-height: 92px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line);
+      transition: background .2s;
+    }
+    .issue-row:last-child { border-bottom: 0; }
+    .issue-row:hover { background: rgba(29,155,240,.04); }
+    .issue-no { color: var(--blue); font-size: 12px; font-weight: 850; letter-spacing: 1px; }
+    .issue-name { color: #fff; font-size: 15px; font-weight: 800; }
+    .issue-desc { color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .latest {
+      display: block;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(145deg, #15181b, #0c0e10);
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0,0,0,.42);
+      color: inherit;
+      text-decoration: none;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .latest:hover { transform: translateY(-4px); border-color: #46505a; box-shadow: 0 34px 90px rgba(0,0,0,.55); }
+    .latest:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
+    .latest::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--blue); }
+    html[dir='rtl'] .latest::before { inset: 0 0 0 auto; }
+    .latest-main { padding: 42px 42px 36px; }
+    .latest h2 { max-width: 650px; }
+    .latest-dek { margin-top: 17px; max-width: 700px; color: #b8bdc2; font-size: 16px; line-height: 1.72; }
+    .signals { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .signal { padding: 26px 28px; border-inline-end: 1px solid var(--line); }
+    .signal:last-child { border-inline-end: 0; }
+    .signal strong { display: block; color: var(--blue); font-size: 34px; line-height: 1; letter-spacing: -1.5px; }
+    .signal span { display: block; margin-top: 9px; color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+    .move { margin: 30px 42px 0; padding: 22px 24px; border: 1px solid rgba(29,155,240,.28); border-radius: 15px; background: var(--blue-soft); }
+    .move-label { color: var(--blue); font-size: 11px; font-weight: 850; letter-spacing: 1.4px; text-transform: uppercase; }
+    html[dir='rtl'] .move-label { letter-spacing: .2px; text-transform: none; }
+    .move p { margin-top: 8px; color: #e1e4e6; font-size: 15px; line-height: 1.67; font-weight: 550; }
+    .source { padding: 25px 42px 38px; color: #626970; font-size: 12px; line-height: 1.5; }
+    .read-issue { display: inline-flex; align-items: center; gap: 8px; margin: 0 42px 36px; color: var(--blue); font-size: 14px; font-weight: 850; }
+    .read-issue::after { content: '→'; transition: transform .2s; }
+    html[dir='rtl'] .read-issue::after { content: '←'; }
+    .latest:hover .read-issue::after { transform: translateX(4px); }
+    html[dir='rtl'] .latest:hover .read-issue::after { transform: translateX(-4px); }
+    .closing { padding: 84px 0 32px; text-align: center; }
+    .closing h2 { max-width: 700px; margin-inline: auto; }
+    .closing > p { max-width: 570px; margin: 17px auto 0; color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+    .closing .signup-wrap { margin-top: 30px; }
+    .reveal { opacity: 0; transform: translateY(18px); animation: reveal .7s cubic-bezier(.2,.8,.2,1) forwards; }
+    .hero .reveal:nth-child(2) { animation-delay: .08s; }
+    .hero .reveal:nth-child(3) { animation-delay: .16s; }
+    .hero .reveal:nth-child(4) { animation-delay: .24s; }
+    .hero .reveal:nth-child(5) { animation-delay: .32s; }
+    @keyframes reveal { to { opacity: 1; transform: none; } }
+    @media (max-width: 680px) {
+      .topbar { height: 66px; }
+      .nav-link { display: none; }
+      .hero { padding: 48px 0; }
+      h1 { letter-spacing: -1.2px; text-wrap: balance; }
+      html[dir='rtl'] h1 { letter-spacing: -1px; }
+      .signup-form { grid-template-columns: 1fr; }
+      .signup-form button { width: 100%; }
+      .section { padding: 60px 0; }
+      .issue-row { grid-template-columns: 46px 1fr; gap: 4px 12px; padding: 17px 18px; }
+      .issue-desc { grid-column: 2; }
+      .latest-main { padding: 30px 24px 26px; }
+      .signals { grid-template-columns: 1fr; }
+      .signal { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 12px; border-inline-end: 0; border-bottom: 1px solid var(--line); padding: 20px 24px; }
+      .signal:last-child { border-bottom: 0; }
+      .signal span { margin: 0; }
+      .move { margin: 24px 24px 0; }
+      .source { padding: 22px 24px 30px; }
+      .read-issue { margin: 0 24px 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; animation: none; }
+      * { transition-duration: .01ms !important; }
+    }
+    .editor-note{margin-top:28px;padding:28px;border-inline-start:3px solid var(--blue);background:var(--panel);border-radius:12px;line-height:1.8;color:var(--ink)}
+    .editor-note strong{display:block;margin-top:14px;color:var(--muted);font-size:14px}
+    .signup-form .application-field{grid-column:1/-1;display:grid;gap:7px;width:100%;text-align:start;color:#c8d2db;font-size:14px;font-weight:600}
+    .signup-form .application-field[hidden]{display:none}
+    .signup-form .application-field input,.signup-form .application-field select{width:100%;min-width:0;font:inherit;padding:14px;border:1px solid #35444c;border-radius:10px;background:#0c1116;color:#fff;min-height:48px}
+    .signup-form .application-field textarea{width:100%;min-width:0;font:inherit;padding:14px;border:1px solid #35444c;border-radius:10px;background:#0c1116;color:#fff;min-height:96px;resize:vertical}
+    .signup-form .application-field.half{grid-column:auto}
+    .signup-form .application-field input[type='email'],.signup-form .application-field input[type='tel']{direction:ltr;text-align:start}
+    .signup-form button{grid-column:1/-1}
+    .signup-form{grid-template-columns:1fr 1fr}
+    .thanks{padding:28px;border:1px solid #327250;border-radius:16px;background:#0d251b;color:#b9efce;line-height:1.7;font-size:16px;text-align:center}
+    @media (max-width:680px){.signup-form .application-field.half{grid-column:1/-1}}
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <div class="header-shell"><SiteHeader lang={lang} /></div>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow reveal">{copy.eyebrow}</div>
+        <h1 class="reveal">{copy.headlineA}<span>{copy.headlineB}</span></h1>
+        <p class="hero-copy reveal">{copy.intro}</p>
+        <div class="signup-wrap reveal" id="register">
+          <form class="signup-form" data-consulting-form novalidate>
+            <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
+            <label class="application-field half">{copy.f.fullName}<input name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="120" /></label>
+            <label class="application-field half">{copy.f.email}<input name="email" type="email" inputmode="email" autocomplete="email" required maxlength="180" /></label>
+            <label class="application-field half">{copy.f.phone}<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required minlength="7" maxlength="30" /></label>
+            <label class="application-field half">{copy.f.jobTitle}<input name="jobTitle" type="text" autocomplete="organization-title" required minlength="2" maxlength="120" placeholder={copy.f.jobPh} /></label>
+            <label class="application-field">{copy.f.organization}<input name="organization" type="text" autocomplete="organization" required minlength="2" maxlength="160" /></label>
+            <label class="application-field half">{copy.f.revenue}<select name="annualRevenue" required><option value="">{copy.f.choose}</option>{revenueOptions.map(([v, h, e]) => <option value={v}>{he ? h : e}</option>)}</select></label>
+            <label class="application-field half">{copy.f.employees}<select name="employees" required><option value="">{copy.f.choose}</option>{employeeOptions.map((v) => <option value={v}>{v}</option>)}</select></label>
+            <label class="application-field">{copy.f.challenge}<textarea name="mainChallenge" required minlength="5" maxlength="2000"></textarea></label>
+            <label class="application-field">{copy.f.aiUsage}<textarea name="currentAiUsage" maxlength="2000"></textarea></label>
+            <label class="application-field">{copy.f.language}<select name="preferredLanguage"><option value="he" selected={he}>{copy.f.hebrew}</option><option value="en" selected={!he}>{copy.f.english}</option></select></label>
+            <label class="consent"><input name="consent" type="checkbox" required /> <span>{copy.f.consent}</span></label>
+            <button type="submit" data-idle={copy.cta} data-loading={copy.loading}>{copy.cta}</button>
+          </form>
+          <div class="thanks" role="status" hidden data-thanks>{copy.success}</div>
+          <p class="form-note">{copy.note}</p>
+          <p class="form-status" aria-live="polite" data-error={copy.error}></p>
+        </div>
+        <div class="proof-row reveal">
+          {copy.proof.map((item) => <span>{item}</span>)}
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <section class="section">
+        <div class="section-head">
+          <div class="eyebrow">{copy.getEyebrow}</div>
+          <h2>{copy.getTitle}</h2>
+          <p>{copy.getIntro}</p>
+        </div>
+        <div class="issue-grid">
+          {copy.gets.map(([no, name, desc]) => (
+            <article class="issue-row">
+              <div class="issue-no">{no}</div>
+              <div class="issue-name">{name}</div>
+              <p class="issue-desc">{desc}</p>
+            </article>
+          ))}
+        </div>
+        <div class="editor-note">
+          <p>{he ? 'אני בונה סוכני AI לעסקים כל יום. בשיחה הזו אני רוצה לעזור לכם להבין איפה זה באמת יזיז לכם את המספרים — לא למכור לכם עוד כלי.' : 'I build AI agents for businesses every day. In this session I want to help you see where AI will actually move your numbers — not sell you another tool.'}</p>
+          <strong>{he ? 'יובל קשטכר · FutureProof Agents' : 'Yuval Keshtcher · FutureProof Agents'}</strong>
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <section class="closing">
+        <div class="eyebrow">{copy.closingEyebrow}</div>
+        <h2>{copy.closingTitle}</h2>
+        <p>{copy.closingText}</p>
+        <div class="signup-wrap">
+          <form class="signup-form" data-consulting-form novalidate>
+            <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
+            <label class="application-field half">{copy.f.fullName}<input name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="120" /></label>
+            <label class="application-field half">{copy.f.email}<input name="email" type="email" inputmode="email" autocomplete="email" required maxlength="180" /></label>
+            <label class="application-field half">{copy.f.phone}<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required minlength="7" maxlength="30" /></label>
+            <label class="application-field half">{copy.f.jobTitle}<input name="jobTitle" type="text" autocomplete="organization-title" required minlength="2" maxlength="120" placeholder={copy.f.jobPh} /></label>
+            <label class="application-field">{copy.f.organization}<input name="organization" type="text" autocomplete="organization" required minlength="2" maxlength="160" /></label>
+            <label class="application-field half">{copy.f.revenue}<select name="annualRevenue" required><option value="">{copy.f.choose}</option>{revenueOptions.map(([v, h, e]) => <option value={v}>{he ? h : e}</option>)}</select></label>
+            <label class="application-field half">{copy.f.employees}<select name="employees" required><option value="">{copy.f.choose}</option>{employeeOptions.map((v) => <option value={v}>{v}</option>)}</select></label>
+            <label class="application-field">{copy.f.challenge}<textarea name="mainChallenge" required minlength="5" maxlength="2000"></textarea></label>
+            <label class="application-field">{copy.f.aiUsage}<textarea name="currentAiUsage" maxlength="2000"></textarea></label>
+            <label class="application-field">{copy.f.language}<select name="preferredLanguage"><option value="he" selected={he}>{copy.f.hebrew}</option><option value="en" selected={!he}>{copy.f.english}</option></select></label>
+            <label class="consent"><input name="consent" type="checkbox" required /> <span>{copy.f.consent}</span></label>
+            <button type="submit" data-idle={copy.cta2} data-loading={copy.loading}>{copy.cta2}</button>
+          </form>
+          <div class="thanks" role="status" hidden data-thanks>{copy.success}</div>
+          <p class="form-note">{copy.note}</p>
+          <p class="form-status" aria-live="polite" data-error={copy.error}></p>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter lang={lang} />
+  </div>
+
+  <script is:inline define:vars={{ lang }}>
+    (function () {
+      var localHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      var isVercel = location.hostname.endsWith('.vercel.app');
+      var endpoint = (localHost || isVercel)
+        ? '/api/consulting'
+        : 'https://yuvalkesh-links.vercel.app/api/consulting';
+
+      document.querySelectorAll('[data-consulting-form]').forEach(function (form) {
+        var wrap = form.parentElement;
+        form.addEventListener('submit', async function (event) {
+          event.preventDefault();
+          var button = form.querySelector('button[type="submit"]');
+          var status = wrap.querySelector('.form-status');
+          var thanks = wrap.querySelector('[data-thanks]');
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          var val = function (name) { var el = form.querySelector('[name=' + name + ']'); return el ? el.value.trim() : ''; };
+          button.disabled = true;
+          button.textContent = button.dataset.loading;
+          status.textContent = '';
+          status.removeAttribute('data-state');
+          try {
+            var response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                fullName: val('fullName'),
+                email: val('email'),
+                phone: val('phone'),
+                jobTitle: val('jobTitle'),
+                organization: val('organization'),
+                annualRevenue: val('annualRevenue'),
+                employees: val('employees'),
+                mainChallenge: val('mainChallenge'),
+                currentAiUsage: val('currentAiUsage'),
+                preferredLanguage: val('preferredLanguage'),
+                consent: form.querySelector('[name="consent"]').checked,
+                company: form.querySelector('[name="company"]').value,
+                lang: lang,
+                page: location.href,
+              }),
+            });
+            var result = await response.json();
+            if (!response.ok || !result.ok) throw new Error('request failed');
+            form.hidden = true;
+            thanks.hidden = false;
+            window.fpAnalytics?.('consulting_request');
+          } catch (error) {
+            status.textContent = status.dataset.error;
+            status.dataset.state = 'error';
+          } finally {
+            button.disabled = false;
+            button.textContent = button.dataset.idle;
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
