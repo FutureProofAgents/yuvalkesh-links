@@ -1,0 +1,158 @@
+---
+import LocalFonts from './LocalFonts.astro';
+import PageHeader from './PageHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+interface Props { lang: 'he' | 'en'; }
+const { lang } = Astro.props;
+const he = lang === 'he';
+const site = Astro.site!.href.replace(/\/$/, '');
+const path = he ? '/he/terms/' : '/terms/';
+const altPath = he ? '/terms/' : '/he/terms/';
+const email = 'y@futureproofagents.com';
+const updated = he ? 'עודכן לאחרונה: 23 באוקטובר 2026' : 'Last updated: October 23, 2026';
+
+type Section = { h: string; p: string[] };
+const sections: Section[] = he
+  ? [
+      { h: '1. מי אנחנו', p: [
+        'האתר futureproofagents.com (להלן "האתר") מופעל על ידי פיוצ\'רפרוף אקספיריאנס בע"מ, ח.פ. 516322831, הפועלת תחת השם FutureProof Agents (להלן "אנחנו").',
+        'השימוש באתר, בתכנים שבו ובטפסים שבו מהווה הסכמה לתנאים אלה. אם אינכם מסכימים להם, אנא אל תשתמשו באתר.',
+      ]},
+      { h: '2. מה יש באתר', p: [
+        'האתר מציג מידע על שירותי הייעוץ, האפיון וההטמעה של סוכני בינה מלאכותית שאנחנו מספקים, וכן מאמרים, ניוזלטר, ספריית פרומפטים, דפי פרויקטים וקישורים לקהילות שלנו.',
+        'התכנים באתר נועדו למידע והשראה בלבד. הם אינם ייעוץ משפטי, חשבונאי, פיננסי או מקצועי אחר, ואינם מחליפים בדיקה של המקרה הספציפי שלכם.',
+      ]},
+      { h: '3. שירותים בתשלום', p: [
+        'פגישת היכרות, יום אפיון, פרויקט הטמעה או כל שירות בתשלום אחר כפופים להצעת מחיר או להסכם בכתב שנחתם בינינו. במקרה של סתירה בין תנאים אלה לבין הסכם כזה, ההסכם גובר.',
+        'המחירים, ההיקפים ולוחות הזמנים שמופיעים באתר הם להמחשה בלבד ואינם מהווים הצעה מחייבת.',
+      ]},
+      { h: '4. קניין רוחני', p: [
+        'כל התכנים באתר, כולל טקסטים, מאמרים, עיצוב, גרפיקה, סרטונים, פרומפטים, שיטת ארבעת הכובעים והמותג FutureProof Agents, שייכים לנו או לבעלי הרישיון שלהם.',
+        'מותר לכם לקרוא, לשתף קישורים ולהשתמש בפרומפטים ובטיפים שפרסמנו לצורך העבודה שלכם. אסור להעתיק, לפרסם מחדש, למכור או להציג את התכנים כשלכם בלי אישור מראש ובכתב.',
+      ]},
+      { h: '5. מה שאתם שולחים לנו', p: [
+        'כשאתם ממלאים טופס פנייה, מועמדות או הרשמה, אתם מתחייבים שהפרטים נכונים ושאתם רשאים למסור אותם. אנא אל תשלחו דרך הטפסים מידע רגיש, סודות מסחריים או מידע אישי של אחרים.',
+        'פנייה דרך האתר אינה יוצרת התקשרות או חובה לספק שירות.',
+      ]},
+      { h: '6. תוכן שנוצר בבינה מלאכותית', p: [
+        'חלק מהתכנים, הדוגמאות והכלים באתר נוצרו או נערכו בעזרת כלי בינה מלאכותית. אנחנו בודקים אותם, אבל הם עלולים לכלול טעויות. לפני שאתם מסתמכים על מידע מהאתר לצורך החלטה עסקית, בדקו אותו.',
+      ]},
+      { h: '7. קישורים ושירותי צד שלישי', p: [
+        'האתר מקשר לשירותים חיצוניים כמו וואטסאפ, פייסבוק, X, יוטיוב ויומן לקביעת פגישות. השימוש בהם כפוף לתנאים ולמדיניות הפרטיות של אותם שירותים, ואין לנו שליטה או אחריות עליהם.',
+      ]},
+      { h: '8. פרטיות', p: [
+        'אנחנו אוספים רק את המידע שאתם מוסרים בטפסים, וכן נתוני שימוש באתר דרך גוגל אנליטיקס כשאתם מאשרים זאת. אנחנו משתמשים במידע כדי לענות לפנייה שלכם, לנהל את הקשר העסקי ולשפר את האתר. אנחנו לא מוכרים מידע אישי.',
+        'המידע נשמר במערכות ניהול לקוחות, בגיליונות ובתיבות מייל פרטיים שלנו, שחלקם מתארחים אצל ספקי ענן מחוץ לישראל. הצטרפות לניוזלטר נעשית רק בהסכמה, ואפשר להסיר את עצמכם בכל רגע דרך הקישור שבכל מייל.',
+        `לפי חוק הגנת הפרטיות, אתם רשאים לבקש לעיין במידע שלכם, לתקן אותו או למחוק אותו. שלחו בקשה ל ${email} ונטפל בה בהקדם.`,
+      ]},
+      { h: '9. הגבלת אחריות', p: [
+        'האתר והתכנים בו ניתנים כפי שהם (AS IS). איננו מתחייבים שהאתר יפעל ללא הפרעות או תקלות, או שהמידע בו מלא ומעודכן תמיד.',
+        'במידה המרבית שהדין מתיר, לא נהיה אחראים לנזק ישיר או עקיף שנגרם משימוש באתר או מהסתמכות על תכניו. שום דבר בתנאים אלה אינו מגביל אחריות שלא ניתן להגביל לפי דין.',
+      ]},
+      { h: '10. שינויים בתנאים', p: [
+        'אנחנו רשאים לעדכן את התנאים מעת לעת. הנוסח המחייב הוא זה שמפורסם בעמוד הזה, לפי תאריך העדכון שבראשו.',
+      ]},
+      { h: '11. דין וסמכות שיפוט', p: [
+        'על תנאים אלה ועל השימוש באתר יחול הדין הישראלי בלבד. סמכות השיפוט הבלעדית נתונה לבתי המשפט המוסמכים במחוז תל אביב יפו.',
+        'במקרה של סתירה בין הנוסח העברי לנוסח האנגלי של התנאים, הנוסח העברי גובר.',
+      ]},
+      { h: '12. יצירת קשר', p: [
+        `שאלות על התנאים או על הפרטיות שלכם: ${email}, או בוואטסאפ 052-6414555.`,
+      ]},
+    ]
+  : [
+      { h: '1. Who we are', p: [
+        'futureproofagents.com (the "Site") is operated by FutureProof Experience Ltd, Israeli company no. 516322831, doing business as FutureProof Agents ("we", "us").',
+        'By using the Site, its content or its forms you agree to these Terms. If you do not agree, please do not use the Site.',
+      ]},
+      { h: '2. What the Site offers', p: [
+        'The Site describes our AI agent consulting, scoping and implementation services, and offers articles, a newsletter, a prompt playbook, project pages and links to our communities.',
+        'Site content is for information and inspiration only. It is not legal, accounting, financial or other professional advice, and it does not replace a review of your specific situation.',
+      ]},
+      { h: '3. Paid services', p: [
+        'Discovery meetings, scoping days, implementation projects and any other paid service are governed by a written quote or agreement signed between us. If such an agreement conflicts with these Terms, the agreement prevails.',
+        'Prices, scopes and timelines shown on the Site are illustrative and are not a binding offer.',
+      ]},
+      { h: '4. Intellectual property', p: [
+        'All Site content, including text, articles, design, graphics, video, prompts, the Four Hats method and the FutureProof Agents brand, belongs to us or our licensors.',
+        'You may read it, share links to it and use the prompts and tips we publish in your own work. You may not copy, republish, sell or present the content as your own without our prior written permission.',
+      ]},
+      { h: '5. What you send us', p: [
+        'When you submit an inquiry, application or sign up form, you confirm the details are accurate and that you are allowed to share them. Please do not send sensitive data, trade secrets or other people\'s personal data through our forms.',
+        'Contacting us through the Site does not create an engagement or an obligation to provide services.',
+      ]},
+      { h: '6. AI generated content', p: [
+        'Some content, examples and tools on the Site were created or edited with AI tools. We review them, but they may contain errors. Please verify information before relying on it for a business decision.',
+      ]},
+      { h: '7. Third party links and services', p: [
+        'The Site links to outside services such as WhatsApp, Facebook, X, YouTube and a meeting calendar. Their own terms and privacy policies apply, and we do not control and are not responsible for them.',
+      ]},
+      { h: '8. Privacy', p: [
+        'We collect only the information you submit in our forms, plus Site usage data through Google Analytics where you allow it. We use it to answer your inquiry, manage our business relationship and improve the Site. We do not sell personal data.',
+        'Data is kept in our private CRM, spreadsheets and mailboxes, some of which are hosted by cloud providers outside Israel. Newsletter sign up is opt in only, and every email has an unsubscribe link.',
+        `Under the Israeli Privacy Protection Law you may ask to access, correct or delete your data. Email ${email} and we will handle it promptly.`,
+      ]},
+      { h: '9. Limitation of liability', p: [
+        'The Site and its content are provided "as is". We do not promise the Site will be uninterrupted or error free, or that its information is always complete and current.',
+        'To the fullest extent permitted by law, we are not liable for any direct or indirect damage arising from use of the Site or reliance on its content. Nothing in these Terms limits liability that cannot be limited by law.',
+      ]},
+      { h: '10. Changes', p: [
+        'We may update these Terms from time to time. The binding version is the one published on this page, by the date shown at the top.',
+      ]},
+      { h: '11. Governing law', p: [
+        'These Terms and your use of the Site are governed solely by the laws of the State of Israel. The competent courts of the Tel Aviv Jaffa district have exclusive jurisdiction.',
+        'If the Hebrew and English versions of these Terms conflict, the Hebrew version prevails.',
+      ]},
+      { h: '12. Contact', p: [
+        `Questions about these Terms or your privacy: ${email}, or WhatsApp +972 52 641 4555.`,
+      ]},
+    ];
+const title = he ? 'תנאי שימוש ופרטיות' : 'Terms of Use and Privacy';
+const desc = he
+  ? 'תנאי השימוש ומדיניות הפרטיות של האתר futureproofagents.com, המופעל על ידי פיוצ\'רפרוף אקספיריאנס בע"מ.'
+  : 'Terms of Use and privacy summary for futureproofagents.com, operated by FutureProof Experience Ltd.';
+---
+<!DOCTYPE html>
+<html lang={lang} dir={he ? 'rtl' : 'ltr'}>
+<head>
+  <script is:inline defer src="/scripts/analytics.js"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta charset="UTF-8" />
+  <script is:inline>(function(){var h=location.hostname;if(h==='futureproofagents.com'||h==='localhost'||h==='127.0.0.1')return;location.replace('https://futureproofagents.com'+location.pathname+location.search+location.hash);})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} · FutureProof Agents</title>
+  <meta name="description" content={desc} />
+  <link rel="canonical" href={`${site}${path}`} />
+  <link rel="alternate" hreflang={he ? 'he' : 'en'} href={`${site}${path}`} />
+  <link rel="alternate" hreflang={he ? 'en' : 'he'} href={`${site}${altPath}`} />
+  <meta name="theme-color" content="#000000" />
+  <LocalFonts hebrew={he} />
+  <style is:inline>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #000; color: #e7e9ea; }
+    .terms { width: 100%; max-width: 760px; }
+    .terms h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.15; letter-spacing: -0.5px; }
+    .terms .updated { color: #71767b; font-size: 14px; margin: 10px 0 36px; }
+    .terms h2 { font-size: 20px; font-weight: 800; color: #fff; margin: 32px 0 10px; }
+    .terms p { font-size: 16px; line-height: 1.8; color: #cfd2d4; margin-bottom: 12px; }
+    .terms a { color: #1d9bf0; }
+    @media (max-width: 600px) { .terms h1 { font-size: 29px; } }
+  </style>
+</head>
+<body class="fp-site-page">
+  <PageHeader lang={lang} alternatePath={altPath} />
+  <main class="terms" dir={he ? 'rtl' : 'ltr'}>
+    <h1>{title}</h1>
+    <p class="updated">{updated}</p>
+    {sections.map((s) => (
+      <section>
+        <h2>{s.h}</h2>
+        {s.p.map((t) => <p>{t}</p>)}
+      </section>
+    ))}
+  </main>
+  <SiteFooter lang={lang} />
+</body>
+</html>
