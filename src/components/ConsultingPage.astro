@@ -388,6 +388,53 @@ const copy = he
     .signup-form{grid-template-columns:1fr 1fr}
     .thanks{padding:28px;border:1px solid #327250;border-radius:16px;background:#0d251b;color:#b9efce;line-height:1.7;font-size:16px;text-align:center}
     @media (max-width:680px){.signup-form .application-field.half{grid-column:1/-1}}
+    /* ---- conversational stepper ---- */
+    .stepper{position:relative;max-width:640px;margin:0 auto;padding:28px 24px 24px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#0c1218,#08090b);box-shadow:0 20px 60px rgba(0,0,0,.45);text-align:start}
+    .stepper-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;font-size:13px;color:var(--muted)}
+    .stepper-progress{flex:1;height:6px;border-radius:99px;background:#1b2229;overflow:hidden}
+    .stepper-progress span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--blue),#7cc8ff);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+    .stepper-count{font-variant-numeric:tabular-nums;white-space:nowrap}
+    .steps{display:grid;overflow-x:clip;overflow-y:visible;padding:2px}
+    .step{grid-area:1/1;display:flex;flex-direction:column;gap:14px;opacity:0;visibility:hidden;transform:translateX(calc(var(--from,1) * 40px));transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s;pointer-events:none}
+    [dir='rtl'] .step{transform:translateX(calc(var(--from,1) * -40px))}
+    .step.is-active{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s;pointer-events:auto}
+    .step-q{margin:0;font-size:clamp(22px,5.4vw,30px);line-height:1.25;font-weight:800;color:#fff}
+    .step-q .num{display:inline-block;margin-inline-end:8px;color:var(--blue);font-size:.6em;vertical-align:middle}
+    .step-hint{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+    .step input[type='text'],.step input[type='email'],.step input[type='tel'],.step textarea{width:100%;font:inherit;font-size:20px;padding:12px 2px;border:0;border-bottom:2px solid #35444c;border-radius:0;background:transparent;color:#fff;outline:none;transition:border-color .2s}
+    .step textarea{font-size:17px;min-height:110px;resize:vertical;border:2px solid #35444c;border-radius:12px;padding:12px}
+    .step input:focus,.step textarea:focus{border-color:var(--blue)}
+    .step input[type='email'],.step input[type='tel']{direction:ltr;text-align:start}
+    [dir='rtl'] .step input[type='email'],[dir='rtl'] .step input[type='tel']{text-align:right}
+    .options{display:grid;gap:10px}
+    .option{display:flex;align-items:center;gap:12px;width:100%;min-height:54px;padding:12px 16px;font:inherit;font-size:17px;color:var(--ink);text-align:start;border:1.5px solid #2c3a43;border-radius:14px;background:#0d141a;cursor:pointer;transition:border-color .2s,background .2s,transform .15s}
+    .option:hover{border-color:var(--blue)}
+    .option:active{transform:scale(.98)}
+    .option kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;border:1px solid #3a4a55;border-radius:7px;font:600 13px/1 inherit;color:var(--muted)}
+    .option[aria-checked='true']{border-color:var(--blue);background:var(--blue-soft);color:#fff}
+    .option[aria-checked='true'] kbd{background:var(--blue);border-color:var(--blue);color:#000}
+    .step-consent{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.6;color:var(--ink);cursor:pointer}
+    .step-consent input{width:22px;height:22px;flex:none;margin-top:3px;accent-color:var(--blue)}
+    .step-error{min-height:22px;margin:0;color:#ff8f8f;font-size:14px}
+    .stepper-nav{display:flex;align-items:center;gap:10px;margin-top:8px}
+    .stepper-nav .next{flex:none;padding:13px 26px;font:inherit;font-weight:700;font-size:16px;border:0;border-radius:12px;background:var(--blue);color:#000;cursor:pointer}
+    .stepper-nav .next:disabled{opacity:.6;cursor:wait}
+    .stepper-nav .back,.stepper-nav .skip{padding:13px 14px;font:inherit;font-size:15px;border:0;background:none;color:var(--muted);cursor:pointer}
+    .stepper-nav[hidden]{display:none}
+    .stepper-nav .back[hidden],.stepper-nav .skip[hidden]{display:none}
+    .stepper-nav .enter-hint{margin-inline-start:auto;font-size:12px;color:var(--muted)}
+    .stepper-done{grid-area:1/1;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px 0}
+    .stepper-done[hidden]{display:none}
+    .stepper-done .party{font-size:64px;line-height:1;animation:pop .7s cubic-bezier(.2,1.6,.4,1) both}
+    .stepper-done h3{margin:0;font-size:clamp(24px,6vw,34px);color:#fff}
+    .stepper-done p{margin:0;max-width:440px;color:var(--ink);line-height:1.7}
+    .confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:20px}
+    .confetti i{position:absolute;top:-12px;width:8px;height:14px;border-radius:2px;opacity:0;animation:fall 2.4s ease-in forwards}
+    @keyframes pop{from{transform:scale(.2) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+    @keyframes fall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(520px) rotate(540deg)}}
+    .closing-cta{display:inline-block;margin-top:18px;padding:14px 28px;border-radius:12px;background:var(--blue);color:#000;font-weight:700;text-decoration:none}
+    @media (max-width:680px){.stepper{padding:20px 16px 18px;border-radius:16px}.stepper-nav .enter-hint{display:none}.stepper-nav .next{flex:1}}
+    @media (prefers-reduced-motion:reduce){.step,.step.is-active,.stepper-progress span{transition:none!important;transform:none!important}.stepper-done .party,.confetti i{animation:none!important}.confetti{display:none}}
   </style>
 </head>
 <body>
@@ -399,39 +446,12 @@ const copy = he
         <div class="eyebrow reveal">{copy.eyebrow}</div>
         <h1 class="reveal">{copy.headlineA}<span>{copy.headlineB}</span></h1>
         <p class="hero-copy reveal">{copy.intro}</p>
-        <div class="signup-wrap reveal" id="register">
-          <form class="signup-form" data-consulting-form novalidate>
-            <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
-            <label class="application-field half">{copy.f.fullName}<input name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="120" /></label>
-            <label class="application-field half">{copy.f.email}<input name="email" type="email" inputmode="email" autocomplete="email" required maxlength="180" /></label>
-            <label class="application-field half">{copy.f.phone}<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required minlength="7" maxlength="30" /></label>
-            <label class="application-field half">{copy.f.jobTitle}<input name="jobTitle" type="text" autocomplete="organization-title" required minlength="2" maxlength="120" placeholder={copy.f.jobPh} /></label>
-            <label class="application-field">{copy.f.organization}<input name="organization" type="text" autocomplete="organization" required minlength="2" maxlength="160" /></label>
-            <label class="application-field half">{copy.f.revenue}<select name="annualRevenue" required><option value="">{copy.f.choose}</option>{revenueOptions.map(([v, h, e]) => <option value={v}>{he ? h : e}</option>)}</select></label>
-            <label class="application-field half">{copy.f.employees}<select name="employees" required><option value="">{copy.f.choose}</option>{employeeOptions.map((v) => <option value={v}>{v}</option>)}</select></label>
-            <label class="application-field">{copy.f.challenge}<textarea name="mainChallenge" required minlength="5" maxlength="2000"></textarea></label>
-            <label class="application-field">{copy.f.aiUsage}<textarea name="currentAiUsage" maxlength="2000"></textarea></label>
-            <label class="application-field">{copy.f.language}<select name="preferredLanguage"><option value="he" selected={he}>{copy.f.hebrew}</option><option value="en" selected={!he}>{copy.f.english}</option></select></label>
-            <label class="consent"><input name="consent" type="checkbox" required /> <span>{copy.f.consent}</span></label>
-            <button type="submit" data-idle={copy.cta} data-loading={copy.loading}>{copy.cta}</button>
-          </form>
-          <div class="thanks" role="status" hidden data-thanks>{copy.success}</div>
-          <p class="form-note">{copy.note}</p>
-          <p class="form-status" aria-live="polite" data-error={copy.error}></p>
-        </div>
         <div class="proof-row reveal">
           {copy.proof.map((item) => <span>{item}</span>)}
         </div>
       </section>
 
-      <hr class="rule" />
-
       <section class="section">
-        <div class="section-head">
-          <div class="eyebrow">{copy.getEyebrow}</div>
-          <h2>{copy.getTitle}</h2>
-          <p>{copy.getIntro}</p>
-        </div>
         <div class="issue-grid">
           {copy.gets.map(([no, name, desc]) => (
             <article class="issue-row">
@@ -441,38 +461,94 @@ const copy = he
             </article>
           ))}
         </div>
-        <div class="editor-note">
-          <p>{he ? 'אני בונה סוכני AI לעסקים כל יום. בשיחה הזו אני רוצה לעזור לכם להבין איפה זה באמת יזיז לכם את המספרים — לא למכור לכם עוד כלי.' : 'I build AI agents for businesses every day. In this session I want to help you see where AI will actually move your numbers — not sell you another tool.'}</p>
-          <strong>{he ? 'יובל קשטכר · FutureProof Agents' : 'Yuval Keshtcher · FutureProof Agents'}</strong>
-        </div>
       </section>
 
-      <hr class="rule" />
+      <section class="section" id="register">
+        <form class="stepper" data-stepper novalidate>
+          <div class="confetti" aria-hidden="true"></div>
+          <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
+          <div class="stepper-top">
+            <div class="stepper-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label={he ? 'התקדמות' : 'Progress'}><span data-bar></span></div>
+            <div class="stepper-count" data-count dir="ltr" aria-live="polite"></div>
+          </div>
+          <div class="steps">
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'היי! איך קוראים לך? 👋' : 'Hi there! What is your name? 👋'}</h2>
+              <p class="step-hint">{he ? 'ככה נדע איך לפנות אליך בשיחה.' : 'So we know what to call you on the call.'}</p>
+              <input name="fullName" type="text" autocomplete="name" minlength="2" maxlength="120" required data-msg={he ? 'רק השם, בבקשה (לפחות 2 אותיות) 🙂' : 'Just your name, please (at least 2 letters) 🙂'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q" data-tpl={he ? 'נעים מאוד, {n}! לאיזה מייל נשלח את פרטי השיחה?' : 'Nice to meet you, {n}! Where should we email the details?'}>{he ? 'נעים מאוד! לאיזה מייל נשלח את פרטי השיחה?' : 'Nice to meet you! Where should we email the details?'}</h2>
+              <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="180" required data-msg={he ? 'נראה שחסר משהו במייל — אפשר לבדוק שוב?' : 'That email looks a little off — mind checking it?'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'ומספר וואטסאפ? ככה הכי קל לתאם 📱' : 'And your WhatsApp number? Easiest way to schedule 📱'}</h2>
+              <p class="step-hint">{he ? 'רק לתיאום השיחה. בלי ספאם, מבטיחים.' : 'Only for scheduling. No spam, promise.'}</p>
+              <input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" required data-msg={he ? 'המספר נראה קצר מדי — אפשר עם קידומת, למשל 050-1234567' : 'That number looks too short — e.g. +972 50 123 4567'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q" data-tpl={he ? 'מה התפקיד שלך, {n}?' : 'What is your role, {n}?'}>{he ? 'מה התפקיד שלך?' : 'What is your role?'}</h2>
+              <input name="jobTitle" type="text" autocomplete="organization-title" minlength="2" maxlength="120" required placeholder={copy.f.jobPh} data-msg={he ? 'ספר/י לנו בכמה מילים מה התפקיד' : 'Tell us your role in a few words'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'ואיך קוראים לעסק? 🏢' : 'And what is the business called? 🏢'}</h2>
+              <input name="organization" type="text" autocomplete="organization" minlength="2" maxlength="160" required data-msg={he ? 'רק שם העסק או החברה' : 'Just the company or business name'} />
+            </div>
+            <div class="step" data-step data-req data-choice>
+              <h2 class="step-q">{he ? 'מה גובה המחזור השנתי, בערך?' : 'Roughly what is your annual revenue?'}</h2>
+              <p class="step-hint">{he ? 'זה עוזר לנו להתאים את השיחה לגודל העסק. נשאר בינינו.' : 'Helps us tailor the session to your size. Stays between us.'}</p>
+              <input type="hidden" name="annualRevenue" required data-msg={he ? 'בחר/י אחת מהאפשרויות' : 'Pick one of the options'} />
+              <div class="options" role="radiogroup">{revenueOptions.map(([v, h, e], i) => <button type="button" class="option" role="radio" aria-checked="false" data-value={v}><kbd>{i + 1}</kbd>{he ? h : e}</button>)}</div>
+            </div>
+            <div class="step" data-step data-req data-choice>
+              <h2 class="step-q">{he ? 'כמה עובדים יש בעסק?' : 'How many people work at the business?'}</h2>
+              <input type="hidden" name="employees" required data-msg={he ? 'בחר/י אחת מהאפשרויות' : 'Pick one of the options'} />
+              <div class="options" role="radiogroup">{employeeOptions.map((v, i) => <button type="button" class="option" role="radio" aria-checked="false" data-value={v}><kbd>{i + 1}</kbd>{v}</button>)}</div>
+            </div>
+            <div class="step" data-step data-optional>
+              <h2 class="step-q">{he ? 'איך אתם משתמשים היום ב־AI? 🤖' : 'How do you use AI today? 🤖'}</h2>
+              <p class="step-hint">{he ? 'לא חובה — אפשר גם "עוד לא התחלנו", וזה לגמרי בסדר.' : 'Optional — "we have not started yet" is totally fine.'}</p>
+              <textarea name="currentAiUsage" maxlength="2000"></textarea>
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q" data-tpl={he ? 'הכי חשוב, {n}: מה האתגר המרכזי שהיית רוצה לפתור?' : 'The big one, {n}: what is the main challenge you would like to solve?'}>{he ? 'הכי חשוב: מה האתגר המרכזי שהיית רוצה לפתור?' : 'The big one: what is the main challenge you would like to solve?'}</h2>
+              <p class="step-hint">{he ? 'כמה משפטים מספיקים. ככל שנבין יותר, השיחה תהיה ממוקדת יותר.' : 'A few sentences is plenty. The more we know, the sharper the session.'}</p>
+              <textarea name="mainChallenge" minlength="5" maxlength="2000" required data-msg={he ? 'עוד כמה מילים, כדי שנגיע מוכנים 🙏' : 'A few more words so we come prepared 🙏'}></textarea>
+            </div>
+            <div class="step" data-step data-optional data-choice>
+              <h2 class="step-q">{he ? 'באיזו שפה נוח לך לדבר?' : 'Which language works best for the call?'}</h2>
+              <input type="hidden" name="preferredLanguage" value={lang} />
+              <div class="options" role="radiogroup">
+                <button type="button" class="option" role="radio" aria-checked={he ? 'true' : 'false'} data-value="he"><kbd>1</kbd>{copy.f.hebrew}</button>
+                <button type="button" class="option" role="radio" aria-checked={he ? 'false' : 'true'} data-value="en"><kbd>2</kbd>{copy.f.english}</button>
+              </div>
+            </div>
+            <div class="step" data-step data-req data-last>
+              <h2 class="step-q" data-tpl={he ? 'כמעט סיימנו, {n}! 🎯' : 'Almost there, {n}! 🎯'}>{he ? 'כמעט סיימנו! 🎯' : 'Almost there! 🎯'}</h2>
+              <p class="step-hint">{copy.note}</p>
+              <label class="step-consent"><input name="consent" type="checkbox" required data-msg={he ? 'צריך את האישור שלך כדי שנוכל לחזור אליך' : 'We need your OK to get back to you'} /><span>{copy.f.consent}</span></label>
+            </div>
+            <div class="stepper-done" data-done hidden tabindex="-1">
+              <div class="party" aria-hidden="true">🎉</div>
+              <h3 data-tpl={he ? 'יש! תודה, {n}!' : 'Woohoo! Thanks, {n}!'}>{he ? 'יש! תודה!' : 'Woohoo! Thank you!'}</h3>
+              <p>{copy.success}</p>
+            </div>
+          </div>
+          <p class="step-error" aria-live="assertive" data-error data-fail={copy.error}></p>
+          <div class="stepper-nav" data-nav>
+            <button type="button" class="next" data-next data-label={he ? 'הבא' : 'Next'} data-submit={he ? 'שריינו לי שיחה 🚀' : 'Book my session 🚀'} data-loading={copy.loading}>{he ? 'הבא' : 'Next'}</button>
+            <button type="button" class="skip" data-skip hidden>{he ? 'דלג' : 'Skip'}</button>
+            <button type="button" class="back" data-back hidden>{he ? 'חזרה' : '← Back'}</button>
+            <span class="enter-hint">{he ? 'או Enter ↵' : 'or press Enter ↵'}</span>
+          </div>
+        </form>
+      </section>
 
       <section class="closing">
         <div class="eyebrow">{copy.closingEyebrow}</div>
         <h2>{copy.closingTitle}</h2>
         <p>{copy.closingText}</p>
-        <div class="signup-wrap">
-          <form class="signup-form" data-consulting-form novalidate>
-            <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
-            <label class="application-field half">{copy.f.fullName}<input name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="120" /></label>
-            <label class="application-field half">{copy.f.email}<input name="email" type="email" inputmode="email" autocomplete="email" required maxlength="180" /></label>
-            <label class="application-field half">{copy.f.phone}<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required minlength="7" maxlength="30" /></label>
-            <label class="application-field half">{copy.f.jobTitle}<input name="jobTitle" type="text" autocomplete="organization-title" required minlength="2" maxlength="120" placeholder={copy.f.jobPh} /></label>
-            <label class="application-field">{copy.f.organization}<input name="organization" type="text" autocomplete="organization" required minlength="2" maxlength="160" /></label>
-            <label class="application-field half">{copy.f.revenue}<select name="annualRevenue" required><option value="">{copy.f.choose}</option>{revenueOptions.map(([v, h, e]) => <option value={v}>{he ? h : e}</option>)}</select></label>
-            <label class="application-field half">{copy.f.employees}<select name="employees" required><option value="">{copy.f.choose}</option>{employeeOptions.map((v) => <option value={v}>{v}</option>)}</select></label>
-            <label class="application-field">{copy.f.challenge}<textarea name="mainChallenge" required minlength="5" maxlength="2000"></textarea></label>
-            <label class="application-field">{copy.f.aiUsage}<textarea name="currentAiUsage" maxlength="2000"></textarea></label>
-            <label class="application-field">{copy.f.language}<select name="preferredLanguage"><option value="he" selected={he}>{copy.f.hebrew}</option><option value="en" selected={!he}>{copy.f.english}</option></select></label>
-            <label class="consent"><input name="consent" type="checkbox" required /> <span>{copy.f.consent}</span></label>
-            <button type="submit" data-idle={copy.cta2} data-loading={copy.loading}>{copy.cta2}</button>
-          </form>
-          <div class="thanks" role="status" hidden data-thanks>{copy.success}</div>
-          <p class="form-note">{copy.note}</p>
-          <p class="form-status" aria-live="polite" data-error={copy.error}></p>
-        </div>
+        <a class="closing-cta" href="#register" data-to-stepper>{copy.cta2}</a>
       </section>
     </main>
 
@@ -486,58 +562,185 @@ const copy = he
       var endpoint = (localHost || isVercel)
         ? '/api/consulting'
         : 'https://yuvalkesh-links.vercel.app/api/consulting';
+      var form = document.querySelector('[data-stepper]');
+      if (!form) return;
+      var steps = Array.prototype.slice.call(form.querySelectorAll('[data-step]'));
+      var bar = form.querySelector('[data-bar]');
+      var count = form.querySelector('[data-count]');
+      var err = form.querySelector('[data-error]');
+      var next = form.querySelector('[data-next]');
+      var back = form.querySelector('[data-back]');
+      var skip = form.querySelector('[data-skip]');
+      var nav = form.querySelector('[data-nav]');
+      var done = form.querySelector('[data-done]');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var cur = 0;
+      var sending = false;
+      var field = function (name) { return form.querySelector('[name="' + name + '"]'); };
+      var val = function (name) { var el = field(name); return el ? el.value.trim() : ''; };
+      var firstName = function () { return val('fullName').split(/\s+/)[0] || ''; };
 
-      document.querySelectorAll('[data-consulting-form]').forEach(function (form) {
-        var wrap = form.parentElement;
-        form.addEventListener('submit', async function (event) {
-          event.preventDefault();
-          var button = form.querySelector('button[type="submit"]');
-          var status = wrap.querySelector('.form-status');
-          var thanks = wrap.querySelector('[data-thanks]');
-          if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-          }
-          var val = function (name) { var el = form.querySelector('[name=' + name + ']'); return el ? el.value.trim() : ''; };
-          button.disabled = true;
-          button.textContent = button.dataset.loading;
-          status.textContent = '';
-          status.removeAttribute('data-state');
-          try {
-            var response = await fetch(endpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                fullName: val('fullName'),
-                email: val('email'),
-                phone: val('phone'),
-                jobTitle: val('jobTitle'),
-                organization: val('organization'),
-                annualRevenue: val('annualRevenue'),
-                employees: val('employees'),
-                mainChallenge: val('mainChallenge'),
-                currentAiUsage: val('currentAiUsage'),
-                preferredLanguage: val('preferredLanguage'),
-                consent: form.querySelector('[name="consent"]').checked,
-                company: form.querySelector('[name="company"]').value,
-                lang: lang,
-                page: location.href,
-              }),
-            });
-            var result = await response.json();
-            if (!response.ok || !result.ok) throw new Error('request failed');
-            form.hidden = true;
-            thanks.hidden = false;
-            window.fpAnalytics?.('consulting_request');
-          } catch (error) {
-            status.textContent = status.dataset.error;
-            status.dataset.state = 'error';
-          } finally {
-            button.disabled = false;
-            button.textContent = button.dataset.idle;
-          }
+      function personalize() {
+        var n = firstName();
+        form.querySelectorAll('[data-tpl]').forEach(function (el) {
+          if (!el.dataset.base) el.dataset.base = el.lastChild.textContent;
+          el.lastChild.textContent = n ? el.dataset.tpl.replace('{n}', n) : el.dataset.base;
+        });
+      }
+
+      function focusStep(step) {
+        var target = step.querySelector('input:not([type=hidden]):not([name=company]), textarea, .option[aria-checked=true], .option');
+        if (target) setTimeout(function () { target.focus({ preventScroll: true }); }, reduce ? 0 : 60);
+      }
+
+      function show(i, dir) {
+        steps.forEach(function (s, k) {
+          s.style.setProperty('--from', k < i ? -1 : 1);
+          s.classList.toggle('is-active', k === i);
+          s.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+          s.inert = k !== i;
+        });
+        cur = i;
+        var step = steps[i];
+        var pct = Math.round((i / steps.length) * 100);
+        bar.style.width = Math.max(pct, 4) + '%';
+        bar.parentElement.setAttribute('aria-valuenow', pct);
+        count.textContent = (i + 1) + ' / ' + steps.length;
+        back.hidden = i === 0;
+        skip.hidden = !step.hasAttribute('data-optional');
+        next.textContent = step.hasAttribute('data-last') ? next.dataset.submit : next.dataset.label;
+        err.textContent = '';
+        personalize();
+        if (dir !== 0) focusStep(step);
+      }
+
+      function validate(step) {
+        if (!step.hasAttribute('data-req')) return true;
+        var el = step.querySelector('[name]:not([name=company])');
+        var ok;
+        if (el.type === 'checkbox') ok = el.checked;
+        else if (el.type === 'hidden') ok = !!el.value;
+        else {
+          el.value = el.value.trim();
+          ok = el.checkValidity() && el.value.length >= (+el.getAttribute('minlength') || 1);
+          if (el.type === 'email') ok = ok && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value);
+          if (el.type === 'tel') ok = ok && /^[+\d][\d\s()\-.]{6,29}$/.test(el.value);
+        }
+        err.textContent = ok ? '' : el.dataset.msg;
+        if (!ok && !reduce) { step.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-8px)' }, { transform: 'translateX(8px)' }, { transform: 'translateX(0)' }], { duration: 260 }); }
+        return ok;
+      }
+
+      function advance() {
+        if (sending) return;
+        var step = steps[cur];
+        if (!validate(step)) { focusStep(step); return; }
+        if (step.hasAttribute('data-last')) return submit();
+        show(cur + 1, 1);
+      }
+
+      function confetti() {
+        if (reduce) return;
+        var box = form.querySelector('.confetti');
+        var colors = ['#1d9bf0', '#7cc8ff', '#ffd166', '#06d6a0', '#ef476f', '#ffffff'];
+        for (var i = 0; i < 60; i++) {
+          var p = document.createElement('i');
+          p.style.left = Math.random() * 100 + '%';
+          p.style.background = colors[i % colors.length];
+          p.style.animationDelay = Math.random() * 0.6 + 's';
+          p.style.animationDuration = 1.6 + Math.random() * 1.4 + 's';
+          box.appendChild(p);
+        }
+      }
+
+      async function submit() {
+        sending = true;
+        next.disabled = true;
+        next.textContent = next.dataset.loading;
+        err.textContent = '';
+        try {
+          var response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              fullName: val('fullName'),
+              email: val('email'),
+              phone: val('phone'),
+              jobTitle: val('jobTitle'),
+              organization: val('organization'),
+              annualRevenue: val('annualRevenue'),
+              employees: val('employees'),
+              mainChallenge: val('mainChallenge'),
+              currentAiUsage: val('currentAiUsage'),
+              preferredLanguage: val('preferredLanguage') || lang,
+              consent: field('consent').checked,
+              company: field('company').value,
+              lang: lang,
+              page: location.href,
+            }),
+          });
+          var result = await response.json();
+          if (!response.ok || !result.ok) throw new Error('request failed');
+          steps.forEach(function (s) { s.classList.remove('is-active'); s.inert = true; });
+          nav.hidden = true;
+          bar.style.width = '100%';
+          count.textContent = '✓';
+          next.textContent = next.dataset.submit;
+          personalize();
+          done.hidden = false;
+          done.focus({ preventScroll: true });
+          confetti();
+          window.fpAnalytics?.('consulting_request');
+        } catch (error) {
+          err.textContent = err.dataset.fail;
+          next.textContent = next.dataset.submit;
+        } finally {
+          sending = false;
+          next.disabled = false;
+        }
+      }
+
+      form.querySelectorAll('[data-choice]').forEach(function (step) {
+        var input = step.querySelector('input[type=hidden]');
+        step.querySelectorAll('.option').forEach(function (opt) {
+          opt.addEventListener('click', function () {
+            step.querySelectorAll('.option').forEach(function (o) { o.setAttribute('aria-checked', o === opt ? 'true' : 'false'); });
+            input.value = opt.dataset.value;
+            err.textContent = '';
+            setTimeout(advance, reduce ? 0 : 260);
+          });
         });
       });
+
+      next.addEventListener('click', advance);
+      back.addEventListener('click', function () { if (cur > 0) show(cur - 1, -1); });
+      skip.addEventListener('click', function () { show(cur + 1, 1); });
+      form.addEventListener('submit', function (e) { e.preventDefault(); advance(); });
+      form.addEventListener('keydown', function (e) {
+        var step = steps[cur];
+        if (!step || !step.classList.contains('is-active')) return;
+        if (e.key === 'Enter' && !e.shiftKey && !(e.target.tagName === 'BUTTON' && e.target !== next)) {
+          e.preventDefault();
+          advance();
+          return;
+        }
+        if (step.hasAttribute('data-choice') && e.target.tagName !== 'TEXTAREA' && /^[1-9]$/.test(e.key)) {
+          var opt = step.querySelectorAll('.option')[+e.key - 1];
+          if (opt) { e.preventDefault(); opt.click(); }
+        }
+      });
+      form.querySelectorAll('input, textarea').forEach(function (el) {
+        el.addEventListener('input', function () { err.textContent = ''; });
+      });
+      document.querySelectorAll('[data-to-stepper]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.getElementById('register').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          if (!done.hidden) return;
+          focusStep(steps[cur]);
+        });
+      });
+      show(0, 0);
     })();
   </script>
 </body>
