@@ -1,0 +1,807 @@
+---
+import LocalFonts from './LocalFonts.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+
+interface Props {
+  lang: 'en' | 'he';
+}
+
+const { lang } = Astro.props;
+const he = lang === 'he';
+const site = Astro.site!.href.replace(/\/$/, '');
+const pagePath = he ? '/he/consulting/' : '/consulting/';
+
+const revenueOptions = [
+  ['up_to_1m', 'עד 1 מיליון ₪', 'Up to ₪1M'],
+  ['1_5m', '1-5 מיליון ₪', '₪1-5M'],
+  ['5_20m', '5-20 מיליון ₪', '₪5-20M'],
+  ['20_100m', '20-100 מיליון ₪', '₪20-100M'],
+  ['over_100m', 'מעל 100 מיליון ₪', 'Over ₪100M'],
+];
+const employeeOptions = ['1-10', '11-50', '51-200', '201-1000', '1000+'];
+
+const copy = he
+  ? {
+      title: 'שיחת ייעוץ AI חינם של 30 דקות עם יובל קשטכר | FutureProof Agents',
+      description: 'לבעלי עסקים ומנהלים מקהילת הוואטסאפ "בינה מלאכותית עסקית": שיחת ייעוץ אישית של 30 דקות, ללא עלות, למיפוי המקומות שבהם סוכן AI מותאם יחסוך לכם זמן וכסף.',
+      eyebrow: 'לחברי קהילת "בינה מלאכותית עסקית" · מספר המקומות מוגבל',
+      headlineA: '30 דקות עם יובל.',
+      headlineB: 'מפה ברורה ל־AI בעסק שלכם.',
+      intro: 'שיחת ייעוץ אישית וחינמית לבעלי עסקים ומנהלים מקהילת הוואטסאפ "בינה מלאכותית עסקית". נעבור יחד על התהליכים בעסק ונמפה איפה סוכן AI מותאם אישית יכול לחסוך לכם זמן וכסף — בענן מאובטח, בלי שהמודלים יתאמנו על המידע שלכם.',
+      cta: 'שריינו לי שיחה',
+      loading: 'שולחים…',
+      note: 'מספר השיחות מוגבל. נעבור על כל בקשה ונחזור אליכם בוואטסאפ או במייל לתיאום מועד.',
+      success: 'תודה! הבקשה התקבלה. נחזור אליכם בקרוב בוואטסאפ או במייל כדי לתאם את השיחה.',
+      error: 'משהו השתבש. נסו שוב בעוד רגע.',
+      proof: ['30 דקות, ללא עלות', 'מקומות מוגבלים', 'ענן מאובטח', 'המודלים לא מתאמנים על המידע שלכם'],
+      getEyebrow: 'מה מקבלים בשיחה',
+      getTitle: 'לא הרצאה. מפה פרקטית לעסק שלכם.',
+      getIntro: 'בסוף 30 הדקות תדעו איפה AI באמת שווה את ההשקעה אצלכם — ומה עדיף לדחות.',
+      gets: [
+        ['01', 'מיפוי הזדמנויות', 'נזהה 2-3 תהליכים שבהם סוכן AI מותאם אישית יכול לחסוך שעות עבודה וכסף כבר ברבעון הקרוב.'],
+        ['02', 'ענן מאובטח', 'איך מריצים סוכנים בסביבה מאובטחת ומבודדת, עם שליטה מלאה בהרשאות ובגישה למידע.'],
+        ['03', 'המידע שלכם נשאר שלכם', 'עבודה עם מודלים שלא מתאמנים על המידע העסקי שלכם, ומה לבדוק מול כל ספק.'],
+        ['04', 'צעד ראשון ברור', 'המלצה קונקרטית אחת להתחיל איתה — עם מדד הצלחה ואחראי.'],
+      ],
+      closingEyebrow: 'מספר המקומות מוגבל',
+      closingTitle: 'רוצים לבדוק מה AI יכול לעשות לעסק שלכם?',
+      closingText: 'ספרו לי קצת על העסק ועל האתגר המרכזי. אני עובר על כל בקשה בעצמי ומתאם שיחה עם מי שיש התאמה.',
+      cta2: 'להרשמה לשיחה',
+      f: {
+        fullName: 'שם מלא', email: 'מייל', phone: 'טלפון / וואטסאפ', jobTitle: 'תפקיד', jobPh: 'למשל: מנכ״ל, בעלים, סמנכ״לית',
+        organization: 'חברה / עסק', revenue: 'מחזור הכנסות שנתי', employees: 'מספר עובדים', choose: 'בחירה',
+        aiUsage: 'איך אתם משתמשים היום ב־AI? (לא חובה)', challenge: 'מה האתגר המרכזי שהייתם רוצים לפתור?',
+        language: 'שפה מועדפת לשיחה', hebrew: 'עברית', english: 'אנגלית',
+        consent: 'אני מאשר/ת שיצרו איתי קשר בוואטסאפ, בטלפון או במייל לתיאום השיחה.',
+      },
+    }
+  : {
+      title: 'Free 30-minute AI consulting session with Yuval Keshtcher | FutureProof Agents',
+      description: 'For business owners and executives from the "Business AI" WhatsApp community: a free, personal 30-minute session to map where a custom AI agent can save you time and money.',
+      eyebrow: 'For "Business AI" community members · Limited spots',
+      headlineA: '30 minutes with Yuval.',
+      headlineB: 'A clear AI map for your business.',
+      intro: 'A free, personal consulting session for business owners and executives from the "Business AI" (בינה מלאכותית עסקית) WhatsApp community. We will walk through your operations and map where a custom AI agent can save you time and money — on a secure cloud, with models that do not train on your data.',
+      cta: 'Book my session',
+      loading: 'Sending…',
+      note: 'Spots are limited. I review every request and will reach out by WhatsApp or email to schedule.',
+      success: 'Thank you! Your request was received. We will reach out shortly by WhatsApp or email to schedule your session.',
+      error: 'That did not go through. Try again in a moment.',
+      proof: ['30 minutes, free', 'Limited spots', 'Secure cloud', 'Models never train on your data'],
+      getEyebrow: 'What you get',
+      getTitle: 'Not a lecture. A practical map for your business.',
+      getIntro: 'In 30 minutes you will know where AI is truly worth the investment for you — and what to hold off on.',
+      gets: [
+        ['01', 'Opportunity map', 'We identify 2-3 processes where a custom AI agent can save hours and money as soon as next quarter.'],
+        ['02', 'Secure cloud', 'How to run agents in an isolated, secure environment with full control over permissions and data access.'],
+        ['03', 'Your data stays yours', 'Working with models that do not train on your business data, and what to check with every vendor.'],
+        ['04', 'A clear first step', 'One concrete recommendation to start with — with a success metric and an owner.'],
+      ],
+      closingEyebrow: 'Limited spots',
+      closingTitle: 'Want to see what AI can do for your business?',
+      closingText: 'Tell me a little about your business and your main challenge. I review every request myself and schedule a call where there is a fit.',
+      cta2: 'Request a session',
+      f: {
+        fullName: 'Full name', email: 'Email', phone: 'Phone / WhatsApp', jobTitle: 'Role', jobPh: 'e.g. CEO, Owner, VP',
+        organization: 'Company / business', revenue: 'Annual revenue', employees: 'Number of employees', choose: 'Choose',
+        aiUsage: 'How do you use AI today? (optional)', challenge: 'What is the main challenge you would like to solve?',
+        language: 'Preferred language for the call', hebrew: 'Hebrew', english: 'English',
+        consent: 'I agree to be contacted by WhatsApp, phone or email to schedule the session.',
+      },
+    };
+---
+<!DOCTYPE html>
+<html lang={lang} dir={he ? 'rtl' : 'ltr'}>
+<head>
+  <script is:inline defer src="/scripts/analytics.js"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{copy.title}</title>
+  <meta name="description" content={copy.description} />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href={`${site}${pagePath}`} />
+  <link rel="alternate" hreflang="en" href={`${site}/consulting/`} />
+  <link rel="alternate" hreflang="he" href={`${site}/he/consulting/`} />
+  <link rel="alternate" hreflang="x-default" href={`${site}/he/consulting/`} />
+  <meta property="og:title" content={copy.title} />
+  <meta property="og:description" content={copy.description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`${site}${pagePath}`} />
+  <meta property="og:image" content={`${site}/avatar.jpg`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <LocalFonts hebrew={lang === 'he'} primary={lang === 'he' ? 'heebo' : 'inter'} />
+  <style is:inline>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --blue: #1d9bf0;
+      --blue-soft: rgba(29, 155, 240, 0.13);
+      --ink: #e7e9ea;
+      --muted: #8b949e;
+      --panel: #101214;
+      --panel-2: #16181c;
+      --line: #2f3336;
+      --black: #000;
+    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      min-height: 100vh;
+      background: var(--black);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+    html[dir='rtl'] body { font-family: 'Heebo', Arial, sans-serif; }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -280px 0 auto;
+      margin: auto;
+      width: min(760px, 100%);
+      height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,155,240,.2), rgba(29,155,240,0) 68%);
+      filter: blur(24px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    a { color: inherit; }
+    .confirmation-banner { padding:20px 24px; margin-top:28px; border:1px solid #327250; border-radius:14px; background:#0d251b; color:#b9efce; line-height:1.6; }
+    .header-shell { width: min(1116px, calc(100% - 40px)); margin-inline: auto; }
+    h1, h2 { text-wrap: balance; overflow-wrap: break-word; }
+    .site-shell { position: relative; z-index: 1; }
+    .topbar {
+      width: min(1080px, calc(100% - 36px));
+      height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: -.25px;
+    }
+    .brand svg { width: 30px; height: 30px; }
+    .brand span { color: var(--blue); }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-link, .lang {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 15px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 750;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .nav-link { border-color: transparent; }
+    .nav-link:hover, .lang:hover { color: #fff; border-color: #454a50; background: rgba(255,255,255,.03); }
+    main { width: min(860px, calc(100% - 36px)); margin: 0 auto; }
+    .hero {
+      text-align: center;
+      padding: 76px 0 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+    h1 {
+      max-width: 820px;
+      margin: 22px auto 0;
+      font-size: clamp(36px, 6.2vw, 68px);
+      line-height: 1.12;
+      letter-spacing: -2.5px;
+      font-weight: 900;
+      color: #fff;
+    }
+    html[dir='rtl'] .eyebrow { letter-spacing: .2px; text-transform: none; }
+    html[dir='rtl'] h1 { line-height: 1.08; letter-spacing: -1.6px; }
+    h1 span { display: block; color: var(--blue); }
+    .hero-copy {
+      max-width: 650px;
+      margin: 28px auto 0;
+      color: #c7cbd0;
+      font-size: clamp(16px, 2.4vw, 19px);
+      line-height: 1.72;
+    }
+    .signup-wrap { width: min(620px, 100%); margin: 38px auto 0; }
+    .signup-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+    .consent { grid-column:1/-1; display:flex; align-items:flex-start; gap:10px; text-align:start; font-size:13px; line-height:1.6; color:#bcc6d0; margin-top:4px; cursor:pointer; }
+    .consent input { margin-top:4px; width:18px; height:18px; flex-shrink:0; accent-color:var(--blue); }
+    .signup-form input[type='email'] {
+      min-width: 0;
+      min-height: 58px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--panel-2);
+      color: #fff;
+      padding: 0 18px;
+      font: inherit;
+      font-size: 15px;
+      direction: ltr;
+      text-align: left;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .signup-form input[type='email']::placeholder { color: #a0aab5; }
+    .signup-form input[type='email']:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(29,155,240,.12); }
+    .signup-form button {
+      min-height: 58px;
+      border: 0;
+      border-radius: 13px;
+      padding: 0 24px;
+      background: var(--blue);
+      color: #001522;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .2s, filter .2s, box-shadow .2s;
+      box-shadow: 0 10px 30px rgba(29,155,240,.2);
+    }
+    .signup-form button:hover { transform: translateY(-2px); filter: brightness(1.08); box-shadow: 0 14px 34px rgba(29,155,240,.28); }
+    .signup-form button:disabled { cursor: wait; opacity: .66; transform: none; }
+    .form-note, .form-status { margin-top: 11px; color: #a0aab5; font-size: 12.5px; line-height: 1.5; }
+    .form-status:empty { display: none; }
+    .form-status[data-state='success'] { color: #56d889; }
+    .form-status[data-state='error'] { color: #ff7a8a; }
+    .honeypot { position: absolute !important; inset-inline-start: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+    .proof-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px 22px;
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 650;
+    }
+    .proof-row span { display: inline-flex; align-items: center; gap: 8px; }
+    .proof-row span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 10px var(--blue); }
+    .rule { border: 0; height: 1px; background: var(--line); margin: 0; }
+    .section { padding: 76px 0; }
+    .section-head { max-width: 650px; margin-bottom: 32px; }
+    .section-head.center { margin-inline: auto; text-align: center; }
+    h2 { margin-top: 12px; color: #fff; font-size: clamp(30px, 5vw, 46px); line-height: 1.1; letter-spacing: -2px; font-weight: 900; }
+    html[dir='rtl'] h2 { letter-spacing: -.7px; }
+    .section-head p { margin-top: 14px; color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+    .issue-grid { border: 1px solid var(--line); border-radius: 20px; background: rgba(16,18,20,.84); overflow: hidden; }
+    .issue-row {
+      display: grid;
+      grid-template-columns: 64px 185px 1fr;
+      gap: 18px;
+      align-items: center;
+      min-height: 92px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line);
+      transition: background .2s;
+    }
+    .issue-row:last-child { border-bottom: 0; }
+    .issue-row:hover { background: rgba(29,155,240,.04); }
+    .issue-no { color: var(--blue); font-size: 12px; font-weight: 850; letter-spacing: 1px; }
+    .issue-name { color: #fff; font-size: 15px; font-weight: 800; }
+    .issue-desc { color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .latest {
+      display: block;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(145deg, #15181b, #0c0e10);
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0,0,0,.42);
+      color: inherit;
+      text-decoration: none;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .latest:hover { transform: translateY(-4px); border-color: #46505a; box-shadow: 0 34px 90px rgba(0,0,0,.55); }
+    .latest:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
+    .latest::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--blue); }
+    html[dir='rtl'] .latest::before { inset: 0 0 0 auto; }
+    .latest-main { padding: 42px 42px 36px; }
+    .latest h2 { max-width: 650px; }
+    .latest-dek { margin-top: 17px; max-width: 700px; color: #b8bdc2; font-size: 16px; line-height: 1.72; }
+    .signals { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .signal { padding: 26px 28px; border-inline-end: 1px solid var(--line); }
+    .signal:last-child { border-inline-end: 0; }
+    .signal strong { display: block; color: var(--blue); font-size: 34px; line-height: 1; letter-spacing: -1.5px; }
+    .signal span { display: block; margin-top: 9px; color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+    .move { margin: 30px 42px 0; padding: 22px 24px; border: 1px solid rgba(29,155,240,.28); border-radius: 15px; background: var(--blue-soft); }
+    .move-label { color: var(--blue); font-size: 11px; font-weight: 850; letter-spacing: 1.4px; text-transform: uppercase; }
+    html[dir='rtl'] .move-label { letter-spacing: .2px; text-transform: none; }
+    .move p { margin-top: 8px; color: #e1e4e6; font-size: 15px; line-height: 1.67; font-weight: 550; }
+    .source { padding: 25px 42px 38px; color: #626970; font-size: 12px; line-height: 1.5; }
+    .read-issue { display: inline-flex; align-items: center; gap: 8px; margin: 0 42px 36px; color: var(--blue); font-size: 14px; font-weight: 850; }
+    .read-issue::after { content: '→'; transition: transform .2s; }
+    html[dir='rtl'] .read-issue::after { content: '←'; }
+    .latest:hover .read-issue::after { transform: translateX(4px); }
+    html[dir='rtl'] .latest:hover .read-issue::after { transform: translateX(-4px); }
+    .closing { padding: 84px 0 32px; text-align: center; }
+    .closing h2 { max-width: 700px; margin-inline: auto; }
+    .closing > p { max-width: 570px; margin: 17px auto 0; color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+    .closing .signup-wrap { margin-top: 30px; }
+    .reveal { opacity: 0; transform: translateY(18px); animation: reveal .7s cubic-bezier(.2,.8,.2,1) forwards; }
+    .hero .reveal:nth-child(2) { animation-delay: .08s; }
+    .hero .reveal:nth-child(3) { animation-delay: .16s; }
+    .hero .reveal:nth-child(4) { animation-delay: .24s; }
+    .hero .reveal:nth-child(5) { animation-delay: .32s; }
+    @keyframes reveal { to { opacity: 1; transform: none; } }
+    @media (max-width: 680px) {
+      .topbar { height: 66px; }
+      .nav-link { display: none; }
+      .hero { padding: 48px 0; }
+      h1 { letter-spacing: -1.2px; text-wrap: balance; }
+      html[dir='rtl'] h1 { letter-spacing: -1px; }
+      .signup-form { grid-template-columns: 1fr; }
+      .signup-form button { width: 100%; }
+      .section { padding: 60px 0; }
+      .issue-row { grid-template-columns: 46px 1fr; gap: 4px 12px; padding: 17px 18px; }
+      .issue-desc { grid-column: 2; }
+      .latest-main { padding: 30px 24px 26px; }
+      .signals { grid-template-columns: 1fr; }
+      .signal { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 12px; border-inline-end: 0; border-bottom: 1px solid var(--line); padding: 20px 24px; }
+      .signal:last-child { border-bottom: 0; }
+      .signal span { margin: 0; }
+      .move { margin: 24px 24px 0; }
+      .source { padding: 22px 24px 30px; }
+      .read-issue { margin: 0 24px 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; animation: none; }
+      * { transition-duration: .01ms !important; }
+    }
+    .editor-note{margin-top:28px;padding:28px;border-inline-start:3px solid var(--blue);background:var(--panel);border-radius:12px;line-height:1.8;color:var(--ink)}
+    .editor-note strong{display:block;margin-top:14px;color:var(--muted);font-size:14px}
+    .signup-form .application-field{grid-column:1/-1;display:grid;gap:7px;width:100%;text-align:start;color:#c8d2db;font-size:14px;font-weight:600}
+    .signup-form .application-field[hidden]{display:none}
+    .signup-form .application-field input,.signup-form .application-field select{width:100%;min-width:0;font:inherit;padding:14px;border:1px solid #35444c;border-radius:10px;background:#0c1116;color:#fff;min-height:48px}
+    .signup-form .application-field textarea{width:100%;min-width:0;font:inherit;padding:14px;border:1px solid #35444c;border-radius:10px;background:#0c1116;color:#fff;min-height:96px;resize:vertical}
+    .signup-form .application-field.half{grid-column:auto}
+    .signup-form .application-field input[type='email'],.signup-form .application-field input[type='tel']{direction:ltr;text-align:start}
+    .signup-form button{grid-column:1/-1}
+    .signup-form{grid-template-columns:1fr 1fr}
+    .thanks{padding:28px;border:1px solid #327250;border-radius:16px;background:#0d251b;color:#b9efce;line-height:1.7;font-size:16px;text-align:center}
+    @media (max-width:680px){.signup-form .application-field.half{grid-column:1/-1}}
+    /* ---- conversational stepper ---- */
+    .stepper{position:relative;max-width:640px;margin:0 auto;padding:28px 24px 24px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#0c1218,#08090b);box-shadow:0 20px 60px rgba(0,0,0,.45);text-align:start}
+    .stepper-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;font-size:13px;color:var(--muted)}
+    .stepper-progress{flex:1;height:6px;border-radius:99px;background:#1b2229;overflow:hidden}
+    .stepper-progress span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--blue),#7cc8ff);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+    .stepper-count{font-variant-numeric:tabular-nums;white-space:nowrap}
+    .steps{position:relative;overflow-x:clip;overflow-y:visible;padding:2px}
+    .step{position:absolute;inset:0 0 auto 0;display:flex;flex-direction:column;gap:14px;opacity:0;visibility:hidden;transform:translateX(calc(var(--from,1) * 40px));transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s;pointer-events:none}
+    [dir='rtl'] .step{transform:translateX(calc(var(--from,1) * -40px))}
+    .step.is-active{position:relative;opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s;pointer-events:auto}
+    .step-q{margin:0;font-size:clamp(22px,5.4vw,30px);line-height:1.25;font-weight:800;color:#fff}
+    .step-q .num{display:inline-block;margin-inline-end:8px;color:var(--blue);font-size:.6em;vertical-align:middle}
+    .step-hint{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+    .step input[type='text'],.step input[type='email'],.step input[type='tel'],.step textarea{width:100%;font:inherit;font-size:20px;padding:12px 2px;border:0;border-bottom:2px solid #35444c;border-radius:0;background:transparent;color:#fff;outline:none;transition:border-color .2s}
+    .step textarea{font-size:17px;min-height:110px;resize:vertical;border:2px solid #35444c;border-radius:12px;padding:12px}
+    .step input:focus,.step textarea:focus{border-color:var(--blue)}
+    .step input[type='email'],.step input[type='tel']{direction:ltr;text-align:start}
+    [dir='rtl'] .step input[type='email'],[dir='rtl'] .step input[type='tel']{text-align:right}
+    .options{display:grid;gap:10px}
+    .option{display:flex;align-items:center;gap:12px;width:100%;min-height:54px;padding:12px 16px;font:inherit;font-size:17px;color:var(--ink);text-align:start;border:1.5px solid #2c3a43;border-radius:14px;background:#0d141a;cursor:pointer;transition:border-color .2s,background .2s,transform .15s}
+    .option:hover{border-color:var(--blue)}
+    .option:active{transform:scale(.98)}
+    .option kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;border:1px solid #3a4a55;border-radius:7px;font:600 13px/1 inherit;color:var(--muted)}
+    .option[aria-checked='true']{border-color:var(--blue);background:var(--blue-soft);color:#fff}
+    .option[aria-checked='true'] kbd{background:var(--blue);border-color:var(--blue);color:#000}
+    .step-consent{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.6;color:var(--ink);cursor:pointer}
+    .step-consent input{width:22px;height:22px;flex:none;margin-top:3px;accent-color:var(--blue)}
+    .step-error{min-height:22px;margin:0;color:#ff8f8f;font-size:14px}
+    .stepper-nav{display:flex;align-items:center;gap:10px;margin-top:8px}
+    .stepper-nav .next{flex:none;padding:13px 26px;font:inherit;font-weight:700;font-size:16px;border:0;border-radius:12px;background:var(--blue);color:#000;cursor:pointer}
+    .stepper-nav .next:disabled{opacity:.6;cursor:wait}
+    .stepper-nav .back,.stepper-nav .skip{padding:13px 14px;font:inherit;font-size:15px;border:0;background:none;color:var(--muted);cursor:pointer}
+    .stepper-nav[hidden]{display:none}
+    .stepper-nav .back[hidden],.stepper-nav .skip[hidden]{display:none}
+    .stepper-nav .enter-hint{margin-inline-start:auto;font-size:12px;color:var(--muted)}
+    .stepper-done{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px 0}
+    .stepper-done[hidden]{display:none}
+    .stepper-done .party{font-size:64px;line-height:1;animation:pop .7s cubic-bezier(.2,1.6,.4,1) both}
+    .stepper-done h3{margin:0;font-size:clamp(24px,6vw,34px);color:#fff}
+    .stepper-done p{margin:0;max-width:440px;color:var(--ink);line-height:1.7}
+    .confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:20px}
+    .confetti i{position:absolute;top:-12px;width:8px;height:14px;border-radius:2px;opacity:0;animation:fall 2.4s ease-in forwards}
+    @keyframes pop{from{transform:scale(.2) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+    @keyframes fall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(520px) rotate(540deg)}}
+    .about-yuval{display:flex;align-items:center;gap:16px;max-width:640px;margin:0 auto 16px;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:#0b1015;text-align:start}
+    .about-yuval img{width:64px;height:64px;flex:none;border-radius:50%;object-fit:cover;border:2px solid var(--blue)}
+    .about-yuval b{display:block;color:#fff;font-size:16px;margin-bottom:4px}
+    .about-yuval p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+    @media (max-width:680px){.hero{padding-bottom:12px}.about-yuval{margin-bottom:12px;padding:12px 14px;gap:12px}.about-yuval img{width:52px;height:52px}.step-q{font-size:22px}.steps{min-height:0}}
+    .closing-cta{display:inline-block;margin-top:18px;padding:14px 28px;border-radius:12px;background:var(--blue);color:#000;font-weight:700;text-decoration:none}
+    @media (max-width:680px){.stepper{padding:20px 16px 18px;border-radius:16px}.stepper-nav .enter-hint{display:none}.stepper-nav .next{flex:1}}
+    @media (prefers-reduced-motion:reduce){.step,.step.is-active,.stepper-progress span{transition:none!important;transform:none!important}.stepper-done .party,.confetti i{animation:none!important}.confetti{display:none}}
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <div class="header-shell"><SiteHeader lang={lang} /></div>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow reveal">{copy.eyebrow}</div>
+        <h1 class="reveal">{copy.headlineA}<span>{copy.headlineB}</span></h1>
+        <p class="hero-copy reveal">{copy.intro}</p>
+        <div class="proof-row reveal">
+          {copy.proof.map((item) => <span>{item}</span>)}
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="issue-grid">
+          {copy.gets.map(([no, name, desc]) => (
+            <article class="issue-row">
+              <div class="issue-no">{no}</div>
+              <div class="issue-name">{name}</div>
+              <p class="issue-desc">{desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="section" id="register">
+        <aside class="about-yuval reveal">
+          <img src="/avatar.jpg" width="64" height="64" alt={he ? 'יובל קשטכר' : 'Yuval Keshtcher'} />
+          <div>
+            <b>{he ? 'נעים מאוד, אני יובל קשטכר' : 'Hi, I am Yuval Keshtcher'}</b>
+            <p>{he ? 'מייסד FutureProof Agents, בונה סוכני AI בהתאמה אישית לעסקים ומוביל את קהילת הוואטסאפ ״בינה מלאכותית עסקית״. לפני כן הקמתי את UX Writing Hub, בית הספר הבינלאומי לכתיבת חוויית משתמש, עם יותר מאלף בוגרים בחברות הגדולות בעולם.' : 'Founder of FutureProof Agents. I build custom AI agents for businesses and lead the WhatsApp community “בינה מלאכותית עסקית” (Business AI). Before that I founded UX Writing Hub, the international UX writing school, with 1,000+ graduates at the world’s biggest companies.'}</p>
+          </div>
+        </aside>
+        <form class="stepper" data-stepper novalidate>
+          <div class="confetti" aria-hidden="true"></div>
+          <label class="honeypot" aria-hidden="true">Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
+          <div class="stepper-top">
+            <div class="stepper-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label={he ? 'התקדמות' : 'Progress'}><span data-bar></span></div>
+            <div class="stepper-count" data-count dir="ltr" aria-live="polite"></div>
+          </div>
+          <div class="steps">
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'היי! 👋 לאיזה מייל נשלח את פרטי השיחה?' : 'Hi there! 👋 Where should we email the session details?'}</h2>
+              <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="180" required data-msg={he ? 'נראה שחסר משהו במייל — אפשר לבדוק שוב?' : 'That email looks a little off — mind checking it?'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'ומספר וואטסאפ? ככה הכי קל לתאם 📱' : 'And your WhatsApp number? Easiest way to schedule 📱'}</h2>
+              <p class="step-hint">{he ? 'רק לתיאום השיחה. בלי ספאם, מבטיחים.' : 'Only for scheduling. No spam, promise.'}</p>
+              <input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" required data-msg={he ? 'המספר נראה קצר מדי — אפשר עם קידומת, למשל 050-1234567' : 'That number looks too short — e.g. +972 50 123 4567'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'ואיך קוראים לך?' : 'And what is your name?'}</h2>
+              <p class="step-hint">{he ? 'ככה נדע איך לפנות אליך בשיחה.' : 'So we know what to call you on the call.'}</p>
+              <input name="fullName" type="text" autocomplete="name" minlength="2" maxlength="120" required data-msg={he ? 'רק השם, בבקשה (לפחות 2 אותיות) 🙂' : 'Just your name, please (at least 2 letters) 🙂'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q" data-tpl={he ? 'נעים מאוד, {n}! מה התפקיד שלך?' : 'Nice to meet you, {n}! What is your role?'}>{he ? 'מה התפקיד שלך?' : 'What is your role?'}</h2>
+              <input name="jobTitle" type="text" autocomplete="organization-title" minlength="2" maxlength="120" required placeholder={copy.f.jobPh} data-msg={he ? 'ספר/י לנו בכמה מילים מה התפקיד' : 'Tell us your role in a few words'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'ואיך קוראים לעסק? 🏢' : 'And what is the business called? 🏢'}</h2>
+              <input name="organization" type="text" autocomplete="organization" minlength="2" maxlength="160" required data-msg={he ? 'רק שם העסק או החברה' : 'Just the company or business name'} />
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q">{he ? 'ספרו בכמה מילים על העסק' : 'Tell us about the business in a few words'}</h2>
+              <p class="step-hint">{he ? 'מה אתם עושים, למי אתם מוכרים ואיך נראה יום עבודה רגיל.' : 'What you do, who you sell to and what a typical work day looks like.'}</p>
+              <textarea name="aboutBusiness" minlength="5" maxlength="2000" required data-msg={he ? 'עוד כמה מילים על העסק, בבקשה 🙏' : 'A few more words about the business, please 🙏'}></textarea>
+            </div>
+            <div class="step" data-step data-req data-choice>
+              <h2 class="step-q">{he ? 'מה גובה המחזור השנתי, בערך?' : 'Roughly what is your annual revenue?'}</h2>
+              <p class="step-hint">{he ? 'זה עוזר לנו להתאים את השיחה לגודל העסק. נשאר בינינו.' : 'Helps us tailor the session to your size. Stays between us.'}</p>
+              <input type="hidden" name="annualRevenue" required data-msg={he ? 'בחר/י אחת מהאפשרויות' : 'Pick one of the options'} />
+              <div class="options" role="radiogroup">{revenueOptions.map(([v, h, e], i) => <button type="button" class="option" role="radio" aria-checked="false" data-value={v}><kbd>{i + 1}</kbd>{he ? h : e}</button>)}</div>
+            </div>
+            <div class="step" data-step data-req data-choice>
+              <h2 class="step-q">{he ? 'כמה עובדים יש בעסק?' : 'How many people work at the business?'}</h2>
+              <input type="hidden" name="employees" required data-msg={he ? 'בחר/י אחת מהאפשרויות' : 'Pick one of the options'} />
+              <div class="options" role="radiogroup">{employeeOptions.map((v, i) => <button type="button" class="option" role="radio" aria-checked="false" data-value={v}><kbd>{i + 1}</kbd>{v}</button>)}</div>
+            </div>
+            <div class="step" data-step data-optional>
+              <h2 class="step-q">{he ? 'איך אתם משתמשים היום ב־AI? 🤖' : 'How do you use AI today? 🤖'}</h2>
+              <p class="step-hint">{he ? 'לא חובה — אפשר גם "עוד לא התחלנו", וזה לגמרי בסדר.' : 'Optional — "we have not started yet" is totally fine.'}</p>
+              <textarea name="currentAiUsage" maxlength="2000"></textarea>
+            </div>
+            <div class="step" data-step data-req>
+              <h2 class="step-q" data-tpl={he ? 'הכי חשוב, {n}: מה האתגר המרכזי שהיית רוצה לפתור?' : 'The big one, {n}: what is the main challenge you would like to solve?'}>{he ? 'הכי חשוב: מה האתגר המרכזי שהיית רוצה לפתור?' : 'The big one: what is the main challenge you would like to solve?'}</h2>
+              <p class="step-hint">{he ? 'כמה משפטים מספיקים. ככל שנבין יותר, השיחה תהיה ממוקדת יותר.' : 'A few sentences is plenty. The more we know, the sharper the session.'}</p>
+              <textarea name="mainChallenge" minlength="5" maxlength="2000" required data-msg={he ? 'עוד כמה מילים, כדי שנגיע מוכנים 🙏' : 'A few more words so we come prepared 🙏'}></textarea>
+            </div>
+            <div class="step" data-step data-optional data-choice>
+              <h2 class="step-q">{he ? 'באיזו שפה נוח לך לדבר?' : 'Which language works best for the call?'}</h2>
+              <input type="hidden" name="preferredLanguage" value={lang} />
+              <div class="options" role="radiogroup">
+                <button type="button" class="option" role="radio" aria-checked={he ? 'true' : 'false'} data-value="he"><kbd>1</kbd>{copy.f.hebrew}</button>
+                <button type="button" class="option" role="radio" aria-checked={he ? 'false' : 'true'} data-value="en"><kbd>2</kbd>{copy.f.english}</button>
+              </div>
+            </div>
+            <div class="step" data-step data-req data-last>
+              <h2 class="step-q" data-tpl={he ? 'כמעט סיימנו, {n}! 🎯' : 'Almost there, {n}! 🎯'}>{he ? 'כמעט סיימנו! 🎯' : 'Almost there! 🎯'}</h2>
+              <p class="step-hint">{copy.note}</p>
+              <label class="step-consent"><input name="consent" type="checkbox" required data-msg={he ? 'צריך את האישור שלך כדי שנוכל לחזור אליך' : 'We need your OK to get back to you'} /><span>{copy.f.consent}</span></label>
+            </div>
+            <div class="stepper-done" data-done hidden tabindex="-1">
+              <div class="party" aria-hidden="true">🎉</div>
+              <h3 data-tpl={he ? 'יש! תודה, {n}!' : 'Woohoo! Thanks, {n}!'}>{he ? 'יש! תודה!' : 'Woohoo! Thank you!'}</h3>
+              <p>{copy.success}</p>
+            </div>
+          </div>
+          <p class="step-error" aria-live="assertive" data-error data-fail={copy.error}></p>
+          <div class="stepper-nav" data-nav>
+            <button type="button" class="next" data-next data-label={he ? 'הבא' : 'Next'} data-submit={he ? 'שריינו לי שיחה 🚀' : 'Book my session 🚀'} data-loading={copy.loading}>{he ? 'הבא' : 'Next'}</button>
+            <button type="button" class="skip" data-skip hidden>{he ? 'דלג' : 'Skip'}</button>
+            <button type="button" class="back" data-back hidden>{he ? 'חזרה' : '← Back'}</button>
+            <span class="enter-hint">{he ? 'או Enter ↵' : 'or press Enter ↵'}</span>
+          </div>
+        </form>
+      </section>
+
+      <section class="closing">
+        <div class="eyebrow">{copy.closingEyebrow}</div>
+        <h2>{copy.closingTitle}</h2>
+        <p>{copy.closingText}</p>
+        <a class="closing-cta" href="#register" data-to-stepper>{copy.cta2}</a>
+      </section>
+    </main>
+
+    <SiteFooter lang={lang} />
+  </div>
+
+  <script is:inline define:vars={{ lang }}>
+    (function () {
+      var localHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      var isVercel = location.hostname.endsWith('.vercel.app');
+      var endpoint = (localHost || isVercel)
+        ? '/api/consulting'
+        : 'https://yuvalkesh-links.vercel.app/api/consulting';
+      var form = document.querySelector('[data-stepper]');
+      if (!form) return;
+      var steps = Array.prototype.slice.call(form.querySelectorAll('[data-step]'));
+      var bar = form.querySelector('[data-bar]');
+      var count = form.querySelector('[data-count]');
+      var err = form.querySelector('[data-error]');
+      var next = form.querySelector('[data-next]');
+      var back = form.querySelector('[data-back]');
+      var skip = form.querySelector('[data-skip]');
+      var nav = form.querySelector('[data-nav]');
+      var done = form.querySelector('[data-done]');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var cur = 0;
+      var sending = false;
+      var field = function (name) { return form.querySelector('[name="' + name + '"]'); };
+      var val = function (name) { var el = field(name); return el ? el.value.trim() : ''; };
+      var sessionId = (function () {
+        try {
+          var k = 'fp_consult_sid';
+          var v = sessionStorage.getItem(k);
+          if (!v) { v = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2)); sessionStorage.setItem(k, v); }
+          return v;
+        } catch (e) { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+      })();
+      var submitted = false;
+      var partialTimer = null;
+      var pendingStep = '';
+      function collect() {
+        return {
+          fullName: val('fullName'),
+          email: val('email'),
+          phone: val('phone'),
+          jobTitle: val('jobTitle'),
+          organization: val('organization'),
+          aboutBusiness: val('aboutBusiness'),
+          annualRevenue: val('annualRevenue'),
+          employees: val('employees'),
+          mainChallenge: val('mainChallenge'),
+          currentAiUsage: val('currentAiUsage'),
+          preferredLanguage: val('preferredLanguage') || lang,
+          company: field('company').value,
+          sessionId: sessionId,
+          lang: lang,
+          page: location.href,
+        };
+      }
+      function flushPartial() {
+        clearTimeout(partialTimer);
+        partialTimer = null;
+        if (submitted || !pendingStep) return;
+        var data = collect();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) return;
+        data.partial = true;
+        data.lastStep = pendingStep;
+        pendingStep = '';
+        // Fire-and-forget: never blocks or surfaces errors in the UI.
+        try {
+          fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), keepalive: true }).catch(function () {});
+        } catch (e) {}
+      }
+      function savePartial(step) {
+        var el = step.querySelector('[name]:not([name=company])');
+        pendingStep = el ? el.name : 'step';
+        clearTimeout(partialTimer);
+        partialTimer = setTimeout(flushPartial, 900);
+      }
+      window.addEventListener('pagehide', flushPartial);
+      document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flushPartial(); });
+      var firstName = function () { return val('fullName').split(/\s+/)[0] || ''; };
+
+      function personalize() {
+        var n = firstName();
+        form.querySelectorAll('[data-tpl]').forEach(function (el) {
+          if (!el.dataset.base) el.dataset.base = el.lastChild.textContent;
+          el.lastChild.textContent = n ? el.dataset.tpl.replace('{n}', n) : el.dataset.base;
+        });
+      }
+
+      function focusStep(step) {
+        var target = step.querySelector('input:not([type=hidden]):not([name=company]), textarea, .option[aria-checked=true], .option');
+        if (target) setTimeout(function () { target.focus({ preventScroll: true }); }, reduce ? 0 : 60);
+      }
+
+      function show(i, dir) {
+        steps.forEach(function (s, k) {
+          s.style.setProperty('--from', k < i ? -1 : 1);
+          s.classList.toggle('is-active', k === i);
+          s.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+          s.inert = k !== i;
+        });
+        cur = i;
+        var step = steps[i];
+        var pct = Math.round((i / steps.length) * 100);
+        bar.style.width = Math.max(pct, 4) + '%';
+        bar.parentElement.setAttribute('aria-valuenow', pct);
+        count.textContent = (i + 1) + ' / ' + steps.length;
+        back.hidden = i === 0;
+        skip.hidden = !step.hasAttribute('data-optional');
+        next.textContent = step.hasAttribute('data-last') ? next.dataset.submit : next.dataset.label;
+        err.textContent = '';
+        personalize();
+        if (dir !== 0) focusStep(step);
+      }
+
+      function validate(step) {
+        if (!step.hasAttribute('data-req')) return true;
+        var el = step.querySelector('[name]:not([name=company])');
+        var ok;
+        if (el.type === 'checkbox') ok = el.checked;
+        else if (el.type === 'hidden') ok = !!el.value;
+        else {
+          el.value = el.value.trim();
+          ok = el.checkValidity() && el.value.length >= (+el.getAttribute('minlength') || 1);
+          if (el.type === 'email') ok = ok && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value);
+          if (el.type === 'tel') ok = ok && /^[+\d][\d\s()\-.]{6,29}$/.test(el.value);
+        }
+        err.textContent = ok ? '' : el.dataset.msg;
+        if (!ok && !reduce) { step.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-8px)' }, { transform: 'translateX(8px)' }, { transform: 'translateX(0)' }], { duration: 260 }); }
+        return ok;
+      }
+
+      function advance() {
+        if (sending) return;
+        var step = steps[cur];
+        if (!validate(step)) { focusStep(step); return; }
+        if (step.hasAttribute('data-last')) return submit();
+        savePartial(step);
+        show(cur + 1, 1);
+      }
+
+      function confetti() {
+        if (reduce) return;
+        var box = form.querySelector('.confetti');
+        var colors = ['#1d9bf0', '#7cc8ff', '#ffd166', '#06d6a0', '#ef476f', '#ffffff'];
+        for (var i = 0; i < 60; i++) {
+          var p = document.createElement('i');
+          p.style.left = Math.random() * 100 + '%';
+          p.style.background = colors[i % colors.length];
+          p.style.animationDelay = Math.random() * 0.6 + 's';
+          p.style.animationDuration = 1.6 + Math.random() * 1.4 + 's';
+          box.appendChild(p);
+        }
+      }
+
+      async function submit() {
+        sending = true;
+        next.disabled = true;
+        next.textContent = next.dataset.loading;
+        err.textContent = '';
+        clearTimeout(partialTimer);
+        pendingStep = '';
+        try {
+          var payload = collect();
+          payload.consent = field('consent').checked;
+          var response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          var result = await response.json();
+          if (!response.ok || !result.ok) throw new Error('request failed');
+          submitted = true;
+          steps.forEach(function (s) { s.classList.remove('is-active'); s.inert = true; });
+          nav.hidden = true;
+          bar.style.width = '100%';
+          count.textContent = '✓';
+          next.textContent = next.dataset.submit;
+          personalize();
+          done.hidden = false;
+          done.focus({ preventScroll: true });
+          confetti();
+          window.fpAnalytics?.('consulting_request');
+        } catch (error) {
+          err.textContent = err.dataset.fail;
+          next.textContent = next.dataset.submit;
+        } finally {
+          sending = false;
+          next.disabled = false;
+        }
+      }
+
+      form.querySelectorAll('[data-choice]').forEach(function (step) {
+        var input = step.querySelector('input[type=hidden]');
+        step.querySelectorAll('.option').forEach(function (opt) {
+          opt.addEventListener('click', function () {
+            step.querySelectorAll('.option').forEach(function (o) { o.setAttribute('aria-checked', o === opt ? 'true' : 'false'); });
+            input.value = opt.dataset.value;
+            err.textContent = '';
+            setTimeout(advance, reduce ? 0 : 260);
+          });
+        });
+      });
+
+      next.addEventListener('click', advance);
+      back.addEventListener('click', function () { if (cur > 0) show(cur - 1, -1); });
+      skip.addEventListener('click', function () { savePartial(steps[cur]); show(cur + 1, 1); });
+      form.addEventListener('submit', function (e) { e.preventDefault(); advance(); });
+      form.addEventListener('keydown', function (e) {
+        var step = steps[cur];
+        if (!step || !step.classList.contains('is-active')) return;
+        if (e.key === 'Enter' && !e.shiftKey && !(e.target.tagName === 'BUTTON' && e.target !== next)) {
+          e.preventDefault();
+          advance();
+          return;
+        }
+        if (step.hasAttribute('data-choice') && e.target.tagName !== 'TEXTAREA' && /^[1-9]$/.test(e.key)) {
+          var opt = step.querySelectorAll('.option')[+e.key - 1];
+          if (opt) { e.preventDefault(); opt.click(); }
+        }
+      });
+      form.querySelectorAll('input, textarea').forEach(function (el) {
+        el.addEventListener('input', function () { err.textContent = ''; });
+      });
+      document.querySelectorAll('[data-to-stepper]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.getElementById('register').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          if (!done.hidden) return;
+          focusStep(steps[cur]);
+        });
+      });
+      show(0, 0);
+    })();
+  </script>
+</body>
+</html>
