@@ -268,6 +268,12 @@
     },
     "api/lead-sync.js": {
       "maxDuration": 60
+    },
+    "api/consulting.js": {
+      "maxDuration": 60
+    },
+    "api/consulting-sync.js": {
+      "maxDuration": 60
     }
   }
 }
