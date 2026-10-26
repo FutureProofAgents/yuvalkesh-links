@@ -2,8 +2,9 @@
 import NewsletterInvite from './NewsletterInvite.astro';
 interface Props {
   lang?: 'he' | 'en';
+  showNewsletterInvite?: boolean;
 }
-const { lang = 'en' } = Astro.props;
+const { lang = 'en', showNewsletterInvite = true } = Astro.props;
 const he = lang === 'he';
 
 const nav = he
@@ -40,7 +41,7 @@ const social = he
       { href: 'https://www.youtube.com/@theLOOP-tube', label: 'theLOOP on YouTube' },
     ];
 ---
-<NewsletterInvite lang={lang} />
+{showNewsletterInvite && <NewsletterInvite lang={lang} />}
 <footer class="site-footer" dir={he ? 'rtl' : 'ltr'} lang={lang}>
   <nav class="row" aria-label={he ? 'ניווט באתר' : 'Site navigation'}>
     {nav.map((l, i) => (

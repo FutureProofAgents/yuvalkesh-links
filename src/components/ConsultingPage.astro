@@ -25,7 +25,7 @@ const copy = he
   ? {
       title: 'שיחת ייעוץ AI חינם של 30 דקות עם יובל קשטכר | FutureProof Agents',
       description: 'שיחה אישית של 30 דקות ללא עלות: נכיר את העסק, נמפה הזדמנויות לסוכני AI מאובטחים ונענה על שאלות מהניסיון שלנו. ההצעה מוגבלת ל־5 משתתפים.',
-      eyebrow: 'לחברי קהילת "בינה מלאכותית עסקית" · 5 משתתפים בלבד',
+      eyebrow: 'שיחת ייעוץ ללא עלות · 5 משתתפים בלבד',
       headlineA: '30 דקות עם יובל.',
       headlineB: 'בואו נדבר על העסק שלכם.',
       intro: 'בואו נדבר על הצרכים והאתגרים בעסק שלכם ונמפה יחד הזדמנויות לשימוש בסוכני בינה מלאכותית מאובטחים. אענה על השאלות שלכם לפי הידע והניסיון שצברנו בפרויקטים בחברות שונות בחצי השנה האחרונה. השיחה אישית וללא עלות.',
@@ -44,7 +44,7 @@ const copy = he
         ['03', 'השאלות שלכם', 'אפשר לשאול על כל מה שמעסיק אתכם. אענה לפי מה שלמדנו בפרויקטים בחברות שונות בחצי השנה האחרונה.'],
         ['04', 'כיוונים להמשך', 'נחשוב יחד מה כדאי לבדוק בהמשך ומה עוד צריך להבין לפני שמחליטים להתקדם.'],
       ],
-      closingEyebrow: '5 משתתפים בלבד',
+      closingEyebrow: 'ללא עלות · ההרשמה מוגבלת ל־5 משתתפים',
       closingTitle: 'רוצים לבדוק מה AI יכול לעשות לעסק שלכם?',
       closingText: 'ספרו לי קצת על העסק ועל האתגר המרכזי. אני עובר על כל בקשה בעצמי ומתאם שיחה עם מי שיש התאמה.',
       cta2: 'להרשמה לשיחה',
@@ -59,7 +59,7 @@ const copy = he
   : {
       title: 'Free 30-minute AI consulting session with Yuval Keshtcher | FutureProof Agents',
       description: 'A free 30-minute conversation about your business, opportunities for secure AI agents, and your questions. Drawing on our project experience. Limited to 5 participants.',
-      eyebrow: 'For "Business AI" community members · Only 5 participants',
+      eyebrow: 'Free consultation · Only 5 participants',
       headlineA: '30 minutes with Yuval.',
       headlineB: 'Let’s talk about your business.',
       intro: 'Let’s discuss your business needs and challenges and explore opportunities for secure AI agents. I’ll answer your questions based on what we have learned from projects with different companies over the past six months. A personal conversation, free of charge.',
@@ -78,7 +78,7 @@ const copy = he
         ['03', 'Your questions', 'Ask what is on your mind. I’ll answer based on lessons from projects with different companies over the past six months.'],
         ['04', 'Possible next steps', 'We’ll consider what is worth exploring and what we still need to understand before moving forward.'],
       ],
-      closingEyebrow: 'Only 5 participants',
+      closingEyebrow: 'Free of charge · Limited to 5 participants',
       closingTitle: 'Want to see what AI can do for your business?',
       closingText: 'Tell me a little about your business and your main challenge. I review every request myself and schedule a call where there is a fit.',
       cta2: 'Request a session',
@@ -588,7 +588,7 @@ const copy = he
       </section>
     </main>
 
-    <SiteFooter lang={lang} />
+    <SiteFooter lang={lang} showNewsletterInvite={false} />
   </div>
 
   <script is:inline define:vars={{ lang }}>
