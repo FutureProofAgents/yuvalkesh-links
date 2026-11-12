@@ -1,0 +1,136 @@
+---
+import LocalFonts from './LocalFonts.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import { hireContent, HIRE_TIER_IDS, whatsappLink } from '../data/hire-content.mjs';
+interface Props { lang: 'he' | 'en' }
+const { lang } = Astro.props;
+const he = lang === 'he';
+const c = hireContent[lang];
+const site = Astro.site!.href.replace(/\/$/, '');
+const canonical = `${site}${he ? '/he/hire/' : '/hire/'}`;
+const whatsappLinks = Object.fromEntries(HIRE_TIER_IDS.map(id => [id, whatsappLink(lang, id)]));
+const genericWhatsapp = whatsappLink(lang, '');
+---
+<!doctype html>
+<html lang={lang} dir={he ? 'rtl' : 'ltr'}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{c.meta.title}</title>
+  <meta name="description" content={c.meta.description} />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="en" href={`${site}/hire/`} />
+  <link rel="alternate" hreflang="he" href={`${site}/he/hire/`} />
+  <link rel="alternate" hreflang="x-default" href={`${site}/he/hire/`} />
+  <meta property="og:title" content={c.meta.title} />
+  <meta property="og:description" content={c.meta.description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={`${site}/avatar.jpg`} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <LocalFonts hebrew={lang==='he'} primary={lang==='he' ? 'heebo' : 'inter'} />
+  <script is:inline defer src="/scripts/analytics.js"></script>
+  <style is:inline>
+    :root{--blue:#1d9bf0;--blue-soft:rgba(29, 155, 240,.13);--ink:#e7e9ea;--muted:#8b949e;--panel:#101214;--panel-2:#16181c;--line:#2f3336;--black:#000;color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#000;color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.7}html[dir=rtl] body{font-family:'Heebo',Arial,sans-serif}body::before{content:'';position:absolute;inset-block-start:0;inset-inline:0;height:700px;background:radial-gradient(ellipse at top,rgba(29, 155, 240,.16),transparent 70%);pointer-events:none;z-index:-1}body{isolation:isolate}.header-shell{width:min(1116px,calc(100 * 1% - 40px));margin-inline:auto}main{width:min(1080px,calc(100 * 1% - 36px));margin-inline:auto}section{padding-block:42px;scroll-margin-block-start:24px}.text-section{max-width:860px;margin-inline:auto}h1,h2,h3{color:#fff;line-height:1.2;text-wrap:balance}h1{font-size:clamp(36px,6.2vw,64px);font-weight:900;margin-block:18px 24px}h1 span{display:block;color:var(--blue)}h2{font-size:clamp(26px,4vw,38px)}h3{font-size:23px}p,li{color:#c7cbd0}a{color:#61baff;text-underline-offset:4px}a,button{touch-action:manipulation}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid #61baff;outline-offset:3px}.hero{padding-block:70px 38px}.hero>p:not(.eyebrow){max-width:800px;font-size:19px}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:12px;font-weight:800}.eyebrow::before{content:'';width:24px;height:2px;background:var(--blue)}html[dir=ltr] .eyebrow{text-transform:uppercase;letter-spacing:.08em}.actions,.chips,.logos{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.button,button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 22px;border-radius:999px;border:1px solid var(--line);font:inherit;font-weight:700;cursor:pointer;text-decoration:none;background:transparent;color:var(--ink)}.primary{background:var(--blue);border-color:var(--blue);color:#001522}.chips{list-style:none;padding:0;margin-block:26px}.chips li,.badge{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px}.logos{justify-content:space-between;padding-block:24px;border-block:1px solid var(--line);color:#c7cbd0}.logos span{display:inline-flex;align-items:center;gap:8px}.logos img{object-fit:contain;max-width:120px}.steps,.pricing-grid,.cases,.fit-grid{display:grid;gap:18px}.steps{list-style:none;padding:0}.step-number{color:#61baff;font-size:14px;font-variant-numeric:tabular-nums}.card{padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:18px;min-width:0}.pricing-grid{margin-block:40px 24px}.pricing-card{display:flex;flex-direction:column}.pricing-card.featured{background:linear-gradient(var(--blue-soft),var(--blue-soft)),var(--panel);border:2px solid var(--blue);box-shadow:0 0 36px var(--blue-soft)}.badge{align-self:flex-start;color:#001522;background:var(--blue);border-color:var(--blue);font-weight:800}.billing{color:#b8c2cd;font-size:14px}.price{margin-block:12px 0;font-variant-numeric:tabular-nums;line-height:1.4}.price bdi{font-size:32px;font-weight:800;color:#fff}.vat{margin-block:2px 14px;color:#c7cbd0;font-size:14px}.pricing-card ul{padding-inline-start:20px}.pricing-card .button{margin-block-start:auto}.note{color:#b8c2cd;font-size:15px}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:16px}table{border-collapse:collapse;width:calc(100 * 1%);min-width:650px}caption{text-align:start;font-size:26px;font-weight:800;color:#fff;padding:20px}th,td{text-align:start;padding:16px;border-block-end:1px solid var(--line)}thead{background:var(--panel-2)}td{color:#c7cbd0}blockquote{margin-inline:0;padding-inline-start:18px;border-inline-start:3px solid var(--blue)}cite{display:block;color:#b8c2cd;font-size:14px;font-style:normal}details{border-block-end:1px solid var(--line);padding-block:12px}summary{min-height:44px;cursor:pointer;font-weight:700;padding-block:10px}form{background:var(--panel);padding:24px;border:1px solid var(--line);border-radius:18px}fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-size:23px;font-weight:800;margin-block-end:16px}label{display:block;margin-block:16px;color:var(--ink)}input,select,textarea{display:block;width:calc(100 * 1%);min-height:48px;margin-block-start:6px;padding:12px;border:1px solid #6d7781;border-radius:8px;background:#000;color:var(--ink);font:inherit}textarea{min-height:120px;resize:vertical}input[type=checkbox]{display:inline-block;width:22px;min-height:22px;margin-inline-end:8px;vertical-align:middle}.consent a{display:inline-flex;align-items:center;min-height:44px}.progress{display:flex;gap:28px;color:#b8c2cd;padding-inline-start:20px}.progress [aria-current=step]{color:#61baff}.form-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.hire-trap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}#form-error{color:#ffb4b4}#form-error:empty{margin:0}#form-success{padding:24px;border:1px solid var(--blue);border-radius:16px;background:var(--blue-soft)}[hidden]{display:none!important}.whatsapp{display:inline-flex;align-items:center;min-height:44px}p a{display:inline-block;min-height:44px}footer{margin-block-start:48px}@media(min-width:760px){.steps{grid-template-columns:repeat(4,1fr)}.pricing-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.pricing-card.featured{transform:translateY(-12px)}.fit-grid{grid-template-columns:1fr 1fr}.cases{grid-template-columns:repeat(3,minmax(0,1fr))}section{padding-block:56px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body data-fp-measure="pricing-test">
+  <div class="header-shell"><SiteHeader lang={lang} alternatePath={he ? '/hire/' : '/he/hire/'} /></div>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">{c.hero.eyebrow}</p>
+      <h1>{c.hero.headline[0]}<span>{c.hero.headline[1]}</span></h1>
+      <p>{c.hero.intro}</p>
+      <div class="actions"><a class="button primary" href="#pricing">{c.hero.primary}</a><a class="button" href="#start" data-lead-cta="hero">{c.hero.secondary}</a></div>
+      <ul class="chips">{c.chips.map(chip => <li>{chip}</li>)}</ul>
+    </section>
+    <div class="logos" role="group" aria-label={c.logos.title}>
+      <img src="/logos/ginger.svg" alt="Ginger" width="110" height="44" loading="lazy" />
+      <img src="/logos/jvp.png" alt="JVP" width="80" height="44" loading="lazy" />
+      <span>{c.logos.diesenhaus}</span><span><img src="/logos/diviners.png" alt="" width="40" height="40" loading="lazy" />Diviners</span><span>iPracticom</span><span>Spark Founder Lab</span>
+    </div>
+    <section>
+      <p class="eyebrow">{c.how.eyebrow}</p><h2>{c.how.title}</h2>
+      <ol class="steps">{c.how.steps.map(([title, text], index) => <li><span class="step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{text}</p></li>)}</ol>
+    </section>
+    <section id="pricing">
+      <p class="eyebrow">{c.pricing.eyebrow}</p><h2>{c.pricing.title}</h2><p>{c.pricing.intro}</p>
+      <div class="pricing-grid">{c.tiers.map(tier => <article class:list={['card', 'pricing-card', { featured: tier.featured }]}>
+        {tier.featured && <span class="badge">{c.pricing.recommended}</span>}
+        <h3>{tier.name}</h3><p class="billing">{tier.billing}</p>
+        {tier.prices.map(price => <div><p class="price">{price.prefix} <bdi dir="ltr">{price.amount}</bdi> {price.suffix}</p><p class="vat">{tier.vat}</p></div>)}
+        <p>{tier.summary}</p><strong>{c.pricing.includes}</strong><ul>{tier.includes.map(item => <li>{item}</li>)}</ul><p class="note">{tier.note}</p>
+        <a class:list={['button', { primary: tier.featured }]} href="#start" data-lead-cta="pricing" data-tier={tier.id}>{tier.cta}</a>
+      </article>)}</div>
+      <p><strong>{c.pricing.starting}</strong></p><p class="note">{c.pricing.underCards}</p><p>{c.pricing.fit}</p>
+    </section>
+    <section><div class="table-scroll" tabindex="0" role="region" aria-label={c.comparison.title}><table>
+      <caption>{c.comparison.title}</caption><thead><tr><th scope="col">{c.comparison.feature}</th>{c.tiers.map(tier => <th scope="col">{tier.name}</th>)}</tr></thead>
+      <tbody>{c.comparison.rows.map(row => <tr><th scope="row">{row[0]}</th>{row.slice(1).map(cell => <td>{cell}</td>)}</tr>)}</tbody>
+    </table></div></section>
+    <section><h2>{c.casesTitle}</h2><div class="cases">{c.cases.map(item => <article class="card"><h3>{item.name}</h3><p>{item.built}</p><p>{item.outcome}</p>{'quote' in item && <blockquote lang={item.quoteLang} dir={item.quoteLang === 'he' ? 'rtl' : 'ltr'}><p>{item.quote}</p><cite>{item.cite}</cite></blockquote>}</article>)}</div></section>
+    <section class="text-section"><h2>{c.fit.title}</h2><div class="fit-grid"><div><h3>{c.fit.yes}</h3><p>{c.fit.for}</p></div><div><h3>{c.fit.no}</h3><p set:html={c.fit.notFor} /></div></div></section>
+    <section class="text-section"><h2>{c.accountability.title}</h2><p>{c.accountability.text}</p></section>
+    <section class="text-section"><h2>{c.faqTitle}</h2>{c.faq.map(([question, answer]) => <details><summary>{question}</summary><p set:html={answer} /></details>)}</section>
+    <section id="start" class="text-section">
+      <p class="eyebrow">{c.closing.eyebrow}</p><h2>{c.closing.title}</h2><p>{c.closing.text}</p>
+      <ol class="progress">{c.form.steps.map((step, index) => <li data-progress={index} aria-current={index === 0 ? 'step' : undefined}>{step}</li>)}</ol>
+      <form id="lead-form" data-language={lang} novalidate>
+        <input type="hidden" name="form_type" value="hire_pricing_test" />
+        <input type="hidden" name="revenue_band" value="undisclosed" />
+        <input type="hidden" name="revenue_currency" value={he ? 'ILS' : 'USD'} />
+        <input type="hidden" name="solutions" value="not_sure" />
+        <input type="hidden" name="linkedin_url" value="" />
+        <div aria-hidden="true" class="hire-trap"><label>{c.form.trap}<input name="website_check" tabindex="-1" autocomplete="off" /></label></div>
+        <fieldset data-step="0">
+          <legend>{c.form.steps[0]}</legend>
+          <label>{c.form.tier}<select name="selected_tier" required><option value="">{c.form.choose}</option>{c.tiers.map(tier => <option value={tier.id}>{tier.name}</option>)}</select></label>
+          <label>{c.form.teamSize}<select name="team_size" required><option value="">{c.form.choose}</option>{c.form.teamSizes.map(size => <option value={size}>{size}</option>)}</select></label>
+          <label>{c.form.challenge}<textarea name="challenge" required minlength="10" maxlength="1000"></textarea></label>
+          <label>{c.form.usage}<textarea name="current_ai_usage" maxlength="400"></textarea></label>
+        </fieldset>
+        <fieldset data-step="1" hidden>
+          <legend>{c.form.steps[1]}</legend>
+          <label>{c.form.fullName}<input name="full_name" required minlength="2" maxlength="120" autocomplete="name" /></label>
+          <label>{c.form.email}<input name="email" type="email" required maxlength="180" autocomplete="email" /></label>
+          <label>{c.form.phone}<input name="phone" type="tel" required maxlength="30" autocomplete="tel" /></label>
+          <label>{c.form.jobTitle}<input name="job_title" required minlength="2" autocomplete="organization-title" /></label>
+          <label>{c.form.company}<input name="company" required minlength="2" autocomplete="organization" /></label>
+          <label>{c.form.language}<select name="preferred_language"><option value="he" selected={he}>{c.form.languages[0]}</option><option value="en" selected={!he}>{c.form.languages[1]}</option></select></label>
+          <label class="consent"><input type="checkbox" name="consent" required />{c.form.consent} <a href={he ? '/he/terms/' : '/terms/'}>{c.form.terms}</a></label>
+        </fieldset>
+        <p id="form-error" role="alert" tabindex="-1" data-error-message={c.error}></p>
+        <div class="form-actions"><button type="button" data-back hidden>{c.form.back}</button><span data-step-count>{c.form.stepCount}</span><button type="button" data-next class="primary">{c.form.next}</button><button type="submit" data-submit class="primary" hidden>{c.form.cta}</button></div>
+        <p class="note">{c.form.note}</p>
+      </form>
+      <div id="form-success" tabindex="-1" hidden>{c.success}</div>
+      <a class="whatsapp" id="hire-whatsapp" href={genericWhatsapp}>{c.form.whatsapp}</a>
+      <h3>{c.form.nextTitle}</h3><p>{c.closing.text}</p>
+      <script src="../scripts/campaign-form.ts"></script>
+    </section>
+  </main>
+  <SiteFooter lang={lang} showNewsletterInvite={false} />
+  <script is:inline define:vars={{ whatsappLinks, genericWhatsapp }}>
+    (() => {
+      const select = document.querySelector('#lead-form [name="selected_tier"]');
+      const whatsapp = document.getElementById('hire-whatsapp');
+      if (!select || !whatsapp) return;
+      const validTier = tier => Object.prototype.hasOwnProperty.call(whatsappLinks, tier);
+      const updateWhatsapp = () => { whatsapp.href = validTier(select.value) ? whatsappLinks[select.value] : genericWhatsapp; };
+      document.querySelectorAll('[data-tier]').forEach(link => {
+        link.addEventListener('click', () => {
+          const tier = link.dataset.tier;
+          if (validTier(tier)) { select.value = tier; updateWhatsapp(); }
+        });
+      });
+      select.addEventListener('change', updateWhatsapp);
+      updateWhatsapp();
+    })();
+  </script>
+</body>
+</html>
