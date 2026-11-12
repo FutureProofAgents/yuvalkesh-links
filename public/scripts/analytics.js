@@ -1,7 +1,7 @@
 /* Public-page measurement is opt-in. Never send form values to Google. */
 (() => {
   if (location.hostname !== 'futureproofagents.com' || window.fpAnalytics) return;
-  if (document.querySelector('meta[name="robots"][content*="noindex"]')) return;
+  if (document.querySelector('meta[name="robots"][content*="noindex"]') && document.body.dataset.fpMeasure !== 'pricing-test') return;
   const id = 'G-MSW885P1MB';
   const key = 'fp-analytics-consent-v1';
   const adsKey = 'fp-ads-measurement-consent-v1';
@@ -80,13 +80,18 @@
       }
     }
   }
-  const allowed = new Set(['whatsapp_click', 'booking_click', 'newsletter_signup', 'lead_cta_click', 'lead_form_start', 'lead_form_step', 'lead_form_error', 'generate_lead']);
+  const allowed = new Set(['whatsapp_click', 'booking_click', 'newsletter_signup', 'lead_cta_click', 'lead_form_start', 'lead_form_step', 'lead_form_error', 'generate_lead', 'pricing_tier_click']);
+  const tiers = new Set(['checkup', 'first_agent', 'retainer']);
   const projectIcps = { 'executive-search-intelligence-japan': 'executive_search', 'distributor-order-intake': 'distribution', 'maintenance-renewals-repair-quotes': 'maintenance_services', 'fund-investor-relations': 'fund_ir', 'construction-document-workflows': 'construction', 'accounting-client-operations': 'accounting', 'real-estate-document-review': 'property_law', 'executive-search-intelligence': 'executive_search', 'immigration-case-operations': 'immigration_law', 'personal-injury-care-coordination': 'pi_care_coordination' };
   window.fpAnalytics = (event, metadata = {}) => {
     if (!enabled || !allowed.has(event)) return;
     const project = document.body.dataset.project;
     const context = Object.hasOwn(projectIcps, project) ? { project_slug: project, icp: projectIcps[project] } : {};
-    if (['nav', 'hero', 'pilot'].includes(metadata.cta_location)) context.cta_location = metadata.cta_location;
+    if (['nav', 'hero', 'pilot', 'pricing', 'closing'].includes(metadata.cta_location)) context.cta_location = metadata.cta_location;
+    const tier = tiers.has(metadata.tier) ? metadata.tier : document.body.dataset.fpMeasure === 'pricing-test'
+      ? document.querySelector('#lead-form')?.elements?.namedItem?.('selected_tier')?.value ?? document.querySelector('#lead-form [name="selected_tier"]')?.value
+      : undefined;
+    if (tiers.has(tier)) context.tier = tier;
     gtag('event', event, { send_to: id, page_path: location.pathname, language: ja ? 'ja' : he ? 'he' : 'en', ...context, transport_type: 'beacon' });
   };
   window.fpGoogleAdsLead = (leadId) => {
@@ -104,7 +109,10 @@
     let u; try { u = new URL(a.href); } catch { return; }
     if (u.hostname === 'wa.me') window.fpAnalytics('whatsapp_click');
     if (['calendar.app.google', 'calendly.com', 'cal.com'].includes(u.hostname)) window.fpAnalytics('booking_click');
-    if (a.hasAttribute('data-lead-cta') && u.origin === location.origin && u.pathname === location.pathname && u.hash === '#start') window.fpAnalytics('lead_cta_click', { cta_location: a.dataset.leadCta });
+    if (a.hasAttribute('data-lead-cta') && u.origin === location.origin && u.pathname === location.pathname && u.hash === '#start') {
+      window.fpAnalytics('lead_cta_click', { cta_location: a.dataset.leadCta, tier: a.dataset.tier });
+      if (tiers.has(a.dataset.tier)) window.fpAnalytics('pricing_tier_click', { tier: a.dataset.tier });
+    }
   });
   const panel = document.createElement('section');
   const preferenceLabel = ja ? 'アクセス解析の設定' : he ? 'העדפות מדידה' : hasAds ? 'Measurement preferences' : 'Analytics preferences';

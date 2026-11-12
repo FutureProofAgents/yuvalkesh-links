@@ -59,3 +59,59 @@ test('Japan cannot be misrouted through an English form or an unregistered proje
  const valid={...accounting(),form_type:'project_jp',project_slug:'executive-search-intelligence-japan',language:'ja'};
  for(const patch of [{language:'en'},{language:'he'},{language:'xx'},{project_slug:'executive-search-intelligence'},{project_slug:'__proto__'},{form_type:'project_us'},{form_type:'accounting_us'},{form_type:''},{consent:false}])assert.throws(()=>validate({...valid,...patch}));
 });
+
+const hire=()=>({...input(),form_type:'hire_pricing_test',selected_tier:'checkup',team_size:'1-10',phone:'+1 (202) 555-0123',challenge:'Route incoming requests to the correct team.'});
+test('hire tiers own routing and defaults in both languages and retain sheet and attribution dimensions',async()=>{
+ const {HIRE_TIERS,HIRE_TEAM_SIZES}=await import('../lib/campaign-leads.js');
+ assert.deepEqual(HIRE_TIERS,{checkup:{he:"צ'ק-אפ",en:'Check-up'},first_agent:{he:'הסוכן הראשון',en:'First agent'},retainer:{he:'ליווי חודשי',en:'Monthly accompaniment'}});
+ assert.deepEqual(HIRE_TEAM_SIZES,['1-10','11-50','51-200','201-1000','1000+']);
+ for(const language of ['he','en'])for(const [selected_tier,label] of Object.entries(HIRE_TIERS))for(const team_size of HIRE_TEAM_SIZES){
+  const body={...hire(),language,selected_tier,team_size,landing_page:'https://attacker.example/',revenue_band:'free',revenue_currency:'BAD',solutions:['invalid'],business_description:'x'.repeat(801),...(language==='he'?{market:'invalid'}:{}),attribution:{first:{utm_source:'newsletter',utm_campaign:'initial',page:'https://futureproofagents.com/?email=private@example.com'},last:{utm_source:'google',utm_content:selected_tier,page:'https://futureproofagents.com/hire/?utm_content='+selected_tier+'&email=private@example.com'}}};
+  const before=JSON.stringify(body),p=validate(body);
+  assert.equal(JSON.stringify(body),before);
+  assert.equal(p.landing_page,`https://futureproofagents.com/${language==='he'?'he/':''}hire/`);
+  assert.equal(p.revenue_band,'undisclosed');assert.equal(p.revenue_currency,language==='he'?'ILS':'USD');
+  assert.deepEqual(p.solutions,['not_sure']);assert.equal(p.business_description,'Hire pricing test: '+label.en);
+  assert.equal(p.market,language==='he'?'israel':'global');assert.equal(p.consent_version,'hire-2026-11-13');
+  assert.deepEqual(p.attribution.form,{type:'hire_pricing_test',selected_tier});
+  assert.equal(p.attribution.first.utm_source,'newsletter');assert.equal(p.attribution.last.utm_content,selected_tier);
+  assert.equal(p.attribution.last.page,'https://futureproofagents.com/hire/');
+  assert.ok(!JSON.stringify(p.attribution).includes('private@example.com'));
+  assert.equal(p.challenge,`Plan of interest: ${label.en} (${selected_tier}). Team size: ${team_size}. Preferred language: ${language==='he'?'Hebrew':'English'}. Current AI use: Not provided. Workflow: ${body.challenge}`);
+  const values=sheetValues({...row(),...p});assert.equal(values[13],p.challenge);assert.equal(values[25],p.landing_page);
+ }
+});
+
+test('hire rejects invalid tier before other fields, but preserves honeypot handling',()=>{
+ for(const selected_tier of ['enterprise','__proto__','constructor','',undefined,[],['checkup'],{},null])assert.throws(()=>validate({form_type:'hire_pricing_test',selected_tier}),{message:'selected_tier'});
+ assert.deepEqual(validate({form_type:'hire_pricing_test',website_check:'bot'}),{spam:true});
+});
+
+test('hire field errors enforce qualification and shared safeguards',()=>{
+ for(const [key,values] of Object.entries({
+  language:['ja','xx','',undefined],team_size:['',undefined,'5_10',[],['1-10']],
+  phone:['',undefined,1234567,'+------','1------','123456','1234567x','1'.repeat(31)],
+  challenge:['',undefined,'short',' '.repeat(10),'x'.repeat(1001),{}],
+  current_ai_usage:['x'.repeat(401),{},null],preferred_language:['ja','',null,[]],
+  submission_id:['', '9ce3cbb2-aec2-1d25-a0d7-b4cd4cd5ac76'],full_name:[''],job_title:[''],company:[''],email:['bad'],consent:[false,'true']
+ }))for(const value of values)assert.throws(()=>validate({...hire(),[key]:value}),{message:key});
+ assert.throws(()=>validate({...hire(),market:'invalid'}),{message:'market'});
+ assert.equal(validate({...hire(),market:undefined}).market,'');
+});
+
+test('hire accepts boundaries and preferred language without truncating workflow',()=>{
+ for(const language of ['he','en']){
+  const p=validate({...hire(),language,selected_tier:'retainer',team_size:'201-1000',phone:'1234567',challenge:'x'.repeat(1000),current_ai_usage:'y'.repeat(400),preferred_language:language==='he'?'en':'he'});
+  assert.ok(p.challenge.length<=1600);
+  assert.ok(p.challenge.endsWith('Workflow: '+'x'.repeat(1000)));
+  assert.ok(p.challenge.includes('Current AI use: '+'y'.repeat(400)+'.'));
+  assert.ok(p.challenge.includes('Preferred language: '+(language==='he'?'English':'Hebrew')+'.'));
+ }
+ assert.ok(validate({...hire(),challenge:'x'.repeat(10),current_ai_usage:''}).challenge.includes('Not provided'));
+});
+
+test('ordinary inquiries remain unchanged when hire-only fields are supplied',()=>{
+ const base=validate(input());
+ assert.deepEqual(validate({...input(),selected_tier:'enterprise',team_size:'bad',current_ai_usage:{},preferred_language:'ja',landing_page:'https://attacker.example/'}),base);
+ assert.equal(base.attribution.form,undefined);
+});
